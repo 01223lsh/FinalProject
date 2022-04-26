@@ -1,2 +1,2 @@
 # DB info
-/main/resources/dbconfig.properties
+src/main/resources/dbconfig.properties
