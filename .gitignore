@@ -1,8 +1,6 @@
 # DB info
 src/main/resources/dbconfig.properties
 
-<<<<<<< HEAD
-=======
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -272,7 +270,6 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,intellij,eclipse
 src/main/resources/dbconfig.properties
 
->>>>>>> 57bec7f9b69eb6123a82f39bfd3682d77a35e8db
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
