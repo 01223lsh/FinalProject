@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- DB접속 정보 -->	
+	<context:property-placeholder location="classpath:/dbconfig.properties"/>
+
+
+	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="${db.driver}" />
+	    <property name="url" value="${db.url}" />
+	    <property name="username" value="${db.username}" />
+   		<property name="password" value="${db.password}" />
+	</bean>
+	
+	
+	<!-- 마이바티스 로깅 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		
+		<constructor-arg ref="dataSourceSpied" />
+		
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL:::" />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 마이바티스 수행 객체 설정 (SqlSession) -->
+<!-- 	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		
+		dataSource 빈을 이용하여 DB연결 정보를 설정한다
+		<property name="dataSource" ref="dataSource" />
+		
+		마이바티스 설정 파일
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		
+		
+		Mapper XML파일들의 위치를 설정한다
+		<property name="mapperLocations">
+			<array>
+				<value></value>
+			</array>
+		</property>
+ 	</bean> 
+	 -->	
+	 
+<!-- 	마이바티스 인터페이스의 위치 설정 (DAO의 패키지) -->
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+<!-- 		<property name="basePackage" value="" /> -->
+<!-- 	</bean> -->
+	
+	
+	
+	<!-- 트랜잭션 매니저 설정 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>
