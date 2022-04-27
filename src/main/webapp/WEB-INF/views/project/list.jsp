@@ -13,6 +13,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
 
+<style>
+  #project-status {
+    color: white;
+    background: red;
+    padding: 3px 5px;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+</style>
+
 <script>
 
 $(document).ready(function() {
@@ -220,6 +231,9 @@ function setCondition() {
           <img src="${p.projectImage }" style="min-height: 250px;">
           <div class="card-body">
             <strong>${p.projectTitle}</strong>
+            <c:if test="${p.projectStep eq 4}">
+              <span id="project-status">마감</span>
+            </c:if>
             <p class="card-text">${p.projectIntro}</p>
             <progress value="${p.sum}" max="${p.projectPrice}"></progress>
             <div class="row fs-6">

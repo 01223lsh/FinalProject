@@ -76,6 +76,7 @@
 	<select id="findCategoryList" resultType="funding.dto.Category">
 		select category_no, category_name 
 		from category
+		order by category_no
 	</select>
 	
 	
