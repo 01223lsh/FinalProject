@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.AdminDao">
+	
+	<select id="selectMemberAll" resultType="funding.dto.Member" parameterType="int">
+		select * from (
+			select rownum rnum, A.* from(
+				select * from member
+				order by member_no desc
+			)A
+		) member
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	   
+	<select id="selectBymemberNo" resultType="funding.dto.Member" parameterType="int">
+		select * from member
+		where member_no = #{memberNo}
+	
+	</select>
+	<select id="selectCntAll" resultType="int">
+		select count(*) from member
+	</select>
+	<select id="selectCntGrade" resultType="int" parameterType="int">
+		select count(*) from member
+		where grade = ${i}
+	
+	</select>
+	<select id="selectCntSearch" resultType="int" parameterType="string">
+		select count(*) from member
+		where ${category} like '%'||#{content}||'%'
+	</select>
+	
+
+	
+	<select id="selectByGrade" resultType="funding.dto.Member" parameterType="int">
+		<choose>
+			<when test='grade == null or grade.equals("")'>
+			select * from (
+		         select rownum rnum, B.* from(
+		            select * from member
+		            order by member_no desc
+		         )B
+		      ) member
+		      where rnum between #{paging.startNo} and #{paging.endNo}
+			</when>
+		
+			<when test='grade != null or grade.equals("")'>
+		      select * from (
+		         select rownum rnum, B.* from(
+		            select * from member
+		            where grade =#{grade}
+		            order by member_no desc
+		         )B
+		      ) member
+		      where rnum between #{paging.startNo} and #{paging.endNo}
+			</when>
+		</choose>
+	</select>
+	<update id="gradeUpdate" parameterType="funding.dto.Member">
+		update member set grade = #{grade}
+		where member_no = #{memberNo}
+		
+	</update>
+	
+	<select id="MemberSearch" resultType="funding.dto.Member">
+		
+		select * from (
+		     select rownum rnum, B.* from(
+		         select * from member
+		         where ${category} like '%'||#{content}||'%'
+		          order by member_no desc
+		        )B
+		     ) member
+		where rnum between #{paging.startNo} and #{paging.endNo}
+	</select>
+	
+	
+    
+</mapper>
