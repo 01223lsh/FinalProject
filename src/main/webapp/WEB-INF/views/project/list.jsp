@@ -14,6 +14,7 @@
 <script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
 
 <style>
+  /* 마감된 프로젝트 표시 */
   #project-status {
     color: white;
     background: red;
@@ -21,6 +22,12 @@
     font-weight: 700;
     font-size: 12px;
     border-radius: 15px;
+  }
+  #category-section .container {
+    overflow: auto;
+  }
+  #category-section .row {
+    flex-flow: nowrap;
   }
 </style>
 
@@ -89,6 +96,27 @@ function setCondition() {
         }
     }
 }
+// 카테고리 이동 - 중도 포기 그냥 scroll로 하자
+// function nextCategory() {
+//   const row = document.querySelector("#category-section .row");
+//   const parentX = document.querySelector("#category-section .container").getBoundingClientRect().x;
+//   const childX = document.querySelector("#category-section .row").getBoundingClientRect().x;
+//   const parentR = document.querySelector("#category-section .container").getBoundingClientRect().right;
+//   const childR = document.querySelector("#category-section .row").getBoundingClientRect().right;
+//
+//   const parent = document.querySelector("#category-section .container");
+//   const child = document.querySelector("#category-section .row");
+//
+//   console.log("P-x: ", parentX)
+//   console.log("C-x: ", childX)
+//   console.log("P-right: ", parentR)
+//   console.log("C-right: ", childR)
+//
+//   console.log("parent: ", parent.clientWidth)
+//   console.log("child: ", child.clientWidth)
+//
+//   row.style.transform = 'translateX(' + (childX - parentX - 100) + 'px)';
+// }
 </script>
 </head>
 <body>
@@ -139,7 +167,7 @@ function setCondition() {
 <main>
 
 <!-- 카테고리 -->
-<section>
+<section id="category-section">
   <div class="container py-5">
     <div class="row">
       <div class="col text-center" onclick="getList()">
@@ -148,40 +176,14 @@ function setCondition() {
       </div>
       
       <c:forEach var="c" items="${cList}">
-      <div class="col text-center" onclick="getList('${c.categoryNo}')">
+      <div class="col text-center me-4" onclick="getList('${c.categoryNo}')">
         <div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="withd: 80px; height: 60px"></div>
         <span>${c.categoryName}</span>
       </div>
       </c:forEach>
-      
-      <!-- <div class="col text-center" onclick="getList('1')">
-        <div><i class="fa-solid fa-shirt fa-3x"></i></div>
-        <span>카테고리1</span>
-      </div>
-      <div class="col text-center" onclick="getList('2')">
-        <div><i class="fa-solid fa-computer fa-3x"></i></div>
-        <span>카테고리2</span>
-      </div>
-      <div class="col text-center" onclick="getList('3')">
-        <div><i class="fa-solid fa-briefcase fa-3x"></i></div>
-        <span>카테고리3</span>
-      </div> -->
-      
-      <!-- <div class="col text-center">
-        <div><i class="fab fa-aws fa-3x"></i></div>
-        <span>카테고리4</span>
-      </div>
-      <div class="col text-center">
-        <div><i class="fas fa-baseball-ball fa-3x"></i></div>
-        <span>카테고리5</span>
-      </div>
-      <div class="col text-center">
-        <div><i class="fas fa-blind fa-3x"></i></div>
-        <span>카테고리6</span>
-      </div> -->
+
     </div>
   </div>
-
 </section>
 
 <!-- /카테고리 -->
