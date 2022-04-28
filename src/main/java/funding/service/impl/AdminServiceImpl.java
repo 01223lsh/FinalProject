@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import funding.dao.face.AdminDao;
 import funding.dto.Member;
+import funding.dto.Notice;
 import funding.service.face.AdminService;
 import funding.util.Paging;
 
@@ -28,11 +29,11 @@ public class AdminServiceImpl implements AdminService{
 		int totalCount ;
 		int curPage = paging.getCurPage();
 		if(i==4 && content==null && !"".equals(content)) {
-			totalCount = adminDao.selectCntAll();
+			totalCount = adminDao.selectCntMember();
 		}else if(content!=null &&!"".equals(content)){
-			totalCount=adminDao.selectCntSearch(category,content);
+			totalCount=adminDao.selectCntMemberSearch(category,content);
 		}else{
-			totalCount= adminDao.selectCntGrade(i);
+			totalCount= adminDao.selectCntMemberGrade(i);
 		}
 		
 		paging = new Paging(totalCount,curPage);
@@ -50,5 +51,23 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Member> MemberSearch(String category, String content,Paging paging) {
 		return adminDao.MemberSearch(category,content,paging);
+	}
+	@Override
+	public void DisabledAllDelete(int i) {
+		adminDao.DisabledAllDelete(i);
+	}
+	
+	@Override
+	public List<Notice> noticeAll(Paging paging) {
+		
+		return adminDao.noticeAll(paging);
+	}
+	@Override
+	public Paging getnoticePaging(Paging paging) {
+		int totalCount = adminDao.selectCntNotice();
+		int curPage = paging.getCurPage();
+		
+		paging =new Paging(totalCount,curPage);
+		return paging;
 	}
 }

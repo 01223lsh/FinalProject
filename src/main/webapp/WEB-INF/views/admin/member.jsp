@@ -46,14 +46,35 @@ var gradep = ${membergrade};
 
 
 $(document).ready(function(){
+	$("#DisabledAllDelete").click(function(){
+		
+		if(confirm("복구가 불가능합니다.\n정말 삭제하시겠습니까?")){
+		
+			$.ajax({
+				type : "post"
+				,url : "/admin/member"
+				,data : "grade=3&disabled=delete"	
+				
+				,dataType : "html"
+				,success : function(res){
+					console.log("삭제 성공")
+					$("#resultLayout").html(res);
+				}
+				,error : function(){
+					console.log("삭제 불가")
+				}
+				
+			})
+		}
+	})
 	
 	$("#memberSearch").click(function(){
-		var category = $("#memberCategory").val();
-		var content = $("#memberContent").val();	
+		var cat= $("#memberCategory").val();
+		var con = $("#memberContent").val();	
 		$.ajax({
 			type : "post"
 			,url : "/admin/member" 
-			,data : "category="+category+"&content="+content+"&grade=4"
+			,data : "category="+cat+"&content="+con+"&grade=4"
 			,dataType : "html"
 			,success : function(res){
 				console.log("검색 가능");
@@ -64,12 +85,11 @@ $(document).ready(function(){
 			}
 			
 		})
-var con = ${con};
-var cat = ${cat};
+
 		
 		$.ajax({
 			type : "post"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "str="+str+"&content"+content+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType :"html"
 			,seccess : function(res){
@@ -84,10 +104,12 @@ var cat = ${cat};
 	
 	for(var i = startPage; i <= endPage; i++){
 		(function(i){
-			$(".paging"+i).click(function(){			
+			$(".paging"+i).click(function(){	
+				var con = $("#memberContent").val();
+				var cat = $("#memberCategory").val();
 				$.ajax({
 					type : "get"
-					,url : "/layout/paging"
+					,url : "/layout/memberpaging"
 					,data : "curPage="+i+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 					,dataType : "html"
 					,success : function(res){
@@ -102,9 +124,11 @@ var cat = ${cat};
 		})(i);
 	}
 	$(".pagingFirst").click(function(){	
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+1+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -116,10 +140,12 @@ var cat = ${cat};
 			}
 		});
 	});
-	$(".pagingBackAll").click(function(){			
+	$(".pagingBackAll").click(function(){
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();	
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+ ${paging.startPage - paging.pageCount }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,success : function(res){
 				console.log("성공");
@@ -131,10 +157,12 @@ var cat = ${cat};
 		});
 	});
 	
-	$(".pagingGoAll").click(function(){			
+	$(".pagingGoAll").click(function(){	
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+${paging.startPage + paging.pageCount }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -146,10 +174,12 @@ var cat = ${cat};
 			}
 		});
 	});
-	$(".pagingGo").click(function(){			
+	$(".pagingGo").click(function(){	
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+${paging.curPage + 1 }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -161,10 +191,12 @@ var cat = ${cat};
 			}
 		});
 	});
-	$(".pagingBack").click(function(){			
+	$(".pagingBack").click(function(){	
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+${paging.curPage - 1 } +"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -176,10 +208,12 @@ var cat = ${cat};
 			}
 		});
 	});
-	$(".pagingLast").click(function(){			
+	$(".pagingLast").click(function(){
+		var con = $("#memberContent").val();
+		var cat = $("#memberCategory").val();
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
+			,url : "/layout/memberpaging"
 			,data : "curPage="+${paging.totalPage}+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -270,14 +304,18 @@ var cat = ${cat};
 <hr>
 
 <select id="memberCategory">
-	<option value="id">아이디</option>
-	<option value="nick">닉네임</option>
-	<option value="name">이름</option>
-	<option value="email">이메일</option>
-	<option value="phone">전화번호</option>
+	<option value="id" <c:if test="${cat eq 'id'}">selected</c:if>>아이디</option>
+	<option value="nick" <c:if test="${cat eq 'nick'}">selected</c:if>>닉네임</option>
+	<option value="name" <c:if test="${cat eq 'name'}">selected</c:if>>이름</option>
+	<option value="email" <c:if test="${cat eq 'email'}">selected</c:if>>이메일</option>
+	<option value="phone" <c:if test="${cat eq 'phone'}">selected</c:if>>전화번호</option>
 </select>
-<input type="text" id="memberContent">
+<input type="text" id="memberContent" value="${con }">
 <button id="memberSearch">검색</button>
+
+<c:if test="${membergrade eq '3' }"> 
+<button id="DisabledAllDelete">비활성화 유저 삭제</button>
+</c:if>
 <br>
 
 <table class="table table-striped table-hover table-condensed">

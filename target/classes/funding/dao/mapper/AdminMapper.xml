@@ -20,15 +20,15 @@
 		where member_no = #{memberNo}
 	
 	</select>
-	<select id="selectCntAll" resultType="int">
+	<select id="selectCntMember" resultType="int">
 		select count(*) from member
 	</select>
-	<select id="selectCntGrade" resultType="int" parameterType="int">
+	<select id="selectCntMemberGrade" resultType="int" parameterType="int">
 		select count(*) from member
 		where grade = ${i}
 	
 	</select>
-	<select id="selectCntSearch" resultType="int" parameterType="string">
+	<select id="selectCntMemberSearch" resultType="int" parameterType="string">
 		select count(*) from member
 		where ${category} like '%'||#{content}||'%'
 	</select>
@@ -76,7 +76,23 @@
 		     ) member
 		where rnum between #{paging.startNo} and #{paging.endNo}
 	</select>
+	<delete id="DisabledAllDelete" parameterType="int">
+		delete from member
+		where grade = #{i}
+	</delete>
 	
+	<select id="selectCntNotice" resultType="int">
+		select count(*) from notice
+	</select>
+	<select id="noticeAll" resultType="funding.dto.Notice">
 	
+		select * from (
+		     select rownum rnum, N.* from(
+		         select * from notice
+		          order by notice_no desc
+		        )N
+		     ) notice
+		where rnum between #{startNo} and #{endNo}
+	</select>
     
 </mapper>

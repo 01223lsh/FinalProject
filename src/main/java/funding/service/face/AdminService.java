@@ -3,6 +3,7 @@ package funding.service.face;
 import java.util.List;
 
 import funding.dto.Member;
+import funding.dto.Notice;
 import funding.util.Paging;
 
 public interface AdminService {
@@ -18,5 +19,11 @@ public interface AdminService {
 	public void gradeUpdate(Member member);
 
 	public List<Member> MemberSearch(String category, String content, Paging paging);
+
+	public void DisabledAllDelete(int i);
+
+	public List<Notice> noticeAll(Paging paging);
+
+	public Paging getnoticePaging(Paging paging);
 
 }
