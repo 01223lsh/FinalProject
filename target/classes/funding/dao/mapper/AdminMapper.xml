@@ -94,5 +94,48 @@
 		     ) notice
 		where rnum between #{startNo} and #{endNo}
 	</select>
-    
+	
+	<select id="selectByNotice" resultType="funding.dto.Notice">
+		select * from notice
+		where notice_no = #{noticeNo}
+		
+	</select>
+	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile">
+		select * from noticefile
+		where notice_no = #{noticeNo}
+		
+	</select>
+	<select id="selectBynoticeno" resultType="int">
+		select notice_seq.nextval from dual
+	</select>
+	<insert id="noriceWrite" parameterType="funding.dto.Notice">
+		insert into notice(notice_no, title, content)
+		values(#{noticeNo},#{title},#{content})
+	</insert>
+    <insert id="insertNoticeFile" parameterType="funding.dto.Notice" >
+    	insert into noticefile
+    	values(#{noticeNo},#{fileOrigin},#{fileStorage})
+    </insert>
+    <select id="selectNoticeFileByFileNo" resultType="funding.dto.NoticeFile" parameterType="funding.dto.NoticeFile">
+		SELECT
+			notice_no noticeNo
+			, file_origin fileOrigin
+			, file_storage fileStorage
+		FROM noticefile
+		WHERE notice_no = #{noticeNo}
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

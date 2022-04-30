@@ -2,8 +2,11 @@ package funding.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import funding.dto.Member;
 import funding.dto.Notice;
+import funding.dto.NoticeFile;
 import funding.util.Paging;
 
 public interface AdminService {
@@ -25,5 +28,13 @@ public interface AdminService {
 	public List<Notice> noticeAll(Paging paging);
 
 	public Paging getnoticePaging(Paging paging);
+
+	public Notice selectByNotice(Notice notice);
+
+	public void noticeWrite(Notice notice, MultipartFile file);
+
+	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
+
+	public NoticeFile getFile(NoticeFile noticeFile);
 
 }

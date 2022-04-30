@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import funding.dto.Member;
 import funding.dto.Notice;
+import funding.dto.NoticeFile;
 import funding.util.Paging;
 
 public interface AdminDao {
@@ -31,5 +32,17 @@ public interface AdminDao {
 	public int selectCntNotice();
 
 	public List<Notice> noticeAll(Paging paging);
+
+	public Notice selectByNotice(Notice notice);
+
+	public int selectBynoticeno();
+
+	public void noticeWrite(Notice notice);
+
+	public void insertNoticeFile(NoticeFile noticeFile);
+
+	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
+
+	public NoticeFile selectNoticeFileByFileNo(NoticeFile noticeFile);
 
 }

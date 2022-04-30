@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -132,7 +132,7 @@ h1{ font-size:18px;  padding:20px; }
 </nav>
 </div>
 <div id="Layout">
-<div id="resultLayout"></div>
+<div id="resultLayout"><h3>관리자님 안녕하세요.</h3></div>
 </div>
 </div>
 </body>

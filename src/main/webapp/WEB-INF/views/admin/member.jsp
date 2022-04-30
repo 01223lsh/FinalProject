@@ -86,20 +86,21 @@ $(document).ready(function(){
 			
 		})
 
-		
-		$.ajax({
-			type : "post"
-			,url : "/layout/memberpaging"
-			,data : "str="+str+"&content"+content+"&grade="+gradep+"&content="+con+"&category="+cat
-			,dataType :"html"
-			,seccess : function(res){
-				$("#resultLayout").html(res)
-			}
-			,error : function(){
-				console.log("검색페이지 망할")
-			}
+			console.log(con);
+// 		$.ajax({
+// 			type : "post"
+// 			,url : "/layout/memberpaging"
+// 			,data : "str="+str+"&content"+content+"&grade="+gradep+"&content="+con+"&category="+cat
+// 			,dataType :"html"
+// 			,seccess : function(res){
+// 				$("#resultLayout").html(res)
 			
-		})
+// 			}
+// 			,error : function(){
+// 				console.log("검색페이지 망할")
+// 			}
+			
+// 		})
 	})
 	
 	for(var i = startPage; i <= endPage; i++){
@@ -298,10 +299,11 @@ $(document).ready(function(){
 		<span>비활성화</span>
 	</div>
 </div>
-
-
-<h3>회원 관리</h3>
 <hr>
+
+
+
+
 
 <select id="memberCategory">
 	<option value="id" <c:if test="${cat eq 'id'}">selected</c:if>>아이디</option>

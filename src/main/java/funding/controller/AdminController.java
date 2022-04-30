@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import funding.dto.Member;
 import funding.dto.Notice;
+import funding.dto.NoticeFile;
 import funding.service.face.AdminService;
 import funding.util.Paging;
 
@@ -122,7 +125,31 @@ public class AdminController {
 		model.addAttribute("paging",paging);
 		
 	}
+	@RequestMapping(value="/admin/noticeView")
+	public void noticeView(Notice notice,Model model,NoticeFile noticeFile) {
+		notice = adminService.selectByNotice(notice);
+		noticeFile= adminService.selectByNoticeFile(noticeFile);
+		
+		model.addAttribute("noticeFile",noticeFile);
+		model.addAttribute("notice",notice);
+	}
+	@RequestMapping(value="/admin/noticeWrite",method = RequestMethod.GET)
+	public void noticeWrite() {	}
 	
+	@RequestMapping(value="/admin/noticeWrite",method = RequestMethod.POST)
+	public void noticeWriteResult(Notice notice, @RequestParam(value="file") MultipartFile file) {
+		logger.info("notice : {}, file : {}",notice,file);
+		
+		adminService.noticeWrite(notice,file);
+	}
+	@RequestMapping("/download")
+	public String download(NoticeFile noticeFile, Model model) {
+		
+		noticeFile = adminService.getFile(noticeFile);
+		model.addAttribute("downFile", noticeFile);
+		
+		return "down";
+	}
 	
 	
 	

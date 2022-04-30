@@ -4,21 +4,18 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+
 	<aop:aspectj-autoproxy />
-	<tx:annotation-driven/>    
-    
-    
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -26,21 +23,28 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"/>
+	</beans:bean>
+	
+	<!-- DownloadView 빈 설정 -->
+	<beans:bean id="down" class="funding.view.DownloadView" />
+	
+	
+	<!-- MultipartResover 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxInMemorySize" value="1048576"/> <!-- 1MB -->
+		<beans:property name="maxUploadSize" value="10485760"/> <!-- 10MB -->
+		<beans:property name="maxUploadSizePerFile" value="5242880" /> <!-- 5MB -->
+	</beans:bean>
+	
 		
-	</beans:bean>
-	
-	
-	<!-- jsonView 빈 설정 -->
-	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
-		<beans:property name="contentType" value="application/json; charset=utf-8"/>
-	</beans:bean>
-	
-	
-	
-	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
-	<!-- 	-> @Controller, @Service -->
-	<context:component-scan base-package="a.b.c,funding.controller, funding.service" />
-	
-	
+		<context:component-scan base-package="a.b.c,funding.controller, funding.service" />
 	
 </beans:beans>
+
+

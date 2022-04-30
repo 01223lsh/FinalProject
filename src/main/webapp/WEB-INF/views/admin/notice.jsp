@@ -6,7 +6,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
 <script type="text/javascript">
+function noticeView(noticeNo){
+	$.ajax({
+		type : "post"
+		,url : "/admin/noticeView"
+		,data : "noticeNo="+noticeNo
+		,dataType  :"html"
+		,success : function(res){
+			console.log("notice view success");
+			$("#resultLayout").html(res)
+		}
+		,error : function(){
+			console.log("notice view error")
+		}
+	})
+}
+function noticeWrite(){
+	$.ajax({
+		type : "get"
+		,url : "/admin/noticeWrite"
+		,dataType  :"html"
+		,success : function(res){
+			$("#resultLayout").html(res)
+		}
+		,error : function(){
+			console.log("notice write error")
+		}
+	})
+}
+
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
@@ -143,15 +176,17 @@ $(document).ready(function(){
 <c:forEach items="${list }" var="i">
 <tr>
 	<td>${i.noticeNo }</td>
-	<td>${i.noticeTitle }</td>
+	<td><a onclick="noticeView(${i.noticeNo})">${i.title }</a></td>
 	<td>관리자</td>
-	<td>${i.noticeDate}</td>
+	<td>${i.date}</td>
 	
 </tr>
 
 </c:forEach>
 
+
 </table>
+<button onclick="noticeWrite()">작성</button>
 </body>
 </html>
 <%@ include file="../../layout/paging.jsp" %>
