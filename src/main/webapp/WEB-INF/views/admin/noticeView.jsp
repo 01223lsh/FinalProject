@@ -46,8 +46,10 @@
 
 
 <hr>
-<c:if test="${not empty noticeFile.fileOrigin}">
-	<a href="/admin/download?notice=${boardFile.fileNo }">${noticeFile.fileOrigin }</a>
+<c:if test="${not empty notice.fileOrigin}">
+	<a 
+<%-- 	href="/admin/download?notice=${boardFile.fileNo }" --%>
+	>${notice.fileOrigin }</a>
 </c:if>
 	<div class="notice Content">${notice.content}</div>
 </div>

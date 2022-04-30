@@ -33,7 +33,7 @@ public interface AdminService {
 
 	public void noticeWrite(Notice notice, MultipartFile file);
 
-	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
+//	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
 
 	public NoticeFile getFile(NoticeFile noticeFile);
 

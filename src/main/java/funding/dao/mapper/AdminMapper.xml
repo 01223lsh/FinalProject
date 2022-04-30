@@ -96,8 +96,17 @@
 	</select>
 	
 	<select id="selectByNotice" resultType="funding.dto.Notice">
-		select * from notice
-		where notice_no = #{noticeNo}
+		select 
+		a.notice_no
+		,a.title 
+		,a.content
+		,a."date"  
+		,b.file_origin
+		,b.file_storage
+		 from notice a , noticefile b
+		where a.notice_no = #{noticeNo}
+        and a.notice_no = b.notice_no(+)
+        
 		
 	</select>
 	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile">
@@ -116,14 +125,14 @@
     	insert into noticefile
     	values(#{noticeNo},#{fileOrigin},#{fileStorage})
     </insert>
-    <select id="selectNoticeFileByFileNo" resultType="funding.dto.NoticeFile" parameterType="funding.dto.NoticeFile">
-		SELECT
-			notice_no noticeNo
-			, file_origin fileOrigin
-			, file_storage fileStorage
-		FROM noticefile
-		WHERE notice_no = #{noticeNo}
-	</select>
+<!--     <select id="selectNoticeFileByFileNo" resultType="funding.dto.NoticeFile" parameterType="funding.dto.NoticeFile"> -->
+<!-- 		SELECT -->
+<!-- 			notice_no noticeNo -->
+<!-- 			, file_origin fileOrigin -->
+<!-- 			, file_storage fileStorage -->
+<!-- 		FROM noticefile -->
+<!-- 		WHERE notice_no = #{noticeNo} -->
+<!-- 	</select> -->
 </mapper>
 
 

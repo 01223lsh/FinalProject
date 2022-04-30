@@ -128,9 +128,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/noticeView")
 	public void noticeView(Notice notice,Model model,NoticeFile noticeFile) {
 		notice = adminService.selectByNotice(notice);
-		noticeFile= adminService.selectByNoticeFile(noticeFile);
+//		noticeFile= adminService.selectByNoticeFile(noticeFile);
 		
-		model.addAttribute("noticeFile",noticeFile);
+//		model.addAttribute("noticeFile",noticeFile);
 		model.addAttribute("notice",notice);
 	}
 	@RequestMapping(value="/admin/noticeWrite",method = RequestMethod.GET)

@@ -121,10 +121,10 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.insertNoticeFile(noticeFile);
 		
 	}
-	@Override
-	public NoticeFile selectByNoticeFile(NoticeFile noticeFile) {
-		return adminDao.selectByNoticeFile(noticeFile);
-	}
+//	@Override
+//	public NoticeFile selectByNoticeFile(NoticeFile noticeFile) {
+//		return adminDao.selectByNoticeFile(noticeFile);
+//	}
 	@Override
 	public NoticeFile getFile(NoticeFile noticeFile) {
 	

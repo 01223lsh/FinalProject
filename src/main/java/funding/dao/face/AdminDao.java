@@ -41,7 +41,7 @@ public interface AdminDao {
 
 	public void insertNoticeFile(NoticeFile noticeFile);
 
-	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
+//	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
 
 	public NoticeFile selectNoticeFileByFileNo(NoticeFile noticeFile);
 
