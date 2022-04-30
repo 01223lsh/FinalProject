@@ -1,5 +1,9 @@
 package funding.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import funding.dto.Category;
 import funding.dto.Project;
 import funding.dto.Reward;
 import funding.service.face.ApplyService;
@@ -31,12 +34,16 @@ public class ApplyController {
 	}
 
 	@RequestMapping(value = "/category", method = RequestMethod.POST)
-	public void categoryInsert(Category category) {
+	public String categoryInsert(Project project, HttpSession session) {
 		logger.info("/apply/category [POST]");
 		
 		//프로젝트와 카테고리 값을 받고 session으로 memberNo를 받아서 insert
 		//카테고리 하나의 트랜잭션으로 reward에도 데이터 생성 
+		project.setMemberNo((Integer)session.getAttribute("memberNo"));
 		
+		applyService.categoryInsert(project);
+		
+		return "redirect:/apply/product";
 	}
 	
 	//제품 입력 페이지 이동
@@ -45,6 +52,11 @@ public class ApplyController {
 		logger.info("/apply/product [GET]");
 		
 		//제품 정보 불러옴
+		Project projectInfo = applyService.projectSelect(project);
+		
+		//모델값 저장
+		model.addAttribute("projectInfo", projectInfo);
+		
 		return "apply/product";
 		
 	}
@@ -62,6 +74,11 @@ public class ApplyController {
 		logger.info("/apply/plan [GET]");
 		
 		//펀딩계획정보 불러옴
+		Project projectInfo = applyService.projectSelect(project);
+		
+		//모델값 저장
+		model.addAttribute("projectInfo", projectInfo);
+
 		return "apply/plan";
 	}
 	
@@ -76,6 +93,12 @@ public class ApplyController {
 	public String content(Project project, Model model) {
 		logger.info("/apply/content [GET]");
 		
+		//프로젝트 소개 정보 불러옴
+		Project projectInfo = applyService.projectSelect(project);
+		
+		//모델값 저장
+		model.addAttribute("projectInfo", projectInfo);
+		
 		return "apply/content";
 	}
 	
@@ -87,8 +110,14 @@ public class ApplyController {
 	
 	//리워드 입력 페이지 이동 
 	@RequestMapping(value = "/reward", method = RequestMethod.GET)
-	public String reward(Reward reward, Model model) {
+	public String reward(Project project, Model model) {
 		logger.info("/apply/reward [GET]");
+		
+		//리워드 정보 불러옴
+		List<Reward> rewardList = applyService.rewardSelect(project);
+		
+		//모델값 저장
+		model.addAttribute("rewardList", rewardList);
 		
 		return "apply/reward";
 	}

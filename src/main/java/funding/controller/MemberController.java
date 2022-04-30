@@ -61,7 +61,7 @@ public class MemberController {
 		if(result == 1) {
 			session.setAttribute("login", true);
 			session.setAttribute("Id", memberInfo.getId());
-			session.setAttribute("nick", memberInfo.getName());
+			session.setAttribute("name", memberInfo.getName());
 			session.setAttribute("nick", memberInfo.getNick());
 			session.setAttribute("mamberNo", memberInfo.getMemberNo());
 			session.setAttribute("phone", memberInfo.getPhone());
