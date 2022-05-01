@@ -16,30 +16,35 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$("#btnWrite").click(function(){
+	if( ${empty notice.fileOrigin}) {
+		$("#newFile").show();
+	} else {
+		$("#originFile").show();
+	}
+	$("#deleteFile").click(function() {
+		$("#originFile").toggleClass("through")
+		$("#newFile").toggle();
+	})
+	$("#btnNoticeUpdate").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 
-		var form = $("#writeform")[0];
+		var form = $("#updateform")[0];
 		var data = new FormData(form);
-		$("#btnWrite").prop("disabled", true);  
+		$("#btnNoticeUpdate").prop("disabled", true);  
 // 		위에 코드로 인해 페이지 하나 더 추가 안됨 유용함
 		$.ajax({
 			type : "post"
-			,url : "/admin/noticeWrite"
-// 			,enctype:"multipart/form-data"
+			,url : "/admin/noticeUpdate"
 			,data : data
 			,dataType : "html"
 			,contentType : false
 	        ,processData : false  
 	        ,cache: false  
 			,success : function(res){
-				console.log("성공??");
 				noticeManagement();
-
-				
+				console.log("성공");
 			},
 			error : function(){
-				
 				console.log("실패"+data);
 			}
 		})
@@ -53,7 +58,7 @@ $(document).ready(function(){
 <h1>글쓰기</h1>
 <hr>
 
-<form enctype="multipart/form-data"  id="writeform" method="post">
+<form enctype="multipart/form-data"  id="updateform" method="post">
 <div class="form-group">
 	<label for="write">작성자</label>
 	<input type="text" id="write" value="관리자" class="form-control" readonly="readonly">
@@ -61,20 +66,36 @@ $(document).ready(function(){
 
 <div class="form-group">
 	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control">
+	<input type="text" id="title" name="title" class="form-control" value="${notice.title }">
 </div>
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content"></textarea>
+	<textarea rows="10" style="width: 100%;" id="content" name="content">${notice.content }</textarea>
 </div>
 
-	<label for="file">첨부파일</label>
-	<input type="file" id="file" name="file">
+<div class="form-group">
 
+	<div id="fileBox">
+		<div id="originFile">
+			<a onclick="noticeDownload(${notice.fileNo})">${notice.fileOrigin}</a>
+			<span id="deleteFile">X</span>
+		</div>
+
+		<div id="newFile">
+			<hr>
+			<label for="file">새로운 첨부파일</label>
+			<input type="file" id="file" name="file">
+			<small>** 새로운 파일로 첨부하면 기존 파일은 삭제됩니다</small>
+		</div>
+	</div>
+
+</div>
 <div class="text-center">
-	<button class="btn btn-primary" id="btnWrite">작성</button>
+	<button class="btn btn-primary" id="btnNoticeUpdate">작성</button>
 	<button type="reset" onclick="noticeManagement()" class="btn btn-danger" >취소</button>
 </div>
+<input type="hidden" value="${notice.fileNo }" id="fileNo" name="fileNo">
+<input type="hidden" value="${notice.noticeNo }" id="noticeNo" name="noticeNo">
 </form>
 
 <script type="text/javascript">

@@ -35,6 +35,10 @@ public interface AdminService {
 
 //	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
 
-	public NoticeFile getFile(NoticeFile noticeFile);
+	public Notice getFile(Notice notice);
+
+	public void noticeUpdate(Notice notice, MultipartFile file);
+
+	public void noticeDelete(Notice notice);
 
 }

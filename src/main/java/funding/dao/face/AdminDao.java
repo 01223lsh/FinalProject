@@ -39,10 +39,19 @@ public interface AdminDao {
 
 	public void noticeWrite(Notice notice);
 
-	public void insertNoticeFile(NoticeFile noticeFile);
 
 //	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
 
-	public NoticeFile selectNoticeFileByFileNo(NoticeFile noticeFile);
+	public Notice selectNoticeFileByFileNo(Notice notice);
+
+	public void noticeUpdate(Notice notice);
+
+	public void updateNoticeFile(Notice notice);
+
+	public void insertNoticeFile(Notice notice);
+
+	public void noticeDelete(Notice notice);
+
+	public void noticeFileDelete(Notice notice);
 
 }

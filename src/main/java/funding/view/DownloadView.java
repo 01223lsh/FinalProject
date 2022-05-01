@@ -10,14 +10,17 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-import funding.dto.NoticeFile;
+import funding.controller.AdminController;
+import funding.dto.Notice;
 
 public class DownloadView extends AbstractView {
-
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	@Autowired private ServletContext context;
 	
 	@Override
@@ -25,7 +28,7 @@ public class DownloadView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 		
 		//모델값 가져오기
-		NoticeFile file = (NoticeFile) model.get("downFile");
+		Notice file = (Notice) model.get("downFile");
 		
 		//업로드된 파일의 객체
 		File src = new File(context.getRealPath("upload"), file.getFileStorage());

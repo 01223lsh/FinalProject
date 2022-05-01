@@ -3,6 +3,7 @@ package funding.dto;
 import java.sql.Date;
 
 public class Notice {
+	private int fileNo;
 	private int noticeNo;
 	private String title;
 	private String content;
@@ -11,9 +12,18 @@ public class Notice {
 	private Date date;
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", title=" + title + ", content=" + content + ", fileOrigin="
-				+ fileOrigin + ", fileStorage=" + fileStorage + ", date=" + date + "]";
+		return "Notice [fileNo=" + fileNo + ", noticeNo=" + noticeNo + ", title=" + title + ", content=" + content
+				+ ", fileOrigin=" + fileOrigin + ", fileStorage=" + fileStorage + ", date=" + date + "]";
 	}
+	
+	public int getFileNo() {
+		return fileNo;
+	}
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
 	public int getNoticeNo() {
 		return noticeNo;
 	}

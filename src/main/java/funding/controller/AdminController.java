@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,13 +142,26 @@ public class AdminController {
 		
 		adminService.noticeWrite(notice,file);
 	}
-	@RequestMapping("/download")
-	public String download(NoticeFile noticeFile, Model model) {
-		
-		noticeFile = adminService.getFile(noticeFile);
-		model.addAttribute("downFile", noticeFile);
+	@RequestMapping(value="/download")
+	public String download(Notice notice, Model model) {
+		notice = adminService.getFile(notice);
+		model.addAttribute("downFile", notice);
 		
 		return "down";
+	}
+	@RequestMapping(value="/admin/noticeUpdate", method=RequestMethod.GET)
+	public void noticeUpdate(Notice notice, Model model) {
+		notice = adminService.selectByNotice(notice);
+		model.addAttribute("notice",notice);
+	}
+	@RequestMapping(value="/admin/noticeUpdate", method=RequestMethod.POST)
+	public void noticeUpdateresult(Notice notice, @RequestParam(value="file") MultipartFile file) {
+		adminService.noticeUpdate(notice,file);	
+	}
+	@RequestMapping(value="/admin/noticeDelete")
+	public String noticeDelete(Notice notice) {
+		adminService.noticeDelete(notice);
+		return null;
 	}
 	
 	

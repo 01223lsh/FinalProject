@@ -91,7 +91,6 @@ public class AdminServiceImpl implements AdminService{
 	public void noticeWrite(Notice notice, MultipartFile file) {
 		int noticeNo = adminDao.selectBynoticeno();
 		notice.setNoticeNo(noticeNo);
-		logger.info("aaaaaaaaaaaaaaa{}",notice.getContent());
 		adminDao.noticeWrite(notice);
 		if(file.getSize()<=0) {
 			return;
@@ -114,20 +113,60 @@ public class AdminServiceImpl implements AdminService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		NoticeFile noticeFile = new NoticeFile();
-		noticeFile.setFileOrigin(file.getOriginalFilename());
-		noticeFile.setFileStorage(filename);
-		noticeFile.setNoticeNo(noticeNo);
-		adminDao.insertNoticeFile(noticeFile);
+		
+		notice.setFileOrigin(file.getOriginalFilename());
+		notice.setFileStorage(filename);
+		notice.setNoticeNo(noticeNo);
+		adminDao.insertNoticeFile(notice);
 		
 	}
 //	@Override
 //	public NoticeFile selectByNoticeFile(NoticeFile noticeFile) {
 //		return adminDao.selectByNoticeFile(noticeFile);
-//	}
+//	} 
 	@Override
-	public NoticeFile getFile(NoticeFile noticeFile) {
+	public Notice getFile(Notice notice) {
 	
-		return adminDao.selectNoticeFileByFileNo(noticeFile);
+		return adminDao.selectNoticeFileByFileNo(notice);
+	}
+@Override
+	public void noticeUpdate(Notice notice, MultipartFile file) {
+		int noticeNo= notice.getNoticeNo();
+		adminDao.noticeUpdate(notice);
+		if(file.getSize()<=0) {
+			return;
+		}
+		
+		String storedPath = context.getRealPath("upload");
+		File storedFolder = new File(storedPath);
+		if(!storedFolder.exists()) {
+			storedFolder.mkdir();
+		}
+		String filename = file.getOriginalFilename();
+		filename+= UUID.randomUUID().toString().split("-")[4];
+		File dest = new File(storedFolder,filename);
+
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		notice.setFileOrigin(file.getOriginalFilename());
+		notice.setFileStorage(filename);
+		if(notice.getFileNo()<=0) {
+			adminDao.insertNoticeFile(notice);
+		}else {
+			adminDao.updateNoticeFile(notice);			
+		}
+		
+	}
+	@Override
+	public void noticeDelete(Notice notice) {
+		
+		adminDao.noticeFileDelete(notice);
+		adminDao.noticeDelete(notice);
+		
 	}
 }

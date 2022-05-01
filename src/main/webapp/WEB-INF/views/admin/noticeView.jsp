@@ -6,6 +6,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function noticeDelete(noticeNo){
+	if(confirm("삭제하시면 복구가 되지 않습니다.\n정말 삭제를 하시겠습니까?")){
+		$.ajax({
+			type : "post"
+			,url : "/admin/noticeDelete"
+			,data : "noticeNo="+noticeNo
+			,dataType : "html"
+			,success : function(res){
+				noticeManagement()
+			},error : function(request,error){
+				console.log("공지사항 삭제 실패");
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				
+			}
+		})
+	}
+}
+function noticeUpdate(noticeNo){
+	$.ajax({
+		type : "get"
+		,url : "/admin/noticeUpdate"
+		,data : "noticeNo="+noticeNo
+		,dataType : "html"
+		,success : function(res){
+			console.log("공지사항 수정 성공");
+			$("#resultLayout").html(res);
+			
+		}
+		,error : function(){
+			console.log("공지사항 수정 실패");
+		}
+	})
+}
+function noticeDownload(fileNo){
+	$.ajax({
+		type : "post"
+		,url : "/download"
+		,data : "fileNo="+fileNo
+		,dataType : "html"
+		,contentType : 'application/x-www-form-urlencoded; charset=UTF-8' //중요
+		,success : function(res){
+			console.log("성공?")
+			window.open("/download/?fileNo="+fileNo);
+		},error : function(request, error){
+	
+			console.log("다운로드 실패")
+			
+		}	
+	})
+}
+</script>
 <style type="text/css">
 .noticeView{
 	margin: 2px 0;
@@ -47,11 +99,15 @@
 
 <hr>
 <c:if test="${not empty notice.fileOrigin}">
-	<a 
-<%-- 	href="/admin/download?notice=${boardFile.fileNo }" --%>
-	>${notice.fileOrigin }</a>
+	<a onclick="noticeDownload(${notice.fileNo})">${notice.fileOrigin }</a>
 </c:if>
 	<div class="notice Content">${notice.content}</div>
 </div>
+<div class="text-center">
+<button onclick="noticeManagement()">목록</button>
+<button onclick="noticeUpdate(${notice.noticeNo})">수정</button>
+<button onclick="noticeDelete(${notice.noticeNo})">삭제</button>
+</div>
+
 </body>
 </html>
