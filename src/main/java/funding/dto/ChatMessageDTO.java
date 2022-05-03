@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class ChatMessageDTO {
 
-	private String chatroomId; // 룸아이디
+	private String chatRoomId; // 룸아이디
 	private String receiverId; // 받는사람
 	private String senderId; // 보낸 사람
 	private String chatContent; // 메세지내용
