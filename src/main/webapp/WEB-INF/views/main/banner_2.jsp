@@ -15,7 +15,7 @@
  <!-- <style type="text/css">
 
      /*캐러셀(이미지슬라이드) 이미지 크기변경 */
-      .carousel-inner{
+      .carousel-inner{//
         width:auto;
         height:980px; /* 이미지 높이 변경 */
       }
