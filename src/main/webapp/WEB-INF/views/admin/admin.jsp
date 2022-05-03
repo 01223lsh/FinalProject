@@ -62,6 +62,23 @@ function noticeManagement(){
 	})
 
 }
+function projectManagement(){
+	$.ajax({
+		type : "get"
+		,url : "/admin/project"
+		,data : "str=poject&step=5"
+		,dataType : "html"
+		,success : function(res){
+			console.log("공지사항 뷰 성공")
+			$("#resultLayout").html(res)
+			
+		}
+		,error : function(){
+			console.log("공지사항 뷰 실패")
+		}
+	})
+
+}
 
 
 
@@ -123,7 +140,7 @@ h1{ font-size:18px;  padding:20px; }
     <h1>관리자 페이지</h1> <!-- h1태그 검색사이트가 좋아함. 문서상에 1개만 있는 것을 권장한다. -->
     <ul class="menu">
         <li><a onclick="memberManagement()">회원관리</a></li>
-        <li><a href="">프로젝트 관리</a></li>
+        <li><a onclick="projectManagement()">프로젝트 목록</a></li>
         <li><a href="">프로젝트 승인</a></li>
         <li><a onclick="noticeManagement()">공지사항</a></li>
         <li><a href=""></a></li>

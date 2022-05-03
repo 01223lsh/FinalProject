@@ -84,7 +84,8 @@ $(document).ready(function(){
 		<div id="newFile">
 			<hr>
 			<label for="file">새로운 첨부파일</label>
-			<input type="file" id="file" name="file">
+<!-- 			<input type="file" id="file" name="file"> -->
+			<input multiple="multiple" type="file" name="file" id="file"/> 
 			<small>** 새로운 파일로 첨부하면 기존 파일은 삭제됩니다</small>
 		</div>
 	</div>

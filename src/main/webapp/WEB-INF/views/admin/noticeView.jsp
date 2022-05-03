@@ -82,6 +82,9 @@ function noticeDownload(fileNo){
     text-align : right;
  	vertical-align:middle;
 }
+.noticeimg{
+	width : 500px;
+}
 
 
 </style>
@@ -98,9 +101,14 @@ function noticeDownload(fileNo){
 
 
 <hr>
-<c:if test="${not empty notice.fileOrigin}">
-	<a onclick="noticeDownload(${notice.fileNo})">${notice.fileOrigin }</a>
-</c:if>
+	<c:forEach items="${listfile}" var="i">
+	<c:if test="${not empty i.fileOrigin}"> 
+	<img src="/upload/${i.fileStorage}" class="noticeimg"> 
+	
+	<a onclick="noticeDownload(${i.fileNo})">${i.fileOrigin}</a><br>
+	
+	</c:if>
+	</c:forEach> 
 	<div class="notice Content">${notice.content}</div>
 </div>
 <div class="text-center">

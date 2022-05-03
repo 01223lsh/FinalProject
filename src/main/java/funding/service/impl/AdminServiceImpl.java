@@ -17,6 +17,7 @@ import funding.dao.face.AdminDao;
 import funding.dto.Member;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
+import funding.dto.Project;
 import funding.service.face.AdminService;
 import funding.util.Paging;
 
@@ -83,43 +84,26 @@ public class AdminServiceImpl implements AdminService{
 		return paging;
 	}
 	@Override
+	public Paging getprojectPaging(Paging paging,int step) {
+		int totalCount = adminDao.selectCntProject(step);
+		int curPage = paging.getCurPage();
+		paging = new Paging(totalCount,curPage);
+		return paging;
+	}
+	@Override
 	public Notice selectByNotice(Notice notice) {
 		
 		return adminDao.selectByNotice(notice);
 	}
 	@Override
-	public void noticeWrite(Notice notice, MultipartFile file) {
-		int noticeNo = adminDao.selectBynoticeno();
-		notice.setNoticeNo(noticeNo);
-		adminDao.noticeWrite(notice);
-		if(file.getSize()<=0) {
-			return;
-		}
-		String storedPath = context.getRealPath("upload");
-		
-		
-		File storedFolder = new File(storedPath);
-		if(!storedFolder.exists()) {
-			storedFolder.mkdir();
-		}
-		String filename = file.getOriginalFilename();
-		filename+= UUID.randomUUID().toString().split("-")[4];
-		File dest = new File(storedFolder,filename);
-		
-		try {
-			file.transferTo(dest);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		notice.setFileOrigin(file.getOriginalFilename());
-		notice.setFileStorage(filename);
-		notice.setNoticeNo(noticeNo);
-		adminDao.insertNoticeFile(notice);
-		
+	public List<NoticeFile> selectBtNoticeFile(Notice notice) {
+		return adminDao.selectByNoticeFile(notice);
 	}
+//	@Override
+//	public void noticeWrite(Notice notice, MultipartFile file) {
+//		
+//		
+//	}
 //	@Override
 //	public NoticeFile selectByNoticeFile(NoticeFile noticeFile) {
 //		return adminDao.selectByNoticeFile(noticeFile);
@@ -129,11 +113,11 @@ public class AdminServiceImpl implements AdminService{
 	
 		return adminDao.selectNoticeFileByFileNo(notice);
 	}
-@Override
-	public void noticeUpdate(Notice notice, MultipartFile file) {
+	@Override
+	public void noticeUpdate(Notice notice,List<MultipartFile> filelist) {
 		int noticeNo= notice.getNoticeNo();
 		adminDao.noticeUpdate(notice);
-		if(file.getSize()<=0) {
+		if(filelist.size()<=0) {
 			return;
 		}
 		
@@ -142,23 +126,41 @@ public class AdminServiceImpl implements AdminService{
 		if(!storedFolder.exists()) {
 			storedFolder.mkdir();
 		}
-		String filename = file.getOriginalFilename();
-		filename+= UUID.randomUUID().toString().split("-")[4];
-		File dest = new File(storedFolder,filename);
-
-		try {
-			file.transferTo(dest);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		notice.setFileOrigin(file.getOriginalFilename());
-		notice.setFileStorage(filename);
-		if(notice.getFileNo()<=0) {
+//		String filename = file.getOriginalFilename();
+//		filename+= UUID.randomUUID().toString().split("-")[4];
+//		File dest = new File(storedFolder,filename);
+//
+//		try {
+//			file.transferTo(dest);
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		notice.setFileOrigin(file.getOriginalFilename());
+//		notice.setFileStorage(filename);
+//		if(notice.getFileNo()<=0) {
+//			adminDao.insertNoticeFile(notice);
+//		}else {
+//			adminDao.updateNoticeFile(notice);			
+//		}
+		adminDao.fileNoByDelete(notice);
+		for(MultipartFile mf : filelist) {
+			
+			String filename = mf.getOriginalFilename();
+			filename+= UUID.randomUUID().toString().split("-")[4];
+			File dest = new File(storedFolder,filename);
+			try {
+				mf.transferTo(dest);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			notice.setFileOrigin(mf.getOriginalFilename());
+			notice.setFileStorage(filename);
+			notice.setNoticeNo(noticeNo);
 			adminDao.insertNoticeFile(notice);
-		}else {
-			adminDao.updateNoticeFile(notice);			
 		}
 		
 	}
@@ -168,5 +170,44 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.noticeFileDelete(notice);
 		adminDao.noticeDelete(notice);
 		
+	}
+	@Override
+	public void noticeWrite(Notice notice, List<MultipartFile> filelist) {
+		int noticeNo = adminDao.selectBynoticeno();
+		notice.setNoticeNo(noticeNo);
+		adminDao.noticeWrite(notice);
+		if(filelist.size()<=0) {
+			return;
+		}
+		String storedPath = context.getRealPath("upload");
+		
+		
+		File storedFolder = new File(storedPath);
+		if(!storedFolder.exists()) {
+			storedFolder.mkdir();
+		}
+		for(MultipartFile mf : filelist) {
+			
+			String filename = mf.getOriginalFilename();
+			filename = UUID.randomUUID().toString().split("-")[4];
+			File dest = new File(storedFolder,filename);
+			try {
+				mf.transferTo(dest);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			notice.setFileOrigin(mf.getOriginalFilename());
+			notice.setFileStorage(filename);
+			notice.setNoticeNo(noticeNo);
+			adminDao.insertNoticeFile(notice);
+		}
+		
+	}
+	@Override
+	public List<Project> projectList(Paging paging, int step) {
+		
+		return adminDao.projectList(paging, step);
 	}
 }

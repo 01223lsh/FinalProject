@@ -84,6 +84,13 @@
 	<select id="selectCntNotice" resultType="int">
 		select count(*) from notice
 	</select>
+	<select id ="selectCntProject" resultType="int">
+		select count(*) from project
+		where 1=1
+		<if test="step!=5"> 
+			and project_step = #{step}
+		</if>
+	</select>
 	<select id="noticeAll" resultType="funding.dto.Notice">
 	
 		select * from (
@@ -96,25 +103,24 @@
 	</select>
 	
 	<select id="selectByNotice" resultType="funding.dto.Notice">
+
+		select notice_no,title,content from notice
+		where notice_no = #{noticeNo} 
+	</select>
+	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile" parameterType="funding.dto.Notice">
 		select 
-		a.notice_no
-		,a.title 
-		,a.content
-		,a."date"  
-		,b.file_no
-		,b.file_origin
-		,b.file_storage
-		 from notice a , noticefile b
-		where a.notice_no = #{noticeNo}
-        and a.notice_no = b.notice_no(+)
-        
-		
-	</select>
-	<select id="selectByNoticeFile" resultType="funding.dto.Notice">
-		select * from noticefile
+		file_no fileNo
+		,notice_no noticeNo
+		,file_origin fileOrigin
+		,file_storage fileStorage
+		 from noticefile
 		where notice_no = #{noticeNo}
-		
 	</select>
+	<delete id="fileNoByDelete" parameterType="funding.dto.Notice">
+		delete from noticefile
+		where notice_no = #{noticeNo}
+	</delete>
+	
 	<select id="selectBynoticeno" resultType="int">
 		select notice_seq.nextval from dual
 	</select>
@@ -156,6 +162,21 @@
     	delete from noticefile
     	where notice_no = #{noticeNo}
     </delete>
+    <select id="projectList" resultType="funding.dto.Project" >
+    	select * from (
+		     select rownum rnum, N.* from(
+		         select * from project 
+		      		where project_step between 3 and 4
+		      		<if test="step!=5">
+						and project_step = #{step}
+					</if>
+		          order by project_no desc
+		        )N
+		     ) project
+		where rnum between #{paging.startNo} and #{paging.endNo}
+	
+	
+    </select>
 
 </mapper>
 

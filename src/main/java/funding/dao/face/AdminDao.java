@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import funding.dto.Member;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
+import funding.dto.Project;
 import funding.util.Paging;
 
 public interface AdminDao {
@@ -53,5 +54,13 @@ public interface AdminDao {
 	public void noticeDelete(Notice notice);
 
 	public void noticeFileDelete(Notice notice);
+
+	public List<NoticeFile> selectByNoticeFile(Notice notice);
+
+	public void fileNoByDelete(Notice notice);
+
+	public List<Project> projectList(@Param("paging") Paging paging, @Param("step")int step);
+
+	public int selectCntProject(int step);
 
 }

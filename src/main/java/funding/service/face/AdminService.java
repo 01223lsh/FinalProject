@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import funding.dto.Member;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
+import funding.dto.Project;
 import funding.util.Paging;
 
 public interface AdminService {
@@ -31,14 +32,20 @@ public interface AdminService {
 
 	public Notice selectByNotice(Notice notice);
 
-	public void noticeWrite(Notice notice, MultipartFile file);
+	public void noticeWrite(Notice notice, List<MultipartFile> filelist);
 
 //	public NoticeFile selectByNoticeFile(NoticeFile noticeFile);
 
 	public Notice getFile(Notice notice);
 
-	public void noticeUpdate(Notice notice, MultipartFile file);
+	public void noticeUpdate(Notice notice, List<MultipartFile> filelist);
 
 	public void noticeDelete(Notice notice);
+
+	public List<NoticeFile> selectBtNoticeFile(Notice notice);
+
+	public List<Project> projectList(Paging paging, int step);
+
+	public Paging getprojectPaging(Paging paging, int step);
 
 }
