@@ -16,7 +16,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	if( ${empty notice.fileOrigin}) {
+	if( "${empty notice.fileOrigin}") {
 		$("#newFile").show();
 	} else {
 		$("#originFile").show();
