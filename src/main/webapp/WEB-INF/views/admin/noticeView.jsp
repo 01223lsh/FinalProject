@@ -61,11 +61,11 @@ function noticeDownload(fileNo){
 <style type="text/css">
 .noticeView{
 	margin: 2px 0;
-		padding: 1px 3px;
-		border-width: 2px;
-		border-color: #aaa;
-		border-style: solid;
-		height: 500px;
+	padding: 1px 3px;
+	border-width: 2px;
+	border-color: #aaa;
+	border-style: solid;
+		
 }
 .notice{
 	margin : 60px 100px;

@@ -57,7 +57,7 @@ public interface AdminDao {
 
 	public List<NoticeFile> selectByNoticeFile(Notice notice);
 
-	public void fileNoByDelete(Notice notice);
+	public void fileNoByDelete(@Param("notice")Notice notice,@Param("fileNolist") List<Integer> fileNolist);
 
 	public List<Project> projectList(@Param("paging") Paging paging, @Param("step")int step);
 

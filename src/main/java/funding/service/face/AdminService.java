@@ -38,14 +38,16 @@ public interface AdminService {
 
 	public Notice getFile(Notice notice);
 
-	public void noticeUpdate(Notice notice, List<MultipartFile> filelist);
+	public void noticeUpdate(Notice notice, List<MultipartFile> filelist, List<Integer> fileNolist);
 
 	public void noticeDelete(Notice notice);
 
 	public List<NoticeFile> selectBtNoticeFile(Notice notice);
 
-	public List<Project> projectList(Paging paging, int step);
+	public List<Project> projectList(Paging paging, int i);
 
-	public Paging getprojectPaging(Paging paging, int step);
+	public Paging getprojectPaging(Paging paging, int i);
+
+	public List<NoticeFile> selectByNoticeFile(Notice notice);
 
 }

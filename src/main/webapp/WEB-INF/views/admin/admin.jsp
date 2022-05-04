@@ -66,7 +66,7 @@ function projectManagement(){
 	$.ajax({
 		type : "get"
 		,url : "/admin/project"
-		,data : "str=poject&step=5"
+		,data : "str=poject&projectStep=5"
 		,dataType : "html"
 		,success : function(res){
 			console.log("공지사항 뷰 성공")

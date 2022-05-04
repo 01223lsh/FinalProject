@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,22 +68,36 @@ public class AdminController {
 		model.addAttribute("paging",paging);
 		model.addAttribute("cnt",cnt);
 	}
-	
-	
-
-	
+	@RequestMapping(value="/admin/project")
+	public void project(Model model,Paging paging,Project project,String projectStep) {
+		int i=5;
+		if(project.getProjectStep() < i) {
+			i=project.getProjectStep();
+		}
+		paging = adminService.getprojectPaging(paging,i);
+		List<Project> list = adminService.projectList(paging,i);
+		
+		
+		int cnt = list.size();
+		model.addAttribute("step",i);
+		model.addAttribute("list",list);
+		model.addAttribute("cnt",cnt);
+		model.addAttribute("paging",paging);
+		model.addAttribute("project",list);
+	}
 	@RequestMapping(value="/admin/memberInfo", method=RequestMethod.GET)
 	public void memberInfo(Member member,Model model) {
-		
 		member = adminService.selectBymemberNo(member);	
-		
-		
 		model.addAttribute("member",member);
-		
 	}
 	@RequestMapping(value="/layout/memberpaging")
-	public String memberpaging(Paging paging,String str,int grade,Model model,String content,String category){
-		model.addAttribute("gradep",grade);
+	public String memberpaging(Paging paging
+			,String str
+			,int grade
+			,Model model
+			,String content
+			,String category){
+//		model.addAttribute("gradep",grade);
 		if(content!=null && !"".equals(content) && str.equals("member")) {
 			return "redirect:/admin/member?curPage="+paging.getCurPage()
 			+"&grade="+grade+"&category="+category+"&content="+content;
@@ -91,11 +106,17 @@ public class AdminController {
 					"&grade="+grade;
 		}		
 	}
+	@RequestMapping(value="/layout/projectpaging")
+	public String projectpaging(
+			Paging paging
+			,int projectStep
+			,Model model){
+		return "redirect:/admin/project?curPage="+paging.getCurPage()+"&projectStep="+projectStep;
+		
+	}
 	@RequestMapping(value="/layout/paging", method = RequestMethod.GET)
 	public String memberpaging(Paging paging,String str,Model model){	
-		if(str.equals("project")) {
-			return "redirect:/admin/project?curPage="+paging.getCurPage();
-		}else if(str.equals("qna")) {
+		 if(str.equals("qna")) {
 			return "redirect:/admin/qna?curPage="+paging.getCurPage();
 		}else if(str.equals("notice")) {
 			logger.info("notice");
@@ -134,14 +155,14 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/noticeWrite",method = RequestMethod.POST)
 	public void noticeWriteResult(Notice notice,MultipartHttpServletRequest mtfRequest) {
-//		logger.info("notice : {}, file : {}",notice,file);
-		List<MultipartFile> filelist =mtfRequest.getFiles("file");
-//				new ArrayList<>();
-	
-		filelist=mtfRequest.getFiles("file");
-		
+		List<MultipartFile> filelist; 
+		if(mtfRequest.getFile("file").getSize()>0) {
+			logger.info("ddddddddd{}",mtfRequest.getFile("file").getSize());
+			filelist =mtfRequest.getFiles("file");
+		}else {
+			filelist=new ArrayList<MultipartFile>();
+		}
 		adminService.noticeWrite(notice,filelist);
-//		adminService.noticeWrite(notice,file);
 	}
 	@RequestMapping(value="/download")
 	public String download(Notice notice, Model model) {
@@ -151,32 +172,35 @@ public class AdminController {
 		return "down";
 	}
 	@RequestMapping(value="/admin/noticeUpdate", method=RequestMethod.GET)
-	public void noticeUpdate(Notice notice, Model model) {
+	public void noticeUpdate(Notice notice
+			, Model model
+			,  @ModelAttribute(value="NoticeFile") NoticeFile noticefile) {
+		logger.info("{}",noticefile);
+		
 		notice = adminService.selectByNotice(notice);
+		List<NoticeFile> noticeFile = adminService.selectByNoticeFile(notice);
+		model.addAttribute("noticeFile",noticeFile);
 		model.addAttribute("notice",notice);
 	}
 	@RequestMapping(value="/admin/noticeUpdate", method=RequestMethod.POST)
-	public void noticeUpdateresult(Notice notice, MultipartHttpServletRequest mtfRequest) {
-		List<MultipartFile> filelist =mtfRequest.getFiles("file");
-		adminService.noticeUpdate(notice,filelist);	
+	public void noticeUpdateresult(Notice notice, MultipartHttpServletRequest mtfRequest
+			,@RequestParam("fileNolist") List<Integer> fileNolist) {
+		logger.info("{}",fileNolist);
+		List<MultipartFile> filelist; 
+		if(mtfRequest.getFile("file").getSize()>0) {
+			logger.info("ddddddddd{}",mtfRequest.getFile("file").getSize());
+			filelist =mtfRequest.getFiles("file");
+		}else {
+			filelist=new ArrayList<MultipartFile>();
+		}
+		adminService.noticeUpdate(notice,filelist,fileNolist);	
 	}
 	@RequestMapping(value="/admin/noticeDelete")
 	public String noticeDelete(Notice notice) {
 		adminService.noticeDelete(notice);
 		return null;
 	}
-	@RequestMapping(value="/admin/project")
-	public void project(Model model,Paging paging,@RequestParam("step") int step) {
-		logger.info("55555555555555555555={}",step);
-		paging = adminService.getprojectPaging(paging,step);
-		List<Project> list = adminService.projectList(paging,step);
-		
-		int cnt = list.size();
-		model.addAttribute("list",list);
-		model.addAttribute("cnt",cnt);
-		model.addAttribute("paging",paging);
-		model.addAttribute("project",list);
-	}
+	
 	
 	
 	

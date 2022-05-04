@@ -17,7 +17,7 @@ public class Project {
 	private Date deliveryDate;
 	private String projectContent;
 	private int fundPrice;
-	private String projectStep;
+	private int projectStep;
 	private int sum;
 	
 	@Override
@@ -141,12 +141,13 @@ public class Project {
 	public void setFundPrice(int fundPrice) {
 		this.fundPrice = fundPrice;
 	}
+	
 
-	public String getProjectStep() {
+	public int getProjectStep() {
 		return projectStep;
 	}
 
-	public void setProjectStep(String projectStep) {
+	public void setProjectStep(int projectStep) {
 		this.projectStep = projectStep;
 	}
 

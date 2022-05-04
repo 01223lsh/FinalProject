@@ -10,14 +10,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-function step(step){
-	
+function step(stepe){
 	$.ajax({
 		type : "post"
 		,url : "/admin/project" 
-		,data : "projectStep="+step
+		,data : "projectStep="+stepe
 		,datdType :"html"
 		,success : function(res){
 			console.log("등급별로");
@@ -36,14 +37,15 @@ var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
 var cnt = ${cnt};
 var str = "project";
+var projectStep =${step};
 $(document).ready(function(){
 	for(var i = startPage; i <= endPage; i++){
 		(function(i){
 			$(".paging"+i).click(function(){	
 				$.ajax({
 					type : "get"
-					,url : "/layout/paging"
-					,data : "curPage="+i+"&str="+str
+					,url : "/layout/projectpaging"
+					,data : "curPage="+i+"&projectStep="+projectStep
 					,dataType : "html"
 					,success : function(res){
 						console.log("성공");
@@ -59,8 +61,8 @@ $(document).ready(function(){
 	$(".pagingFirst").click(function(){	
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+1+"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+1+"&projectStep="+projectStep
 			,dataType : "html"
 			,success : function(res){
 				console.log("성공");
@@ -74,8 +76,8 @@ $(document).ready(function(){
 	$(".pagingBackAll").click(function(){
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+ ${paging.startPage - paging.pageCount }+"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+ ${paging.startPage - paging.pageCount }+"&projectStep="+projectStep
 			,success : function(res){
 				console.log("성공");
 				$("#resultLayout").html(res)
@@ -89,8 +91,8 @@ $(document).ready(function(){
 	$(".pagingGoAll").click(function(){	
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+${paging.startPage + paging.pageCount }+"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+${paging.startPage + paging.pageCount }+"&projectStep="+projectStep
 			,dataType : "html"
 			,success : function(res){
 				console.log("성공");
@@ -104,8 +106,8 @@ $(document).ready(function(){
 	$(".pagingGo").click(function(){	
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+${paging.curPage + 1 }+"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+${paging.curPage + 1 }+"&projectStep="+projectStep
 			,dataType : "html"
 			,success : function(res){
 				console.log("성공");
@@ -119,8 +121,8 @@ $(document).ready(function(){
 	$(".pagingBack").click(function(){	
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+${paging.curPage - 1 } +"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+${paging.curPage - 1 }+"&projectStep="+projectStep
 			,dataType : "html"
 			,success : function(res){
 				console.log("성공");
@@ -134,8 +136,8 @@ $(document).ready(function(){
 	$(".pagingLast").click(function(){
 		$.ajax({
 			type : "get"
-			,url : "/layout/paging"
-			,data : "curPage="+${paging.totalPage}+"&str="+str
+			,url : "/layout/projectpaging"
+			,data : "curPage="+${paging.totalPage}+"&projectStep="+projectStep
 			,dataType : "html"
 			,success : function(res){
 				console.log("성공");

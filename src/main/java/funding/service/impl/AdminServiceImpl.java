@@ -85,6 +85,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 	@Override
 	public Paging getprojectPaging(Paging paging,int step) {
+		
 		int totalCount = adminDao.selectCntProject(step);
 		int curPage = paging.getCurPage();
 		paging = new Paging(totalCount,curPage);
@@ -114,10 +115,12 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.selectNoticeFileByFileNo(notice);
 	}
 	@Override
-	public void noticeUpdate(Notice notice,List<MultipartFile> filelist) {
+	public void noticeUpdate(Notice notice,List<MultipartFile> filelist,List<Integer> fileNolist) {
 		int noticeNo= notice.getNoticeNo();
 		adminDao.noticeUpdate(notice);
+		adminDao.fileNoByDelete(notice,fileNolist);
 		if(filelist.size()<=0) {
+			
 			return;
 		}
 		
@@ -144,7 +147,6 @@ public class AdminServiceImpl implements AdminService{
 //		}else {
 //			adminDao.updateNoticeFile(notice);			
 //		}
-		adminDao.fileNoByDelete(notice);
 		for(MultipartFile mf : filelist) {
 			
 			String filename = mf.getOriginalFilename();
@@ -176,6 +178,7 @@ public class AdminServiceImpl implements AdminService{
 		int noticeNo = adminDao.selectBynoticeno();
 		notice.setNoticeNo(noticeNo);
 		adminDao.noticeWrite(notice);
+
 		if(filelist.size()<=0) {
 			return;
 		}
@@ -209,5 +212,9 @@ public class AdminServiceImpl implements AdminService{
 	public List<Project> projectList(Paging paging, int step) {
 		
 		return adminDao.projectList(paging, step);
+	}
+	@Override
+	public List<NoticeFile> selectByNoticeFile(Notice notice) {
+		return adminDao.selectByNoticeFile(notice);
 	}
 }

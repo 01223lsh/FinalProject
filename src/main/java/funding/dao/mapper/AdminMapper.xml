@@ -116,9 +116,13 @@
 		 from noticefile
 		where notice_no = #{noticeNo}
 	</select>
-	<delete id="fileNoByDelete" parameterType="funding.dto.Notice">
+	<delete id="fileNoByDelete" parameterType="int">
 		delete from noticefile
-		where notice_no = #{noticeNo}
+		where notice_no = #{notice.noticeNo}
+		and file_no not in
+		<foreach collection="fileNolist" item="item"  open="(" separator="," close=")" > 
+	     #{item} 
+		</foreach>
 	</delete>
 	
 	<select id="selectBynoticeno" resultType="int">
