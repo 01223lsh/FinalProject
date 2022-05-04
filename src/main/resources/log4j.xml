@@ -15,6 +15,10 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="funding">
+		<level value="info"/>
+	</logger>
+	
 		<!-- 마이바티스 Loggers -->
 	<logger name="jdbc.connection">
 		<level value="WARN" />

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="funding.dao.face.ProjectViewDao">
+
+<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+	SELECT project_no, member_no, category_id, project_title, project_intro, budget_plan, schedule_plan, project_price,
+			open_date, close_date, delivery_date, project_content, fund_price, project_step
+	FROM project
+	WHERE project_no = #{projectNo}
+
+</select>
+
+
+
+</mapper>
