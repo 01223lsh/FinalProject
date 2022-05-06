@@ -29,6 +29,12 @@ color:#fff;
 }
 
 .apply{
+	display: flex;
+	flex-grow: 1;
+}
+
+
+.apply-back{
     display: block;
     width: 438px;
     height: 100%;
@@ -42,21 +48,21 @@ color:#fff;
 
 
 .item {
-    display:flex; 
+/*     display:flex;  */
     position: relative; 
     left: 5%;
     top:100px;  
 /*     overflow:auto; */
-	with:600px;
+	width:550x;
 /* 	margin: 0 auto; */
 /* 	text-align: justify; */
 }
 
-.item category{
+.item-category{
 	display: block;
-	min-width: 500px;
-/*     overflow:auto; */
+	min-width: 350px;
 	margin-bottom: 50px;
+	
 /*     position: fixed; */
 /* 	flex:1; */
 }
@@ -68,44 +74,181 @@ color:#fff;
 	width:auto;
 }
 
+.item-intro{
+	display: none;
+}
 
+.item-intro textarea{
+	width: 100%;
+	height: 104px;
+	border: 1px solid reb(229, 229, 229);
+	resize: none;
+	padding: 10px 16px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	outline: none;
+	font-size: 14px;
+	line-height: 1.7em;
+}
 
-
-</style>
-<script type="text/javascript">
+#item-intro-limit{
+	font-size: 14px !important;
 	
+}
+
+
+#textTotal, #textCount{
+	font-size: 14px !important;
+	float: right;
+}
+
+.item-intro-text{ 
+	margin-bottom: 50px;
+}
+
+.button-next{
+	background: rgb(229, 229, 229);
+	color: rgb(255, 255, 255);
+	border: none;
+	align-items: center;
+	height: 40px;
+	border-radius:4px;
+	box-sizing: border-box;
+	justify-content: center;
+/* 	text-align: right; */
+/* 	disabled: disabled; */
+} 
+
+
+/* textarea{ */
+/* 	border: 1px solid rgb(218, 74, 73); */
+/* } */
+
+</style>	
+<script type="text/javascript">
+function applyCategory(){
+	var form = {
+		"categoryNo" : $(':input[name=categoryNo]:checked').val(),
+		"projectIntro" : $('#projectIntro').val().trim()
+	}
+	console.log(form);
+	
+// 	var categoryNo = $(':input[name=category]:checked').val();
+// 	var projectIntro = $('#projectIntro').val().trim();
+	
+	
+	$.ajax({
+		type:"POST"
+		,url:"/apply/category"
+		,data: JSON.stringify(form)
+		,contentType: "application/json"
+		,success: function(){
+// 			$("")
+			alert("프로젝트 생성!")
+		}
+	})
+}
+// var chatContent = $('#chatContent').val().trim();
+// $.ajax({
+// 		type: "POST",
+// 		url: "./chatSubmitServlet",
+// 		data: {
+// 			fromID: encodeURIComponent(fromID),
+// 			toID: encodeURIComponent(toID),
+// 			chatContent: encodeURIComponent(chatContent),
+// 		},
+// 		success: function(result) {
+// 			if(result == 1) {
+// 				autoClosingAlert('#successMessage', 2000);
+// 			} else if (result == 0) {
+// 				autoClosingAlert('#dangerMessage', 2000);
+// 			} else {
+// 				autoClosingAlert('#warningMessage', 2000)
+// 			}
+// 		}
+// });
+
+$(function() {
+	//소개글 활성화
+	$('input.item-category, input').one('click', function() {
+		$('.item-intro').css('display', 'block');
+	});
+	
+	$('#projectIntro').keyup(function (e) { 
+		let content = $(this).val(); 
+		
+		// 글자수 세기
+		if (content.length == 0 || content == '') { 
+			$('#textCount').text('0자'); 
+		} else if(content.length < 10 && content.length > 0) { 
+			$('.item-intro-text').css('color', 'rgb(218, 74, 73)');
+			$('.item-intro-text textarea').css('border', '1px solid rgb(218, 74, 73)');
+			$('#textCount').text(content.length + '자'); 
+			$('.button-next').css('background', 'rgb(229, 229, 229)');
+			$('.button-next').attr('disabled', true);
+		} else {
+			$('.item-intro-text').css('color', 'initial');
+			$('.item-intro-text textarea').css('border', '1px solid rgb(0, 0, 0)');
+			$('.item-intro-limit').css('display', 'none');
+			$('#textCount').text(content.length + '자'); 
+			$('.button-next').css('background', 'rgb(255, 87, 87)');
+			$('.button-next').attr('disabled', false);
+			$('.button-next').css('cursor', 'pointer');
+// 			$('.button-next: hover').css('color', 'rgb(255,192,192)');
+		}
+		
+		
+		// 글자수 제한 
+		if (content.length > 50) { 
+			// 200자 부터는 타이핑 되지 않도록 
+			$(this).val($(this).val().substring(0, 50)); 
+			// 200자 넘으면 알림창 뜨도록 
+// 			alert('글자수는 50자까지 입력 가능합니다.'); 
+		}; 
+	});
+
+	
+});
+
+
+
 </script>
 
 </head>
 <body>
-		<div class="apply"></div>
+	<div class="apply">
+		<div class="apply-back"></div>
 		<div class="right-content">		
 			<div class="item">
-				<h3>카테고리를 선택해주세요.</h3>
-				<p>나중에 변경 가능하니 걱정마세요.</p>
-				
-			</div>
-			<div class="item category">
-				<input type="radio" class="rounded-pill" id="radio1" name="radios"><label class="rounded-pill"  for="radio1">뷰티</label>
-				<input type="radio" class="rounded-pill" id="radio2" name="radios"><label class="rounded-pill"  for="radio2">디자인 문구</label>
-				<input type="radio" class="rounded-pill" id="radio3" name="radios"><label class="rounded-pill"  for="radio3">푸드</label>
-				<input type="radio" class="rounded-pill" id="radio4" name="radios"><label class="rounded-pill"  for="radio4">잡화</label>
-				<input type="radio" class="rounded-pill" id="radio5" name="radios"><label class="rounded-pill"  for="radio5">굿즈</label>
+				<h3 style= "font-size: 24px !important;">카테고리를 선택해주세요.</h3>
+	 			<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
 			</div>
 			
-			<div class="item intro">
+			<div class="item item-category">
+				<input type="radio" class="rounded-pill" id="radio1" name="categoryNo" value= 1><label class="rounded-pill"  for="radio1">뷰티</label>
+				<input type="radio" class="rounded-pill" id="radio2" name="categoryNo" value= 2><label class="rounded-pill"  for="radio2">디자인 문구</label>
+				<input type="radio" class="rounded-pill" id="radio3" name="categoryNo" value= 3><label class="rounded-pill"  for="radio3">푸드</label>
+				<input type="radio" class="rounded-pill" id="radio4" name="categoryNo" value= 4><label class="rounded-pill"  for="radio4">잡화</label>
+				<input type="radio" class="rounded-pill" id="radio5" name="categoryNo" value= 5 ><label class="rounded-pill"  for="radio5">굿즈</label>
+			</div>
+			
+			<div class="item-intro">
 				<div class="item">
-					<h3>프로젝트를 간단하게 소개해주세요!</h3>
+					<h3 style= "font-size: 24px !important;">프로젝트를 간단하게 소개해주세요!</h3>
+	 				<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
+					
+					<div class="item-intro-text">
+						<textarea placeholder="프로젝트 요약을 입력해주세요." id="projectIntro" name="projectIntro" maxlength="200"></textarea>		
+						<span id=item-intro-limit>최소 10자이상 입력해주세요.</span>
+						<span id="textTotal">/ 50자</span>		
+						<span id="textCount">0자</span>
+					</div>
+					<button class="button-next" onclick="applyCategory()">다음단계</button>
 				</div>
-				
-				<div></div>
-							
 			</div>
-			
 		</div>
-		
-		
-		
+	</div>
+	
 		
 		
 </body>

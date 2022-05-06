@@ -66,12 +66,15 @@ h4 {
 						<%= messageContent %>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-dark"x data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-outline-dark" data-dismiss="modal">확인</button>
 					</div>
 				</div>	
 			</div>
 		</div>
 	</div>
+	<form  action="/apply/category" method="get">
+	<button>프로젝트 만들기</button>
+	</form>
 	
 	<!-- 로그인시 실행 -->
 	<script>

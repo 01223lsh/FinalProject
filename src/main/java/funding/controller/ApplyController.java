@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.Project;
 import funding.dto.Reward;
@@ -34,16 +36,19 @@ public class ApplyController {
 	}
 
 	@RequestMapping(value = "/category", method = RequestMethod.POST)
-	public String categoryInsert(Project project, HttpSession session) {
+	
+	public @ResponseBody Project categoryInsert(@RequestBody Project project, HttpSession session) {
 		logger.info("/apply/category [POST]");
 		
 		//프로젝트와 카테고리 값을 받고 session으로 memberNo를 받아서 insert
 		//카테고리 하나의 트랜잭션으로 reward에도 데이터 생성 
+		System.out.println("ProjectDto 정보 : " + project.toString());
+		
+		System.out.println(session.getAttribute("memberNo"));
 		project.setMemberNo((Integer)session.getAttribute("memberNo"));
-		
 		applyService.categoryInsert(project);
+		return project;
 		
-		return "redirect:/apply/product";
 	}
 	
 	//제품 입력 페이지 이동

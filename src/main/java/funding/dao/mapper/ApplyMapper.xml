@@ -37,8 +37,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="projectNo">
 			SELECT project_seq.NEXTVAL FROM dual
 		</selectKey>
-		INSERT INTO project(project_no, member_no, category_no) 
-		VALUES( #{projectNo}, #{memberNo}, #{categoryNo} )
+		INSERT INTO project(project_no, member_no, category_no, project_intro) 
+		VALUES( #{projectNo}, #{memberNo}, #{categoryNo}, #{projectIntro} )
 	</insert>
 	
 	<insert id="insertDefaultReward" parameterType="int">

@@ -63,7 +63,7 @@ public class MemberController {
 			session.setAttribute("Id", memberInfo.getId());
 			session.setAttribute("name", memberInfo.getName());
 			session.setAttribute("nick", memberInfo.getNick());
-			session.setAttribute("mamberNo", memberInfo.getMemberNo());
+			session.setAttribute("memberNo", memberInfo.getMemberNo());
 			session.setAttribute("phone", memberInfo.getPhone());
 			session.setAttribute("grade", memberInfo.getGrade());
 			session.setAttribute("messageType", "성공메시지");

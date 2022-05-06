@@ -2,13 +2,13 @@ package funding.dto;
 
 public class Reward {
 	
-	private int rewardNo;
-	private int projectNo;
-	private int rewardPrice;
-	private int rewardAmount;
-	private String rewardName;
-	private String rewardIntro;
-	private int rewardState;
+	private int rewardNo;		// 리워드 번호
+	private int projectNo;		// 프로젝트 번호
+	private int rewardPrice;	// 리워드 가격
+	private int rewardAmount;	// 리워드 남은갯수
+	private String rewardName;	// 품목명
+	private String rewardIntro;	// 품목설명
+	private int rewardState;	// 제품 포함 여부
 
 	@Override
 	public String toString() {
@@ -16,7 +16,6 @@ public class Reward {
 				+ ", rewardAmount=" + rewardAmount + ", rewardName=" + rewardName + ", rewardIntro=" + rewardIntro
 				+ ", rewardState=" + rewardState + "]";
 	}
-
 
 	public int getRewardNo() {
 		return rewardNo;

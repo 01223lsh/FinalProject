@@ -6,7 +6,7 @@ public class Project {
 	
 	private int projectNo;			// 프로젝트 번호
 	private int memberNo;			// 회원번호
-	private int categoryId;			// 카테고리 번호
+	private int categoryNo;			// 카테고리 번호
 	private String projectTitle;	// 프로젝트 제목
 	private String projectIntro;	// 소개글(요약)
 	private String budgetPlan;		// 프로젝트 예약 계획
@@ -23,7 +23,7 @@ public class Project {
 	
 	@Override
 	public String toString() {
-		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryId=" + categoryId
+		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
 				+ ", projectTitle=" + projectTitle + ", projectIntro=" + projectIntro + ", budgetPlan=" + budgetPlan
 				+ ", schedulePlan=" + schedulePlan + ", ProjectImage=" + ProjectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
@@ -44,11 +44,11 @@ public class Project {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public int getCategoryId() {
-		return categoryId;
+	public int getCategoryNo() {
+		return categoryNo;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
 	}
 	public String getProjectTitle() {
 		return projectTitle;
