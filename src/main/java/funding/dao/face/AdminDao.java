@@ -63,4 +63,15 @@ public interface AdminDao {
 
 	public int selectCntProject(int step);
 
+	// create by young
+	// DB 에서 심사대기중인 프로젝트 가져오기
+    List<Project> findAllWaitingProject();
+
+	// create by young
+	// 프로젝트 상태 업데이트
+	int updateProjectStep(Project project);
+
+	// create by young
+	// 프로젝트 상세 내용 조회
+	Project findByNo(Project project);
 }

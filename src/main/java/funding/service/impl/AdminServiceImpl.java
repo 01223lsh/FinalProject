@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import funding.dao.face.AdminDao;
@@ -22,85 +23,97 @@ import funding.service.face.AdminService;
 import funding.util.Paging;
 
 @Service
-public class AdminServiceImpl implements AdminService{
-	@Autowired AdminDao adminDao;
-	
-	@Autowired ServletContext context;
+public class AdminServiceImpl implements AdminService {
+	@Autowired
+	AdminDao adminDao;
+
+	@Autowired
+	ServletContext context;
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
-	
+
 	@Override
 	public List<Member> selectMemberAll(Paging paging) {
 		return adminDao.selectMemberAll(paging);
 	}
-	
+
 	@Override
 	public Member selectBymemberNo(Member member) {
 		return adminDao.selectBymemberNo(member.getMemberNo());
 	}
+
 	@Override
-	public Paging getPaging(Paging paging,int i,String category,String content) {
-		int totalCount ;
+	public Paging getPaging(Paging paging, int i, String category, String content) {
+		int totalCount;
 		int curPage = paging.getCurPage();
-		if(i==4 && content==null && !"".equals(content)) {
+		if (i == 4 && content == null && !"".equals(content)) {
 			totalCount = adminDao.selectCntMember();
-		}else if(content!=null &&!"".equals(content)){
-			totalCount=adminDao.selectCntMemberSearch(category,content);
-		}else{
-			totalCount= adminDao.selectCntMemberGrade(i);
+		} else if (content != null && !"".equals(content)) {
+			totalCount = adminDao.selectCntMemberSearch(category, content);
+		} else {
+			totalCount = adminDao.selectCntMemberGrade(i);
 		}
-		
-		paging = new Paging(totalCount,curPage);
+
+		paging = new Paging(totalCount, curPage);
 		return paging;
 	}
+
 	@Override
 	public List<Member> selectByGrade(Member member, Paging paging) {
-		return adminDao.selectByGrade(member.getGrade(),paging);
+		return adminDao.selectByGrade(member.getGrade(), paging);
 	}
+
 	@Override
 	public void gradeUpdate(Member member) {
 		adminDao.gradeUpdate(member);
-		
+
 	}
+
 	@Override
-	public List<Member> MemberSearch(String category, String content,Paging paging) {
-		return adminDao.MemberSearch(category,content,paging);
+	public List<Member> MemberSearch(String category, String content, Paging paging) {
+		return adminDao.MemberSearch(category, content, paging);
 	}
+
 	@Override
 	public void DisabledAllDelete(int i) {
 		adminDao.DisabledAllDelete(i);
 	}
-	
+
 	@Override
 	public List<Notice> noticeAll(Paging paging) {
-		
+
 		return adminDao.noticeAll(paging);
 	}
+
 	@Override
 	public Paging getnoticePaging(Paging paging) {
 		int totalCount = adminDao.selectCntNotice();
 		int curPage = paging.getCurPage();
-		
-		paging =new Paging(totalCount,curPage);
+
+		paging = new Paging(totalCount, curPage);
 		return paging;
 	}
+
 	@Override
-	public Paging getprojectPaging(Paging paging,int step) {
-		
+	public Paging getprojectPaging(Paging paging, int step) {
+
 		int totalCount = adminDao.selectCntProject(step);
 		int curPage = paging.getCurPage();
-		paging = new Paging(totalCount,curPage);
+		paging = new Paging(totalCount, curPage);
 		return paging;
 	}
+
 	@Override
 	public Notice selectByNotice(Notice notice) {
-		
+
 		return adminDao.selectByNotice(notice);
 	}
+
 	@Override
 	public List<NoticeFile> selectBtNoticeFile(Notice notice) {
 		return adminDao.selectByNoticeFile(notice);
 	}
-//	@Override
+
+	//	@Override
 //	public void noticeWrite(Notice notice, MultipartFile file) {
 //		
 //		
@@ -111,22 +124,23 @@ public class AdminServiceImpl implements AdminService{
 //	} 
 	@Override
 	public Notice getFile(Notice notice) {
-	
+
 		return adminDao.selectNoticeFileByFileNo(notice);
 	}
+
 	@Override
-	public void noticeUpdate(Notice notice,List<MultipartFile> filelist,List<Integer> fileNolist) {
-		int noticeNo= notice.getNoticeNo();
+	public void noticeUpdate(Notice notice, List<MultipartFile> filelist, List<Integer> fileNolist) {
+		int noticeNo = notice.getNoticeNo();
 		adminDao.noticeUpdate(notice);
-		adminDao.fileNoByDelete(notice,fileNolist);
-		if(filelist.size()<=0) {
-			
+		adminDao.fileNoByDelete(notice, fileNolist);
+		if (filelist.size() <= 0) {
+
 			return;
 		}
-		
+
 		String storedPath = context.getRealPath("upload");
 		File storedFolder = new File(storedPath);
-		if(!storedFolder.exists()) {
+		if (!storedFolder.exists()) {
 			storedFolder.mkdir();
 		}
 //		String filename = file.getOriginalFilename();
@@ -147,11 +161,11 @@ public class AdminServiceImpl implements AdminService{
 //		}else {
 //			adminDao.updateNoticeFile(notice);			
 //		}
-		for(MultipartFile mf : filelist) {
-			
+		for (MultipartFile mf : filelist) {
+
 			String filename = mf.getOriginalFilename();
-			filename+= UUID.randomUUID().toString().split("-")[4];
-			File dest = new File(storedFolder,filename);
+			filename += UUID.randomUUID().toString().split("-")[4];
+			File dest = new File(storedFolder, filename);
 			try {
 				mf.transferTo(dest);
 			} catch (IllegalStateException e) {
@@ -164,14 +178,13 @@ public class AdminServiceImpl implements AdminService{
 			notice.setNoticeNo(noticeNo);
 			adminDao.insertNoticeFile(notice);
 		}
-		
+
 	}
+
 	@Override
 	public void noticeDelete(Notice notice) {
-		
 		adminDao.noticeFileDelete(notice);
 		adminDao.noticeDelete(notice);
-		
 	}
 	@Override
 	public void noticeWrite(Notice notice, List<MultipartFile> filelist) {
@@ -179,21 +192,21 @@ public class AdminServiceImpl implements AdminService{
 		notice.setNoticeNo(noticeNo);
 		adminDao.noticeWrite(notice);
 
-		if(filelist.size()<=0) {
+		if (filelist.size() <= 0) {
 			return;
 		}
 		String storedPath = context.getRealPath("upload");
-		
-		
+
+
 		File storedFolder = new File(storedPath);
-		if(!storedFolder.exists()) {
+		if (!storedFolder.exists()) {
 			storedFolder.mkdir();
 		}
-		for(MultipartFile mf : filelist) {
-			
+		for (MultipartFile mf : filelist) {
+
 			String filename = mf.getOriginalFilename();
 			filename = UUID.randomUUID().toString().split("-")[4];
-			File dest = new File(storedFolder,filename);
+			File dest = new File(storedFolder, filename);
 			try {
 				mf.transferTo(dest);
 			} catch (IllegalStateException e) {
@@ -206,15 +219,51 @@ public class AdminServiceImpl implements AdminService{
 			notice.setNoticeNo(noticeNo);
 			adminDao.insertNoticeFile(notice);
 		}
-		
+
 	}
 	@Override
 	public List<Project> projectList(Paging paging, int step) {
-		
+
 		return adminDao.projectList(paging, step);
 	}
 	@Override
 	public List<NoticeFile> selectByNoticeFile(Notice notice) {
 		return adminDao.selectByNoticeFile(notice);
+	}
+
+	// create by young
+	// project_step = 1, 심사 대기중인 프로젝트만 가져오는 메소드
+	@Override
+	public List<Project> getWaitingProject() {
+		return adminDao.findAllWaitingProject();
+	}
+
+	// create by young
+	// 프로젝트 진행상황 업데이트(4 - 진행, 3 - 승인 거절}
+	@Override
+	@Transactional  // 이후 메시지 insert 코드 추가시 트랜잭션 처리 필요
+	public int updateProjectStep(Project project, String message) {
+		// 프로젝트 상황 업데이트
+		int result = adminDao.updateProjectStep(project);
+
+		if (project.getProjectStep() == 3) {
+			// 프로젝트 상태 변경이 승인거절인 경우 메시지 보내는 로직 추가
+			// alert 테이블에 insert 하는 코드
+		}
+
+		if (result == 1) {
+			logger.info("프로젝트 상태 업데이트 성공");
+			return 1;
+		} else {
+			logger.error("프로젝트 상태 업데이트 실패");
+			return -1;
+		}
+	}
+
+	// create by young
+	// 개별 프로젝트 상세내용 조회
+	@Override
+	public Project getProject(Project project) {
+		return adminDao.findByNo(project);
 	}
 }
