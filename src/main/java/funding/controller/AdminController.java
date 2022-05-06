@@ -198,8 +198,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/noticeDelete")
 	public String noticeDelete(Notice notice) {
 		adminService.noticeDelete(notice);
-		return null;
+		return null; 
 	}
+	
 	
 	
 	
