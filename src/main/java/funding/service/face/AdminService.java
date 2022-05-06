@@ -50,4 +50,15 @@ public interface AdminService {
 
 	public List<NoticeFile> selectByNoticeFile(Notice notice);
 
+	// create by young
+	// project_step = 1, 심사 대기중인 프로젝트만 가져오는 메소드
+    List<Project> getWaitingProject();
+
+	// create by young
+	// 프로젝트 심사 처리
+	int updateProjectStep(Project project, String message);
+
+	// create by young
+	// 프로젝트 상세 내용 가져오기
+	Project getProject(Project project);
 }
