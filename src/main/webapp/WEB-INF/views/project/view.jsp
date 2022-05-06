@@ -22,8 +22,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js%22%3E"></script>
+
 <script src="https://kit.fontawesome.com/dd18300701.js"
 	crossorigin="anonymous"></script>
 
@@ -34,6 +33,106 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+
+		
+		$("#plan").on("click",function(){
+			
+			$.ajax({
+				url:"/project/plan",
+				type:"post",
+				data:{projectNo:${project.projectNo }},
+				dataType: "html",
+				success:function(res){
+					console.log("성공")
+					
+					$("#plan").css("color", "rgb(116, 152, 107)");
+        			$("#story").css("color", "gray");
+        			$("#news").css("color", "gray");
+        			$("#comment").css("color", "gray");
+        			$("#content3_1").html(res);
+				},
+				error:function(){
+        			console.log("통신실패");
+        		}
+			})
+		})
+		
+		$("#story").on("click", function(){
+			
+			
+			$.ajax({
+				url:"/project/content",
+				type:"post",
+				data:{projectNo:${project.projectNo }},
+				success:function(res){
+					console.log("성공")
+			
+			$("#story").css("color", "rgb(116, 152, 107)");
+			$("#plan").css("color", "gray");
+			$("#news").css("color", "gray");
+			$("#comment").css("color", "gray");
+			$("#content3_1").html(res.projectContent);
+				},
+				error:function(){
+        			console.log("통신실패");
+        		}
+		})
+		
+		})
+	
+		$("#news").on("click",function(){
+			
+			$.ajax({
+				url:"/project/news/list",
+				type:"post",
+				data:{projectNo:${project.projectNo }},
+				dataType: "html",
+				success:function(res){
+					console.log("성공")
+					
+					$("#news").css("color", "rgb(116, 152, 107)");
+        			$("#story").css("color", "gray");
+        			$("#plan").css("color", "gray");
+        			$("#comment").css("color", "gray");
+        			$("#content3_1").html(res);
+				},
+				error:function(){
+        			console.log("통신실패");
+        		}
+			})
+		})
+			
+			$("#comment").on("click",function(){
+			
+			$.ajax({
+				url:"/project/comment/list",
+				type:"post",
+				data:{projectNo:${project.projectNo }},
+				dataType: "html",
+				success:function(res){
+					console.log("성공")
+					
+					$("#comment").css("color", "rgb(116, 152, 107)");
+        			$("#story").css("color", "gray");
+        			$("#news").css("color", "gray");
+        			$("#plan").css("color", "gray");
+        			$("#content3_1").html(res);
+				},
+				error:function(){
+        			console.log("통신실패");
+        		}
+			})
+			})
+			
+			
+		
+	})
+	
+	</script>
 <style>
 * {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -280,7 +379,7 @@ div {
 			<ul>
 				<li><a id="story" href="#" style="color: rgb(116, 152, 107);"><b>소개
 					</b></a></li>
-				<li><a id="author" href="#"><b>계획</b></a></li>
+				<li><a id="plan" href="#"><b>계획</b></a></li>
 				<li><a id="news" href="#"><b>최근소식</b></a></li>
 				<li><a id="comment" href="#"><b>댓글</b></a></li>
 				
@@ -289,6 +388,7 @@ div {
 		<br>
 		<hr>
 		
+	
 	
 
 

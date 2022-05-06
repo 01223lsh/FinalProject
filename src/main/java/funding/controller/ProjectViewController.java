@@ -2,6 +2,7 @@ package funding.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.Project;
+import funding.dto.ProjectComment;
+import funding.dto.ProjectNews;
 import funding.service.face.ProjectViewService;
 
 @Controller
@@ -24,6 +28,10 @@ public class ProjectViewController {
 	@RequestMapping(value = "/project/view")
 	public String projectView(Project project, Model model) {
 		logger.info("/projectView/view");
+		
+		if( project.getProjectNo() < 1 ) {
+			return "redirect:/";
+		}
 		
 		project = projectViewService.getProject(project);
 		
@@ -53,6 +61,56 @@ public class ProjectViewController {
 		
         return null;
         
+	}
+	
+	@RequestMapping(value = "/project/plan")
+	public String projectPlan(Project project, Model model) {
+		
+		project = projectViewService.getPlan(project);
+		
+		model.addAttribute("plan", project);
+		
+		return "project/plan";
+	}
+	
+	
+	@RequestMapping(value = "/project/news/list")
+	public String projectNewsList(int projectNo, Model model) {
+		
+		List<ProjectNews> newsList = projectViewService.getNewsList(projectNo);
+		
+		model.addAttribute("newsList", newsList);
+		
+		return "project/newsList";
+		
+	}
+	
+	@RequestMapping(value = "/project/comment/list")
+	public String projectCommentList(int projectNo, Model model) {
+		
+		List<ProjectComment> commentList = projectViewService.getCommentList(projectNo);
+		
+		model.addAttribute("commentList", commentList);
+		
+		return "project/commentList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/project/content")
+	public Project projectContent(int projectNo) {
+		
+		Project p = projectViewService.getContent(projectNo);
+		return p;
+	}
+	
+	@RequestMapping(value = "project/news/view")
+	public String projectNewsView(ProjectNews news, Model model) {
+		
+		news = projectViewService.getNewsView(news);
+		
+		model.addAttribute("news", news);
+		
+		return "project/newsView";
 	}
 	
 }

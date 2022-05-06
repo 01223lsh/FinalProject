@@ -7,12 +7,45 @@
 <mapper namespace="funding.dao.face.ProjectViewDao">
 
 <select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
-	SELECT project_no, member_no, category_id, project_title, project_intro, budget_plan, schedule_plan, project_price,
+	SELECT project_no, member_no, category_id, project_title, project_intro,  project_price,
 			open_date, close_date, delivery_date, project_content, fund_price, project_step
 	FROM project
 	WHERE project_no = #{projectNo}
 
 </select>
+
+<select id="selectPlan" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+	SELECT budget_plan, schedule_plan
+	FROM project
+	WHERE project_no = #{projectNo}
+
+</select>
+
+<select id="selectNewsList" parameterType="int" resultType="funding.dto.ProjectNews">
+	SELECT news_no, news_title, news_date
+	FROM project_news
+	WHERE project_no = #{projectNo}
+ </select>
+ 
+ <select id="selectCommentList" parameterType="int" resultType="funding.dto.ProjectComment">
+ 	SELECT comment_no, comment_content, comment_writer, comment_date
+ 	FROM project_comment
+ 	WHERE project_no = #{projectNo}
+ 
+ 
+ </select>
+ 
+ <select id="selectContent" parameterType="int" resultType="funding.dto.Project">
+ 	SELECT project_content FROM project
+ 	WHERE project_no = #{projectNo}
+ 
+ </select>
+ 
+ <select id="selectNewsView" parameterType="funding.dto.ProjectNews" resultType="funding.dto.ProjectNews">
+ 	SELECT news_title, news_content, news_date
+ 	FROM project_news
+ 	WHERE news_no = #{newsNo}
+ </select>
 
 
 
