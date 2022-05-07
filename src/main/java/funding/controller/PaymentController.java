@@ -55,7 +55,7 @@ public class PaymentController {
 		
 	}
 	
-	@RequestMapping(value = "/paymetn/order")
+	@RequestMapping(value = "/payment/order")
 	public void order() {
 		logger.info("/payment/order");
 	}

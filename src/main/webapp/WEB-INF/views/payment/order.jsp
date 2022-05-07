@@ -11,15 +11,11 @@ $(document).ready(function() {
 	
 })
 
-window.onload = function() {
-	
-}
-
 </script>
 
 <div class="container">
 
-<h1>페이지 template</h1>
+<h1>주문 정보 입력 페이지 </h1>
 
 
 </div> <!-- .container end -->

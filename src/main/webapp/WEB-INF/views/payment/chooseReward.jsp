@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
@@ -11,10 +12,35 @@ $(document).ready(function() {
 	
 })
 
-window.onload = function() {
+
+</script>
+
+<script type="text/javascript">
+
 	
-	alert.
+	/* function toggleRewardAmount() {
+		var checkBox = document.getElementsByName("rewardNo")
+		var rewardAmount = document.getElementsByName("rewardAmount")
+		
+		if(checkBox.disable == false){
+			rewardAmount.disabled = true;
+		}
+	} */
 	
+function toggleRewardAmount() {
+	var checkBox = document.getElementsByName('rewardNo')
+	var rewardCount = document.getElementsByName('rewardCount')
+	
+	console.log(checkBox)
+	for (var i = 0; i < checkBox.length; i++) {
+		if (checkBox[i].checked) {
+			console.log(i, 'check박스가 활성화 ')
+			rewardCount[i].disabled = false;
+		} else {
+			console.log(i, 'check박스가 비활성화')			
+			rewardCount[i].disabled = true;
+		}
+	}
 }
 
 </script>
@@ -26,7 +52,6 @@ window.onload = function() {
 	text-align: center;
 	font-weight: bold;
 	display: flex;
-/* 	margin: 0 auto; */
 }
 .orderStep ol {
 margin: 0 auto;
@@ -83,7 +108,6 @@ width: 1100px;
 	float: left;
     padding: 5px 430px 5px 10px;
 } 
-
 dd p:nth-child(1){
 	font-size: 30px;
 	margin-bottom: 15px;
@@ -122,7 +146,7 @@ dd p em {
 			<hr>
 		</div>
 		
-		<form action="#" method="get">
+		<form action="/payment/order" method="get">
 		
 		<div class="rewardList">
 			<c:forEach var="i" items="${rewardList }">
@@ -132,10 +156,10 @@ dd p em {
 					<dt>
 					<c:choose>
 						<c:when test="${i.rewardNo eq rewardNo}">
-							<input type="checkbox" checked>
+							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" onchange='toggleRewardAmount()' checked>
 						</c:when>
 						<c:when test="${i.rewardNo ne rewardNo}">
-							<input type="checkbox">
+							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" >
 						</c:when>
 					</c:choose>
 					</dt>
@@ -146,14 +170,7 @@ dd p em {
 					<p>리워드 구성내용: ${i.rewardIntro }<em>(${i.rewardAmount}남음)</em></p>
 					<p>배송비 없음 | 리워드 배송 예정일 : yyyy-mm-dd</p>
 					<p>수량: 
-					<c:choose>
-					<c:when test="">
-						<input id="rewardAmount" name="rewardAmount" type="number" min="0" max="9" value="0">
-					</c:when>
-					<c:when test="">
-						<input type="">
-					</c:when>
-					</c:choose>
+						<input type="number" name="rewardCount" min="1" max="9" value="0" disabled>
 					</p>
 					
 					</dd>
@@ -168,12 +185,13 @@ dd p em {
 		<div>
 			<h4 style="font-weight: bold;">추가 펀딩금 (선택)</h4>
 			<p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
-			<input type="text" maxlength="9" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+			<input type="text" name="addtionalFunding" maxlength="9" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			원을 추가로 후원합니다. <em style="font-style: 12px;">(최대 9자리)</em>
 			<hr>
-			<button class="btn-lg" style="background: #d4dfff;">다음 단계로 >></button>
+			<button id="paymentBtn" class="btn-lg" style="background: #d4dfff;">
+			다음 단계로 >>
+			</button>
 		</div>
-		
 		
 		</form>
 	
