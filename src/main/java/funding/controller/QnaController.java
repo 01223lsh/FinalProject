@@ -58,7 +58,6 @@ public class QnaController {
 		
 		model.addAttribute("qna", qnaview);
 		
-		
 	}
 	
 	@GetMapping("/qna/qnawrite")

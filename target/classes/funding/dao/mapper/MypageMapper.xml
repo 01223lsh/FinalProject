@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="funding.dao.face.MypageDao">
+    
+    <select id="selectByIdPw" resultType="int" parameterType="funding.dto.Member">
+    	SELECT count(*) cnt FROM member
+    	WHERE id = #{id} AND pw = #{pw}
+    </select>
+    
+<!--     <select id="selecNicktById" resultType="String" parameterType="funding.dto.Member"> -->
+<!--     	SELECT nick FROM member -->
+<!--     	WHERE id = #{id} -->
+<!--     </select> -->
+    
+<!--     <select id="seleteMemberNoById" resultType="int" parameterType="funding.dto.Member"> -->
+<!--     	SELECT member_no -->
+<!--     	FROM member -->
+<!--     	WHERE id = #{id} -->
+<!--     </select> -->
+    
+<!--     <select id="selectGradeById" resultType="int" parameterType="funding.dto.Member"> -->
+<!--     	SELECT grade -->
+<!--     	FROM member -->
+<!--     	where id = #{id} -->
+<!--     </select> -->
+    
+    	
+	<select id="selectByLoginid" resultType="funding.dto.Member" parameterType="String">
+		SELECT member_no, id, pw, name, email, nick, phone, grade 
+		FROM member
+		WHERE id = #{loginid}
+	</select>
+    
+    <update id="updateByMemberNo" parameterType="funding.dto.Member">
+    	UPDATE member
+    	SET name = #{name}, nick = #{nick}, pw = #{pw}, email = #{email}, phone = #{phone}
+    	WHERE member_no = #{memberNo} 
+    </update>
+    
+    <select id="selectByNick" resultType="int" parameterType="String">
+    	SELECT count(*) cnt
+    	FROM member
+    	WHERE nick = #{nick}
+    </select>
+    
+    <select id="selectInfoById" resultType="funding.dto.Member" parameterType="funding.dto.Member">
+		SELECT member_no, id, pw, name, email, nick, phone, grade 
+		FROM member
+		WHERE id = #{id} 
+    
+    </select>
+    
+    <select id="selectCntPwchkByIdPw" parameterType="funding.dto.Member" resultType="int">
+    	SELECT count(*) cnt
+    	FROM member
+    	where id = #{id} and pw = #{pw} 
+    </select>
+    
+    <select id="selectCntSocialById" parameterType="funding.dto.Member" resultType="int">
+    	SELECT count(*) cnt 
+		FROM member
+		WHERE id = #{id}
+		AND ( naver_login is null and kakao_login is null)
+    
+    </select>
+    
+    <select id="selectByloginNo" parameterType="int" resultType="funding.dto.MemberSeller">
+    	SELECT member_no, bank_name, account_number, account_name, seller_info
+    	FROM member_seller
+    	WHERE member_no = #{loginNo}
+    </select>
+    
+    <update id="updateSellerByMemberNo" parameterType="funding.dto.MemberSeller" >
+    	UPDATE member_seller
+    	SET bank_name = #{bankName}, account_number = #{accountNumber} , account_name = #{accountName}, seller_info = #{sellerInfo}
+    	WHERE member_no = #{memberNo}
+    </update>
+    
+    
+    </mapper>
