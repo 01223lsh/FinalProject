@@ -17,21 +17,11 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 
-	
-	/* function toggleRewardAmount() {
-		var checkBox = document.getElementsByName("rewardNo")
-		var rewardAmount = document.getElementsByName("rewardAmount")
-		
-		if(checkBox.disable == false){
-			rewardAmount.disabled = true;
-		}
-	} */
-	
-function toggleRewardAmount() {
+function toggleRewardCount() {
 	var checkBox = document.getElementsByName('rewardNo')
 	var rewardCount = document.getElementsByName('rewardCount')
 	
-	console.log(checkBox)
+	//checkBox 배열 길이 만큼 체크여부에 따라서 수량 입력칸 활성화/비활성화  
 	for (var i = 0; i < checkBox.length; i++) {
 		if (checkBox[i].checked) {
 			console.log(i, 'check박스가 활성화 ')
@@ -43,6 +33,14 @@ function toggleRewardAmount() {
 	}
 }
 
+//toggleRewardCount()는 onclick이라는 이벤트에 의해서 실헹 되기 때문에 
+//window.onload 를 통하여 페이지의 요소가 모두 로드되고 함수가 호출 되도록한다.
+//결제 페이지로 넘어가기전 선택한 리워드의 수량을 선택할 수 있도록 해준다.
+window.onload = function(){
+	console.log("페이지 로딩 후 바로 실행할 function()")
+	toggleRewardCount()	
+}
+	
 </script>
 
 <style type="text/css">
@@ -156,10 +154,10 @@ dd p em {
 					<dt>
 					<c:choose>
 						<c:when test="${i.rewardNo eq rewardNo}">
-							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" onchange='toggleRewardAmount()' checked>
+							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" onclick='toggleRewardCount()' checked>
 						</c:when>
 						<c:when test="${i.rewardNo ne rewardNo}">
-							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" >
+							<input type="checkbox" name="rewardNo" value="${i.rewardNo }" onclick='toggleRewardCount()'>
 						</c:when>
 					</c:choose>
 					</dt>
