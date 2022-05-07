@@ -11,6 +11,12 @@ $(document).ready(function() {
 	
 })
 
+window.onload = function() {
+	
+	alert.
+	
+}
+
 </script>
 
 <style type="text/css">
@@ -119,19 +125,36 @@ dd p em {
 		<form action="#" method="get">
 		
 		<div class="rewardList">
-			<c:forEach var="i" begin="0" end="5">
+			<c:forEach var="i" items="${rewardList }">
 			<ul>
 			<li>
 				<dl class="rewardBox">
-				
-					<dt><input type="checkbox" id="${i}"></dt>
+					<dt>
+					<c:choose>
+						<c:when test="${i.rewardNo eq rewardNo}">
+							<input type="checkbox" checked>
+						</c:when>
+						<c:when test="${i.rewardNo ne rewardNo}">
+							<input type="checkbox">
+						</c:when>
+					</c:choose>
+					</dt>
 					<dd>
 					
-					<p><label for="${i}">(총금액) 펀딩 합니다.</label></p>
-					<p>리워드 품명</p>
-					<p>리워드 구성내용<em>(남은재고)</em></p>
+					<p><label for="checkbox">${i.rewardPrice } 펀딩 합니다.</label></p>
+					<p>리워드 품명: ${i.rewardName }</p>
+					<p>리워드 구성내용: ${i.rewardIntro }<em>(${i.rewardAmount}남음)</em></p>
 					<p>배송비 없음 | 리워드 배송 예정일 : yyyy-mm-dd</p>
-					<p>수량: <input type="number" value="0"></p>
+					<p>수량: 
+					<c:choose>
+					<c:when test="">
+						<input id="rewardAmount" name="rewardAmount" type="number" min="0" max="9" value="0">
+					</c:when>
+					<c:when test="">
+						<input type="">
+					</c:when>
+					</c:choose>
+					</p>
 					
 					</dd>
 				</dl>
@@ -145,9 +168,10 @@ dd p em {
 		<div>
 			<h4 style="font-weight: bold;">추가 펀딩금 (선택)</h4>
 			<p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
-			<input type="text"> 원을 추가로 후원합니다.
+			<input type="text" maxlength="9" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+			원을 추가로 후원합니다. <em style="font-style: 12px;">(최대 9자리)</em>
 			<hr>
-			<button class="btn-lg" style="background: #d4dfff;">다음 단계로 > </button>
+			<button class="btn-lg" style="background: #d4dfff;">다음 단계로 >></button>
 		</div>
 		
 		
