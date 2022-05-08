@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import funding.dto.Reward;
 import funding.service.face.PaymentService;
@@ -52,11 +53,18 @@ public class PaymentController {
 		//모델값 전송
 		model.addAttribute("rewardNo", reward.getRewardNo());
 		model.addAttribute("rewardList", rewardList);
-		
 	}
 	
 	@RequestMapping(value = "/payment/order")
-	public void order() {
+	public void orderFirst(Model model
+			, @RequestParam int[] rewardNo
+			, @RequestParam int[] rewardCount) {
 		logger.info("/payment/order");
+		
+		logger.info("전달 받은 rewardNo의 배열 : {}", rewardNo);
+		logger.info("전달 받은 rewardCount의 배열 : {}", rewardCount);
+		
+		//고른 리워드
+		//paymentService 
 	}
 }
