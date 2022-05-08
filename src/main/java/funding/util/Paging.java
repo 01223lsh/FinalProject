@@ -15,6 +15,8 @@ public class Paging {
 	private int startNo; //화면에 보이는 게시글의 시작 번호
 	private int endNo; //화면에 보이는 게시글의 끝 번호
 	
+	private String search; //검색어
+	private String select; //검색 목록
 	
 	//디폴트 생성자 - 페이징로직이 완성되지 않는다
 	public Paging() { }
@@ -89,7 +91,7 @@ public class Paging {
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", select=" + select + "]";
 	}
 	
 	public int getCurPage() {
@@ -145,6 +147,13 @@ public class Paging {
 	}
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
+	}
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }

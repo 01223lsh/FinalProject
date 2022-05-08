@@ -15,10 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import funding.dao.face.AdminDao;
+import funding.dto.Category;
 import funding.dto.Member;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.Qna;
 import funding.service.face.AdminService;
 import funding.util.Paging;
 
@@ -42,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Paging getPaging(Paging paging, int i, String category, String content) {
+	public Paging membergetPaging(Paging paging, int i, String category, String content) {
 		int totalCount;
 		int curPage = paging.getCurPage();
 		if (i == 4 && content == null && !"".equals(content)) {
@@ -92,13 +94,29 @@ public class AdminServiceImpl implements AdminService {
 		paging = new Paging(totalCount, curPage);
 		return paging;
 	}
+	@Override
+	public Paging getQnaPaging(Paging paging, String complete) {
+		int totalCount = adminDao.selectCntQna(complete);
+		int curPage = paging.getCurPage();
+
+		paging = new Paging(totalCount, curPage);
+		return paging;
+	}
+	
 
 	@Override
-	public Paging getprojectPaging(Paging paging, int step) {
+	public Paging getprojectPaging(Paging paging, int step,Category category) {
 
-		int totalCount = adminDao.selectCntProject(step);
+		int totalCount = adminDao.selectCntProject(step,category.getCategoryNo());
 		int curPage = paging.getCurPage();
 		paging = new Paging(totalCount, curPage);
+		return paging;
+	}
+	@Override
+	public Paging getapproveProjectpaging(Paging paging) {
+		int totalCount = adminDao.selectCntapproveProject(paging);
+		int curPage = paging.getCurPage();
+		paging = new Paging(totalCount,curPage);
 		return paging;
 	}
 
@@ -113,15 +131,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.selectByNoticeFile(notice);
 	}
 
-	//	@Override
-//	public void noticeWrite(Notice notice, MultipartFile file) {
-//		
-//		
-//	}
-//	@Override
-//	public NoticeFile selectByNoticeFile(NoticeFile noticeFile) {
-//		return adminDao.selectByNoticeFile(noticeFile);
-//	} 
+
 	@Override
 	public Notice getFile(Notice notice) {
 
@@ -129,6 +139,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	@Transactional
 	public void noticeUpdate(Notice notice, List<MultipartFile> filelist, List<Integer> fileNolist) {
 		int noticeNo = notice.getNoticeNo();
 		adminDao.noticeUpdate(notice);
@@ -138,29 +149,12 @@ public class AdminServiceImpl implements AdminService {
 			return;
 		}
 
-		String storedPath = context.getRealPath("upload");
+		String storedPath = context.getRealPath("noticeimg");
 		File storedFolder = new File(storedPath);
 		if (!storedFolder.exists()) {
 			storedFolder.mkdir();
 		}
-//		String filename = file.getOriginalFilename();
-//		filename+= UUID.randomUUID().toString().split("-")[4];
-//		File dest = new File(storedFolder,filename);
-//
-//		try {
-//			file.transferTo(dest);
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		notice.setFileOrigin(file.getOriginalFilename());
-//		notice.setFileStorage(filename);
-//		if(notice.getFileNo()<=0) {
-//			adminDao.insertNoticeFile(notice);
-//		}else {
-//			adminDao.updateNoticeFile(notice);			
-//		}
+
 		for (MultipartFile mf : filelist) {
 
 			String filename = mf.getOriginalFilename();
@@ -187,6 +181,7 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.noticeDelete(notice);
 	}
 	@Override
+	@Transactional
 	public void noticeWrite(Notice notice, List<MultipartFile> filelist) {
 		int noticeNo = adminDao.selectBynoticeno();
 		notice.setNoticeNo(noticeNo);
@@ -195,7 +190,7 @@ public class AdminServiceImpl implements AdminService {
 		if (filelist.size() <= 0) {
 			return;
 		}
-		String storedPath = context.getRealPath("upload");
+		String storedPath = context.getRealPath("noticeimg");
 
 
 		File storedFolder = new File(storedPath);
@@ -222,9 +217,9 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 	@Override
-	public List<Project> projectList(Paging paging, int step) {
+	public List<Project> projectList(Paging paging, int step,Category category) {
 
-		return adminDao.projectList(paging, step);
+		return adminDao.projectList(paging, step,category.getCategoryNo());
 	}
 	@Override
 	public List<NoticeFile> selectByNoticeFile(Notice notice) {
@@ -234,8 +229,8 @@ public class AdminServiceImpl implements AdminService {
 	// create by young
 	// project_step = 1, 심사 대기중인 프로젝트만 가져오는 메소드
 	@Override
-	public List<Project> getWaitingProject() {
-		return adminDao.findAllWaitingProject();
+	public List<Project> getWaitingProject(Paging paging) {
+		return adminDao.findAllWaitingProject(paging);
 	}
 
 	// create by young
@@ -266,4 +261,41 @@ public class AdminServiceImpl implements AdminService {
 	public Project getProject(Project project) {
 		return adminDao.findByNo(project);
 	}
+	@Override
+	public List<Category> categoryList() {
+		return adminDao.categoryList();
+	}
+	
+	//은지님 코드
+	@Override
+	public List<Qna> Qnalist(Paging paging, String complete) {
+		return adminDao.selectQnaList(paging,complete);
+	}
+	@Override
+	public List<Qna> Qnalist() {
+		return adminDao.selectQnaListStep();
+	}
+	@Override
+	public Qna qnaview(Qna viewqna) {
+		Qna qna = adminDao.selectByQnaNo(viewqna);
+		
+		return qna;
+	}
+	@Override
+	public void qnaDelete(Qna qna) {
+		logger.info("삭제하려는 글 번호 : {}", qna.getQnaNo());
+
+		adminDao.deleteQna(qna);
+		
+	}
+	@Override
+	public void qnarewrite(Qna qna) {
+		if("".equals(qna.getQnaTitle())){
+			qna.setQnaTitle("(제목없음)");
+		}
+		adminDao.updateQnaAll(qna);
+		adminDao.insertQnare(qna);
+		
+	}
+	
 }

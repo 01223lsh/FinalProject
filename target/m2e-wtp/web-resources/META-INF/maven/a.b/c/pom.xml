@@ -196,29 +196,7 @@
 		</dependency>        
 	</dependencies>
     <build>
-		<!-- create by young intellij setting -->
-		<resources>
-			<resource>
-				<!-- src/main/java 폴더의 xml파일들을 빌드에 포함 -->
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<!-- src/main/resources 폴더의 xml, properties, yml, setting파일들을 빌드에 포함 -->
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-					<include>**/*.yml</include>
-					<!-- <include>**/*.setting</include>-->
-				</includes>
-			</resource>
-		</resources>
-
-
-		<plugins>
+        <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>

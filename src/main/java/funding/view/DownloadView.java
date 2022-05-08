@@ -31,8 +31,8 @@ public class DownloadView extends AbstractView {
 		Notice file = (Notice) model.get("downFile");
 		
 		//업로드된 파일의 객체
-		File src = new File(context.getRealPath("upload"), file.getFileStorage());
-		logger.info("{}",context.getRealPath("upload"));
+		File src = new File(context.getRealPath("noticeimg"), file.getFileStorage());
+		logger.info("{}",context.getRealPath("noticeimg"));
 		
 		//서버의 파일 입력 스트림
 		FileInputStream in = new FileInputStream(src);

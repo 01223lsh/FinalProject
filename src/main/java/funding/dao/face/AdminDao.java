@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import funding.dto.Category;
 import funding.dto.Member;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.Qna;
 import funding.util.Paging;
 
 public interface AdminDao {
@@ -59,13 +61,13 @@ public interface AdminDao {
 
 	public void fileNoByDelete(@Param("notice")Notice notice,@Param("fileNolist") List<Integer> fileNolist);
 
-	public List<Project> projectList(@Param("paging") Paging paging, @Param("step")int step);
+	public List<Project> projectList(@Param("paging") Paging paging, @Param("step")int step,@Param("categoryNo") int categoryNo);
 
-	public int selectCntProject(int step);
+	public int selectCntProject(@Param("step")int step,@Param("categoryNo") int categoryNo);
 
 	// create by young
 	// DB 에서 심사대기중인 프로젝트 가져오기
-    List<Project> findAllWaitingProject();
+    List<Project> findAllWaitingProject(Paging paging);
 
 	// create by young
 	// 프로젝트 상태 업데이트
@@ -74,4 +76,26 @@ public interface AdminDao {
 	// create by young
 	// 프로젝트 상세 내용 조회
 	Project findByNo(Project project);
+
+	public List<Category> categoryList();
+
+	public int selectCntapproveProject(Paging paging);
+
+	public int selectCntQna(String complete);
+
+	public List<Qna> qnaAll(Paging paging);
+
+	public List<Qna> selectQnaList(@Param("paging")Paging paging, @Param("complete")String complete);
+
+	public Qna selectByQnaNo(Qna viewqna);
+
+	public void deleteQna(Qna qna);
+
+	public void updateQnaAll(Qna qna);
+
+	public void insertQnare(Qna qna);
+
+	public List<Qna> selectQnaListStep();
+
+
 }
