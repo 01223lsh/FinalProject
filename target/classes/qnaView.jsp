@@ -65,7 +65,7 @@ function qnaDelete(qnaNo){
 <br><br>
 <button class="pull-left;" onclick="qnaManagement()">목록</button>
 	<c:forEach items="${list}" var="i">
-		<c:if test="${ qna.qnaNo eq i.qnaNo}">
+		<c:if test="${ qna.qnaNo eq i.qnaRefer}">
 			<button class="pull-right" style="margin-right: 10px;" onclick="qnaRewrite(${qna.qnaNo})">답변작성</button>
 		</c:if>
 	</c:forEach>

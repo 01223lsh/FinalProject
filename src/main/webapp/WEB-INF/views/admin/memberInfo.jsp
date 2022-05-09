@@ -66,10 +66,24 @@ $(document).ready(function(){
 	
 	<td>
 	<select id="membergradeupdate">
-		<option value="0" <c:if test="${member.grade eq '0'}">selected</c:if>>일반유저</option>
-		<option value="1" <c:if test="${member.grade eq '1'}">selected</c:if>>사업자</option>
-		<option value="2" <c:if test="${member.grade eq '2'}">selected</c:if>>관리자</option>
-		<option value="3" <c:if test="${member.grade eq '3'}">selected</c:if>>비활성화</option>
+		<c:choose>
+			<c:when test="${member.grade eq 0 }">
+				<option value="0" <c:if test="${member.grade eq '0'}">selected</c:if>>일반유저</option>
+				<option value="2" <c:if test="${member.grade eq '2'}">selected</c:if>>관리자</option>
+			</c:when>
+			<c:when test="${member.grade eq 1 }">
+				<option value="0" <c:if test="${member.grade eq '0'}">selected</c:if>>일반유저</option>
+				<option value="1" <c:if test="${member.grade eq '1'}">selected</c:if>>사업자</option>			
+			</c:when>
+			<c:when test="${member.grade eq 2 }">
+				<option value="0" <c:if test="${member.grade eq '0'}">selected</c:if>>일반유저</option>
+				<option value="2" <c:if test="${member.grade eq '2'}">selected</c:if>>관리자</option>
+			</c:when>
+			<c:when test="${member.grade eq 3 }">
+				<option value="0" <c:if test="${member.grade eq '0'}">selected</c:if>>일반유저</option>
+				<option value="3" <c:if test="${member.grade eq '3'}">selected</c:if>>비활성화</option>
+			</c:when>		
+		</c:choose>
 	</select>
 	
 	</td>

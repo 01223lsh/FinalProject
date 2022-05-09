@@ -23,6 +23,7 @@ import funding.dto.Project;
 import funding.dto.Qna;
 import funding.service.face.AdminService;
 import funding.util.Paging;
+import funding.util.ProjectPaging;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -105,11 +106,11 @@ public class AdminServiceImpl implements AdminService {
 	
 
 	@Override
-	public Paging getprojectPaging(Paging paging, int step,Category category) {
+	public ProjectPaging getprojectPaging(ProjectPaging paging, int step,Category category) {
 
 		int totalCount = adminDao.selectCntProject(step,category.getCategoryNo());
 		int curPage = paging.getCurPage();
-		paging = new Paging(totalCount, curPage);
+		paging = new ProjectPaging(totalCount, curPage);
 		return paging;
 	}
 	@Override
@@ -217,7 +218,7 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 	@Override
-	public List<Project> projectList(Paging paging, int step,Category category) {
+	public List<Project> projectList(ProjectPaging paging, int step,Category category) {
 
 		return adminDao.projectList(paging, step,category.getCategoryNo());
 	}

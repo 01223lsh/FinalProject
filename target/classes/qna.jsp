@@ -258,7 +258,8 @@ td {
 	<c:forEach items="${list }" var="qna">
 	<tr style=" height: 20px;">
 		<td >${qna.qnaNo} </td>
-		<td style="text-align: left;"><a onclick="qnaView(${qna.qnaNo })" style="text-decoration: none;">
+		<td style="text-align: left;">
+		<a onclick="qnaView(${qna.qnaNo })" style="text-decoration: none;">
 		<c:if test="${qna.qnaStep>0}">
 		<c:forEach begin="0" end="${qna.qnaStep}" >
 		&nbsp;&nbsp;
@@ -266,8 +267,11 @@ td {
 		</c:if>
 		${qna.qnaTitle }</a>
 		<c:if test="${qna.qnaStep eq 0}">
-		<i class="fa-solid fa-volume-off"></i>
-			${qna.qnaRefer}
+		<c:choose>
+			
+			<i class="fa-solid fa-volume-off"></i>
+		
+		</c:choose>
 		</c:if>
 		</td>
 		<td>${qna.nick } </td>

@@ -156,10 +156,7 @@
     	update notice set title=#{title}, content=#{content}
     	where notice_no = #{noticeNo}
     </update>
-    <update id="updateNoticeFile" parameterType="funding.dto.Notice">
-    	update noticefile set file_origin=#{fileOrigin}, file_storage=#{fileStorage}
-    	where file_no = #{fileNo}
-    </update>
+  
     
     <delete id="noticeDelete" parameterType="funding.dto.Notice">
     	delete from notice
@@ -297,8 +294,11 @@
 	
 	</insert>
 	<select id="selectQnaListStep" resultType="funding.dto.Qna">
-		select * from qna
-		where qna_step = 0
+		SELECT
+ 		qna_refer
+		FROM qna
+		GROUP BY qna_refer
+		HAVING COUNT(qna_refer) &lt; 2
 	</select>
 </mapper>
 
