@@ -10,7 +10,7 @@
 		from project
 		<where>
 		<if test="category != null and !''.equals(category)">
-		AND category_id = #{category}
+		AND category_no = #{category}
 		</if>
 		<if test="keyword != null and !''.equals(keyword)">
 		AND project_title LIKE '%' || #{keyword} || '%'
@@ -41,7 +41,7 @@
 			, nvl(sum, 0) sum
 		from project pj
 		left join (
-    		select project_no, sum(payment_amount) sum 
+    		select project_no, sum(payment_total) sum
     		from payment
     		group by project_no    
 		) py

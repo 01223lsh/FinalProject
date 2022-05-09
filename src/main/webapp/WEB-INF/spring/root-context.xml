@@ -7,7 +7,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- DB접속 정보 -->	
-	<!-- <context:property-placeholder location="classpath:/dbconfig.properties"/> -->
+	 <context:property-placeholder location="classpath:/dbconfig.properties"/>
 
 
 	<!-- <bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -18,10 +18,10 @@
 	</bean> -->
 	
 	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-	    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-	    <property name="username" value="kh5test" />
-   		<property name="password" value="1234" />
+    	<property name="driverClassName" value="${db.driver}" />
+	    <property name="url" value="${db.url}" />
+	    <property name="username" value="${db.username}" />
+   		<property name="password" value="${db.password}" />
 	</bean>
 	
 	
