@@ -16,7 +16,7 @@
        			 
        			 WHERE 1=1
 <!--        			 <choose> -->
-<!--        			 <when test="#{select} != null and #{select}.equals('nick')"> -->
+<!--        			 <when test="select != null and #{select}.equals('nick')"> -->
        			 	AND nick LIKE '%'|| #{search} ||'%'
 <!--        			 </when> -->
 <!--        			 <when test="select != null and select.equals('qnaTitle')"> -->
@@ -27,6 +27,17 @@
 <!--        			 </when> -->
 <!--        			 </choose> -->
        			 
+<!--        			 <choose> -->
+<!--        			 <when test="select =='nick'"> -->
+<!--        			 	AND nick LIKE '%'|| #{search} ||'%' -->
+<!--        			 </when> -->
+<!--        			 <when test="select =='qnaTitle'"> -->
+<!--        			 	AND qna_title LIKE '%'|| #{search} ||'%' -->
+<!--        			 </when> -->
+<!--        			 <when test="select =='qnaContent'"> -->
+<!--        			 	AND qna_content LIKE '%'|| #{search} ||'%' -->
+<!--        			 </when> -->
+<!--        			 </choose> -->
        			 order by qna_refer desc, qna_step)Q
     		)QNA
 		WHERE rnum between #{startNo } and #{endNo }
@@ -34,8 +45,11 @@
 
     </select>
     
-    <select id="selectCntAll" resultType="int">
+    <select id="selectCntAll" resultType="int" parameterType="funding.util.Paging">
     	SELECT count(*) cnt FROM qna
+<!--     	WHERE #{select} LIKE '%' || #{search} ||'%' -->
+    	WHERE nick LIKE '%' || #{search} ||'%'
+    	
     </select>
     
    	<select id="selectByQnaNo" resultType="funding.dto.Qna" parameterType="funding.dto.Qna">

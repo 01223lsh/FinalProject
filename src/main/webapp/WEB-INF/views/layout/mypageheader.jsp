@@ -19,6 +19,17 @@ $(document).ready(function() {
 	if("${socialchk}"==0){
 		$("#memberinfo").hide();
 	};
+	
+	if("${grade}"==0){
+		$("#joinfunding").show();
+	};
+	
+	if("${grade}"==1){
+		$("#makefunding").show();
+	};
+	
+	
+	
 })
 
 </script>
@@ -106,8 +117,8 @@ a:vistied {
 <ul>
 	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo">회원 정보확인/수정</a></li>
 	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none;">판매 정보확인/수정</a></li>
-	<li><a class="m" href="#">펀딩관련</a></li>
-	<li><a class="m" href="#">메뉴3</a></li>
+	<li><a class="m" href="#" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
+	<li><a class="m" href="#" id="makefunding" style="display: none;">제작한 펀딩</a></li>
 	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
 </ul>
 </div> <!-- menu -->

@@ -29,7 +29,6 @@ public class QnaController {
 	@GetMapping("/qna/list")
 	public void list(Paging pagingParam, Model model) {
 		
-		
 		logger.info("/board/list [GET]");
 		
 		//페이징 계산
@@ -46,15 +45,14 @@ public class QnaController {
 		model.addAttribute("list", list);
 	}
 	
+	
 	@GetMapping("/qna/view")
 	public void view(Qna viewqna, Model model) {
 		
 		logger.info("/qna/view [GET]");
-
 		
 		//상세보기(게시글-Board)
 		Qna qnaview = qnaService.qnaview(viewqna);
-
 		
 		model.addAttribute("qna", qnaview);
 		
@@ -74,6 +72,7 @@ public class QnaController {
 		}
 	}
 	
+	
 	@PostMapping("/qna/qnawrite")
 	public String qnawriteProc(HttpSession session, Qna qna) {
 		
@@ -83,6 +82,7 @@ public class QnaController {
 		
 		return "redirect:/qna/view?qnaNo=" + qna.getQnaNo();
 	}
+	
 	
 	@GetMapping("/qna/qnarewrite")
 	public String qnarewrite(HttpSession session) {
@@ -116,7 +116,6 @@ public class QnaController {
 		
 		//상세보기(게시글-Board)
 		Qna qnaview = qnaService.qnaview(qna);
-
 		
 		model.addAttribute("qna", qnaview);
 		
@@ -139,9 +138,7 @@ public class QnaController {
 		
 		logger.info("컨트롤러로 받아온 삭제용 게시글 번호 : {}", qna.getQnaNo());
 		
-		
 		qnaService.delete(qna);
-		
 		
 		return "redirect:/qna/list";
 		

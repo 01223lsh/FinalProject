@@ -9,7 +9,7 @@ public interface QnaDao {
 
 	public List<Qna> selectList(Paging paging);
 
-	public int selectCntAll();
+	public int selectCntAll(Paging pagingParam);
 
 	public Qna selectByQnaNo(Qna viewqna);
 

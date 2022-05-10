@@ -9,15 +9,6 @@
 
 <script type="text/javascript">
 
-// function NickChk() {
-	
-// 	var Pchk = ^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$
-	
-// 	if(! Pchk.test("pw")){
-// 		alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/대문자/특수문자를 모두 포함해야 합니다.")
-// 		return false
-// 	}
-// }
 
 
 
@@ -25,10 +16,7 @@
 
 
 $(document).ready(function() {
-	
-// 	$("#update").click(function() {
-// 		$("form").submit();
-// 	});
+
 	var duplCheck= false;
 	$("#dupBtn").click(function() {
 		$.ajax({
@@ -37,6 +25,7 @@ $(document).ready(function() {
 			, url : "/mypage/nickChk"
 			, data : { nick : $("#nick").val()}
 			, dataType : "json"
+			
 			, success : function(result) {
 				console.log("AJAX 성공")
 				console.log(result)
@@ -59,15 +48,6 @@ $(document).ready(function() {
 		});
 	});
 	
-// var pwchk = false;
-// function PWChk() {	
-// 	var Pchk = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$";
-	
-// 	if(false === Pchk.test(pw.value)){
-// 		alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/대문자/특수문자를 모두 포함해야 합니다.")
-// 		return false;
-// 	} 
-// }
 	
 	 $("#update").click(function(){
       
@@ -114,28 +94,15 @@ $(document).ready(function() {
 	        $("#phone").focus();
 	        return false;
 	      }
+
 		
+		var Pchk = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
 		
-		
-// 		var Pchk = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$";
-		
-// 		if(false === Pchk.test(pw.value)){
-// 			alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/대문자/특수문자를 모두 포함해야 합니다.")
-// 			return false;
-// 		} 
-// 		else {
-// 			return true;
-// 		}
-		
-		
-		
-// 		if(! /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$.test(pw)){
-// 			alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/대문자/특수문자를 모두 포함해야 합니다.")
-// 			return false;
-// 		} 
-// 		else {
-// 			return true;
-// 		}
+		if(Pchk.test(pw.value)==false){
+			alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/영어/특수문자를 모두 포함해야 합니다.");
+			return false;
+		} 
+
 		
 		
 		
@@ -144,10 +111,7 @@ $(document).ready(function() {
 	           return false;
 	        }
 	
-// 	    if( !pwchk) {
-	    	
-// 	    }
-	    
+
 	    
 		$("form").submit();
       

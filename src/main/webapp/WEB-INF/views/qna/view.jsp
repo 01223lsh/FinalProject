@@ -5,7 +5,18 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
+<script type="text/javascript">
 
+$(document).ready(function() {
+	if("${grade}"==2  && "${memberNo == qna.memberNo}"){
+		$("#admindelete").hide();
+	};
+	
+
+})
+
+
+</script>
 
 
 
@@ -32,12 +43,13 @@
 
 <c:if test="${memberNo == qna.memberNo}">
 <a href="/qna/qnaupdate?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;">수정</button></a>
-<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;">삭제</button></a>
+<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;" id="admindelete">삭제</button></a>
+
 </c:if>
 
 <c:if test="${grade == 2 }">
 <a href="/qna/qnarewrite?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;">답변작성</button></a>
-<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;">삭제</button></a>
+<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;" >삭제</button></a>
 </c:if>
 
 

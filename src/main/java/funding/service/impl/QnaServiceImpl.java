@@ -30,7 +30,7 @@ public class QnaServiceImpl implements QnaService{
 	public Paging getPaging(Paging pagingParam) {
 		
 		//전체 총 게시글 수 조회
-		int totalCount = qnaDao.selectCntAll();
+		int totalCount = qnaDao.selectCntAll(pagingParam);
 		
 		//페이징 계산
 		Paging paging = new Paging(totalCount, pagingParam.getCurPage() );

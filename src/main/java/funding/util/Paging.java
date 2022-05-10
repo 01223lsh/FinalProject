@@ -29,6 +29,18 @@ public class Paging {
 		makePaging();
 	}
 	
+	
+//	public Paging(int totalCount, int curPage, String search) {
+//		setTotalCount(totalCount);
+//		setCurPage(curPage);
+//		setSearch(search);
+//		
+//		makePaging();
+//	}
+	
+	
+	
+	
 	//총 게시글 수, 현제 페이지번호를 입력하는 생성자
 	public Paging(int totalCount, int curPage) {
 		setTotalCount(totalCount);
