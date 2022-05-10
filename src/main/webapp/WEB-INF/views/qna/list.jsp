@@ -64,16 +64,16 @@ input #search {
 <form action="/qna/list" method="get">
 
 <div>
-<!-- 	<select name="select"  style="border-radius: 1px;"> -->
-<%-- 		<option value="nick" id="nick" <c:if test="${select eq 'nick' }">selected</c:if>>작성자</option> --%>
-<%-- 		<option value="qnaTitle" id="qnaTitle" <c:if test="${select eq 'qnaTitle' }">selected</c:if>>제목</option> --%>
-<%-- 		<option value="qnaContent" id="qnaContent" <c:if test="${select eq 'qnaContent' }">selected</c:if>>>내용</option> --%>
-<!-- 	</select> -->
-	<select name="select"  style="border-radius: 1px;">
-		<option value="nick" id="nick" >작성자</option>
-		<option value="qnaTitle" id="qnaTitle" >제목</option>
-		<option value="qnaContent" id="qnaContent">내용</option>
+	<select name="select" id="select" style="border-radius: 1px;">
+		<option value="nick" id="nick" <c:if test="${select eq 'nick' }">selected</c:if>>작성자</option>
+		<option value="qnaTitle" id="qnaTitle" <c:if test="${select eq 'qnaTitle' }">selected</c:if>>제목</option>
+		<option value="qnaContent" id="qnaContent" <c:if test="${select eq 'qnaContent' }">selected</c:if>>내용</option>
 	</select>
+<!-- 	<select name="select"  style="border-radius: 1px;"> -->
+<!-- 		<option value="nick" id="nick" >작성자</option> -->
+<!-- 		<option value="qnaTitle" id="qnaTitle" >제목</option> -->
+<!-- 		<option value="qnaContent" id="qnaContent">내용</option> -->
+<!-- 	</select> -->
 	<input type="text" name="search" id="search" placeholder="검색어를 입력하세요"  value="${param.search}" />
 	<button>검색</button>
 

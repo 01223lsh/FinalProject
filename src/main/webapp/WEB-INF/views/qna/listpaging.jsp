@@ -4,8 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${not empty param.search }">
-	<c:set var="searchParam" value="&search=${param.search }" />
+<%-- 	<c:set var="searchParam" value="&search=${param.search }" /> --%>
+	<c:set var="searchParam" value="&select=${param.select }&search=${param.search }" />
 </c:if>
+
+<%-- 	<c:set var="searchParam" value="&select=${paging.select }&search=${paging.search }" /> --%>
+
 
 <div class="text-center">
 
@@ -41,7 +45,7 @@
 			<li class="active"><a href="/qna/list?curPage=${i}${searachParam}"> ${i}</a></li>
 		</c:if>
 		<c:if test="${paging.curPage != i }">
-			<li><a href="/qna/list?curPage=${i}">${i}${searachParam}</a></li>
+			<li><a href="/qna/list?curPage=${i }${searchParam }">${i }</a></li>
 		</c:if>
 	</c:forEach>
 	
