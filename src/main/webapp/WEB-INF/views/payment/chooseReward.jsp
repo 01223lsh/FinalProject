@@ -125,7 +125,11 @@ dd p em {
 	font-size: 12px;
 }
 .rewardPrice {font-size: 30px;}
-
+.totalP {
+	text-align: center;
+	font-size: 30px;	
+}
+#totalPrice {border: none;}
 
 </style>
 
@@ -154,6 +158,9 @@ dd p em {
 		
 		<form action="/payment/order" method="get">
 		
+		<!-- 넘겨줄 프로젝트 번호 -->
+		<input type="hidden" name="projectNo" value="1">
+		<!-- 넘겨줄 프로젝트 번호 -->
 		<div class="rewardList">
 			<c:forEach var="i" items="${rewardList }">
 			<ul>
@@ -191,13 +198,13 @@ dd p em {
 		<div>
 			<h4 style="font-weight: bold;">추가 펀딩금 (선택)</h4>
 			<p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
-			<input type="text" id="additionalFunding" name="addtionalFunding" min="0" maxlength="9" 
+			<input type="text" id="additionalFunding" name="additionalFunding" min="0" maxlength="9" 
 			oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 			value="0" onkeyup="sumPrice()">
 			원을 추가로 후원합니다. <em style="font-style: 12px;">(최대 9자리)</em>
 			<hr>
-			<p>
-			총 <input id="totalPrice" value="" readonly>원 결제 합니다.
+			<p class="totalP">
+			총 <input id="totalPrice" name="totalPrice" min="0" value="" readonly>원 결제 합니다.
 			</p>
 			<hr>
 			<button id="paymentBtn" class="btn-lg" style="background: #d4dfff;">

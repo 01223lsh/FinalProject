@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="funding.dao.face.PaymentDao">
 
 	<select id="selectReward" resultType="funding.dto.Reward">
@@ -15,5 +16,39 @@
 		, reward_state  
 		FROM reward
 	</select>
+	
+	<select id="selectByRewardNo" resultType="funding.dto.Reward" parameterType="funding.dto.Reward">
+		SELECT 
+		reward_no
+		, project_no
+		, reward_price
+		, reward_amount
+		, reward_name
+		, reward_intro
+		, reward_state  
+		FROM reward
+		WHERE reward_no = #{rewardNo}
+	</select>
+	
+	<insert id="insertOrder" parameterType="funding.dto.Order">
+		<selectKey order="BEFORE" keyProperty="orderNo" resultType="int">
+			SELECT order_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO order_tb
+		VALUES (#{orderNo}, 0, sysdate, 0, #{additionalFunding}, #{totalPrice})
+	</insert>	
+	
+	<insert id="insertRewardOrder">
+		INSERT INTO reward_order
+		VALUES (reward_order_seq.nextval, #{orderNo}, #{rewardNo}, #{rewardCount})
+	</insert>
+	
+	<insert id="insertDelivery" parameterType="funding.dto.Delivery">
+		INSERT INTO delivery
+		VALUES (delivery_seq.nextval, #{orderNo}
+		, #{postalCode}, #{address}, #{addressDetail}
+		, #{addressExtra}, #{recipientName}, #{recipientPhone}
+		, #{precautions})
+	</insert>
 
 </mapper>

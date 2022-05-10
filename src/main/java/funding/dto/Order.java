@@ -8,12 +8,17 @@ public class Order {
 	private int memberNo;
 	private Date orderDate;
 	private int orderStatus;
-	private int addtionalFunding;
+	private int additionalFunding;
 	private int totalPrice;
+	private int rewardOrderNo;
+	private int rewardNo;
+	private int rewardCount;
+	
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + ", addtionalFunding=" + addtionalFunding + ", totalPrice=" + totalPrice + "]";
+				+ orderStatus + ", additionalFunding=" + additionalFunding + ", totalPrice=" + totalPrice
+				+ ", rewardOrderNo=" + rewardOrderNo + ", rewardNo=" + rewardNo + ", rewardCount=" + rewardCount + "]";
 	}
 	public int getOrderNo() {
 		return orderNo;
@@ -39,11 +44,11 @@ public class Order {
 	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public int getAddtionalFunding() {
-		return addtionalFunding;
+	public int getAdditionalFunding() {
+		return additionalFunding;
 	}
-	public void setAddtionalFunding(int addtionalFunding) {
-		this.addtionalFunding = addtionalFunding;
+	public void setAdditionalFunding(int additionalFunding) {
+		this.additionalFunding = additionalFunding;
 	}
 	public int getTotalPrice() {
 		return totalPrice;
@@ -51,4 +56,23 @@ public class Order {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public int getRewardOrderNo() {
+		return rewardOrderNo;
+	}
+	public void setRewardOrderNo(int rewardOrderNo) {
+		this.rewardOrderNo = rewardOrderNo;
+	}
+	public int getRewardNo() {
+		return rewardNo;
+	}
+	public void setRewardNo(int rewardNo) {
+		this.rewardNo = rewardNo;
+	}
+	public int getRewardCount() {
+		return rewardCount;
+	}
+	public void setRewardCount(int rewardCount) {
+		this.rewardCount = rewardCount;
+	}
+	
 }

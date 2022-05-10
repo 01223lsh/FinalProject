@@ -5,15 +5,18 @@ public class Delivery {
 	private int deliveryNo;
 	private int orderNo;
 	private String postalCode;
+	private String address;
 	private String addressDetail;
+	private String addressExtra;
 	private String recipientName;
 	private String recipientPhone;
 	private String precautions;
 	@Override
 	public String toString() {
 		return "Delivery [deliveryNo=" + deliveryNo + ", orderNo=" + orderNo + ", postalCode=" + postalCode
-				+ ", addressDetail=" + addressDetail + ", recipientName=" + recipientName + ", recipientPhone="
-				+ recipientPhone + ", precautions=" + precautions + "]";
+				+ ", address=" + address + ", addressDetail=" + addressDetail + ", addressExtra=" + addressExtra
+				+ ", recipientName=" + recipientName + ", recipientPhone=" + recipientPhone + ", precautions="
+				+ precautions + "]";
 	}
 	public int getDeliveryNo() {
 		return deliveryNo;
@@ -33,11 +36,23 @@ public class Delivery {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getAddressDetail() {
 		return addressDetail;
 	}
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
+	}
+	public String getAddressExtra() {
+		return addressExtra;
+	}
+	public void setAddressExtra(String addressExtra) {
+		this.addressExtra = addressExtra;
 	}
 	public String getRecipientName() {
 		return recipientName;
