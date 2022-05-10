@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		member = memberDao.loadUserInfo(member);
 //		MemberDto member =loginDao.loadUserInfo(conn, "dmswk108");
-		System.out.println("[LoginServiceImpl] loadUserInfo() - memberDto 정보 : " + member.toString());
+//		System.out.println("[LoginServiceImpl] loadUserInfo() - memberDto 정보 : " + member.toString());
 
 		return member;	
 	}

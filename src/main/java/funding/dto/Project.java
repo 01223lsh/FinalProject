@@ -2,8 +2,13 @@ package funding.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+//import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Project {
 	
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private int projectNo;			// 프로젝트 번호
 	private int memberNo;			// 회원번호
 	private int categoryNo;			// 카테고리 번호
@@ -11,27 +16,40 @@ public class Project {
 	private String projectIntro;	// 소개글(요약)
 	private String budgetPlan;		// 프로젝트 예약 계획
 	private String schedulePlan;	// 프로젝트 일정
-	private String ProjectImage;	// 대표사진경로
+	private String projectImage;	// 대표사진경로
 	private int projectPrice;		// 목표금액
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date openDate;			// 프로젝트 오픈일
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date closeDate;			// 프로젝트 종료일
 	private Date deliveryDate;		// 예상 배송시작일
 	private String projectContent;	// 소개글 내용
 	private int fundPrice; 			// 펀딩금액(현재)
 	private String projectStep;		// 프로젝트 진행 단계
-	
+	ProjectPhoto projectPhoto;		// 프로젝트 사진 객체
 	
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
 				+ ", projectTitle=" + projectTitle + ", projectIntro=" + projectIntro + ", budgetPlan=" + budgetPlan
-				+ ", schedulePlan=" + schedulePlan + ", ProjectImage=" + ProjectImage + ", projectPrice=" + projectPrice
+				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ "]";
+				+ ", projectPhoto=" + projectPhoto + "]";
 	}
 	
 	
+	public ProjectPhoto getProjectPhoto() {
+		return projectPhoto;
+	}
+
+
+	public void setProjectPhoto(ProjectPhoto projectPhoto) {
+		this.projectPhoto = projectPhoto;
+	}
+
+
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -75,10 +93,10 @@ public class Project {
 		this.schedulePlan = schedulePlan;
 	}
 	public String getProjectImage() {
-		return ProjectImage;
+		return projectImage;
 	}
 	public void setProjectImage(String projectImage) {
-		ProjectImage = projectImage;
+		this.projectImage = projectImage;
 	}
 	public int getProjectPrice() {
 		return projectPrice;

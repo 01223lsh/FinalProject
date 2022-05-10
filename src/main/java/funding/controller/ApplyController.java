@@ -1,6 +1,7 @@
 package funding.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import funding.dto.Project;
 import funding.dto.Reward;
@@ -37,7 +40,7 @@ public class ApplyController {
 
 	@RequestMapping(value = "/category", method = RequestMethod.POST)
 	
-	public @ResponseBody Project categoryInsert(@RequestBody Project project, HttpSession session) {
+	public @ResponseBody String categoryInsert(@RequestBody Project project, HttpSession session, Model model) {
 		logger.info("/apply/category [POST]");
 		
 		//프로젝트와 카테고리 값을 받고 session으로 memberNo를 받아서 insert
@@ -47,39 +50,89 @@ public class ApplyController {
 		System.out.println(session.getAttribute("memberNo"));
 		project.setMemberNo((Integer)session.getAttribute("memberNo"));
 		applyService.categoryInsert(project);
-		return project;
+		
+		//모델값 전달
+		model.addAttribute("projectInfo", project);
+		int projectNo = project.getProjectNo();
+		
+		System.out.println(projectNo);
+		
+		return projectNo + "";
 		
 	}
 	
 	//제품 입력 페이지 이동
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public String product(Project project, Model model) {
+	public String product(int projectNo, Model model) {
 		logger.info("/apply/product [GET]");
 		
+		
 		//제품 정보 불러옴
-		Project projectInfo = applyService.projectSelect(project);
+		Project projectInfo = applyService.projectSelect(projectNo);
 		
 		//모델값 저장
 		model.addAttribute("projectInfo", projectInfo);
+		System.out.println(model.getAttribute("projectInfo"));
 		
 		return "apply/product";
 		
 	}
 	
 	//제품정보 입력
+//	@RequestMapping(value = "/product", method = RequestMethod.POST)
+//	public void productInput(@RequestBody Project project, Model model) {
+//		logger.info("/apply/product [POST]");
+//		
+//		System.out.println("controller: " + project);
+//
+//		
+//		
+//		//제품 정보 입력 
+//		applyService.productUpdate(project);
+//		
+//		//모델값 전달
+//		model.addAttribute("projectInfo", project);
+////		int projectNo = project.getProjectNo();
+//		
+////		System.out.println(projectNo);
+//		
+////		return projectNo + "";
+//		
+//	}
+	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public void productInput(Project project) {
+	public void productInput(
+			@RequestPart(value = "projectUpdate") Project project, Model model,
+			@RequestPart(value = "file", required = false) MultipartFile file
+			) throws Exception {
 		logger.info("/apply/product [POST]");
+		
+		System.out.println(project);
+		System.out.println("controller 파일 값: " + file);
+		
+		//제품 정보 입력 
+		applyService.productUpdate(project, file);
+		
+		Project projectInfo = applyService.projectSelect(project.getProjectNo());
+		
+		
+		//모델값 전달
+		model.addAttribute("projectInfo", projectInfo);
+//		int projectNo = project.getProjectNo();
+		
+//		System.out.println(projectNo);
+		
+//		return projectNo + "";
 		
 	}
 	
 	//펀딩계획 페이지 이동
 	@RequestMapping(value = "/plan", method = RequestMethod.GET)
-	public String plan(Project project, Model model) {
+	public String plan(int projectNo, Model model) {
 		logger.info("/apply/plan [GET]");
 		
 		//펀딩계획정보 불러옴
-		Project projectInfo = applyService.projectSelect(project);
+		Project projectInfo = applyService.projectSelect(projectNo);
 		
 		//모델값 저장
 		model.addAttribute("projectInfo", projectInfo);
@@ -89,17 +142,32 @@ public class ApplyController {
 	
 	//펀딩계획 입력
 	@RequestMapping(value = "/plan", method = RequestMethod.POST)
-	public void planInput(Project project) {
+	public void planInput(@RequestBody Project project, Model model) {
 		logger.info("/apply/plan [POST]");
+		
+		
+		System.out.println(project);
+		
+		//계획 정보 입력 
+		applyService.planUpdate(project);
+		
+		Project projectInfo = applyService.projectSelect(project.getProjectNo());
+		
+		
+		//모델값 전달
+		model.addAttribute("projectInfo", projectInfo);
+
+		
+		
 	}
 	
 	//프로젝트 소개 페이지 이동
 	@RequestMapping(value = "/content", method = RequestMethod.GET)
-	public String content(Project project, Model model) {
+	public String content(int projectNo, Model model) {
 		logger.info("/apply/content [GET]");
 		
 		//프로젝트 소개 정보 불러옴
-		Project projectInfo = applyService.projectSelect(project);
+		Project projectInfo = applyService.projectSelect(projectNo);
 		
 		//모델값 저장
 		model.addAttribute("projectInfo", projectInfo);
@@ -115,13 +183,18 @@ public class ApplyController {
 	
 	//리워드 입력 페이지 이동 
 	@RequestMapping(value = "/reward", method = RequestMethod.GET)
-	public String reward(Project project, Model model) {
+	public String reward(int projectNo, Model model) {
 		logger.info("/apply/reward [GET]");
 		
+		//프로젝트 소개 정보 불러옴
+		Project projectInfo = applyService.projectSelect(projectNo);
+		
 		//리워드 정보 불러옴
-		List<Reward> rewardList = applyService.rewardSelect(project);
+		List<Reward> rewardList = applyService.rewardSelect(projectNo);
 		
 		//모델값 저장
+		model.addAttribute("projectInfo", projectInfo);
+		
 		model.addAttribute("rewardList", rewardList);
 		
 		return "apply/reward";

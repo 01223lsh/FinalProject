@@ -2,6 +2,8 @@ package funding.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import funding.dto.Project;
 import funding.dto.Reward;
 
@@ -20,8 +22,13 @@ public interface ApplyService {
 	 * @param project
 	 * @return project - 제품정보
 	 */
-	public Project projectSelect(Project project);
+	public Project projectSelect(int projectNo);
 
+	/**
+	 * 제품 정보 저장하기
+	 * @param project
+	 */
+	public void productUpdate(Project project, MultipartFile file);
 	
 	/**
 	 * 리워드 정보 리스트
@@ -29,6 +36,15 @@ public interface ApplyService {
 	 * @param project
 	 * @return list - 리워드 정보 리스트
 	 */
-	public List<Reward> rewardSelect(Project project);
+	public List<Reward> rewardSelect(int projectNo);
+	
+	/**
+	 * 계획 정보 저장하기
+	 * 
+	 * @param project
+	 */
+	public void planUpdate(Project project);
+	
+	
 
 }

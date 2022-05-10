@@ -142,9 +142,12 @@ function applyCategory(){
 		,url:"/apply/category"
 		,data: JSON.stringify(form)
 		,contentType: "application/json"
-		,success: function(){
+		,success: function(data){
 // 			$("")
 			alert("프로젝트 생성!")
+			console.log(data);
+			let url = '/apply/product?projectNo='+data;
+			location.replace(url);
 		}
 	})
 }
@@ -218,7 +221,7 @@ $(function() {
 <body>
 	<div class="apply">
 		<div class="apply-back"></div>
-		<div class="right-content">		
+		<div class="right-content">
 			<div class="item">
 				<h3 style= "font-size: 24px !important;">카테고리를 선택해주세요.</h3>
 	 			<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>

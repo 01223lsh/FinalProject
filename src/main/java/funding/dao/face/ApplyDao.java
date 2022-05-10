@@ -25,10 +25,17 @@ public interface ApplyDao {
 	/**
 	 * 입력하던 정보 불러오기
 	 * 
-	 * @param project
+	 * @param projectNo
 	 * @return project - 입력했던 프로젝트 정보
 	 */
-	public Project projectSelect(Project project);
+	public Project projectSelect(int projectNo);
+
+	/**
+	 * 제품 정보 저장하기
+	 * 
+	 * @param project
+	 */
+	public void productUpdate(Project project);
 
 	/**
 	 * 입력했던 리워드 정보 불러오기
@@ -36,6 +43,22 @@ public interface ApplyDao {
 	 * @param project
 	 * @return list - 작성하던 리워드 정보
 	 */
-	public List<Reward> rewardSelect(Project project);
+	public List<Reward> rewardSelect(int projectNo);
+
+	/**
+	 * 프로젝트에 저장되있던 대표사진 삭제
+	 * 
+	 * @param projectNo
+	 */
+	public void deleteProjectImage(int projectNo);
+	
+	/**
+	 * 계획 정보 저장하기
+	 * 
+	 * @param project
+	 */
+	public void planUpdate(Project project);
+
+
 	
 }

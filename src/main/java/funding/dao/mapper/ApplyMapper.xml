@@ -13,7 +13,7 @@
 		<result column="project_intro" property="projectIntro"/>
 		<result column="budget_plan" property="budgetPlan"/>
 		<result column="schedule_plan" property="schedulePlan"/>
-		<result column="Project_image" property="ProjectImage"/>
+		<result column="project_image" property="projectImage"/>
 		<result column="project_price" property="projectPrice"/>
 		<result column="open_date" property="openDate"/>
 		<result column="close_date" property="closeDate"/>
@@ -33,6 +33,15 @@
 		<result column="reward_state" property="rewardState"/>
 	</resultMap>
 	
+	<resultMap type="funding.dto.ProjectPhoto" id="ProjectPhoto">
+		<id column="photo_no" property="photoNo"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="photo_name" property="photoName"/>
+		<result column="reward_update" property="photoUpdate"/>
+		<result column="photo_path" property="photoPath"/>
+	</resultMap>
+	
+	
 	<insert id="projectInsert" parameterType="funding.dto.Project">
 		<selectKey order="BEFORE" resultType="int" keyProperty="projectNo">
 			SELECT project_seq.NEXTVAL FROM dual
@@ -46,18 +55,38 @@
 		VALUES(reward_seq.NEXTVAL, #{projectNo}, 1000, -1, '리워드 없이 후원하기', 1)
 	</insert>
 	
-	<select id="projectSelect" resultMap="Project" parameterType="funding.dto.Project">
+	<select id="projectSelect" resultMap="Project" parameterType="int">
 		SELECT * FROM project
         WHERE project_no = #{projectNo}
 	</select>
 
+	<insert id="productUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET category_no = #{categoryNo}
+              , project_title = #{projectTitle}
+              , project_intro = #{projectIntro}
+
+       	      <if test='projectImage!=null and projectImage neq""' >
+       	      , project_image = #{projectImage}
+       	      </if> 
+
+        WHERE project_no = #{projectNo} 
+	</insert>
+	
+	<insert id="planUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET project_price = #{projectPrice}
+              , open_date = #{openDate}
+              , close_date = #{closeDate}
+              , delivery_date = #{deliveryDate}
+        WHERE project_no = #{projectNo}
+	</insert>
+	
 	<select id="rewardSelect" resultMap="Reward" parameterType="funding.dto.Project">
 		SELECT * from reward
         WHERE project_no = #{projectNo}
 	</select>
 	
 	
-
-
 
 </mapper>	
