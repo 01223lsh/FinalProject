@@ -34,6 +34,11 @@ public class QnaController {
 		//페이징 계산
 		Paging paging = qnaService.getPaging(pagingParam);
 		
+		
+		logger.info("페이징내용물: {}", pagingParam);
+		
+		
+		
 		//게시글 목록 조회
 		List<Qna> list = qnaService.list(paging);
 		

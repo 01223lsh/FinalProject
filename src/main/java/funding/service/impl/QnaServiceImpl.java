@@ -36,8 +36,10 @@ public class QnaServiceImpl implements QnaService{
 		Paging paging = new Paging(totalCount, pagingParam.getCurPage() );
 		
 		//검색
-//		paging.setSelect(pagingParam.getSelect());
+		paging.setSelect(pagingParam.getSelect());
 		paging.setSearch(pagingParam.getSearch());
+		
+		logger.info("두번째 페이징 내용물 : {} " , paging);
 		
 		return paging;
 	}

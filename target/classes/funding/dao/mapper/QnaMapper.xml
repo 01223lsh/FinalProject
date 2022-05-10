@@ -15,29 +15,18 @@
        			 from qna
        			 
        			 WHERE 1=1
-<!--        			 <choose> -->
-<!--        			 <when test="select != null and #{select}.equals('nick')"> -->
+       			 <choose>
+       			 <when test="select != null and select.equals('nick')">
        			 	AND nick LIKE '%'|| #{search} ||'%'
-<!--        			 </when> -->
-<!--        			 <when test="select != null and select.equals('qnaTitle')"> -->
-<!--        			 	AND qna_title LIKE '%'|| #{search} ||'%' -->
-<!--        			 </when> -->
-<!--        			 <when test="select != null and select.equals('qnaContent')"> -->
-<!--        			 	AND qna_content LIKE '%'|| #{search} ||'%' -->
-<!--        			 </when> -->
-<!--        			 </choose> -->
+       			 </when>
+       			 <when test="select != null and select.equals('qnaTitle')">
+       			 	AND qna_title LIKE '%'|| #{search} ||'%'
+       			 </when>
+       			 <when test="select != null and select.equals('qnaContent')">
+       			 	AND qna_content LIKE '%'|| #{search} ||'%'
+       			 </when>
+       			 </choose>
        			 
-<!--        			 <choose> -->
-<!--        			 <when test="select =='nick'"> -->
-<!--        			 	AND nick LIKE '%'|| #{search} ||'%' -->
-<!--        			 </when> -->
-<!--        			 <when test="select =='qnaTitle'"> -->
-<!--        			 	AND qna_title LIKE '%'|| #{search} ||'%' -->
-<!--        			 </when> -->
-<!--        			 <when test="select =='qnaContent'"> -->
-<!--        			 	AND qna_content LIKE '%'|| #{search} ||'%' -->
-<!--        			 </when> -->
-<!--        			 </choose> -->
        			 order by qna_refer desc, qna_step)Q
     		)QNA
 		WHERE rnum between #{startNo } and #{endNo }
@@ -47,8 +36,19 @@
     
     <select id="selectCntAll" resultType="int" parameterType="funding.util.Paging">
     	SELECT count(*) cnt FROM qna
-<!--     	WHERE #{select} LIKE '%' || #{search} ||'%' -->
-    	WHERE nick LIKE '%' || #{search} ||'%'
+       	WHERE 1=1
+       	<choose>
+
+      		<when test="select != null and select.equals('nick')">
+      			 AND nick LIKE '%'|| #{search} ||'%'
+      		</when>
+      		<when test="select != null and select.equals('qnaTitle')">
+      		 	AND qna_title LIKE '%'|| #{search} ||'%'
+      		</when>
+      		<when test="select != null and select.equals('qnaContent')">
+      		 	AND qna_content LIKE '%'|| #{search} ||'%'
+      		</when>
+      	</choose>
     	
     </select>
     
