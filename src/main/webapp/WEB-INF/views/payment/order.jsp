@@ -5,8 +5,12 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
-<script type="text/javascript">
+<!-- 아임포트 api 코드 -->
+<c:import url="/WEB-INF/views/payment/importPayment.jsp"></c:import>
+<!-- 카카오 우편번호 api -->
+<c:import url="/WEB-INF/views/payment/kakaoDelivery.jsp"/><br>
 
+<script type="text/javascript">
 
 </script>
 
@@ -51,7 +55,6 @@
 	border: 1px solid #eee;
 	border-radius: 5px;
 	padding-right: 40px;
-/* 	margin: 0 auto 20px 100px 20px 100px; */
 	margin: 0 auto;
 	width: 600px;
 }
@@ -81,9 +84,18 @@
     line-height: 1.25em;
     outline: 0;
 }
-
-
-
+.dForm {
+	margin: 0.2em 0;
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-color: #dbdbdb #d2d2d2 #d0d0d0 #d2d2d3;
+    box-shadow: inset 0.1em 0.1em 0.15em rgb(0 0 0 / 10%);
+    vertical-align: middle;
+    line-height: 1.25em;
+    outline: 0;
+}
+#sample6_address{width: 348px;}
 </style>
 
 <div class="container">
@@ -142,7 +154,7 @@
 	</div>
 	
 	<hr>
-	<form action="/payment/paymentResult" method="post">
+	<form action="/payment/order" method="post">
 		
 		<input type="hidden" name="totalPrice" value="${totalPrice }">
 		<input type="hidden" name="additionalFunding" value="${additionalFunding }">
@@ -152,8 +164,13 @@
 			<input type="hidden" name="rewardCount" value="${rewardCountArr[status.index]}">
 		</c:forEach>
 		
-		<!-- 카카오 우편번호 api -->
-		<c:import url="/WEB-INF/views/payment/delivery.jsp"/><br>
+		<div class="addressInfo">
+			<input type="text" class="dForm" name="postalCode" id="sample6_postcode" placeholder="우편번호">
+			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+			<input type="text" class="dForm" name="address" id="sample6_address" placeholder="주소"><br>
+			<input type="text" class="dForm" name="addressDetail" id="sample6_detailAddress" placeholder="상세주소">
+			<input type="text" class="dForm" name="addressExtra" id="sample6_extraAddress" placeholder="참고항목">		
+		</div>
 			
 		<hr>
 		
@@ -166,10 +183,11 @@
 		
 		<h2 align="center">총 <em style="font-size:2em;">${totalPrice}</em>원 결제 합니다</h2>
 		<hr>
-		<button id="paymentBtn" class="btn-lg" style="background: #d4dfff;">
+		
+	</form>
+		<button id="paymentBtn" onclick="requestPay()" class="btn-lg" style="background: #d4dfff;">
 		결제진행
 		</button>
-	</form>
 
 
 </div> <!-- .container end -->

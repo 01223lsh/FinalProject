@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import funding.dto.Delivery;
@@ -25,7 +26,7 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@GetMapping(value = "/payment/temporary")
+	@RequestMapping(value = "/payment/temporary")
 	public void projectView(Model model) {
 		logger.info("/payment/temporary");
 		
@@ -39,7 +40,7 @@ public class PaymentController {
 		model.addAttribute("rewardList", rewardList);
 	}
 	
-	@GetMapping(value = "/payment/chooseReward")
+	@RequestMapping(value = "/payment/chooseReward")
 	public void chooseReward(Model model, Reward reward) {
 		
 		logger.info("/payment/chooseReward");
@@ -64,7 +65,7 @@ public class PaymentController {
 			, @RequestParam("rewardCount") int[] rewardCountArr
 			, int additionalFunding
 			, int totalPrice) {
-		logger.info("/payment/order");
+		logger.info("/payment/order [GET]");
 		
 		logger.info("전달 받은 rewardNoArr : {}", rewardNoArr);
 		logger.info("전달 받은 rewardCountArr : {}", rewardCountArr);
@@ -72,7 +73,7 @@ public class PaymentController {
 		//전달받은 rewardNo의 배열을 반복문을 통하여 상세정보를 저장하고 
 		//List객체에 추가
 		List<Reward> rewardList = new ArrayList<>();
-		for (int i = 0; i < rewardNoArr.length; i++) {
+		for (int i=0; i<rewardNoArr.length; i++) {
 			Reward rewardNo = new Reward();
 			rewardNo.setRewardNo(rewardNoArr[i]);
 			Reward reward = paymentService.detailReward(rewardNo);
@@ -95,14 +96,13 @@ public class PaymentController {
 		model.addAttribute("totalPrice", totalPrice);
 	}
 	
-	@PostMapping(value = "/payment/paymentResult")
-	public void paymentResult(Model model
+	@PostMapping(value = "/payment/order")
+	public String paymentResult(Model model
 			, Delivery delivery
 			, Order order
 			, @RequestParam("rewardNo") int[] rewardNoArr
-			, @RequestParam("rewardCount") int[] rewardCountArr
-			) {
-		logger.info("/payment/paymentResult");
+			, @RequestParam("rewardCount") int[] rewardCountArr) {
+		logger.info("/payment/order [POST]");
 		
 		//전달 받은 파라미터 확인
 		logger.info("rewardNo : {}", rewardNoArr);
@@ -115,6 +115,7 @@ public class PaymentController {
 		//주문정보 추가 
 		paymentService.addOrder(order, delivery, rewardNoArr, rewardCountArr);
 		
+		return "redirect:/payment/paymentResult";
 	}
 	
 }

@@ -1,29 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style type="text/css">
-.dForm {
-	margin: 0.2em 0;
-    font-size: 1em;
-    padding: 0.5em;
-    border: 1px solid #ccc;
-    border-color: #dbdbdb #d2d2d2 #d0d0d0 #d2d2d3;
-    box-shadow: inset 0.1em 0.1em 0.15em rgb(0 0 0 / 10%);
-    vertical-align: middle;
-    line-height: 1.25em;
-    outline: 0;
-}
-#sample6_address{width: 348px;}
-</style>
-<div class="addressInfo">
-	<input type="text" class="dForm" name="postalCode" id="sample6_postcode" placeholder="우편번호">
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" class="dForm" name="address" id="sample6_address" placeholder="주소"><br>
-	<input type="text" class="dForm" name="addressDetail" id="sample6_detailAddress" placeholder="상세주소">
-	<input type="text" class="dForm" name="addressExtra" id="sample6_extraAddress" placeholder="참고항목">		
-	
-</div>
-
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
