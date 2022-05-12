@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="funding.dao.face.ChatDao">
+ 
+    <select id="selectChatRoomByroomId" parameterType="string" resultType="funding.dto.ChatRoom">
+        SELECT * FROM chat_room 
+        WHERE chatroom_id = #{chatroomId} 
+    </select>
+    
+    <insert id="insertChatRoom" parameterType="funding.dto.ChatRoom">
+        INSERT INTO chat_room VALUES(SEQ_CHATROOM_ID.NEXTVAL, #{memberNo}, #{chatroomName})
+    </insert>
+    
+</mapper>
+  <!--   
+    <select id="selectChatRoom" parameterType="int" resultType="funding.dto.ChatRoom">
+        SELECT COUNT(*) FROM chat_room
+        WHERE sender_name = #{senderName} AND receiver_name = #{receiverName}
+    </select>
+    
+    <select id="selectChatRoomList" parameterType="string" resultType="funding.dto.ChatRoom">
+        SELECT * FROM chat_room
+        WHERE sender_name = #{senderName} OR receiver_name = #{receiverName}
+    </select>
+    
+    <select id="selectChatRoomName" parameterType="funding.dto.ChatRoom">
+    	SELECT * FROM chat_room
+    </select> -->
+
+	<!-- <resultMap type="ChatRoom" id="chatRoomResultSet">
+        <id property="chatroomId" column="CHATROOM_ID" />
+        <result property="senderEmail" column="SENDER_EMAIL" />
+        <result property="senderName" column="SENDER_NAME" />        
+        <result property="senderPic" column="SENDER_PIC" />
+        <result property="receiverEmail" column="RECEIVER_EMAIL" />
+        <result property="receiverName" column="RECEIVER_NAME" />
+        <result property="receiverPic" column="RECEIVER_PIC" />
+    </resultMap>
+ 
+    <resultMap type="ChatMessage" id="chatMessageResultSet">
+        <id property="messageId" column="MESSAGE_ID" />
+        <result property="roomId" column="ROOM_ID" />
+        <result property="message" column="MESSAGE_CONTENT" />
+        <result property="name" column="SENDER_NAME" />
+        <result property="email" column="SENDER_EMAIL" />
+        <result property="unReadCount" column="UNREAD_COUNT" />
+    </resultMap> 
+     -->
+    <!--  <select id="selectChatmessageByroomId" parameterType="string" resultMap="ChatMessage">
+        SELECT * FROM chat_message
+        WHERE chatroom_id = #{chatroomId}
+    </select> 
+     <select id="selectTotalCntUnRead" parameterType="ChatMessage" resultType="int">
+        SELECT COUNT(*) FROM CHATMESSAGE
+        WHERE ROOM_ID = #{roomId} AND SENDER_EMAIL != #{email} AND UNREAD_COUNT = 1
+    </select> 
+    
+    <insert id="insertChatMessage" parameterType="funding.dto.ChatMessage">
+        INSERT INTO chat_message VALUES(#{chatroomId}, #{sender}, #{message}) 
+    </insert> 
+     <update id="updateCount" parameterType="ChatMessage">
+        UPDATE CHATMESSAGE
+        SET UNREAD_COUNT = 0
+        WHERE ROOM_ID = #{roomId} AND SENDER_EMAIL != #{email} AND UNREAD_COUNT = 1
+    </update>  
+    
+     <insert id="insertChatMessage" parameterType="ChatMessage">
+        <if test="sessionCount == 1">
+        INSERT INTO chat_message VALUES(#{chatroomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, DEFAULT) 
+        </if>
+        <if test="sessionCount == 2">
+        INSERT INTO chat_message VALUES(#{chatroomId}, SEQ_CHATMESSAGE_ID.NEXTVAL, #{message}, #{name}, #{email}, 0)
+        </if>
+    </insert>  -->

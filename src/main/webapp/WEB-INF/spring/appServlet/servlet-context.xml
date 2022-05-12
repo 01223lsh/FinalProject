@@ -50,27 +50,20 @@
 		</websocket:handshake-interceptors>
 	</websocket:handlers> -->
 	
-	<!-- websocket handler -->
-	<beans:bean id="ChatHandler"
-		class="chatting.ChatHandler" />
-	<websocket:handlers>
-		<websocket:mapping path="/chat"
-			handler="ChatHandler" />
-		<websocket:handshake-interceptors>
-			<beans:bean
-				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-	</websocket:handlers>
-	
 
-	
-	
-	
+<!-- websocket handler -->
+<beans:bean id="replyEchoHandler" class="funding.handler.ReplyEchoHandler"/>
+<websocket:handlers>
+<websocket:mapping path="/replyEcho" handler="replyEchoHandler"/>
+<websocket:handshake-interceptors>
+<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+</websocket:handshake-interceptors>
+</websocket:handlers> 
+
 	
 	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
 	<!-- 	-> @Controller, @Service -->
-	<context:component-scan base-package="a.b.c" />
-	
+	<context:component-scan base-package="a.b.c, funding.controller, funding.service, funding.repository, funding.config" />
 	
 	
 </beans:beans>
