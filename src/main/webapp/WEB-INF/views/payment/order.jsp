@@ -156,7 +156,7 @@
 	<hr>
 	<form action="/payment/order" method="post">
 		
-		<input type="hidden" name="totalPrice" value="${totalPrice }">
+		<input type="hidden" id="totalPrice" name="totalPrice" value="${totalPrice }">
 		<input type="hidden" name="additionalFunding" value="${additionalFunding }">
 		
 		<c:forEach var="i" items="${rewardList}" varStatus="status">

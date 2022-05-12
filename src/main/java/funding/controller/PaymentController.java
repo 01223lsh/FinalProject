@@ -96,13 +96,13 @@ public class PaymentController {
 		model.addAttribute("totalPrice", totalPrice);
 	}
 	
-	@PostMapping(value = "/payment/order")
+	@PostMapping(value = "/payment/paymentResult")
 	public String paymentResult(Model model
 			, Delivery delivery
 			, Order order
 			, @RequestParam("rewardNo") int[] rewardNoArr
 			, @RequestParam("rewardCount") int[] rewardCountArr) {
-		logger.info("/payment/order [POST]");
+		logger.info("/payment/paymentResult [POST]");
 		
 		//전달 받은 파라미터 확인
 		logger.info("rewardNo : {}", rewardNoArr);
@@ -116,6 +116,11 @@ public class PaymentController {
 		paymentService.addOrder(order, delivery, rewardNoArr, rewardCountArr);
 		
 		return "redirect:/payment/paymentResult";
+	}
+	
+	@RequestMapping(value = "/payment/test")
+	public void paymentTest() {
+		logger.info("/payment/test");
 	}
 	
 }
