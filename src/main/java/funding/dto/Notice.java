@@ -9,21 +9,18 @@ public class Notice {
 	private String content;
 	private String fileOrigin;
 	private String fileStorage;
-	private Date date;
+	private Date regDate;
 	@Override
 	public String toString() {
 		return "Notice [fileNo=" + fileNo + ", noticeNo=" + noticeNo + ", title=" + title + ", content=" + content
-				+ ", fileOrigin=" + fileOrigin + ", fileStorage=" + fileStorage + ", date=" + date + "]";
+				+ ", fileOrigin=" + fileOrigin + ", fileStorage=" + fileStorage + ", regDate=" + regDate + "]";
 	}
-	
 	public int getFileNo() {
 		return fileNo;
 	}
-
 	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
-
 	public int getNoticeNo() {
 		return noticeNo;
 	}
@@ -54,14 +51,12 @@ public class Notice {
 	public void setFileStorage(String fileStorage) {
 		this.fileStorage = fileStorage;
 	}
-	public Date getDate() {
-		return date;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	
 	
-	
-
 }

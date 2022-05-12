@@ -96,7 +96,7 @@ function noticeDownload(fileNo){
 <div style="height:20px;">
 	<div class="noticeTitle" >${notice.title}</div>
 
-	<div class="noticeDate" style="color :#ccc;">작성일자 : ${notice.date} | 작성자  : 관리자</div>
+	<div class="noticeDate" style="color :#ccc;">작성일자 : ${notice.regDate} | 작성자  : 관리자</div>
 </div>
 
 

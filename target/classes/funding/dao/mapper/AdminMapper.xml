@@ -4,6 +4,36 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="funding.dao.face.AdminDao">
+	<select id="selectByMemberDate" resultType="funding.dto.Chart">
+		select * from(SELECT to_char(sysdate-${selectDate}  + LEVEL,'YYYY-MM-DD') AS regDate FROM dual a CONNECT BY LEVEL &lt;= ${selectDate} ) A
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as rdate
+		, count(*) as cnt from member
+		where REG_DATE BETWEEN TO_CHAR(sysdate-${selectDate},'YYYY-MM-DD') and TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		) B
+		on A.regDate=B.rdate
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as buisness
+		, count(*) as buisnesscnt from member
+		where REG_DATE BETWEEN TO_CHAR(sysdate-${selectDate},'YYYY-MM-DD') and TO_CHAR(SYSDATE,'YYYY-MM-DD')
+        and grade =1
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		)C
+		on A.regDate=C.buisness
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as normal
+		, count(*) as normalcnt from member
+		where REG_DATE BETWEEN TO_CHAR(sysdate-${selectDate},'YYYY-MM-DD') and TO_CHAR(SYSDATE,'YYYY-MM-DD')
+        and grade =0
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		)D
+		on A.regDate=D.normal
+		order by regDate desc
+	</select>
 	
 	<select id="selectMemberAll" resultType="funding.dto.Member" parameterType="int">
 		select * from (
@@ -107,7 +137,7 @@
 	
 	<select id="selectByNotice" resultType="funding.dto.Notice">
 
-		select notice_no,title,content from notice
+		select notice_no,title,content,reg_date from notice
 		where notice_no = #{noticeNo} 
 	</select>
 	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile" parameterType="funding.dto.Notice">
@@ -300,6 +330,28 @@
 		GROUP BY qna_refer
 		HAVING COUNT(qna_refer) &lt; 2
 	</select>
+	
+	<select id="selectBymemberSeller" resultType="funding.dto.MemberSeller">
+		select * from member_seller
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectbyqnainfo" resultType="funding.dto.Qna">
+		select * from qna
+		where qna_no = #{qnaNo}
+	</select>
+	<update id="qnaUpdate" parameterType="funding.dto.Qna">
+		update qna set 
+		qna_title =#{qnaTitle}
+		,qna_content=#{qnaContent}
+		where qna_no = #{qnaNo}
+	
+	</update>
+	
+	<insert id="insertAlert" parameterType="funding.dto.Alert">
+		insert into alert(alert_no,member_no,alert_content,alert_read)
+		values(alert_seq.nextval,#{memberNo},#{alertContent},#{alertRead})
+	</insert>
 </mapper>
 
 

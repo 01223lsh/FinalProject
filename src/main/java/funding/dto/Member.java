@@ -1,5 +1,7 @@
 package funding.dto;
 
+import java.sql.Date;
+
 public class Member {
 	private int memberNo;
 	private String id;
@@ -9,10 +11,34 @@ public class Member {
 	private String nick;
 	private String phone;
 	private int grade;
+	private String NaverLogin;
+	private String KakaoLogin;
+	private Date regDate;
+	
+	
+	public String getNaverLogin() {
+		return NaverLogin;
+	}
+	public void setNaverLogin(String naverLogin) {
+		NaverLogin = naverLogin;
+	}
+	public String getKakaoLogin() {
+		return KakaoLogin;
+	}
+	public void setKakaoLogin(String kakaoLogin) {
+		KakaoLogin = kakaoLogin;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email
-				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + "]";
+				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", NaverLogin=" + NaverLogin
+				+ ", KakaoLogin=" + KakaoLogin + ", regDate=" + regDate + "]";
 	}
 	public int getMemberNo() {
 		return memberNo;

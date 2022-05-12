@@ -6,12 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
 
     <style>
         img {
@@ -26,9 +21,10 @@
         // 프로젝트 심사 요청 처리
         function updateProjectStep(projectStep) {
             const projectNo = '${project.projectNo}'
+            const projectTitle = '${project.projectTitle}'
             const memberNo = '${project.memberNo}'
             const message = $("textarea[name=message]").val()
-            const queryString = {projectNo: projectNo, memberNo: memberNo, projectStep: projectStep, message: message};
+            const queryString = {projectNo: projectNo, memberNo: memberNo, projectStep: projectStep, alertContent: message,projectTitle:projectTitle};
 
             console.log(queryString);
 
@@ -131,7 +127,7 @@
         <div class="row text-center">
             <button class="btn btn-primary" onclick="updateProjectStep(3)">승인</button>
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-approve">거절</button>
-            <button class="btn btn-success" onclick="approveProject()">목록으로</button>
+            <button class="btn btn-success" onclick="approveProject()">목록</button>
         </div>
     </div>
 </div>

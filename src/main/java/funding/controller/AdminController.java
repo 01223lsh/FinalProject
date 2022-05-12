@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -19,8 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import funding.dto.Alert;
 import funding.dto.Category;
+import funding.dto.Chart;
 import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
@@ -40,9 +41,37 @@ public class AdminController {
 	private ServletContext context;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	//관리자 페이지
-	@RequestMapping(value = "/admin/admin")
+	//관리자 페이지 - 통계
+	@RequestMapping(value = "/admin/main")
 	public void admin() {
+	}
+	@RequestMapping(value = "/admin/chart" , method= {RequestMethod.GET, RequestMethod.POST})
+	public void chart(Model model,Chart chart,String dayType) {
+		logger.info("sssssssssssssssssssss{}",chart);
+		logger.info("sssssssssssssssssssss{}",dayType);
+		if("".equals(dayType) && dayType ==null) {
+			
+			chart.setSelectDate(7);
+		}else {
+			chart.setSelectDate(Integer.valueOf(dayType));
+			
+		}
+		List<Chart> chartlist = adminService.selectByMemberDate(chart);
+		logger.info("{}",chartlist);
+		model.addAttribute("list",chartlist);
+		model.addAttribute("chart", chart);
+	}
+	//qna 수정
+	@RequestMapping(value = "/admin/qnaUpdate",method=RequestMethod.GET)
+	public void qnaUpdate(Model model,Qna qna) {
+		logger.info("aaaaaaaaaa{}",qna);
+		qna = adminService.selectbyqnainfo(qna);
+		model.addAttribute("qna",qna);
+	}
+	@RequestMapping(value = "/admin/qnaUpdate",method=RequestMethod.POST)
+	public void qnaUpdateWrite(Model model,Qna qna) {
+		logger.info("aaaaaaaaaa{}",qna);
+		 adminService.qnaUpdate(qna);
 	}
 	//회원관리
 	@RequestMapping(value = "/admin/member")
@@ -116,14 +145,16 @@ public class AdminController {
 	}
 	//회원 정보
 	@RequestMapping(value = "/admin/memberInfo", method = RequestMethod.GET)
-	public void memberInfo(Member member, Model model) {
+	public void memberInfo(Member member, Model model,MemberSeller memberSeller) {
 		//회원 정보 불러옴
 		member = adminService.selectBymemberNo(member);
+		memberSeller = adminService.selectBymemberSeller(member);
 		model.addAttribute("member", member);
+		model.addAttribute("memberSeller", memberSeller);
 	}
 
 	//멤버 페이지 - 페이징
-	@RequestMapping(value = "/layout/memberpaging")
+	@RequestMapping(value = "/layout/paging")
 	public String memberpaging(Paging paging
 			, String str
 			, int grade
@@ -285,15 +316,15 @@ public class AdminController {
 	// 프로젝트 심사 처리
 	@RequestMapping(value = "/admin/approveProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Map approveProject(Project project, @RequestParam(required = false) String message, Model model) {
+	public Map approveProject(Project project, Alert alert, Model model) {
 		logger.info("[/admin/approveProject][POST]");
 		logger.info("파라미터: projectNo: {}", project.getProjectNo());
 		logger.info("파라미터: memberNo: {}", project.getMemberNo());
 		logger.info("파라미터: projectStep: {}", project.getProjectStep());
-		logger.info("파라미터: message: {}", message);
+		logger.info("파라미터: message: {}", alert);
 
 		// 프로젝트 심사 처리
-		int result = adminService.updateProjectStep(project, message);
+		int result = adminService.updateProjectStep(project, alert);
 		logger.info("프로젝트 심사처리 결과: {}", result);
 
 		// View 전달 데이터 (JSON)

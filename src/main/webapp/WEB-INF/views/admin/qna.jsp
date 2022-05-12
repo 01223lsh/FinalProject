@@ -24,20 +24,7 @@ function complete(No){
 	})
 	
 }
-function qnaView(qnaNo){
-	console.log(qnaNo);
-	$.ajax({
-		type : "post"
-		,url : "/admin/qnaView?qnaNo="+qnaNo
-		,dataType :"html"
-		,success : function(res){
-			$("#resultLayout").html(res)
-		}
-		,error : function(){
-			console.log("qna view error")
-		}
-	})
-}
+
 
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
@@ -256,26 +243,25 @@ td {
 	
 	
 	<c:forEach items="${list }" var="qna">
-	<tr style=" height: 20px;">
+	<tr style=" height: 20px;" class="qnaView" onclick="qnaView(${qna.qnaNo})">
 		<td >${qna.qnaNo} </td>
 		<td style="text-align: left;">
-		<a onclick="qnaView(${qna.qnaNo })" style="text-decoration: none;">
+		<input type="hidden" value="${qna.qnaNo }" class="qnaNo">
 		<c:if test="${qna.qnaStep>0}">
 		<c:forEach begin="0" end="${qna.qnaStep}" >
 		&nbsp;&nbsp;
 		</c:forEach>
 		</c:if>
-		${qna.qnaTitle }</a>
+		${qna.qnaTitle }
 		<c:if test="${qna.qnaStep eq 0}">
-		<c:choose>
-			
-			<i class="fa-solid fa-volume-off"></i>
 		
-		</c:choose>
+			
+			<i class="fa-solid fa-volume-off" style="color:red"></i>
+		
+		
 		</c:if>
 		</td>
 		<td>${qna.nick } </td>
-<%-- 		<td>${qna.hit } </td> --%>
 		<td><fmt:formatDate value="${qna.qnaCreateDate }" pattern="yy-MM-dd HH:mm:ss"/>  </td>
 	</tr>	
 	</c:forEach>

@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 
 
 <script type="text/javascript">
-function noticeView(noticeNo){
+$(".noticeView").click(function(){
+	var noticeNo = $(".noticeNo").val();
+
 	$.ajax({
 		type : "post"
 		,url : "/admin/noticeView"
@@ -25,7 +27,7 @@ function noticeView(noticeNo){
 			console.log("notice view error")
 		}
 	})
-}
+})
 function noticeWrite(){
 	$.ajax({
 		type : "get"
@@ -174,11 +176,13 @@ $(document).ready(function(){
 	
 </tr>
 <c:forEach items="${list}" var="i">
-<tr>
+<tr class="noticeView">
 	<td>${i.noticeNo }</td>
-	<td><a onclick="noticeView(${i.noticeNo})">${i.title }</a></td>
+	<td>${i.title }
+	<input type="hidden" class="noticeNo" value="${i.noticeNo }"> 
+	</td>
 	<td>관리자</td>
-	<td>${i.date}</td>
+	<td>${i.regDate}</td>
 	
 </tr>
 
@@ -187,6 +191,7 @@ $(document).ready(function(){
 
 </table>
 <button onclick="noticeWrite()">작성</button>
+
 </body>
 </html>
 <%@ include file="../../layout/paging.jsp" %>

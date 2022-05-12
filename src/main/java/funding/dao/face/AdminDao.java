@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import funding.dto.Alert;
 import funding.dto.Category;
+import funding.dto.Chart;
 import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
@@ -254,6 +257,37 @@ public interface AdminDao {
 	 * @return 문의게시판 미답변 정보
 	 */
 	public List<Qna> selectQnaListStep();
+
+	/**
+	 *  member 넘버로 사업자 정보 가져오기
+	 * @param member 회원 정보
+	 * @return 사업자 정보
+	 */
+	public MemberSeller selectBymemberSeller(Member member);
+
+	/**
+	 * member Date 정보 불러옴
+	 * @param chart 
+	 * @return member Date
+	 */
+	public List<Chart> selectByMemberDate(Chart chart);
+	/**
+	 * qnano로 qna정보 불러옴
+	 * @param qna qna넘버
+	 * @return qna 정보
+	 */
+	public Qna selectbyqnainfo(Qna qna);
+	/**
+	 * qna 작성 정보 갱신
+	 * @param qna 문의글 내용
+	 */
+	public void qnaUpdate(Qna qna);
+
+	/**
+	 * 프로젝트 승인 및 거절
+	 * @param alert 알람 정보
+	 */
+	public void insertAlert(Alert alert);
 
 
 }

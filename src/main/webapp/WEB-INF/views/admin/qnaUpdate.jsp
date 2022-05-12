@@ -8,16 +8,18 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#btnQnaWrite").click(function(){
+	$("#btnQnaUpdate").click(function(){
+		
 		oEditors.getById["qnaContent"].exec("UPDATE_CONTENTS_FIELD", []);
 		$.ajax({
 			type : "post"
-			,url : "/admin/qnarewrite"
+			,url : "/admin/qnaUpdate"
 			,data :  {qnaContent:$("#qnaContent").val(),id:+"${id}",nick:"관리자",memberNo:"1",qnaNo:"+${param.qnaNo}",qnaTitle:$("#qnaTitle").val()}
 			,dataType : "html"  
 			,success : function(res){
-				console.log("성공??");
-				qnaManagement();
+				var qnaNo="${param.qnaNo}";
+				console.log(qnaNo+"qnaUpdate");
+				qnaView(qnaNo);
 
 				
 			},
@@ -44,7 +46,7 @@ textarea {
 
 
 
-<h1 style="text-align: center; margin-top: 30px;">문의 답변글 작성</h1>
+<h1 style="text-align: center; margin-top: 30px;">문의 답변글 수정</h1>
 <br>
 
 
@@ -72,13 +74,13 @@ textarea {
 
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-1">
-			<input type="text" id="qnaTitle" name="qnaTitle" class="form-control"  placeholder="제목을 입력하세요" value="ㄴ">
+			<input type="text" id="qnaTitle" name="qnaTitle" class="form-control"  placeholder="제목을 입력하세요" value="${qna.qnaTitle }">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-1">
-			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
+			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">${qna.qnaContent }</textarea>
 		</div>
 	</div>
 
@@ -87,7 +89,7 @@ textarea {
 	
 </form>
 <div style="text-align: center; margin-top: 50px; margin-bottom: 100px;" > 
-	<button id="btnQnaWrite" name="btnWrite" >작성</button>
+	<button id="btnQnaUpdate" name="btnWrite" >작성</button>
 	<button type="button" id="cancle" onclick="qnaView(${param.qnaNo})">취소</button>
 </div>
 

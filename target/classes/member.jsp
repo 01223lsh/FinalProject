@@ -9,9 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
 <script type="text/javascript"> 
+
 
 var str = "member";
 function grade(grade){
@@ -38,11 +37,29 @@ var endPage = ${paging.endPage};
 var cnt = ${cnt};
 
 var gradep = ${membergrade};
-
+$(".viewmember").click(function(){
+	const memberno = $(".viewmemberno").val();
+	$.ajax({
+		type : "get"
+		,url : "/admin/memberInfo"
+		,data : "memberNo="+memberno
+		,dataType : "html"
+		,success : function(res){
+			$("#resultLayout").html(res);
+			console.log("뷰 성공")
+		}
+		,error : function(){
+			console.log("뷰실패")
+		}
+		
+	})
+	
+})
 
 
 
 $(document).ready(function(){
+
 	$("#DisabledAllDelete").click(function(){
 		
 		if(confirm("복구가 불가능합니다.\n정말 삭제하시겠습니까?")){
@@ -106,8 +123,8 @@ $(document).ready(function(){
 				var con = $("#memberContent").val();
 				var cat = $("#memberCategory").val();
 				$.ajax({
-					type : "get"
-					,url : "/layout/memberpaging"
+					type : "post"
+					,url : "/layout/paging"
 					,data : "curPage="+i+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 					,dataType : "html"
 					,success : function(res){
@@ -125,8 +142,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+1+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -142,8 +159,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();	
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+ ${paging.startPage - paging.pageCount }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,success : function(res){
 				console.log("성공");
@@ -159,8 +176,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+${paging.startPage + paging.pageCount }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -176,8 +193,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+${paging.curPage + 1 }+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -193,8 +210,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+${paging.curPage - 1 } +"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -210,8 +227,8 @@ $(document).ready(function(){
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
 		$.ajax({
-			type : "get"
-			,url : "/layout/memberpaging"
+			type : "post"
+			,url : "/layout/paging"
 			,data : "curPage="+${paging.totalPage}+"&str="+str+"&grade="+gradep+"&content="+con+"&category="+cat
 			,dataType : "html"
 			,success : function(res){
@@ -223,8 +240,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-
 }) 
 
 </script>
@@ -330,9 +345,11 @@ $(document).ready(function(){
 </tr>
 
 	<c:forEach items="${list}" var="i">
-<tr>
+<tr class="viewmember">
 	<td>${i.memberNo }</td>
-	<td><a onclick="viewMember(${i.memberNo })">${i.id }</a></td>
+	<td><a  style="color : blue;">${i.id }</a>
+	<input type="hidden" class="viewmemberno" value="${i.memberNo}"/>
+	</td>
 	<td>${i.nick}</td>
 	<td>${i.name }</td>
 	<td>${i.email }</td>
@@ -356,4 +373,4 @@ $(document).ready(function(){
  total : ${total}
 </body>
 </html>
-<%@ include file="../../layout/memberpaging.jsp" %>
+<%@ include file="../../layout/paging.jsp" %>

@@ -1,35 +1,81 @@
+<%@ page import="java.util.*"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-function viewMember(memberno){
+<script type="text/javascript">
+// $(function() {
+// 	var dayType = $("#chartDate option:selected").val();
+// 	console.log(dayType)
+// 	$.ajax({
+// 		type : "get"
+// 		,url : "/admin/chart"
+// 		,data : "dayType="+dayType
+// 		,dataType : "html"
+// 		,success : function(res){
+// 			$("#resultLayout").html(res)
+// 		},error : function(){
+// 			console.log("차트 변경 실패");
+// 		}
+		
+// 	})
+	
+// });
+function chartDate(){
+	var selectDate = document.getElementById("#chartDate");
+	var dayType = $("#chartDate option:selected").val();
+	var chartCheck=1;
+	if(dayType==7){
+		chartCheck=0;
+	}
+	if(dayType==0){
+		dayType=7
+	}
+	console.log(dayType)
 	$.ajax({
 		type : "get"
-		,url : "/admin/memberInfo"
-		,data : "memberNo="+memberno
+		,url : "/admin/chart"
+		,data : "dayType="+dayType+"&chartCheck="+chartCheck
 		,dataType : "html"
 		,success : function(res){
-			$("#resultLayout").html(res);
-			console.log("뷰 성공")
-		}
-		,error : function(){
-			console.log("뷰실패")
+			$("#resultLayout").html(res)
+		},error : function(){
+			console.log("차트 변경 실패");
 		}
 		
 	})
-	
+}
+function qnaView(qnaNo){
+
+	console.log(qnaNo);
+	$.ajax({
+		type : "post"
+		,url : "/admin/qnaView?qnaNo="+qnaNo
+		,dataType :"html"
+		,success : function(res){
+			$("#resultLayout").html(res)
+		}
+		,error : function(){
+			console.log("qna view error")
+		}
+	})
 }
 function memberManagement(){
 	$.ajax({
@@ -38,7 +84,22 @@ function memberManagement(){
 		,data : "grade=4"+"&str=member"
 		,dataType : "html"
 		,success : function(res){
-			console.log("회원관리 뷰 성공")
+			$("#resultLayout").html(res)
+			
+		}
+		,error : function(){
+			console.log("회원관리 뷰 실패")
+		}
+	})
+
+}
+function chartManagement(){
+	$.ajax({
+		type : "get"
+		,url : "/admin/chart"
+		,data : "dayType=7&chartCheck=0"
+		,dataType : "html"
+		,success : function(res){
 			$("#resultLayout").html(res)
 			
 		}
@@ -118,8 +179,20 @@ function qnaManagement(searchtest){
 
 
 
+
+
 </script>
 <style>
+#btn_chart_excel_download {
+    border: 0;
+    background-color: #007f1b;
+    color: white; 
+    font-weight:bold; 
+    padding: 5px; 
+	border-radius: 10px;
+	float : right;
+}
+
 nav{ 
     width:200px; 
     background-color:#eee; 
@@ -160,7 +233,12 @@ h1{ font-size:18px;  padding:20px; }
     width:80%;
     box-sizing: border-box;
 }
+#chart-line{
+	width: 700px;
+	height: 700px;
+}
 </style>
+
 
 </head>
 <body>
@@ -180,13 +258,17 @@ h1{ font-size:18px;  padding:20px; }
         <li><a onclick="approveProject()">프로젝트 승인</a></li>
         <li><a onclick="noticeManagement()">공지사항</a></li>
         <li><a onclick="qnaManagement()">문의 게시판</a></li>
+        <li><a onclick="chartManagement()">통계</a></li>
     </ul>
  
 </nav>
 </div>
 <div id="Layout">
-<div id="resultLayout"><h3>관리자님 안녕하세요.</h3></div>
+	<div id="resultLayout">
+		
+	</div>
+	</div>
 </div>
-</div>
+
 </body>
 </html>

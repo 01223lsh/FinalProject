@@ -24,6 +24,21 @@ function qnaRewrite(qnaNo){
 		}
 	})
 }
+function qnaUpdate(qnaNo){
+	$.ajax({
+		type : "get"
+		,url : "/admin/qnaUpdate"
+		,data : "qnaNo="+qnaNo
+		,dataType : "html"
+		,success : function(res){
+			$("#resultLayout").html(res)
+			
+		},error : function(){
+			console.log("qna 삭제 실패");
+		}
+	})
+	
+}
 
 function qnaDelete(qnaNo){
 	if(confirm("복구가 불가능합니다.\n정말 삭제하시겠습니까?")){
@@ -70,6 +85,7 @@ function qnaDelete(qnaNo){
 		</c:if>
 	</c:forEach>
 <c:if test="${qna.qnaStep>0 }">
+<button class="pull-right" style="margin-right:10px;" onclick="qnaUpdate(${qna.qnaNo})">수정</button>
 <button class="pull-right" style="margin-right:10px;" onclick="qnaDelete(${qna.qnaNo})">삭제</button>
 </c:if>
 

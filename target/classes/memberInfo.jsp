@@ -35,7 +35,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
+<h3>회원정보</h3>
+<hr>
 <table class="table table-striped table-hover table-condensed">
 <tr>
 	<td>회원 번호</td>
@@ -85,10 +86,27 @@ $(document).ready(function(){
 			</c:when>		
 		</c:choose>
 	</select>
-	
 	</td>
 </tr>
 </table>
+<c:if test="${member.grade eq 1 }">
+<h3>사업자 정보</h3>
+<hr>
+<table class="table table-striped table-hover table-condensed">
+<tr>
+	<td>은행 명</td> <td>${memberSeller.bankName}</td>
+</tr>
+<tr>
+	<td>계좌 번호</td> <td>${memberSeller.accountNumber}</td>
+</tr>
+<tr>
+	<td>예금주 명</td> <td>${memberSeller.accountName}</td>
+</tr>
+<tr>
+	<td>창작자 소개</td> <td>${memberSeller.sellerInfo}</td>
+</tr>
+</table>
+</c:if>
 
 <button id="memberupdate">수정</button> <button onclick="memberManagement()">취소</button>
 

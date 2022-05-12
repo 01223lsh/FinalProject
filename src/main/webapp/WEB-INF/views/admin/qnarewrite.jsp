@@ -49,6 +49,7 @@ textarea {
 
 
 
+
 <div id="wrtie"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px;" >
 
 <form method="post" class="form-horizontal" id="qnaWriteForm">

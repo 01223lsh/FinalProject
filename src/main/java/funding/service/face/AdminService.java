@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import funding.dto.Alert;
 import funding.dto.Category;
+import funding.dto.Chart;
 import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
@@ -159,7 +162,7 @@ public interface AdminService {
 
 	// create by young
 	// 프로젝트 심사 처리
-	public int updateProjectStep(Project project, String message);
+	public int updateProjectStep(Project project, Alert alert);
 
 	// create by young
 	// 프로젝트 상세 내용 가져오기
@@ -207,6 +210,31 @@ public interface AdminService {
 	 * @return 문의사항 정보
 	 */
 	public List<Qna> Qnalist();
+
+	/**
+	 *  member 넘버로 사업자 정보 가져오기
+	 * @param member 회원 정보
+	 * @return 사업자 정보
+	 */
+	public MemberSeller selectBymemberSeller(Member member);
+
+	/**
+	 * member Date 정보 불러옴
+	 * @param chart 
+	 * @return member Date
+	 */
+	public List<Chart> selectByMemberDate(Chart chart);
+
+	/**
+	 * qnano로 qna정보 불러옴
+	 * @param qna qna넘버
+	 * @return qna 정보
+	 */
+	public Qna selectbyqnainfo(Qna qna);
+	/**
+	 * qna 작성 정보 갱신
+	 */
+	public void qnaUpdate(Qna qna);
 
 
 

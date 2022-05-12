@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 <script type="text/javascript">
 var projectStep =${step};
 function categorya(categoryNo){
@@ -223,6 +224,52 @@ $(document).ready(function(){
     box-sizing: border-box;
 
 }
+ .section-img {
+    padding: 3px;
+  }
+  .section-img img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .section-body {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-around;*/
+    min-height: 220px;
+  }
+  [class^="body"] {
+    margin: 5px 0;
+  }
+  .section-body .body-title {
+    margin: 5px 0;
+    font-size: 14px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-intro {
+    font-size: 12px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-progress {
+    flex-grow: 1;
+  }
+  .section-body .body-progress progress {
+    width: 100%;
+  }
+  .section-body .body-etc {
+    flex-grow: 1;
+  }
+  .section-body .body-etc span {
+    font-size: 12px;
+  }
+  .section-body .body-etc div:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .section-body .body-etc div:first-child > span:first-child{
+    color: red;
+  }
 
 #center{
 	margin:0 auto; 
@@ -307,11 +354,50 @@ $(document).ready(function(){
 <!-- </div> -->
 
 
-<div class="container text-center" style="display: flex; justify-content: center;">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="min-width : 800px; max-width : 800px; float:center; ">
+<!-- <div class="container text-center" style="display: flex; justify-content: center;"> -->
+<!--     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="min-width : 800px; max-width : 800px; float:center; "> -->
 
-		<c:forEach var="p" items="${project}">
-      <div class="col" style="max-width: 250px;">
+<%-- 		<c:forEach var="p" items="${project}"> --%>
+<!--       <div class="col" style="max-width: 250px;"> -->
+<!--         <div class="card shadow-sm"> -->
+<%--           <img src="${p.projectImage }" style="min-height: 250px;"> --%>
+<!--           <div class="card-body"> -->
+<%--             <strong>${p.projectTitle}</strong> --%>
+<%--             <c:if test="${p.projectStep eq 4}"> --%>
+<!--               <span id="project-status">마감</span> -->
+<%--             </c:if> --%>
+<%--             <p class="card-text">${p.projectIntro}</p> --%>
+<!--             <div class="row fs-6"> -->
+<!--               <div class="col d-flex"> -->
+<!--                 <span style="margin-right: 10px;"> -->
+<%-- <%--                 	<fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
+<%--                 	<fmt:formatNumber type="percent" value="${p.fundPrice/p.projectPrice}"  /> --%>
+<!--                 </span> -->
+<!--                 <span> -->
+<%-- 	                <fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/> --%>
+<!--                 </span> -->
+<!--               </div> -->
+<!--               <div class="col text-end"> -->
+<!--                 <span> -->
+<%--                 <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/> --%>
+<!--                 </span> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<%--       </c:forEach> --%>
+
+<!--     </div> -->
+<!--   </div> -->
+ <div class="container" style="display: flex;">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto; display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+    justify-content: space-between;">
+
+      <c:forEach var="p" items="${project}">
+      <div class="col" style="min-width: 250px;" style="margin:0px auto;">
         <div class="card shadow-sm">
           <img src="${p.projectImage }" style="min-height: 250px;">
           <div class="card-body">
@@ -320,30 +406,29 @@ $(document).ready(function(){
               <span id="project-status">마감</span>
             </c:if>
             <p class="card-text">${p.projectIntro}</p>
+            <progress value="${p.sum}" max="${p.projectPrice}"></progress>
             <div class="row fs-6">
               <div class="col d-flex">
-                <span style="margin-right: 10px;">
-<%--                 	<fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
-                	<fmt:formatNumber type="percent" value="${p.fundPrice/p.projectPrice}"  />
-                </span>
+              <span style="margin-right: 10px;">
+                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
+              </span>
                 <span>
-	                <fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/>
-                </span>
+                  
+              </span>
               </div>
               <div class="col text-end">
-                <span>
-                <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/>
-                </span>
+              <span>
+              <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/>
+              </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       </c:forEach>
-
-    </div>
-  </div>
+      </div>
+      </div>
 </body>
   
 </html>
-<%@ include file="../../layout/paging.jsp" %>
+<%@ include file="../../layout/projectpaging.jsp" %>

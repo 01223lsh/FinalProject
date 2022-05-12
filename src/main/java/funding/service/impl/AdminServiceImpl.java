@@ -15,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import funding.dao.face.AdminDao;
+import funding.dto.Alert;
 import funding.dto.Category;
+import funding.dto.Chart;
 import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
@@ -34,6 +37,10 @@ public class AdminServiceImpl implements AdminService {
 	ServletContext context;
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
+	@Override
+	public List<Chart> selectByMemberDate(Chart chart) {
+		return adminDao.selectByMemberDate(chart);
+	}
 	@Override
 	public List<Member> selectMemberAll(Paging paging) {
 		return adminDao.selectMemberAll(paging);
@@ -238,14 +245,17 @@ public class AdminServiceImpl implements AdminService {
 	// 프로젝트 진행상황 업데이트(4 - 진행, 3 - 승인 거절}
 	@Override
 	@Transactional  // 이후 메시지 insert 코드 추가시 트랜잭션 처리 필요
-	public int updateProjectStep(Project project, String message) {
+	public int updateProjectStep(Project project, Alert alert) {
 		// 프로젝트 상황 업데이트
 		int result = adminDao.updateProjectStep(project);
-
+		
 		if (project.getProjectStep() == 3) {
 			// 프로젝트 상태 변경이 승인거절인 경우 메시지 보내는 로직 추가
-			// alert 테이블에 insert 하는 코드
+			alert.setAlertContent("\""+project.getProjectTitle()+"\"의 프로젝트가 승인 되었습니다.") ;
+		}else if(project.getProjectStep() == 2) {
+			alert.setAlertContent("\""+project.getProjectTitle()+"\"의 프로젝트가 거절 되었습니다. (사유 :"+alert.getAlertContent()+")") ;
 		}
+		adminDao.insertAlert(alert);
 
 		if (result == 1) {
 			logger.info("프로젝트 상태 업데이트 성공");
@@ -297,6 +307,18 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateQnaAll(qna);
 		adminDao.insertQnare(qna);
 		
+	}
+	@Override
+	public MemberSeller selectBymemberSeller(Member member) {
+		return adminDao.selectBymemberSeller(member);
+	}
+	@Override
+	public Qna selectbyqnainfo(Qna qna) {
+		return adminDao.selectbyqnainfo(qna);
+	}
+	@Override
+	public void qnaUpdate(Qna qna) {
+		 adminDao.qnaUpdate(qna);
 	}
 	
 }
