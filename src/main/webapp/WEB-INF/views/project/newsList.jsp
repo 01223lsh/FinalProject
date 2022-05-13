@@ -3,19 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <script type="text/javascript">
 
-	$(document).ready(function() {
-		var newsNo = "";
-		$(".newsContent").on("click",function(){
-			var newsNo = $(this).attr('value');
-			console.log(newsNo)
+
+function news(no){
+$.ajax({
+	url:"/project/news/view",
+	type:"post",
+	data:{newsNo:no},
+	dataType: "html",
+	success:function(res){
+		console.log("성공")
 		
+		$("#content3_1").html(res);
+	},
+	error:function(){
+		console.log("통신실패");
+	}
+})
+}
+
+
+
+		
+		$("#newsWrite").on("click",function(){
 			
 			$.ajax({
-				url:"/project/news/view",
-				type:"post",
-				data:{newsNo:newsNo},
+				url:"/project/news/write",
+				type:"get",
+				data:{projectNo:${projectNo}},
 				dataType: "html",
 				success:function(res){
 					console.log("성공")
@@ -26,20 +43,42 @@
         			console.log("통신실패");
         		}
 			})
+			
 		})
-	})
-	</script>
+		
 
+	</script>
+	
+<style>
+#news1 a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	}
+
+#newsWrite{
+	float: right;
+}
+
+</style>
 
 <div id="news1">
-최근소식
+<b>- 최근소식</b>
+<button id="newsWrite" class="btn btn-primary">작성하기</button>
+<br>
 <hr>
+
 <c:forEach var="news" items="${newsList }">
-<a href="#" class="newsContent" value="${news.newsNo }">
+<a class="newsContent" onclick="news(${news.newsNo})">
+
 <div>
-<p>${news.newsTitle }</p>
-<p><fmt:formatDate value="${news.newsDate }" pattern="yyyy.MM.dd"/></p>
+<b>${news.newsTitle }</b>
+<br>
+<small><fmt:formatDate value="${news.newsDate }" pattern="yyyy.MM.dd"/></small>
 </div>
+
 </a>
+<hr>
 </c:forEach>
+
 </div>

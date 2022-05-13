@@ -68,6 +68,7 @@
 				url:"/project/content",
 				type:"post",
 				data:{projectNo:${project.projectNo }},
+				dataType: "html",
 				success:function(res){
 					console.log("성공")
 			
@@ -75,7 +76,7 @@
 			$("#plan").css("color", "gray");
 			$("#news").css("color", "gray");
 			$("#comment").css("color", "gray");
-			$("#content3_1").html(res.projectContent);
+			$("#content3_1").html(res);
 				},
 				error:function(){
         			console.log("통신실패");
@@ -217,30 +218,10 @@ div {
 	transition: .6s;
 }
 
-.btn-outline-secondary {
-	width: 110px;
-	height: 50px;
-	border-color: lightgray;
-}
 
-.btn-outline-secondary:hover {
-	background-color: #fff !important;
-	color: #000 !important;
-}
-
-.btn-outline-secondary>img {
-	width: 35px;
-	height: 35px;
-	margin-top: -2px;
-	float: left;
-}
-
-.btn-outline-secondary>p {
-	margin-top: 5px;
-}
 
 /*content2*/
-#content2>ul {
+ #content2>ul { 
 	list-style-type: none;
 }
 
@@ -252,6 +233,8 @@ div {
 #content2>ul>li>a {
 	text-decoration: none;
 	color: lightslategray;
+	cursor: pointer;
+
 }
 
 /*content3*/
@@ -260,7 +243,7 @@ div {
 }
 
 #content3_1,#content3_2 {
-	width: 480px;
+	width: 560px;
 	margin-left: 50px;
 	text-align: left;
 }
@@ -274,13 +257,13 @@ div {
 
 /*reward*/
 #reward {
-	width: 360px;
+	width: 300px;
 	margin-left: 50px;
 	text-align: left;
 	float: left;
 }
 
-#reward>div {
+#reward div {
 	background-color: rgb(250, 250, 250);
 	box-shadow: 4px 4px 4px rgb(206, 204, 204);
 }
@@ -298,9 +281,7 @@ div {
 	cursor: pointer;
 }
 
-#reward>div:hover {
-	background-color: rgba(250, 250, 250, 0.726);
-}
+
 
 .reward_1 * {
 	padding-bottom: 10px;
@@ -331,11 +312,11 @@ div {
 
 			<div id="content1_2">
 				<div id="content1_2_1">
-					남은 기간<br>
-					<b style="font-size: 25px;">${d }</b>일 남음
+					<b>남은 기간</b><br>
+					<b style="font-size: 25px;">${d }</b><small>일 남음</small>
 				</div>
 				<br> <br><br>
-				<div id="content1_2_4">모인 금액</div><br>
+				<div id="content1_2_4"><b>모인 금액</b></div><br>
 				<div class="progress" id="progress">
 					
 					<div class="progress-bar"
@@ -343,13 +324,13 @@ div {
 				</div>
 
 				<div id="content1_2_2" style="margin-top: 5px;">
-					<b style="font-size: 25px;">${Math.round(project.fundPrice div project.projectPrice *100)} </b>% 달성
+					<b style="font-size: 25px;">${Math.round(project.fundPrice div project.projectPrice *100)} </b><small>% 달성</small>
 				</div>
 				<br> <br>
 
 				<div id="content1_2_3">
 					<b style="font-size: 25px;"><fmt:formatNumber type="number"
-							value="${project.fundPrice }" /></b>원 펀딩
+							value="${project.fundPrice }" /></b><small>원 펀딩</small>
 				</div>
 				<br> <br> <a href="" type="button" class="btn btn-success"
 					id="btn-success1">펀딩하기</a> <br> <br>
@@ -377,11 +358,11 @@ div {
 		<hr>
 		<div id="content2">
 			<ul>
-				<li><a id="story" href="#" style="color: rgb(116, 152, 107);"><b>소개
+				<li><a id="story" style="color: rgb(116, 152, 107);"><b>소개
 					</b></a></li>
-				<li><a id="plan" href="#"><b>계획</b></a></li>
-				<li><a id="news" href="#"><b>최근소식</b></a></li>
-				<li><a id="comment" href="#"><b>댓글</b></a></li>
+				<li><a id="plan"><b>계획</b></a></li>
+				<li><a id="news" ><b>최근소식</b></a></li>
+				<li><a id="comment"><b>댓글</b></a></li>
 				
 			</ul>
 		</div>
@@ -394,22 +375,39 @@ div {
 
 		<div id="content3">
 			<div id="content3_1">
+				<b>-프로젝트 소개</b>
+				<br><br>
 				${project.projectContent }
 			</div>
 			
 
 			<div id="reward">
-<%-- 				<c:forEach var="r" items="${ list }"> --%>
+			
 					<div id="reward_1" class="reward_1">
 
 						<a href="pay.me?rno=<%--리워드번호 --%>"> <b
-							style="font-size: 17px;">(금액)원 펀딩 </b><br> <br>
-							<span>설명글</span>
+							style="font-size: 17px;">1000원</b><br> <br>
+							<span>선물 없이 후원하기</span>
 						</a>
 
 					</div>
 					<br>
-<%-- 				</c:forEach> --%>
+				<c:forEach var="reward" items="${rewardList }">
+				
+				<a href="/#?rewardNo=${reward.rewardNo }">
+					<div id="reward_1" class="reward_1">
+						
+						
+						 <b style="font-size: 17px;">${reward.rewardPrice }원 </b><br> <br>
+							<span>${reward.rewardName }</span><br>
+							<small>${reward.rewardIntro }</small>
+							
+						
+
+					</div>
+					</a>
+					<br>
+				</c:forEach>
 			</div>
 
 		</div>

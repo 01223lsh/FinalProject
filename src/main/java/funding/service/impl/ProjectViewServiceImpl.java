@@ -9,6 +9,7 @@ import funding.dao.face.ProjectViewDao;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
+import funding.dto.Reward;
 import funding.service.face.ProjectViewService;
 
 @Service
@@ -54,4 +55,35 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 		return projectViewDao.selectNewsView(news);
 	}
 
+	@Override
+	public void writeNews(ProjectNews news) {
+		
+		projectViewDao.insertNews(news);
+		
+	}
+	
+	@Override
+	public void deleteNews(ProjectNews news) {
+		
+		projectViewDao.deleteNews(news);
+	}
+	
+	@Override
+	public void writeComment(ProjectComment comment) {
+		
+		projectViewDao.insertComment(comment);
+	}
+	
+	@Override
+	public void deleteComment(ProjectComment comment) {
+		
+		projectViewDao.deleteComment(comment);
+		
+	}
+	
+	@Override
+	public List<Reward> getReward(Project project) {
+		
+		return projectViewDao.selectRewardList(project);
+	}
 }

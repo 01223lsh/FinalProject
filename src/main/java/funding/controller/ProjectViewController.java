@@ -9,12 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
+import funding.dto.Reward;
 import funding.service.face.ProjectViewService;
 
 @Controller
@@ -36,6 +39,11 @@ public class ProjectViewController {
 		project = projectViewService.getProject(project);
 		
 		model.addAttribute("project", project);
+		
+		List<Reward> rewardList = projectViewService.getReward(project);
+		
+		model.addAttribute("rewardList", rewardList);
+		
 		
 		//남은 일 계산
 		int d = 0;
@@ -80,6 +88,7 @@ public class ProjectViewController {
 		List<ProjectNews> newsList = projectViewService.getNewsList(projectNo);
 		
 		model.addAttribute("newsList", newsList);
+		model.addAttribute("projectNo", projectNo);
 		
 		return "project/newsList";
 		
@@ -91,19 +100,21 @@ public class ProjectViewController {
 		List<ProjectComment> commentList = projectViewService.getCommentList(projectNo);
 		
 		model.addAttribute("commentList", commentList);
+		model.addAttribute("projectNo", projectNo);
 		
 		return "project/commentList";
 	}
 	
-	@ResponseBody
+	
 	@RequestMapping(value = "/project/content")
-	public Project projectContent(int projectNo) {
+	public String projectContent(int projectNo,Model model) {
 		
 		Project p = projectViewService.getContent(projectNo);
-		return p;
+		model.addAttribute("p",p);
+		return "project/content";
 	}
 	
-	@RequestMapping(value = "project/news/view")
+	@RequestMapping(value = "/project/news/view")
 	public String projectNewsView(ProjectNews news, Model model) {
 		
 		news = projectViewService.getNewsView(news);
@@ -111,6 +122,73 @@ public class ProjectViewController {
 		model.addAttribute("news", news);
 		
 		return "project/newsView";
+	}
+	
+	
+	@GetMapping("/project/news/write")
+	public String write(int projectNo,Model model) {
+		logger.info("{}",projectNo);
+		model.addAttribute("projectNo", projectNo);
+		return "project/newsWrite";
+	}
+	
+	@PostMapping("/project/news/write")
+	public String writeProcess(ProjectNews news,Model model) {
+		logger.info("/news/write");
+		logger.info("{}",news);
+		
+		
+		projectViewService.writeNews(news);
+		
+		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
+		
+		model.addAttribute("newsList", newsList);
+		return "project/newsList";
+		
+	}
+	
+	@RequestMapping(value = "/project/news/delete")
+	public String projectNewsDelete(Model model, ProjectNews news) {
+		
+		logger.info("{}",news);
+		projectViewService.deleteNews(news);
+		
+		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("projectNo", news.getProjectNo());
+		return "project/newsList";
+	}
+	
+	
+	@RequestMapping(value = "/project/comment/write")
+	public String projectCommentWrite(Model model, ProjectComment comment) {
+		
+		logger.info("/project/comment/write");
+		logger.info("{}",comment);
+		
+		projectViewService.writeComment(comment);
+		
+		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
+		
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("projectNo", comment.getProjectNo());
+		
+		return "project/commentList";
+	}
+	
+	
+	@RequestMapping(value = "/project/comment/delete")
+	public String projectCommentDelete(Model model, ProjectComment comment) {
+		
+		projectViewService.deleteComment(comment);
+		
+		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
+		
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("projectNo", comment.getProjectNo());
+		
+		return "project/commentList";
 	}
 	
 }

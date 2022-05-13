@@ -5,6 +5,7 @@ import java.util.List;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
+import funding.dto.Reward;
 
 public interface ProjectViewDao {
 
@@ -19,5 +20,15 @@ public interface ProjectViewDao {
 	public Project selectContent(int projectNo);
 
 	public ProjectNews selectNewsView(ProjectNews news);
+
+	public void insertNews(ProjectNews news);
+
+	public void deleteNews(ProjectNews news);
+
+	public void insertComment(ProjectComment comment);
+
+	public void deleteComment(ProjectComment comment);
+
+	public List<Reward> selectRewardList(Project project);
 
 }
