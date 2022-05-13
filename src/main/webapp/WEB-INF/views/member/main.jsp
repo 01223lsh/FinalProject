@@ -74,14 +74,23 @@
 			width: 70px;
 		}
 		
+		.container {
+	 		flex-direction: row-reverse; 
+		}
+		
 		</style>
 
 
 </head>
 <body>
 <ul style="list-style-type: none;">
-<li><a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a></li>
+<li><a href="/member/main"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a></li>
  </ul>
+ <div class="container">
+	<div class="item"><button>helloflex</button></div>
+	<div class="item"><button>helloflex</button></div>
+	<div class="item"><button>helloflex</button></div>
+</div>
 
 <!-- <ul class="nav justify-content-center">
   <li class="nav-item">
@@ -153,17 +162,29 @@
         </li>
       </ul>
       <div>
-      <c:choose>
+		<c:if test="${empty login  }">
+			<button><a href="#">회원가입</a></button> | <button><a href="#">로그인</a></button>
+		</c:if>
+		<c:if test="${login eq true && session.memberId != admin }">
+			<button><a href="#">로그아웃</a></button> | <button><a href="/chat/room/enter/1">채팅</a></button> |
+		</c:if>
+		<c:if test="${login eq true && session.memberId eq admin }" >
+			<button><a href="#">관리자 페이지</a></button> | <button><a href="/chat/room/enter/1">채팅</a></button>
+		</c:if>
+		<%-- <c:if test="${session.memberId eq admin}">
+			<a href="#">회원가입</a> | <a href="#">로그인</a> | <a href="#">관리자 페이지</a>
+		</c:if> --%>
+    <%--   <c:choose>
 		<c:when test="${empty login }">
 			<a href="#">회원가입</a> | <a href="#">로그인</a> | <a href="#">관리자 페이지</a>
 		</c:when>
 		<c:when test="${login eq true }">
-			<a href="#">로그아웃</a> | <a href="/chat/room">채팅</a>
+			<a href="#">로그아웃</a> | <a href="/chat/room/enter/1">채팅</a>
 		</c:when>
 		<c:when test="${empty login }">
 			<a href="#">회원가입</a> | <a href="#">로그인</a> | <a href="#">관리자 페이지</a>
 		</c:when>
-	   </c:choose>
+	   </c:choose> --%>
 	   </div>
       
       <form class="d-flex">

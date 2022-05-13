@@ -6,13 +6,13 @@
 
 <mapper namespace="funding.dao.face.ChatDao">
  
-    <select id="selectChatRoomByroomId" parameterType="string" resultType="funding.dto.ChatRoom">
+    <select id="selectChatRoomByroomId" parameterType="int" resultType="funding.dto.ChatRoom">
         SELECT * FROM chat_room 
-        WHERE chatroom_id = #{chatroomId} 
+        WHERE member_no = #{memberNo} 
     </select>
     
-    <insert id="insertChatRoom" parameterType="funding.dto.ChatRoom">
-        INSERT INTO chat_room VALUES(SEQ_CHATROOM_ID.NEXTVAL, #{memberNo}, #{chatroomName})
+    <insert id="insertChatRoom" parameterType="int">
+        INSERT INTO chat_room VALUES(SEQ_CHATROOM_ID.NEXTVAL, #{memberNo} )
     </insert>
     
 </mapper>

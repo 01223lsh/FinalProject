@@ -15,20 +15,17 @@ public class ChatRoomRepository { // 채팅방을 생성하고 정보를 조회�
 	private ChatDao chatDao;
 
 	// 채팅방 생성
-	@Override
-	public ChatRoom createChatRoom(String name) {
-		ChatRoom chatRoom = ChatRoom.create(name);
-		chatDao.insertChatRoom(chatRoom);
+	public ChatRoom createChatRoom(int memberno) {
+		// ChatRoom chatRoom = ChatRoom.create(name); //네임이 필요가 없으니깐
 		// chatDao.put(chatRoom.getchatroomId(), chatRoom);
-		log.info("생성된 채팅방: {}", chatRoom);
-		return chatRoom;
+		// log.info("생성된 채팅방: {}", chatRoom);
+		return chatDao.insertChatRoom(memberno);
 	}
 
 	// 채팅방 하나 불러오기
-	@Override
-	public ChatRoom findRoomById(String roomId) {
-		log.info("조회된 채팅방: {}", chatDao.selectChatRoomByroomId(roomId));
-		return chatDao.selectChatRoomByroomId(roomId);
+	public ChatRoom findRoomById(int memberno) {
+		log.info("조회된 채팅방: {}", chatDao.selectChatRoomByroomId(memberno));
+		return chatDao.selectChatRoomByroomId(memberno);
 	}
 
 //	public ChatRoom createChatRoom(ChatRoom chatRoom) {

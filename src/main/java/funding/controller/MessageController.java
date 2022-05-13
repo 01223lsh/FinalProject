@@ -36,12 +36,15 @@ public class MessageController {
 			// , @DestinationVariable String destination
 			, Principal principal) {
 		// 메시지 타입이 ENTER 인 경우 환영 메시지 출력
-		if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
-			message.setMessage(message.getSender() + "님이 입장하였습니다.");
-		}
-		if (ChatMessage.MessageType.EXIT.equals(message.getType())) {
-			message.setMessage(message.getSender() + "님이 퇴장하셨습니다.");
-		}
+		System.out.println("컨트롤러 도착 테스트");
+		System.out.println("메시지 객체 확인: " + message);
+//		if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
+//			message.setMessage(message.getSender() + "님이 입장하였습니다.");
+//		}
+//		if (ChatMessage.MessageType.EXIT.equals(message.getType())) {
+//			message.setMessage(message.getSender() + "님이 퇴장하셨습니다.");
+//		}
+		log.info("test : {}", message);
 		// "/topic/chat/room/{roomId}" 를 구독하고 있는 클라이언트에게 메시지 전달
 		sendingOperations.convertAndSend("/topic/chat/room/" + message.getChatroomId(), message);
 		log.info("구독 클라이언트에게 메시지 전달");
