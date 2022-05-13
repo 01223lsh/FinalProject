@@ -314,7 +314,7 @@ function setCondition() {
         <div class="card shadow-sm card-section">
           <!-- 카드 이미지 -->
           <div class="section-img">
-            <img src="${p.projectImage }" style="min-height: 250px;">
+            <img src="${p.projectImage}" style="min-height: 250px;">
           </div>
           <!-- 카드 몸통 -->
           <div class="card-body section-body">
