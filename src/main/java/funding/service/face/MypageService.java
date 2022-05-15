@@ -1,7 +1,14 @@
 package funding.service.face;
 
+import java.util.HashMap;
+import java.util.List;
+
+import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Project;
+import funding.util.Paging;
+import funding.util.PagingFundingList;
 
 public interface MypageService {
 
@@ -88,6 +95,129 @@ public interface MypageService {
 	 * @param memberSeller
 	 */
 	public void sellerinfoUpdate(MemberSeller memberSeller);
+
+	/**
+	 * 참여중인 편딩 페이징
+	 * @param pagingParam
+	 * @return
+	 */
+	public PagingFundingList getjoinPaging(PagingFundingList pagingParam, int memberNo);
+
+	/**
+	 * 참여중인 펀딩 리스트
+	 * @param paging
+	 * @return
+	 */
+	public List<JoinFunding> joinlist(PagingFundingList paging);
+
+	/**
+	 * 참여중인 펀드 상세정보
+	 * @param memberNo
+	 * @return
+	 */
+	public List<HashMap<String, Object>> joinfundview(JoinFunding joinFunding);
+
+	/**
+	 * 참여중인 펀드 상세정보 - 판매자 이름 가져오기
+	 * @param sellername
+	 * @return
+	 */
+	public String getseller(int projectNo);
+	
+	/**
+	 * 제작한 펀딩 페이징
+	 * @param pagingParam
+	 * @param memberNo
+	 * @return
+	 */
+	public PagingFundingList getmakePaging(PagingFundingList pagingParam, int memberNo);
+	
+	/**
+	 * 제작한 펀딩 리스트
+	 * @param paging
+	 * @return
+	 */
+	public List<JoinFunding> makelist(PagingFundingList paging);
+
+	/**
+	 * 멤버 번호 따라 제작한 펀드 정보 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public Project makefundview(Project project);
+	
+	/**
+	 * 카테고리 이름 가져오기
+	 * @param view
+	 * @return
+	 */
+	public String getcategory(Project view);
+
+	/**
+	 * 프로젝트 번호로 해당 프젝의 리워드 가져오기
+	 * @param project
+	 * @return
+	 */
+	public List<HashMap<String, Object>> makefundreward(Project view);
+
+	/**
+	 * 참여한 모든 프로젝트 갯수 알아오기
+	 * @return
+	 */
+	public int getTotalCnt(int memberNo);
+
+	/**
+	 * 참여한 프로젝트 갯수(프로젝트 종료)
+	 * @param memberNo
+	 * @return
+	 */
+	public int getTotalendCnt(int memberNo);
+	
+	/**
+	 * 작성한 qna 갯수 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int getQnaCnt(int memberNo);
+
+	/**
+	 * 작성중인 펀딩 갯수 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int getMakefund0(int memberNo);
+
+	/**
+	 * 제작한 펀딩 갯수 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int getMakefund1(int memberNo);
+
+	public int getMakefund2(int memberNo);
+	
+	public int getMakefund3(int memberNo);
+	
+	public int getMakefund4(int memberNo);
+	
+	/**
+	 * 최신 qna 리스트 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public List<HashMap<String, Object>> getqnalist(int memberNo);
+
+
+
+
+
+
+
+	
+
+
+
+
 
 
 

@@ -21,11 +21,34 @@ td {
 	height: 40px;
 }
 
-input #search {
+input  {
 	
 	border-radius: 1px;
+	height: 30px;
+	width : 300px;
+	border: 1px solid black;
+	margin-right: 20px;
 
 }
+
+
+button {
+	border-radius: 3px;
+	border: 1px solid black;
+}
+
+select {
+	
+	height: 30px;
+	width : 80px;
+	margin-right: 10px;
+	
+}
+
+ a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: none;}
+
 </style>
 
 
@@ -33,11 +56,11 @@ input #search {
 
 <div id="qnalist" style="text-align: center;" >
 
-<h1>고객센터 목록페이지</h1>
-<hr>
+<h1>고객센터</h1>
+<!-- <hr> -->
 
 
-<table style="margin: auto; width: 100%;  border-radius: 10px;" >
+<table style="margin: auto; width: 100%;  border-radius: 10px; margin-top: 50px;" >
 
 	<tr style="border-bottom: 2px #DDD solid;">
 		<th style="width: 5%;">글번호</th>
@@ -59,13 +82,17 @@ input #search {
 	</c:forEach>
 
 </table><br>
-
+<a href="/qna/qnawrite" ><button class="pull-left">글쓰기</button></a>
+<div class="pull-right">
+<span >총 게시글 수 : ${paging.totalCount }</span>
+</div>
+<br><br>
 <div><!-- searchform -->
 <form action="/qna/list" method="get">
 
 <div>
-	<select name="select" id="select" style="border-radius: 1px;">
-		<option value="nick" id="nick" <c:if test="${select eq 'nick' }">selected</c:if>>작성자</option>
+	<select name="select" id="select" style="border-radius: 1px; ">
+		<option value="nick" id="nick" style="display: none;" <c:if test="${select eq 'nick' }">selected</c:if>>작성자</option>
 		<option value="qnaTitle" id="qnaTitle" <c:if test="${select eq 'qnaTitle' }">selected</c:if>>제목</option>
 		<option value="qnaContent" id="qnaContent" <c:if test="${select eq 'qnaContent' }">selected</c:if>>내용</option>
 	</select>
@@ -81,9 +108,7 @@ input #search {
 
 </form>
 </div><!-- searchform -->
-
-<a href="/qna/qnawrite" ><button class="pull-left">글쓰기</button></a>
-<span class="pull-right">총 게시글 수 : ${paging.totalCount }</span>
+<br>
 
 </div><!-- main -->
 </div><!-- container -->

@@ -27,6 +27,8 @@ public interface QnaDao {
 
 	public void insertQnare(Qna qna);
 
+	public int selectCntQnare(Qna viewqna);
+
 	
 	
 	

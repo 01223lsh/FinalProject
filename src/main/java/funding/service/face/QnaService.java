@@ -21,4 +21,6 @@ public interface QnaService {
 
 	public void qnarewrite(Qna qna);
 
+	public int qnaReCnt(Qna viewqna);
+
 }

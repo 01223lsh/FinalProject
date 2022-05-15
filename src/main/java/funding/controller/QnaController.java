@@ -55,11 +55,18 @@ public class QnaController {
 	public void view(Qna viewqna, Model model) {
 		
 		logger.info("/qna/view [GET]");
+		logger.info("viewqna의 값을 찾자 : {}", viewqna);
 		
 		//상세보기(게시글-Board)
 		Qna qnaview = qnaService.qnaview(viewqna);
 		
+		logger.info("상세보기 게시글 확인하기 : {}", qnaview);
+		
+		//refer >2 일 경우, 답글 작성 불가하게 "답글 작성" 버튼 숨기기
+		int reCnt = qnaService.qnaReCnt(viewqna);
+		
 		model.addAttribute("qna", qnaview);
+		model.addAttribute("reCnt", reCnt);
 		
 	}
 	
@@ -148,6 +155,10 @@ public class QnaController {
 		return "redirect:/qna/list";
 		
 	}
+	
+	
+	
+	
 	
 	
 }

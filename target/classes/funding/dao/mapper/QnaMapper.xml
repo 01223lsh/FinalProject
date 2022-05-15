@@ -110,6 +110,16 @@
     	WHERE qna_no = #{qnaNo}
     </delete>
 	
+	<select id="selectCntQnare" parameterType="funding.dto.Qna" resultType="int">
+		select count(*)
+		from qna
+		where qna_refer = #{qnaNo}
+	</select>
+	
+	
+	
+	
+	
 	
     
     </mapper>

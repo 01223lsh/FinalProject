@@ -96,14 +96,39 @@ $(document).ready(function() {
 	      }
 
 		
-		var Pchk = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+
+
+		var Namechk = /^[가-힣a-z]{2,10}$/; 
+		if(Namechk.test(name.value)==false){
+			alert("이름은 2~10자의 한글, 영어로만 입력 가능합니다.");
+			return false;
+		} 
 		
+		
+		var Nickchk = /^[가-힣a-z0-9]{3,8}$/; 
+		if(Nickchk.test(nick.value)==false){
+			alert("닉네임은 3~8자의 한글, 영어, 숫자로만 입력 가능합니다.");
+			return false;
+		} 
+		
+		
+		var Phonechk = /^\d{3}-\d{3,4}-\d{4}$/;
+		if(Phonechk.test(phone.value)==false){
+			alert("핸드폰 번호를 잘못 입력 했습니다. 형식을 확인해주세요.");
+			return false;
+		} 
+		
+		var Echk = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if(Echk.test(email.value)==false){
+			alert("이메일을 잘못 입력 했습니다. 형식을 확인해주세요.");
+			return false;
+		} 
+		
+		var Pchk = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
 		if(Pchk.test(pw.value)==false){
 			alert("비밀번호는 8자 이상, 20자 이하이어야 하며, 숫자/영어/특수문자를 모두 포함해야 합니다.");
 			return false;
 		} 
-
-		
 		
 		
 	    if( !duplCheck ) {
@@ -111,9 +136,11 @@ $(document).ready(function() {
 	           return false;
 	        }
 	
-
+	    alert("수정이 완료되었습니다.");
 	    
 		$("form").submit();
+		
+		
       
 	});
 
@@ -163,6 +190,23 @@ input {
 	text-align: center;
 }
 
+.title {
+	margin-left: 30%;
+	width: 120px;  
+	background-color: #E0ECF8; 
+	border-radius: 10px; 
+	text-align: center; 
+	display: inline-block;
+}
+
+.ans {
+	width: 250px; 
+	display: inline-block;
+	margin-left: 50px;
+	
+}
+
+
 </style>
 
 
@@ -175,95 +219,84 @@ input {
 
 <div id="infoform">
 
-<form action="/mypage/infoupdate" method="post" class="form-horizontal">
+<form action="/mypage/infoupdate" method="post" >
 	
 	<input type="hidden" name="memberNo" id="memberNo" value="${info.memberNo }" >
 	
-	<div class="row" style="margin-right: 18%; height : 500px;">
-	<div>
-		<div style="width: 120px;  background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div class="box"  style="height : 500px; " >
+	<div style="margin-bottom: 30px;">
+		<div class="title" >
 			<label for="id" style="padding-top: 4px;">아이디</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="id" id="id" value="${info.id }"  readonly="readonly">	
 		</div>
 	</div>
-	<br><br><br>
 	
-<!-- 	<div class="row"> -->
-	<div>
-		<div style="width: 120px; background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div style="margin-bottom: 30px;">
+		<div class="title" >			
 			<label for="name" style="padding-top: 4px;">이름</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="name" id="name" value="${info.name }" >	
 		</div>
 	</div>
-	<br><br><br>
-<!-- 	<div class="row"> -->
 
-	<div>
-		<div style="width: 120px;  background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+
+	<div style="margin-bottom: 15px;">
+		<div class="title" >	
 			<label for="nick" style="padding-top: 4px;">닉네임</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="nick" id="nick" value="${info.nick }" >
-			
-<!-- 			<br>	 -->
 		</div>
-<!-- 				<span id="dupMsg" style="position: relative" class="col-md-10"></span> -->
-				<span id="dupMsg" style="margin-left: 100px;"></span>
-		<div>
-			<button type="button" id="dupBtn" name="dupBtn" class="col-md-offset-11" style="display: block; ">중복확인</button>		
+		<div style="display: inline-block;">
+			<button type="button" id="dupBtn" name="dupBtn">중복확인</button>		
+		</div>
+		<div style="display: inline-block; margin-left: 50%;">
+				<span id="dupMsg" ></span>
 		</div>
 	</div>
 	
 	
-<!-- 	<div class="row"> -->
-	<div>
-		<div style="width: 120px;  background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div style="margin-bottom: 30px;">
+		<div class="title" >	
 			<label for="pw" style="padding-top: 4px;">비밀번호</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="pw" id="pw" >	
 		</div>
 	</div>
-	<br><br><br>
-<!-- 	<div class="row"> -->
 
-	<div>
-		<div style="width: 120px; background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div style="margin-bottom: 30px;">
+		<div class="title" >	
 			<label for="pwChk" style="padding-top: 4px;">비밀번호 확인</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="pwChk" id="pwChk" >	
 		</div>
 	</div>
-	<br><br><br>
 	
-<!-- 	<div class="row"> -->
-	<div>
-		<div style="width: 120px;  background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div style="margin-bottom: 30px;">
+		<div class="title" >	
 			<label for="email" style="padding-top: 4px;">이메일</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="email" name="email" id="email" value="${info.email }">	
 		</div>
 	</div>
 	
-	<br><br><br>
-<!-- 	<div class="row"> -->
 
-	<div>
-		<div style="width: 120px;  background-color: #E0ECF8; border-radius: 10px; text-align: center;" class="col-md-1 col-md-offset-4">
+	<div style="margin-bottom: 30px;">
+		<div class="title" >	
 			<label for="phone" style="padding-top: 4px;">전화번호</label>
 		</div>
-		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
+		<div class = "ans">
 			<input type="text" name="phone" id="phone" value="${info.phone }">	
 		</div>
 	</div>
 	
-	</div><!--row  -->
+	</div><!--box  -->
 	
 
 
@@ -271,7 +304,7 @@ input {
 
 
 
-<!-- <br><br><br><br><br> -->
+<br><br><br>
 <div style="text-align: center;">
 <button type="button" onclick="location.href='./infoview'" style="margin-right: 15px;">취소</button>
 <button id="update" onclick="location.href='./infoupdate'" style="margin-right: 15px;">수정</button>

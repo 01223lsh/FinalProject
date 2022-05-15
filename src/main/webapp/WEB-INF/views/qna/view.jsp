@@ -10,6 +10,10 @@
 $(document).ready(function() {
 	if("${grade}"==2  && "${memberNo == qna.memberNo}"){
 		$("#admindelete").hide();
+		
+// 		if("${reCnt}" > 1){
+// 			$("#reply").hide();
+// 		}
 	};
 	
 
@@ -20,7 +24,7 @@ $(document).ready(function() {
 
 
 
-<h1 style="text-align: center;">고객센터 상세페이지</h1>
+<!-- <h1 style="text-align: center;">고객센터</h1> -->
 <br>
 
 <div id="view"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px;">
@@ -47,8 +51,8 @@ $(document).ready(function() {
 
 </c:if>
 
-<c:if test="${grade == 2 }">
-<a href="/qna/qnarewrite?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;">답변작성</button></a>
+<c:if test="${grade == 2 && reCnt ==1}">
+<a href="/qna/qnarewrite?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;" id="reply" >답변작성</button></a>
 <a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px;" >삭제</button></a>
 </c:if>
 

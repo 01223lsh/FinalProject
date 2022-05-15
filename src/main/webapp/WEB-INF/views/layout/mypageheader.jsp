@@ -115,11 +115,12 @@ a:vistied {
 
 <div class="menu">
 <ul>
+	<li><a class="m" href="/mypage/mypagemain" id="mypagemain">마이페이지</a></li>
 	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo">회원 정보확인/수정</a></li>
 	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none;">판매 정보확인/수정</a></li>
-	<li><a class="m" href="#" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
-	<li><a class="m" href="#" id="makefunding" style="display: none;">제작한 펀딩</a></li>
-	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
+<!-- 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li> -->
+	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
+	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none;">제작한 펀딩</a></li>
 </ul>
 </div> <!-- menu -->
 </div><!-- left -->

@@ -80,5 +80,254 @@
     	WHERE member_no = #{memberNo}
     </update>
     
+    <select id="selectCntAll" resultType="int" parameterType="funding.util.PagingFundingList">
+
+		select count(*) cnt 
+		FROM(
+		select DISTINCT o.order_no, o.order_date, p.project_title, p.project_no, p.project_step, o.order_status, c.category_name
+		from reward r, reward_order ro, order_tb o, project p, category c
+		where p.project_no = r.project_no and
+		    r.reward_no = ro.reward_no and
+		    ro.order_no = o.order_no and
+		   c.category_no = p.category_no
+		    
+		   and o.member_no = #{memberNo}
+		   
+		   	<choose>
+	      		<when test="select != null and select.equals('projectStep')">
+	    			 AND project_step LIKE '%'|| #{search} ||'%'
+	      		</when>
+	      		<when test="select != null and select.equals('projectTitle')">
+	      		 	AND project_title LIKE '%'|| #{search} ||'%'
+	      		</when>
+			</choose>
+		
+		order by o.order_date desc
+		) A
+
+    </select>
+    	
     
+
+    
+    <select id="selectList" resultType="funding.dto.JoinFunding" parameterType="funding.util.PagingFundingList">
+		SELECT * FROM (
+		    SELECT rownum rnum, list.* FROM (
+		        select DISTINCT o.order_no, o.order_date, p.project_title, p.project_no, p.project_step, o.order_status, c.category_name
+		        from reward r, reward_order ro, order_tb o, project p, category c
+		        where p.project_no = r.project_no and
+		            r.reward_no = ro.reward_no and
+		            ro.order_no = o.order_no and
+		           c.category_no = p.category_no
+		            
+		           and o.member_no = #{memberNo}
+		           
+			<choose>
+	      		<when test="select != null and select.equals('projectStep')">
+	    			 AND project_step LIKE '%'|| #{search} ||'%'
+	      		</when>
+	      		<when test="select != null and select.equals('projectTitle')">
+	      		 	AND project_title LIKE '%'|| #{search} ||'%'
+	      		</when>
+			</choose>
+		           
+		        order by o.order_date desc
+		    ) list
+		) R
+		WHERE rnum between #{startNo } and #{endNo } 
+    </select>
+    
+    
+    
+    
+    
+    <select id="selectjoinfundBymemberNo" parameterType="funding.dto.JoinFunding" resultType="hashmap">
+    
+		select  *
+		from reward r, reward_order ro, order_tb o, project p, category c, delivery d
+		where p.project_no = r.project_no and
+		    r.reward_no = ro.reward_no and
+		    ro.order_no = o.order_no and
+		   c.category_no = p.category_no and
+		   d.order_no = o.order_no
+		    
+		   and o.member_no = #{memberNo}
+		   and o.order_no = #{orderNo}
+    </select>
+    
+    <select id="selectSellerNameByProjectNo" parameterType="int" resultType="String">
+	    select m.name
+		from project p, member m
+		where p.member_no = m.member_no
+		and p.project_no = #{projectNo}
+    
+    </select>
+    
+    <select id="selectCntAllMake" resultType="int" parameterType="funding.util.PagingFundingList">
+    	SELECT count(*) cnt
+		FROM project
+		where 1=1
+		and member_no = #{memberNo}
+		<choose>
+      		<when test="select != null and select.equals('projectStep')">
+    			 AND project_step LIKE '%'|| #{search} ||'%'
+      		</when>
+      		<when test="select != null and select.equals('projectTitle')">
+      		 	AND project_title LIKE '%'|| #{search} ||'%'
+      		</when>
+		</choose>
+		
+		
+    </select>
+    
+    <select id="selectListMAke" resultType="funding.dto.JoinFunding" parameterType="funding.util.PagingFundingList">
+	   SELECT * FROM (
+	   SELECT rownum rnum, list.* FROM (
+	       select 
+	        p.PROJECT_NO, p.MEMBER_NO, p.CATEGORY_NO, p.PROJECT_TITLE , p.PROJECT_INTRO, p.BUDGET_PLAN ,p.SCHEDULE_PLAN ,p.PROJECT_IMAGE ,
+	        p.PROJECT_PRICE, p.OPEN_DATE, p.CLOSE_DATE ,p.DELIVERY_DATE ,p.PROJECT_CONTENT ,p.FUND_PRICE ,p.PROJECT_STEP ,
+	        c.category_name
+	        from project p, category c
+	       where 
+	          c.category_no = p.category_no
+	            
+	          and p.member_no = ${memberNo}
+	          
+			<choose>
+	      		<when test="select != null and select.equals('projectStep')">
+	    			 AND project_step LIKE '%'|| #{search} ||'%'
+	      		</when>
+	      		<when test="select != null and select.equals('projectTitle')">
+	      		 	AND project_title LIKE '%'|| #{search} ||'%'
+	      		</when>
+			</choose>
+	       order by p.project_no desc
+	    ) list
+	) R
+	WHERE rnum between #{startNo } and #{endNo }
+    </select>
+    
+    <select id="selectProjectBymemberNo" resultType="funding.dto.Project" parameterType="funding.dto.Project">
+	    select 
+	    PROJECT_NO, MEMBER_NO, CATEGORY_NO, PROJECT_TITLE , PROJECT_INTRO, BUDGET_PLAN ,SCHEDULE_PLAN ,PROJECT_IMAGE ,
+	    PROJECT_PRICE, OPEN_DATE, CLOSE_DATE ,DELIVERY_DATE ,PROJECT_CONTENT ,FUND_PRICE ,PROJECT_STEP
+		from project
+		where project_no = #{projectNo}
+    </select>
+
+	<select id="selectCategoryByprojectNo" parameterType="funding.dto.Project" resultType="String">
+		select 
+	    c.category_name
+		from category c, project p
+		where c.category_no = p.category_no
+	    and p.project_no = #{projectNo}
+	</select>
+	
+	<select id="selectRewardByprojectNo" parameterType="funding.dto.Project" resultType="hashmap">
+		select REWARD_NO, PROJECT_NO,REWARD_PRICE,REWARD_AMOUNT,REWARD_NAME,REWARD_INTRO,REWARD_STATE
+		from reward r
+		where project_no = #{projectNo}
+	</select>
+	
+	<select id="selectCntJoinPJ" resultType="int" parameterType="int">
+	
+		select count(*) cnt 
+		FROM(
+		select DISTINCT o.order_no, o.order_date, p.project_title, p.project_no, p.project_step, o.order_status, c.category_name
+		from reward r, reward_order ro, order_tb o, project p, category c
+		where p.project_no = r.project_no and
+		    r.reward_no = ro.reward_no and
+		    ro.order_no = o.order_no and
+		   c.category_no = p.category_no
+	
+		   and o.member_no = #{memberNo}
+			and p.project_step = 3
+		) A
+	
+	</select>
+	
+	<select id="selectCntJoinEndPJ" resultType="int" parameterType="int">
+	
+		select count(*) cnt 
+		FROM(
+		select DISTINCT o.order_no, o.order_date, p.project_title, p.project_no, p.project_step, o.order_status, c.category_name
+		from reward r, reward_order ro, order_tb o, project p, category c
+		where p.project_no = r.project_no and
+		    r.reward_no = ro.reward_no and
+		    ro.order_no = o.order_no and
+		   c.category_no = p.category_no
+		    
+		   and o.member_no = #{memberNo}
+			and p.project_step = 4
+		) A
+	
+	</select>
+	
+	
+	<select id="selectCntQna" resultType="int" parameterType="int">
+		select count(*)
+		from qna
+		where member_no = #{memberNo}
+	</select>
+	
+	
+	<select id="selectCntMake0" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 0
+	
+	</select>
+	
+	<select id="selectCntMake1" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 1
+	
+	</select>
+	
+	<select id="selectCntMake2" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 2
+	
+	</select>
+	
+	<select id="selectCntMake3" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 3
+	
+	</select>
+	
+	<select id="selectCntMake4" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 4
+	
+	</select>
+	
+	<select id="selectQnaList" parameterType="int" resultType="hashmap">
+		SELECT * FROM (
+		    SELECT rownum rnum, list.* FROM (
+		        select qna_title, qna_create_date, qna_no, member_no, qna_refer
+		        from qna
+		        where 
+		            member_no = ${memberNo}
+		        order by qna_no desc
+		    ) list
+		) R
+		WHERE rnum BETWEEN 1 AND 5
+	
+	
+	</select>
+	
+
+
+	
+	
     </mapper>

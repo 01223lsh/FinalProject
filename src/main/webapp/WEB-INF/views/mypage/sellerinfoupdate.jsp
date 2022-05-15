@@ -11,6 +11,46 @@
 
 $(document).ready(function() {
 	$("#update").click(function() {
+		
+		
+		if($("#bankName").val().length==0){
+	        alert("은행명을 입력해주세요.");
+	        $("#bankName").focus();
+	        return false;
+	      }
+		
+		var bnchk = /^[가-힣]{4,5}$/;
+		if(bnchk.test(bankName.value)==false){
+			alert("은행명을 잘못 입력 했습니다.");
+			return false;
+		} 
+		
+		
+		if($("#accountNumber").val().length==0){
+	        alert("계좌번호를 입력해주세요.");
+	        $("#accountNumber").focus();
+	        return false;
+	      }
+		
+		var accchk = /^[0-9]{10,30}$/;
+		if(accchk.test(accountNumber.value)==false){
+			alert("계좌번호를 잘못 입력 했습니다.");
+			return false;
+		} 
+		
+		if($("#accountName").val().length==0){
+	        alert("예금주를 입력해주세요.");
+	        $("#accountName").focus();
+	        return false;
+	      }
+		
+		var acnchk =/^[0-9가-힣a-zA-Z]{2,10}$/;
+		if(acnchk.test(accountName.value)==false){
+			alert("예금주를 잘못 입력 했습니다.");
+			return false;
+		} 
+		
+		 alert("수정이 완료되었습니다.");
 		$("form").submit();
 	})
 })

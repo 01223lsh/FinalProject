@@ -114,7 +114,10 @@ public class QnaServiceImpl implements QnaService{
 
 	}
 	
-	
+	@Override
+	public int qnaReCnt(Qna viewqna) {
+		return qnaDao.selectCntQnare(viewqna);
+	}
 	
 	
 	

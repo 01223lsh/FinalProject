@@ -1,7 +1,14 @@
 package funding.dao.face;
 
+import java.util.HashMap;
+import java.util.List;
+
+import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Project;
+import funding.util.Paging;
+import funding.util.PagingFundingList;
 
 public interface MypageDao {
 
@@ -87,6 +94,126 @@ public interface MypageDao {
 	 * @param memberSeller
 	 */
 	public void updateSellerByMemberNo(MemberSeller memberSeller);
+
+	/**
+	 * 참여중인 펀딩 페이징(총 개수)
+	 * @param pagingParam
+	 * @return
+	 */
+	public int selectCntAll(PagingFundingList pagingParam);
+
+	/**
+	 * 참여중인 펀딩 리스트
+	 * @param paging
+	 * @return
+	 */
+	public List<JoinFunding> selectList(PagingFundingList paging);
+
+	/**
+	 * 참여중인 펀드 상세정보 죄다 불러오기
+	 * @param memberNo
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectjoinfundBymemberNo(JoinFunding joinFunding);
+
+	/**
+	 * 참여중인 펀드 정보의 프로젝트 셀러 찾아오기
+	 * @param sellername - 해시맵에 있던 프로젝트 번호
+	 * @return
+	 */
+	public String selectSellerNameByProjectNo(int projectNo);
+	
+	/**
+	 * 제작한 펀딩 페이지(총 개수)
+	 * @param pagingParam
+	 * @return
+	 */
+	public int selectCntAllMake(PagingFundingList pagingParam);
+
+	/**
+	 * 제작한 펀딩 리스트
+	 * @param paging
+	 * @return
+	 */
+	public List<JoinFunding> selectListMAke(PagingFundingList paging);
+
+	/**
+	 * 제작한 펀딩 정보 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public Project selectProjectBymemberNo(Project project);
+	
+	/**
+	 * 카테고리 골라오기
+	 * @param view
+	 * @return
+	 */
+	public String selectCategoryByprojectNo(Project view);
+
+	/**
+	 * 프로젝트 번호로 리워드 정보 가져오기
+	 * @param project
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectRewardByprojectNo(Project view);
+
+	/**
+	 * 참여한 프로젝트 갯수 세기(진행중인 프로젝트)
+	 * @return
+	 */
+	public int selectCntJoinPJ(int memberNo);
+
+	/**
+	 * 참여한 프로젝트 갯수 세기(종료된 프로젝트)
+	 * @return
+	 */
+	public int selectCntJoinEndPJ(int memberNo);
+	
+	/**
+	 * 작성한 qna 갯수 세기
+	 * @param memberNo
+	 * @return
+	 */
+	public int selectCntQna(int memberNo);
+
+	/**
+	 * 작성중인 펀딩 갯수 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int selectCntMake0(int memberNo);
+
+	/**
+	 * 제작한 펀딩 갯수 가져오기
+	 * @param memberNo
+	 * @return
+	 */
+	public int selectCntMake1(int memberNo);
+
+	public int selectCntMake2(int memberNo);
+	
+	public int selectCntMake3(int memberNo);
+	
+	public int selectCntMake4(int memberNo);
+	
+	
+	/**
+	 * 최신 문의사항 리스트 5개 뽑기
+	 * @param memberNo
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectQnaList(int memberNo);
+
+
+
+
+
+
+	
+
+
+	
 
 	
 }
