@@ -38,66 +38,89 @@ var sock = new SockJS("/ws/chat");
 var ws = Stomp.over(sock);
 var reconnect = 0;
 // 테스트
-function subTest() {
-    ws.subscribe("/queue/user-" + "${loginId}" , function(message) {
-        var recv = JSON.parse(message.body);
-        recvMessage(recv);
-    })
-   /*  ws.subscribe("/user/${loginId}/queue/data", function(message) {
-        var recv = JSON.parse(message.body);
-        recvMessage(recv);
-    }) */
-    // ws.subscribe('/user/topic/data', function (message) {
-    //     $('.' + user).text(JSON.parse(message.body).time);
-    // })
-};
+// function subTest() {
+//     ws.subscribe("/queue/user-" + "${loginId}" , function(message) {
+//         var recv = JSON.parse(message.body);
+//         recvMessage(recv);
+//     })
+//    /*  ws.subscribe("/user/${loginId}/queue/data", function(message) {
+//         var recv = JSON.parse(message.body);
+//         recvMessage(recv);
+//     }) */
+//     // ws.subscribe('/user/topic/data', function (message) {
+//     //     $('.' + user).text(JSON.parse(message.body).time);
+//     // })
+// };
 // 테스트
-function test() {
-    const message = $("#chat-message").val();
-    ws.send("/app/message/to-target", {}, JSON.stringify({
-        type:'TALK'
-        , roomId: '${room.chatroomId}'
-        , sender: '${loginId}'
-        , message: message
-        , targetUser: "test11"})  // 대상 유저 하드코딩
-    );
-}
+// function test() {
+//     const message = $("#chat-message").val();
+//     ws.send("/app/message/to-target", {}, JSON.stringify({
+//         type:'TALK'
+//         , roomId: '${room.chatroomId}'
+//         , sender: '${loginId}'
+//         , message: message
+//         , targetUser: "test11"})  // 대상 유저 하드코딩
+//     );
+// }
 // 보내는 메시지
 function sendMessage(message) {
     //const message = $("#chat-message").val();
     // sender 세션 아이디값으로 임시로 정해놓음
-      ws.send("/app/chat/message", {}, JSON.stringify({type:'TALK', chatroomId: '${room.chatroomId}', sender: '${sessionId}', message: message}));
-    recvMessage(message);  
+      ws.send("/app/chat/message", {}, JSON.stringify({type:'TALK', chatroomId: '${room.chatroomId}', sender: '${sessionScope.nick}', message: message}));
+//     recvMessage(message);  
+   
+      
+	
+
+
 }
 
 // 받는 메시지
 function recvMessage(recv) {
-    console.log(recv)
+   // debugger;
+	console.log(recv)
     console.log("test문자 :" + recv.message)
-    
-    var myid = "${sessionId}"
-    
+    const result = $("#chat-result");
+    const li = $("<li></li>");
+    var myid = "${sessionScope.Id}";
+    const messageContainer = $("<div></div>");
+    const messageHeaderDiv = $("<div></div>");
+    const messageDiv = $("<div></div>");
     var myidDiv = $("<div></div>");
+//     var div = $("<div></div>");
+//     var message = $(".test");
     
-    myidDiv.text(recv.myid);
-    myidDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "background": "beige"});
-    
-    
-    
-    var message = $(".test")
-    
-     var div = $("<div></div>")
-    div.text(recv.message)
-    if(myid != recv.sender) {
- 		div.css("color", "red")   
+    myidDiv.text(recv.sender);
+    messageDiv.text(recv.message);
+    messageHeaderDiv.append(myidDiv);
+    messageHeaderDiv.addClass("d-flex justify-content-between")
+    messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "margin" : "10px", "background": "#d8f1f5"});
+    messageContainer.append(messageHeaderDiv);
+    messageContainer.append(messageDiv);
+    messageContainer.css({"width": "200px", "align-self": "flex-start"})
+    li.addClass(" d-flex flex-column");
+    if (recv.sender == '${sessionScope.nick}') {
+        messageDiv.css("background", "#dceaf9")
+        messageContainer.css("align-self", "flex-end")
     }
+    li.append(messageContainer)
+    result.append(li)
+//  	const chatBox = document.getElementById("#chat");
+//     // clientHeight(보여지는 영역) = scrollHeight(전체 영역) - scrollTop(숨겨진 영역)
+//     // 숨겨진 영역 높이를 전체 높이 만큼 쭉 밀어서 스크롤 맨 밑에 오도록 설정
+//     chatBox.scrollTop = chatBox.scrollHeight;
     
- 	var messageDiv = $("<div></div>");
+    
+   /*  if(myid != recv.sender) {
+//  		div.css("color", "red")   
+    } */
+    
+ 	/* var messageDiv = $("<div></div>");
     
  	messageDiv.text(recv.messageDiv);
  	messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "background": "beige"});
-  
-    message.append(div)
+   */
+//     message.append(div)
     
     
     
@@ -174,7 +197,7 @@ function connect() {
             var recv = JSON.parse(message.body);
             recvMessage(recv);
         });
-        ws.send("/app/chat/message", {}, JSON.stringify({type:'ENTER', chatroomId: '${room.chatroomId}', sender: '${loginId}'}));
+        ws.send("/app/chat/message", {}, JSON.stringify({type:'ENTER', chatroomId: '${room.chatroomId}', sender: '${sessoinScope.nick}'}));
     }, function(error) {
         if(reconnect++ <= 5) {
             setTimeout(function() {
@@ -317,7 +340,7 @@ $(function(){
 .chat_wrap .header { font-size: 14px; padding: 15px 0; background: #182bf9; color: white; text-align: center;  }
  
 .chat_wrap .chat { padding-bottom: 80px; }
-.chat_wrap .chat ul { width: 100%; list-style: none; }
+.chat_wrap .chat ul { width: 100%; list-style: none; padding: 10px;}
 .chat_wrap .chat ul li { width: 100%; }
 .chat_wrap .chat ul li.left { text-align: left; }
 .chat_wrap .chat ul li.right { text-align: right;}
@@ -330,7 +353,7 @@ $(function(){
 .chat_wrap .input-div > textarea { width: 100%; height: 80px; border: none; padding: 10px; resize: none;
 
 }
- 
+
 .format { display: none; }
 
 
@@ -345,11 +368,12 @@ $(function(){
     <div class="header">
         CHAT
     </div>
-    <div class="test">
+<!--     <div class="test"> -->
     	
-    </div>
+<!--     </div> -->
     <div class="chat">
         <ul class="chat-scroll">
+     	   <li class="d-flex flex-column" id="chat-result"></li>
             <!-- 동적 생성 -->
         </ul>
     </div>

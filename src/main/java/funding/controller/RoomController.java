@@ -46,7 +46,7 @@ public class RoomController {
 	}
 
 	// 특정 채팅방 조회
-	@GetMapping("/room/{roomId}")
+	@GetMapping("/room/{memberNo}")
 	@ResponseBody
 	public ChatRoom roomInfo(@PathVariable int memberNo) {
 		log.info("[/chat/room/{}][GET]", memberNo);
