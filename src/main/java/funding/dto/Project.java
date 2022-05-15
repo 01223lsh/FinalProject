@@ -19,7 +19,7 @@ public class Project {
 	private int fundPrice;
 	private int projectStep;
 	private int sum;
-	
+	private int rnum;
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
@@ -27,7 +27,15 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ ", sum=" + sum + "]";
+				+ ", sum=" + sum + ", rnum=" + rnum + "]";
+	}
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getProjectNo() {

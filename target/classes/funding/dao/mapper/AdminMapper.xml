@@ -10,6 +10,7 @@
 		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as rdate
 		, count(*) as cnt from member
 		where REG_DATE BETWEEN TO_CHAR(sysdate-${selectDate},'YYYY-MM-DD') and TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		and grade between 0 and 1
 		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
 		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
 		) B
@@ -32,7 +33,7 @@
 		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
 		)D
 		on A.regDate=D.normal
-		order by regDate desc
+		order by regDate
 	</select>
 	
 	<select id="selectMemberAll" resultType="funding.dto.Member" parameterType="int">
@@ -322,6 +323,12 @@
 		    (select qna_step from qna where qna_no = #{qnaNo})+1 ,
 		    (select qna_depth from qna where qna_no = #{qnaNo})+1 , #{memberNo})
 	
+	</insert>
+	<insert id="insertqnaAlert" parameterType="funding.dto.Qna">
+		insert into alert 
+		values
+		(ALERT_SEQ.nextval,(select member_no from qna where qna_no = #{qnaRefer}),
+		'문의 게시글의 답변이 달렸습니다.',0,sysdate)	
 	</insert>
 	<select id="selectQnaListStep" resultType="funding.dto.Qna">
 		SELECT

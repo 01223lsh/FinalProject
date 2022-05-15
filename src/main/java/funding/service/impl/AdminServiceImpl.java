@@ -25,6 +25,7 @@ import funding.dto.NoticeFile;
 import funding.dto.Project;
 import funding.dto.Qna;
 import funding.service.face.AdminService;
+import funding.util.ApprovedPaging;
 import funding.util.Paging;
 import funding.util.ProjectPaging;
 
@@ -121,10 +122,10 @@ public class AdminServiceImpl implements AdminService {
 		return paging;
 	}
 	@Override
-	public Paging getapproveProjectpaging(Paging paging) {
+	public ApprovedPaging getapproveProjectpaging(ApprovedPaging paging) {
 		int totalCount = adminDao.selectCntapproveProject(paging);
 		int curPage = paging.getCurPage();
-		paging = new Paging(totalCount,curPage);
+		paging = new ApprovedPaging(totalCount,curPage);
 		return paging;
 	}
 
@@ -237,7 +238,7 @@ public class AdminServiceImpl implements AdminService {
 	// create by young
 	// project_step = 1, 심사 대기중인 프로젝트만 가져오는 메소드
 	@Override
-	public List<Project> getWaitingProject(Paging paging) {
+	public List<Project> getWaitingProject(ApprovedPaging paging) {
 		return adminDao.findAllWaitingProject(paging);
 	}
 
@@ -304,6 +305,8 @@ public class AdminServiceImpl implements AdminService {
 		if("".equals(qna.getQnaTitle())){
 			qna.setQnaTitle("(제목없음)");
 		}
+		logger.info("qqqqqqqqqqq{}",qna);
+		adminDao.insertqnaAlert(qna);
 		adminDao.updateQnaAll(qna);
 		adminDao.insertQnare(qna);
 		

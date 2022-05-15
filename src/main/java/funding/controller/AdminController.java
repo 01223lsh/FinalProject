@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -28,6 +29,7 @@ import funding.dto.Project;
 import funding.dto.Qna;
 import funding.service.face.AdminService;
 import funding.util.Paging;
+import funding.util.ApprovedPaging;
 import funding.util.ProjectPaging;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -45,16 +47,13 @@ public class AdminController {
 	@RequestMapping(value = "/admin/main")
 	public void admin() {
 	}
-	@RequestMapping(value = "/admin/chart" , method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/admin/chart/chart" , method= {RequestMethod.GET, RequestMethod.POST})
 	public void chart(Model model,Chart chart,String dayType) {
-		logger.info("sssssssssssssssssssss{}",chart);
-		logger.info("sssssssssssssssssssss{}",dayType);
+
 		if("".equals(dayType) && dayType ==null) {
-			
 			chart.setSelectDate(7);
 		}else {
 			chart.setSelectDate(Integer.valueOf(dayType));
-			
 		}
 		List<Chart> chartlist = adminService.selectByMemberDate(chart);
 		logger.info("{}",chartlist);
@@ -62,19 +61,17 @@ public class AdminController {
 		model.addAttribute("chart", chart);
 	}
 	//qna 수정
-	@RequestMapping(value = "/admin/qnaUpdate",method=RequestMethod.GET)
+	@RequestMapping(value = "/admin/qna/qnaUpdate",method=RequestMethod.GET)
 	public void qnaUpdate(Model model,Qna qna) {
-		logger.info("aaaaaaaaaa{}",qna);
 		qna = adminService.selectbyqnainfo(qna);
 		model.addAttribute("qna",qna);
 	}
-	@RequestMapping(value = "/admin/qnaUpdate",method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/qna/qnaUpdate",method=RequestMethod.POST)
 	public void qnaUpdateWrite(Model model,Qna qna) {
-		logger.info("aaaaaaaaaa{}",qna);
 		 adminService.qnaUpdate(qna);
 	}
 	//회원관리
-	@RequestMapping(value = "/admin/member")
+	@RequestMapping(value = "/admin/member/member")
 	public void member(Member member, Model model
 			, Paging paging, String disabled
 			, String category
@@ -113,7 +110,7 @@ public class AdminController {
 		model.addAttribute("cnt", cnt);
 	}
 	//프로젝트 페이지
-	@RequestMapping(value = "/admin/project")
+	@RequestMapping(value = "/admin/project/project")
 	public void project(Model model
 			, ProjectPaging paging
 			, Project project
@@ -144,7 +141,7 @@ public class AdminController {
 		model.addAttribute("project", list);
 	}
 	//회원 정보
-	@RequestMapping(value = "/admin/memberInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/member/memberInfo", method = RequestMethod.GET)
 	public void memberInfo(Member member, Model model,MemberSeller memberSeller) {
 		//회원 정보 불러옴
 		member = adminService.selectBymemberNo(member);
@@ -163,11 +160,11 @@ public class AdminController {
 			, String category) {
 		if (content != null && !"".equals(content) && str.equals("member")) {
 			//회원 검색 + 등급 + 페이징
-			return "redirect:/admin/member?curPage=" + paging.getCurPage()
+			return "redirect:/admin/member/member?curPage=" + paging.getCurPage()
 					+ "&grade=" + grade + "&category=" + category + "&content=" + content;
 		} else {
 			// 회원 등급 + 페이징
-			return "redirect:/admin/member?curPage=" + paging.getCurPage() +
+			return "redirect:/admin/member/member?curPage=" + paging.getCurPage() +
 					"&grade=" + grade;
 		}
 	}
@@ -179,32 +176,34 @@ public class AdminController {
 			, Model model
 			, int categoryNo) {
 		//프로젝트 진행 현황 + 페이징 + 카테고리
-		return "redirect:/admin/project?curPage=" + paging.getCurPage() + "&projectStep=" + projectStep+"&categoryNo="+categoryNo;
+		return "redirect:/admin/project/project?curPage=" + paging.getCurPage() + "&projectStep=" + projectStep+"&categoryNo="+categoryNo;
 	}
-	
+	@RequestMapping(value = "/layout/ApprovedPaging", method = RequestMethod.GET)
+	public String ApprovedPaging(ApprovedPaging paging, String str, Model model) {
+		
+			//프로젝트 승인 페이징
+			return "redirect:/admin/approved/approveProject?curPage=" + paging.getCurPage();
+		
+	}
 	// 페이징
 	@RequestMapping(value = "/layout/paging", method = RequestMethod.GET)
 	public String memberpaging(Paging paging, String str, Model model) {
 		
-		if (str.equals("approveProject")) {
-			//프로젝트 승인 페이징
-			return "redirect:/admin/approveProject?curPage=" + paging.getCurPage();
-		} else {
 			// 공지사항 페이징
-			return "redirect:/admin/notice?curPage=" + paging.getCurPage();
-		} 
+		return "redirect:/admin/notice/notice?curPage=" + paging.getCurPage();
+		
 
 	}
 
 	//회원 등급 수정
-	@RequestMapping(value = "/admin/memberInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/member/memberInfo", method = RequestMethod.POST)
 	public void memberUpdate(Member member) {
 		//회원 등급 수정
 		adminService.gradeUpdate(member);
 	}
 
 	//공지사항
-	@RequestMapping(value = "/admin/notice")
+	@RequestMapping(value = "/admin/notice/notice")
 	public void notice(Notice notice, Paging paging, Model model) {
 		//공지사항 페이징
 		paging = adminService.getnoticePaging(paging);
@@ -218,7 +217,7 @@ public class AdminController {
 	}
 
 	//공지사항 내용
-	@RequestMapping(value = "/admin/noticeView")
+	@RequestMapping(value = "/admin/notice/noticeView")
 	public void noticeView(Notice notice, Model model, NoticeFile noticeFile) {
 		//공지사항 내용
 		notice = adminService.selectByNotice(notice);
@@ -231,7 +230,7 @@ public class AdminController {
 	}
 
 	//공지사항 작성
-	@RequestMapping(value = "/admin/noticeWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/notice/noticeWrite", method = RequestMethod.GET)
 	public void noticeWrite() {	}
 	//공지사항 작성
 	@RequestMapping(value = "/admin/noticeWrite", method = RequestMethod.POST)
@@ -257,7 +256,7 @@ public class AdminController {
 	}
 	
 	//공지사항 수정 GET
-	@RequestMapping(value = "/admin/noticeUpdate", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/notice/noticeUpdate", method = RequestMethod.GET)
 	public void noticeUpdate(Notice notice
 			, Model model
 			, @ModelAttribute(value = "NoticeFile") NoticeFile noticefile) {
@@ -272,7 +271,7 @@ public class AdminController {
 	}
 
 	//공지사항 수정 POST
-	@RequestMapping(value = "/admin/noticeUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/notice/noticeUpdate", method = RequestMethod.POST)
 	public void noticeUpdateresult(Notice notice, MultipartHttpServletRequest mtfRequest
 			, @RequestParam("fileNolist") List<Integer> fileNolist) {
 		logger.info("{}", fileNolist);
@@ -287,20 +286,20 @@ public class AdminController {
 	}
 
 	//공지사항 삭제
-	@RequestMapping(value = "/admin/noticeDelete")
+	@RequestMapping(value = "/admin/notice/noticeDelete")
 	public String noticeDelete(Notice notice) {
 		adminService.noticeDelete(notice);
-		return "/admin/notice";
+		return "/admin/notice/notice";
 	}
 
 
 	// create by young
 	// 심사 대기중인 프로젝트 페이지
-	@RequestMapping("/admin/approveProject")
-	public ModelAndView approveProjectPage(Paging paging) {
+	@RequestMapping("/admin/approved/approveProject")
+	public ModelAndView approveProjectPage(ApprovedPaging paging) {
 		logger.info("[/admin/approveProject][GET]");
 		paging = adminService.getapproveProjectpaging(paging);
-		ModelAndView mav = new ModelAndView("admin/approveProject");
+		ModelAndView mav = new ModelAndView("admin/approved/approveProject");
 		Map<String, Object> model = mav.getModel();
 		logger.info("{}",mav);
 		List<Project> list = adminService.getWaitingProject(paging);
@@ -308,13 +307,14 @@ public class AdminController {
 		model.put("list", list);
 		model.put("paging",paging);
 		model.put("cnt",cnt);
+		logger.info("test{}",cnt);
 		
 		return mav;
 	}
 
 	// create by young
 	// 프로젝트 심사 처리
-	@RequestMapping(value = "/admin/approveProject", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/approved/approveProject", method = RequestMethod.POST)
 	@ResponseBody
 	public Map approveProject(Project project, Alert alert, Model model) {
 		logger.info("[/admin/approveProject][POST]");
@@ -344,11 +344,11 @@ public class AdminController {
 
 	// create by young
 	// 프로젝트 심사 처리
-	@RequestMapping("/admin/projectDetail")
+	@RequestMapping("/admin/approved/projectDetail")
 	public ModelAndView getProject(Project project) {
 		logger.info("[/admin/projectDetail][GET]");
 		logger.info("파라미터: projectNo - {}", project.getProjectNo());
-		ModelAndView mav = new ModelAndView("admin/projectDetail");
+		ModelAndView mav = new ModelAndView("admin/approved/projectDetail");
 		Map<String, Object> model = mav.getModel();
 
 		// 개별 프로젝트 상세내용 조회
@@ -361,7 +361,7 @@ public class AdminController {
 	}
 	
 	//은지님 코드 (ajax)수정
-	@RequestMapping(value="/admin/qna")
+	@RequestMapping(value="/admin/qna/qna")
 	public void list(Paging pagingParam, Model model,@Param("complete") String complete) {
 		
 		logger.info("ccccc{}",complete);
@@ -379,12 +379,12 @@ public class AdminController {
 	//문의게시판 페이징
 	@RequestMapping(value="/layout/qnapaging")
 	public String qnaPaging(String complete, Paging paging) {
-		return "redirect:/admin/qna?curPage=" + paging.getCurPage()+"&complete="+complete;
+		return "redirect:/admin/qna/qna?curPage=" + paging.getCurPage()+"&complete="+complete;
 	}
 	//문의게시판 상세보기
-	@RequestMapping(value="/admin/qnaView")
+	@RequestMapping(value="/admin/qna/qnaView")
 	public void view(Qna viewqna, Model model) {
-		logger.info("/qna/view [GET]");
+		logger.info("/qna/view [GET] {} ",viewqna);
 		//상세보기(게시글-Board)
 		viewqna = adminService.qnaview(viewqna);
 		//문의사항 답변 확인
@@ -393,7 +393,7 @@ public class AdminController {
 		model.addAttribute("list", list);
 	}
 	//문의게시판  답변 삭제
-	@RequestMapping(value="/admin/qnaDelete")
+	@RequestMapping(value="/admin/qna/qnaDelete")
 	public String qnaDelete(Qna qna) {
 		logger.info("컨트롤러로 받아온 삭제용 게시글 번호 : {}", qna.getQnaNo());
 		//문의게시판 답변 삭제
@@ -402,11 +402,13 @@ public class AdminController {
 		
 	}
 	//문의사항 답변 작성 GET
-	@GetMapping("/admin/qnarewrite")
+	@GetMapping("/admin/qna/qnarewrite")
 	public void qnarewrite() {}
 	//문의사항 답변 작성 POST
-	@PostMapping("/admin/qnarewrite")
-	public void qnarewriteProc(Qna qna) {
+	@PostMapping("/admin/qna/qnarewrite")
+	public void qnarewriteProc(Qna qna, HttpSession session) {
+		
+//		qna.setMemberNo((int) session.getAttribute("memberNo"));
 		logger.info("[write reqna] : {}", qna);
 		adminService.qnarewrite(qna);
 	}

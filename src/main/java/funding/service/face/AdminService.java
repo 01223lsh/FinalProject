@@ -13,6 +13,7 @@ import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
 import funding.dto.Qna;
+import funding.util.ApprovedPaging;
 import funding.util.Paging;
 import funding.util.ProjectPaging;
 
@@ -158,7 +159,7 @@ public interface AdminService {
 
 	// create by young
 	// project_step = 1, 심사 대기중인 프로젝트만 가져오는 메소드
-    public List<Project> getWaitingProject(Paging paging);
+    public List<Project> getWaitingProject(ApprovedPaging paging);
 
 	// create by young
 	// 프로젝트 심사 처리
@@ -174,7 +175,7 @@ public interface AdminService {
 	 */
 	public List<Category> categoryList();
 	// create by young
-	public Paging getapproveProjectpaging(Paging paging);
+	public ApprovedPaging getapproveProjectpaging(ApprovedPaging paging);
 	// create by young
 	public Paging getQnaPaging(Paging paging, String complete);
 

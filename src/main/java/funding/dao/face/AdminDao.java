@@ -13,6 +13,7 @@ import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
 import funding.dto.Qna;
+import funding.util.ApprovedPaging;
 import funding.util.Paging;
 import funding.util.ProjectPaging;
 
@@ -182,7 +183,7 @@ public interface AdminDao {
 
 	// create by young
 	// DB 에서 심사대기중인 프로젝트 가져오기
-    List<Project> findAllWaitingProject(Paging paging);
+    List<Project> findAllWaitingProject(ApprovedPaging paging);
 
 	// create by young
 	// 프로젝트 상태 업데이트
@@ -203,7 +204,7 @@ public interface AdminDao {
 	 * @param paging 페이징
 	 * @return 프로젝트 승인 리스트
 	 */
-	public int selectCntapproveProject(Paging paging);
+	public int selectCntapproveProject(ApprovedPaging paging);
 
 	/**
 	 * 문의 게시판 리스트 개수
@@ -288,6 +289,12 @@ public interface AdminDao {
 	 * @param alert 알람 정보
 	 */
 	public void insertAlert(Alert alert);
+
+	/**
+	 * 문의사항 답변 alert
+	 * @param qna 정보
+	 */
+	public void insertqnaAlert(Qna qna);
 
 
 }

@@ -51,7 +51,7 @@ function chartDate(){
 	console.log(dayType)
 	$.ajax({
 		type : "get"
-		,url : "/admin/chart"
+		,url : "/admin/chart/chart"
 		,data : "dayType="+dayType+"&chartCheck="+chartCheck
 		,dataType : "html"
 		,success : function(res){
@@ -67,7 +67,7 @@ function qnaView(qnaNo){
 	console.log(qnaNo);
 	$.ajax({
 		type : "post"
-		,url : "/admin/qnaView?qnaNo="+qnaNo
+		,url : "/admin/qna/qnaView?qnaNo="+qnaNo
 		,dataType :"html"
 		,success : function(res){
 			$("#resultLayout").html(res)
@@ -80,7 +80,7 @@ function qnaView(qnaNo){
 function memberManagement(){
 	$.ajax({
 		type : "get"
-		,url : "/admin/member"
+		,url : "/admin/member/member"
 		,data : "grade=4"+"&str=member"
 		,dataType : "html"
 		,success : function(res){
@@ -96,7 +96,7 @@ function memberManagement(){
 function chartManagement(){
 	$.ajax({
 		type : "get"
-		,url : "/admin/chart"
+		,url : "/admin/chart/chart"
 		,data : "dayType=7&chartCheck=0"
 		,dataType : "html"
 		,success : function(res){
@@ -112,7 +112,7 @@ function chartManagement(){
 function noticeManagement(){
 	$.ajax({
 		type : "get"
-		,url : "/admin/notice"
+		,url : "/admin/notice/notice"
 		,data : "str=notice"
 		,dataType : "html"
 		,success : function(res){
@@ -129,7 +129,7 @@ function noticeManagement(){
 function projectManagement(){
 	$.ajax({
 		type : "get"
-		,url : "/admin/project"
+		,url : "/admin/project/project"
 		,data : "str=poject&projectStep=5&categoryNo=0"
 		,dataType : "html"
 		,success : function(res){
@@ -147,8 +147,8 @@ function projectManagement(){
 function approveProject() {
     $.ajax({
         type : "get"
-        ,url : "/admin/approveProject"
-        ,data : "str=approveProject"
+        ,url : "/admin/approved/approveProject"
+        ,data : {}
         ,dataType : "html"
         ,success : function(res){
             console.log("공지사항 뷰 성공")
@@ -163,7 +163,7 @@ function approveProject() {
 function qnaManagement(searchtest){
 	$.ajax({
 		type : "get"
-		,url : "/admin/qna"
+		,url : "/admin/qna/qna"
 		,data : {str:"qna",search:searchtest,complete:"3"}
 		,dataType : "html"
 		,success : function(res){
@@ -183,6 +183,7 @@ function qnaManagement(searchtest){
 
 </script>
 <style>
+html { overflow-y:scroll; }
 #btn_chart_excel_download {
     border: 0;
     background-color: #007f1b;
@@ -246,8 +247,8 @@ h1{ font-size:18px;  padding:20px; }
 <!-- <button  onclick="memberManagement()">회원관리</button><br> -->
 <!-- <button>프로젝트 관리</button><br> -->
 <!-- <button>프로젝트 승인</button><br> -->
-<br><br>
-<div id="managerLayout">
+
+<div id="managerLayout" style="height:1000px">
 <div  id="menu">
 <nav >
     관리자 페이지 <!-- h1태그 검색사이트가 좋아함. 문서상에 1개만 있는 것을 권장한다. -->
@@ -263,6 +264,7 @@ h1{ font-size:18px;  padding:20px; }
  
 </nav>
 </div>
+<br><br>
 <div id="Layout">
 	<div id="resultLayout">
 		
