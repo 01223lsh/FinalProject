@@ -59,6 +59,13 @@ public interface ApplyDao {
 	 */
 	public void planUpdate(Project project);
 
+	/**
+	 * 프로젝트 정보 저장하기
+	 * 
+	 * @param project
+	 */
+	public void contentUpdate(Project project);
+
 
 	
 }

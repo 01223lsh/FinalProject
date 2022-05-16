@@ -82,6 +82,14 @@
         WHERE project_no = #{projectNo}
 	</insert>
 	
+	<insert id="contentUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET project_content = #{projectContent}
+              , budget_plan = #{budgetPlan}
+              , schedule_plan = #{schedulePlan}
+        WHERE project_no = #{projectNo}
+	</insert>
+	
 	<select id="rewardSelect" resultMap="Reward" parameterType="funding.dto.Project">
 		SELECT * from reward
         WHERE project_no = #{projectNo}

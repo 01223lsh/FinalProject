@@ -62,7 +62,7 @@ textarea::placeholder {
 }
 
 .top_nav_button {
-	SSposition: relative;
+	position: relative;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -363,38 +363,42 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script type="text/javascript">
 
+
 //저장하기
 function applySubmit(){
-// 	debugger;
+//	debugger;
 	
 	//콤마 제거 및 인트형 변환
 	var uncommaPrice = uncomma( $('#projectPrice').val() );
 	
 	//각 날짜들의 date형 값을 string으로 변환
-// 	var stringOpen = $('#openDate').val();
+//	var stringOpen = $('#openDate').val();
 	var stringOpen = $.datepicker.formatDate("yy-mm-dd",$("#openDate").datepicker("getDate")); 
-    StringOpen = $("#openDate").val();
+  StringOpen = $("#openDate").val();
 	
-// 	var	stringOpen = $(openDate	).serialize();
+//	var	stringOpen = $(openDate	).serialize();
 	
-// 	var stringClose = $('#closeDate').val();
+//	var stringClose = $('#closeDate').val();
 	var stringClose = $.datepicker.formatDate("yy-mm-dd",$("#closeDate").datepicker("getDate")); 
-    stringClose = $("#closeDate").val();
+  stringClose = $("#closeDate").val();
 	
-// 	var stringClose = $(closeDate ).serialize();
+//	var stringClose = $(closeDate ).serialize();
 	
+	var stringDelivery = $.datepicker.formatDate("yy-mm-dd",$("#deliveryDate").datepicker("getDate")); 
+  stringDelivery = $("#deliveryDate").val();
 	
-   	alert(stringOpen);
+ 	alert(stringOpen);
 	
 	
 	//입력 데이터들 json 파싱
 	var form = 
-// 		$("#whiteForm").serialize();
+//		$("#whiteForm").serialize();
 	{
 			"projectNo" : ${projectInfo.projectNo},
 			"projectPrice" : uncommaPrice,
 			"openDate" : stringOpen,
-			"closeDate" : stringClose
+			"closeDate" : stringClose,
+			"deliveryDate" : stringDelivery
 			
 	}
 	
@@ -482,26 +486,47 @@ function uncomma(str) {
 	return (new Number(str));//문자열을 숫자로 반환 
 }
 
-
+//저장된 날짜값이 없다면
 <c:if test = "${projectInfo.openDate ne null}">
-
 function planDate (date) {
 	var closeDate = $('#closeDate');
+	var deliveryDate = $('#deliveryDate');
 	var openDate = $('#openDate').datepicker('getDate');
 	var minDate = $('#openDate').datepicker('getDate');
 	closeDate.datepicker('setDate', minDate);
+	deliveryDate.datepicker('setDate', minDate);
 	openDate.setDate(openDate.getDate() + 60);
 	closeDate.datepicker('option', 'maxDate', openDate);
 	closeDate.datepicker('option', 'minDate', minDate);
+	deliveryDate.datepicker('option', 'minDate', minDate);
+}
+</c:if>
+
+//펀딩 기간
+function period() {
+	
+	var openPeriod = new Date($('#openDate').datepicker('getDate'));
+		alert(openPeriod.getTime());
+	var closePeriod = new Date($('#closeDate').datepicker('getDate'));
+	
+	var periodMs = closePeriod.getTime() - openPeriod.getTime();		
+//		blur
+	var fundingPeriod = periodMs / (1000*60*60*24);
+	
+	//예상 수령액 보여주는 함수
+//		$("#eceipts").html(price + "원").css('color', 'rgb(218, 74, 73)'); 
+	
+	//플랫폼 수수료 보여주는 함수
+	$("#period").html(fundingPeriod + "일"); 
 }
 
-</c:if>
-	
+
 
 $(function() {
 	
 	//화면 로드했을 때 실행
 	loadPrice();
+	period();
 	<c:if test = "${projectInfo.openDate eq null}">
 	 	//초기값을 오늘 날짜로 설정
 	    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
@@ -571,12 +596,15 @@ $(function() {
         minDate: "+14D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
    		,onSelect: function (date) {
    			var closeDate = $('#closeDate');
+   			var deliveryDate = $('#deliveryDate');
    			var openDate = $(this).datepicker('getDate');
    			var minDate = $(this).datepicker('getDate');
    			closeDate.datepicker('setDate', minDate);
+   			deliveryDate.datepicker('setDate', minDate);
    			openDate.setDate(openDate.getDate() + 60);
    			closeDate.datepicker('option', 'maxDate', openDate);
    			closeDate.datepicker('option', 'minDate', minDate);
+   			deliveryDate.datepicker('option', 'minDate', minDate);
    		}
 	});
 
@@ -584,19 +612,27 @@ $(function() {
 	//종료일 설정
 	$("#closeDate").datepicker();
 	
+	//배송일 설정
+	$("#deliveryDate").datepicker();
+	
 	//펀딩 기간
-	$("#projectPrice").on("keyup", function(e){
+	$("#openDate, #closeDate").change(function(e){
 
-		commission = Math.floor($("#projectPrice").val() * 0.05) + "";			
+// 		var openPeriod = new Date(${openDateView });
+		openPeriod = new Date($("#openDate").datepicker("getDate"));
+			alert(openPeriod.getTime());
+// 		var closePeriod = new Date(${closeDateView });
+		closePeriod = new Date($("#closeDate").datepicker("getDate"));
 		
-				
-		
+		periodMs = closePeriod.getTime() - openPeriod.getTime();		
+// 		blur
+		fundingPeriod = periodMs / (1000*60*60*24);
 		
 		//예상 수령액 보여주는 함수
-		$("#eceipts").html(price + "원").css('color', 'rgb(218, 74, 73)'); 
+// 		$("#eceipts").html(price + "원").css('color', 'rgb(218, 74, 73)'); 
 		
 		//플랫폼 수수료 보여주는 함수
-		$("#commission").html(commission + "원"); 
+		$("#period").html(fundingPeriod + "일"); 
 	});
 	
 	
@@ -702,6 +738,12 @@ $(function() {
 						<fmt:formatDate value = "${projectInfo.closeDate }" pattern = "yyyy-MM-dd" var = "closeDateView"/>
 						<p><input type="text" id="closeDate" name="closeDate" 
 						value="${closeDateView}"></p>
+					</div>
+					<div class="projectItem_deliveryPlan">
+						<p>배송예상일</p>
+						<fmt:formatDate value = "${projectInfo.deliveryDate }" pattern = "yyyy-MM-dd" var = "deliveryDateView"/>
+						<p><input type="text" id="deliveryDate" name="deliveryDate" 
+						value="${deliveryDateView}"></p>
 					</div>
 				</div>
 			</div>

@@ -110,11 +110,82 @@ public class ApplyServiceImpl implements ApplyService{
 	
 	@Override
 	public void planUpdate(Project project) {
-
+		
+		//계획정보 저장하기
 		applyDao.planUpdate(project);
+	}
+	
+	@Override
+	public void contentUpdate(Project project) {
+
+		//제품 정보 저장하기
+		applyDao.contentUpdate(project);
+
+//		//컨텐트 이미지 업로드
+//		if(file != null && file.getSize() != 0 ) {
+//
+//			//파일이 저장될 경로
+//			String storedPath = context.getRealPath("projectPhoto");
+//			File storedFolder = new File(storedPath);
+//			if( !storedFolder.exists() ) {
+//				storedFolder.mkdir();
+//			}
+//	
+//			//파일이 저장될 이름
+//			String originName = file.getOriginalFilename();
+//			String storedName = UUID.randomUUID().toString().split("-")[4] + originName ;
+//			
+//			//저장될 파일 정보 객체
+//			File dest = new File(storedFolder, storedName);
+//	
+//			try {
+//				file.transferTo(dest);
+//			} catch (IllegalStateException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			
+//			
+//			project.getProjectPhoto().setPhotoNo();
+//			boardFile.setBoardNo(board.getBoardNo());
+//			boardFile.setOriginName(originName);
+//			boardFile.setStoredName(storedName);
+//			
+//			boardDao.insertFile(boardFile);
+//			
+////			//소개글 + 파일 값 객체에 저장
+////			project.setProjectImage("/projectImage/" + storedName);
+//		}
+		
+		System.out.println(project);
 		
 	}
 	
+	@Override
+	public String fileUpload(MultipartFile file) {
+		
+		//ck에디터 사진 파일 저장
+		
+		// 파일 저장 경로 생성
+		String storedPath = context.getRealPath("projectPhoto");
+		File storedFolder = new File(storedPath);
+		if (storedFolder.exists()) {
+		storedFolder.mkdir();
+		}
+		// 저장 파일 이름 생성
+		String fileName = UUID.randomUUID().toString().split("-")[4] + file.getOriginalFilename();
+		// 업로드 파일 객체 생성
+		File dest = new File(storedFolder, fileName);
+		// 파일 업로드
+		try {
+		file.transferTo(dest);
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		return fileName;
+	
+	}
 	
 	
 	@Override

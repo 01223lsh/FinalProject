@@ -284,11 +284,11 @@ textarea::placeholder {
 
 //저장하기
 function applySubmit(){
-	debugger;
+// 	debugger;
 	//넘길 데이터를 담아주는 객체
 	var formData = new FormData();
 	
-	//입력 데이터들 json 파싱
+	//입력 데이터들 json 직렬화
 	var form = 
 // 		$("#whiteForm").serialize();
 	{
@@ -386,15 +386,18 @@ $(function() {
 		// 글자수 세기
 		if (content.length == 0 || content == '') { 
 			$('#textCount').text('0자'); 
+			$('.submit_button').attr('disabled', 'disabled');
 		} else if(content.length < 10 && content.length > 0) { 
 			$('.projectItem_textarea').css('color', 'rgb(218, 74, 73)');
 			$('.projectItem_textarea textarea').css('border', '1px solid rgb(218, 74, 73)');
 			$('#textCount').text(content.length + '자'); 
+			$('.submit_button').attr('disabled', 'disabled');
 		} else {
 			$('.projectItem_textarea').css('color', 'initial');
 			$('.projectItem_textarea textarea').css('border', '1px solid rgb(230, 230, 230)');
 			$('.item-intro-limit').css('display', 'none');
 			$('#textCount').text(content.length + '자'); 
+			$('.submit_button').removeAttr('disabled');
 		}
 		
 		

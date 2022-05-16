@@ -116,7 +116,7 @@ color:#fff;
 	box-sizing: border-box;
 	justify-content: center;
 /* 	text-align: right; */
-/* 	disabled: disabled; */
+/*  	disabled: disabled;  */
 } 
 
 
@@ -175,6 +175,7 @@ $(function() {
 	//소개글 활성화
 	$('input.item-category, input').one('click', function() {
 		$('.item-intro').css('display', 'block');
+		$('.button-next').attr('disabled', 'disabled');
 	});
 	
 	$('#projectIntro').keyup(function (e) { 
@@ -188,14 +189,14 @@ $(function() {
 			$('.item-intro-text textarea').css('border', '1px solid rgb(218, 74, 73)');
 			$('#textCount').text(content.length + '자'); 
 			$('.button-next').css('background', 'rgb(229, 229, 229)');
-			$('.button-next').attr('disabled', true);
+			$('.button-next').attr('disabled', 'disabled');
 		} else {
 			$('.item-intro-text').css('color', 'initial');
 			$('.item-intro-text textarea').css('border', '1px solid rgb(0, 0, 0)');
 			$('.item-intro-limit').css('display', 'none');
 			$('#textCount').text(content.length + '자'); 
 			$('.button-next').css('background', 'rgb(255, 87, 87)');
-			$('.button-next').attr('disabled', false);
+			$('.button-next').removeAttr('disabled');
 			$('.button-next').css('cursor', 'pointer');
 // 			$('.button-next: hover').css('color', 'rgb(255,192,192)');
 		}

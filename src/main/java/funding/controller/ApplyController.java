@@ -1,8 +1,11 @@
 package funding.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -158,7 +162,6 @@ public class ApplyController {
 		model.addAttribute("projectInfo", projectInfo);
 
 		
-		
 	}
 	
 	//프로젝트 소개 페이지 이동
@@ -175,11 +178,49 @@ public class ApplyController {
 		return "apply/content";
 	}
 	
+	
 	//프로젝트 소개 입력
 	@RequestMapping(value = "/content", method = RequestMethod.POST)
-	public void contentInput(Project project) { // 사진 dto 추가
+	public void contentInput(@RequestBody Project project, Model model) {
 		logger.info("/apply/content [POST]");
+		
+		System.out.println(project);
+		
+		//제품 정보 입력 
+		applyService.contentUpdate(project);
+		
+		Project projectInfo = applyService.projectSelect(project.getProjectNo());
+		
+		//모델값 전달
+		model.addAttribute("projectInfo", projectInfo);
+		
 	}
+	
+	//ck에디터 - 파일안에 사진파일 저장
+	@RequestMapping(value = "/ck/upload", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ckUpload(
+	HttpServletRequest req
+	, HttpServletResponse resp
+	, @RequestParam("upload") MultipartFile file) {
+	Map<String, Object> json = new HashMap<>();
+	//resp.setCharacterEncoding("UTF-8"); // 없어도 되는거 같은데 참고할 땐 있어서 일단 놔둠
+	//resp.setContentType("text/html; charset=UTF-8"); // 이것도 마찬가지
+	// 파일은 컨텍스트 루트의 '/img' 에 저장되도록 설정
+	// 저장된 파일이름을 반환
+	String fileName = applyService.fileUpload(file);
+	// servlet-context.xml 에 <resources> url로 설정
+	String fileUrl = "/projectPhoto/" + fileName;
+	// ckEditor 4.9.0 버전 이후에는 JSON 형태로 리턴하도록 ckEditor document 에서 정의
+	json.put("uploaded", 1);
+	json.put("fileName", fileName);
+	json.put("url", fileUrl);
+	
+	logger.info("json: {}", json);
+	
+	return json;
+	}
+	
 	
 	//리워드 입력 페이지 이동 
 	@RequestMapping(value = "/reward", method = RequestMethod.GET)
@@ -227,7 +268,5 @@ public class ApplyController {
 		//메인 페이지로 redirect
 		return "redirect:/";
 	}
-	
-	
 	
 }

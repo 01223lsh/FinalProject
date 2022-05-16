@@ -27,6 +27,7 @@ public interface ApplyService {
 	/**
 	 * 제품 정보 저장하기
 	 * @param project
+	 * @param file
 	 */
 	public void productUpdate(Project project, MultipartFile file);
 	
@@ -44,6 +45,21 @@ public interface ApplyService {
 	 * @param project
 	 */
 	public void planUpdate(Project project);
+	
+	/**
+	 * 프로젝트 소개글 저장하기
+	 * 
+	 * @param project
+	 */
+	public void contentUpdate(Project project);
+	
+	/**
+	 * ck에디터 사진 파일 저장
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public String fileUpload(MultipartFile file);
 	
 	
 

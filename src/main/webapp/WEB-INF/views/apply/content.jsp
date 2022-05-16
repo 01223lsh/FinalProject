@@ -9,6 +9,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script> -->
+<!-- <script src="[ckeditor-build-path]/ckeditor.js"></script> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
+<!-- <link href="summernote-bs5.css" rel="stylesheet"> -->
+<!-- <script src="summernote-bs5.js"></script> -->
+<script src="/resources/js/ckeditor/ckeditor.js"></script>
+
+
 
 <style type="text/css">
 
@@ -238,6 +248,32 @@ textarea::placeholder {
 </style>
 
 <script type="text/javascript">
+function applySubmit(){
+	debugger;
+	var form = {
+		"projectNo" : ${projectInfo.projectNo},
+		"projectContent" : CKEDITOR.instances.projectContent.getData(),
+		"budgetPlan" : $('#budgetPlan').val().trim(),
+		"schedulePlan" : $('#schedulePlan').val().trim()
+	}
+	console.log(form);
+	
+	$.ajax({
+		type:"POST"
+		,url:"/apply/content"
+		,data: JSON.stringify(form)
+		,contentType: "application/json"
+		,success: function(data){
+// 			$("")
+			alert("프로젝트 생성!")
+			console.log(data);
+			let url = '/apply/content?projectNo='+data;
+			location.replace(url);
+		}
+	})
+}
+
+
 
 function applyProduct(){
 	$.ajax({
@@ -281,6 +317,105 @@ function applyReward(){
 }
 
 
+// $(function() {
+// // 	$("#projectContent").
+// // CKEDITOR.replace('projectContent');
+// 	CKEDITOR.replace('projectContent', { 
+// // 		filebrowserImageUploadUrl: '/apply/ck/upload'
+// 		filebrowserUploadUrl: '/apply/ck/upload'
+// 		, language: 'ko' 
+// // 		, font_names: '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana'
+// // 		, font_defaultLabel: '맑은 고딕/Malgun Gothic'
+// // 		, fontSize_defaultLabel: '12'
+// // 		, skin: 'office2013'
+// 	});
+
+	
+	
+	
+
+
+
+
+
+// 	ClassicEditor 
+// 		.create( document.querySelector( '#projectContent' ) ) 
+// // 			ckfinder: {
+// // 				UploadUrl: '/common/ckeditor/fileUpload'
+// // 			}
+// 		.catch( error => { 
+// 			console.error( error );
+// 		} );
+
+// 	 $('#projectContent').summernote({
+// // 	        placeholder: 'Hello stand alone ui',
+// // 	        tabsize: 2,
+// // 	        height: 120,
+// // 	        lang: 'ko-KR', // default: 'en-US'
+// // 	        toolbar: [
+// // 	          ['style', ['style']],
+// // 	          ['font', ['bold', 'underline', 'clear']],
+// // 	          ['color', ['color']],
+// // 	          ['para', ['ul', 'ol', 'paragraph']],
+// // 	          ['table', ['table']],
+// // 	          ['insert', ['link', 'picture', 'video']],
+// // 	          ['view', ['fullscreen', 'codeview', 'help']]
+// // 	        ]
+//         height: 500,                 // 에디터 높이
+//         minHeight: null,             // 최소 높이
+//         maxHeight: null,             // 최대 높이
+//         focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+//         lang: "ko-KR",					// 한글 설정
+//         toolbar: [
+//            // [groupName, [list of button]]
+//            ['fontname', ['fontname']],
+//            ['fontsize', ['fontsize']],
+//            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+//            ['color', ['forecolor','color']],
+//            ['table', ['table']],
+//            ['para', ['ul', 'ol', 'paragraph']],
+//            ['height', ['height']],
+//            ['insert',['picture','link','video']],
+//            ['view', ['fullscreen', 'help']]
+//         ],
+//    	  	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+//     	fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+//       	callbacks: {
+// 	        onImageUpload : function(files, editor, welEditable){
+// 	          // 파일 업로드(다중업로드를 위해 반복문 사용)
+// 	          for (var i = files.length - 1; i >= 0; i--) {
+// 	              uploadSummernoteImageFile(files[i], this);
+// 	          }
+// 	        }
+// 	    }
+// 	 });
+
+//     function uploadSummernoteImageFile(file, el) {
+//         var data = new FormData();	
+//         data.append("file",file);
+//         $.ajax({
+//         	url: '/../summer_image.do',
+//         	type: "POST",
+//          	enctype: 'multipart/form-data',
+//           	data: data,
+//           	cache: false,
+//           	contentType : false,
+//           	processData : false,
+//           	success : function(data) {
+//                     var json = JSON.parse(data);
+//                     $(el).summernote('editor.insertImage',json["url"]);
+//                         jsonArray.push(json["url"]);
+//                         jsonFn(jsonArray);
+//           	},
+//           	error : function(e) {
+//            	   console.log(e);
+//           	}
+//        	});
+//    	}
+
+// })
+
+
 </script>
 
 </head>
@@ -317,14 +452,14 @@ function applyReward(){
 				<div class="projectItem_projectInfo">
 					<dl>
 						<dt>프로젝트 소개</dt>
-						<dd>무엇을 만들기 위한 프로젝트인지 분명이 알려주세요.</dd>
+						<dd>무엇을 만들기 위한 프로젝트인지 분명히 알려주세요.</dd>
 					</dl>
 				</div>
 				<div class="projectItem_projectform">
 					<p>소개</p>
 					<div class="projectItem_textarea">
 						<span>
-							<textarea placeholder="프로젝트 내용을 작성해주세요." id="projectContent" name="projectContent" maxlength="1000">${projectInfo.projectContent} ck에디터를 추가할 예정</textarea>		
+							<textarea placeholder="프로젝트 내용을 작성해주세요." id="projectContent" name="projectContent" maxlength="1000">${projectInfo.projectContent}</textarea>		
 						</span>
 					</div>				
 				</div>
@@ -368,6 +503,24 @@ function applyReward(){
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+$(function() {
+// 	$("#projectContent").
+// CKEDITOR.replace('projectContent');
+	CKEDITOR.replace('projectContent', { 
+// 		filebrowserImageUploadUrl: '/apply/ck/upload'
+		filebrowserUploadUrl: '/apply/ck/upload'
+		, language: 'ko' 
+// 		, font_names: '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana'
+// 		, font_defaultLabel: '맑은 고딕/Malgun Gothic'
+// 		, fontSize_defaultLabel: '12'
+// 		, skin: 'office2013'
+	});
+})
+
+ </script> 
 
 
 </body>

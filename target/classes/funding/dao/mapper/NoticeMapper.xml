@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.AdminDao">
+	
+	<select id="selectCntNotice" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	<select id="noticeAll" resultType="funding.dto.Notice">
+	
+		select * from (
+		     select rownum rnum, N.* from(
+		         select * from notice
+		          order by notice_no desc
+		        )N
+		     ) notice
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectByNotice" resultType="funding.dto.Notice">
+
+		select notice_no,title,content from notice
+		where notice_no = #{noticeNo} 
+	</select>
+	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile" parameterType="funding.dto.Notice">
+		select 
+		file_no fileNo
+		,notice_no noticeNo
+		,file_origin fileOrigin
+		,file_storage fileStorage
+		 from noticefile
+		where notice_no = #{noticeNo}
+	</select>
+	<delete id="fileNoByDelete" parameterType="int">
+		delete from noticefile
+		where notice_no = #{notice.noticeNo}
+		and file_no not in
+		<foreach collection="fileNolist" item="item"  open="(" separator="," close=")" > 
+	     #{item} 
+		</foreach>
+	</delete>
+	
+	<select id="selectBynoticeno" resultType="int">
+		select notice_seq.nextval from dual
+	</select>
+	
+	<insert id="noticeWrite" parameterType="funding.dto.Notice">
+		insert into notice(notice_no, title, content)
+		values(#{noticeNo},#{title},#{content})
+	</insert>
+	
+    <insert id="insertNoticeFile" parameterType="funding.dto.Notice" >
+    	insert into noticefile
+    	values(noticefile_seq.nextval,#{noticeNo},#{fileOrigin},#{fileStorage})
+    </insert>
+    
+    <select id="selectNoticeFileByFileNo" resultType="funding.dto.Notice">
+    	select 
+    	file_no fileNo
+    	,notice_no noticeNo
+    	,file_origin fileOrigin
+    	,file_storage fileStorage    	
+    	from noticefile
+    	where file_no = #{fileNo}
+    
+    </select>
+    <update id="noticeUpdate" parameterType="funding.dto.Notice">
+    	update notice set title=#{title}, content=#{content}
+    	where notice_no = #{noticeNo}
+    </update>
+    <update id="updateNoticeFile" parameterType="funding.dto.Notice">
+    	update noticefile set file_origin=#{fileOrigin}, file_storage=#{fileStorage}
+    	where file_no = #{fileNo}
+    </update>
+    
+    <delete id="noticeDelete" parameterType="funding.dto.Notice">
+    	delete from notice
+    	where notice_no = #{noticeNo}
+    </delete>
+    <delete id="noticeFileDelete" parameterType="funding.dto.Notice">
+    	delete from noticefile
+    	where notice_no = #{noticeNo}
+    </delete>
+    <select id="projectList" resultType="funding.dto.Project" >
+    	select * from (
+		     select rownum rnum, N.* from(
+		         select * from project 
+		      		where project_step between 3 and 4
+		      		<if test="step!=5">
+						and project_step = #{step}
+					</if>
+		          order by project_no desc
+		        )N
+		     ) project
+		where rnum between #{paging.startNo} and #{paging.endNo}
+	
+	
+    </select>
+
+</mapper>
+
+
+
