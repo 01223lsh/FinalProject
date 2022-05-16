@@ -35,7 +35,7 @@ public class RoomController {
 	// 채팅방 입장 화면
 	@GetMapping("/room/enter/{memberNo}")
 	public String roomDetail(Model model, @PathVariable String memberNo, HttpSession session) {
-		log.info("[/chat/room/enter/{}][GET]", memberNo);
+		// log.info("[/chat/room/enter/{}][GET]", memberNo);
 		ChatRoom room = repository.findRoomById(Integer.parseInt(memberNo));
 		System.out.println("결과값 테스트: " + room);
 		String sessionId = session.getId();

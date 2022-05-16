@@ -16,6 +16,13 @@
 
 <script type="text/javascript">
 
+$(document).ready(function() {
+	//검색 버튼 클릭
+	$("#btnSearch").click(function() {
+		location.href="/project/list?search="+$("#search").val();
+	});
+})
+
 /* alert('${sessionScope.Id}');
  */
 </script>
@@ -170,14 +177,14 @@
 			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/login">회원가입</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">로그인</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1">회원가입</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">로그인</a></button>
 			</c:when>
 			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '2'}">
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/login">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">관리자페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/chatting/room">채팅</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">관리자페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/chatting/room">채팅</a></button>
 			</c:when>
 			<c:otherwise>
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/login">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">채팅</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">채팅</a></button>
 			</c:otherwise>
 		 	</c:choose>
 	</div>
@@ -199,7 +206,11 @@
        
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="notice/list">공지사항</a>
+          <a class="nav-link active" aria-current="page" href="/notice/list">공지사항</a>
+       
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/main/guide">이용가이드</a>
        
         </li>
         <li class="nav-item">
@@ -210,11 +221,14 @@
         </li>
       </ul>
       
+      <div class="form-inline text-center">
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="검색어를 입력하세요." aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit">검색</button>
+        <input class="form-control me-2" placeholder="검색어를 입력하세요." type="text" id="search" value="${param.search }" />
+        <button id="btnSearch" class="btn btn-outline-primary" type="submit">검색</button>
       </form>
+      </div>
     </div>
   </div>
 </nav>
 </div>
+

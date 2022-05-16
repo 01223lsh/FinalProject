@@ -1,0 +1,44 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="funding.dao.face.ProjectDao">
+
+	<resultMap type="web.dto.Board" id="Board">
+		<id column="board_no" property="boardNo"/>
+		<result column="writer_id" property="writerId"/>
+		<result column="writer_nick" property="writerNick"/>
+		<result column="write_date" property="writeDate"/>
+	</resultMap>
+
+	<select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, P.* FROM (
+				SELECT
+					project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+					project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
+				FROM project
+				WHERE title LIKE '%' || #{search} || '%' 
+				ORDER BY project_no DESC
+			) P
+		) PROJECT
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM project
+		WHERE title LIKE '%' || #{search} || '%' 
+	</select>
+	
+		<select id="select" resultMap="Project" parameterType="funding.dto.Project">
+		SELECT
+			project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+			project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	
+	
+</mapper> -->

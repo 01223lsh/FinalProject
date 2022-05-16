@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.ProjectDao">
+	
+	<select id="getTotalCnt" parameterType="funding.commons.Pagination" resultType="int">
+		select count(*)
+		from project
+		<where>
+		<if test="category != null and !''.equals(category)">
+		AND category_no = #{category}
+		</if>
+		<if test="keyword != null and !''.equals(keyword)">
+		AND project_title LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="filter != null and !''.equals(filter)">
+		AND project_step = #{filter}
+		</if>
+		</where>
+	</select>
+	
+	<!-- <select id="findAllByFilterAndOrder" parameterType="kh3.commons.Pagination" resultType="kh3.dto.Project">
+		select * 
+		from (
+		    select row_number() over (order by project_no desc) r, project.* from project
+		)
+		<where> 
+		<if test="category != null and keyword != null">
+		AND ${category} LIKE '%' || #{keyword} || '%' 
+		</if>
+		</where>
+		order by r
+	</select> -->
+	
+	<select id="findAllByFilterAndOrder" parameterType="funding.commons.Pagination" resultType="funding.dto.Project">
+		select 
+			row_number() over (order by pj.project_no desc) r
+			, pj.*
+			, nvl(sum, 0) sum
+		from project pj
+		left join (
+    		select project_no, sum(payment_total) sum
+    		from payment
+    		group by project_no    
+		) py
+    		on pj.project_no = py.project_no 
+		
+		<where> 
+		<if test="category != null and !''.equals(category)">
+		AND category_no = #{category}
+		</if>
+		<if test="keyword != null and !''.equals(keyword)">
+		AND project_title LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="filter != null and !''.equals(filter)">
+		AND project_step = #{filter}
+		</if>
+		</where>
+		
+		<choose>
+			<when test="order != null and order.equals('open_date')">
+			order by open_date desc 
+			</when>
+			<when test="order != null and order.equals('close_date')">
+			order by close_date
+			</when>
+			<otherwise>
+			order by r
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<select id="findCategoryList" resultType="funding.dto.Category">
+		select category_no, category_name 
+		from category
+		order by category_no
+	</select>
+	
+		<select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, P.* FROM (
+				SELECT
+					project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+					project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
+				FROM project
+				WHERE title LIKE '%' || #{search} || '%' 
+				ORDER BY project_no DESC
+			) P
+		) PROJECT
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM project
+		WHERE title LIKE '%' || #{search} || '%' 
+	</select>
+	
+	<select id="select" resultMap="Project" parameterType="funding.dto.Project">
+		SELECT
+			project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+			project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	
+	
+</mapper>

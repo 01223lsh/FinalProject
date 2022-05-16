@@ -69,9 +69,6 @@ function sendMessage(message) {
       ws.send("/app/chat/message", {}, JSON.stringify({type:'TALK', chatroomId: '${room.chatroomId}', sender: '${sessionScope.nick}', message: message}));
 //     recvMessage(message);  
    
-      
-	
-
 
 }
 
@@ -94,13 +91,13 @@ function recvMessage(recv) {
     messageDiv.text(recv.message);
     messageHeaderDiv.append(myidDiv);
     messageHeaderDiv.addClass("d-flex justify-content-between")
-    messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "margin" : "10px", "background": "#d8f1f5"});
+    messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "margin" : "10px", "background": "#d9dbed"});
     messageContainer.append(messageHeaderDiv);
     messageContainer.append(messageDiv);
     messageContainer.css({"width": "200px", "align-self": "flex-start"})
     li.addClass(" d-flex flex-column");
     if (recv.sender == '${sessionScope.nick}') {
-        messageDiv.css("background", "#dceaf9")
+        messageDiv.css("background", "#dceaf9" )
         messageContainer.css("align-self", "flex-end")
     }
     li.append(messageContainer)
@@ -337,7 +334,7 @@ $(function(){
 
 
  
-.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #182bf9; color: white; text-align: center;  }
+.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #9e9e9e; color: white; text-align: center;  }
  
 .chat_wrap .chat { padding-bottom: 80px; }
 .chat_wrap .chat ul { width: 100%; list-style: none; padding: 10px;}
@@ -349,7 +346,7 @@ $(function(){
 .chat_wrap .chat ul li > div.sender { margin: 10px 20px 0 20px; font-weight: bold; }
 .chat_wrap .chat ul li > div.message { display: inline-block; word-break:break-all; margin: 5px 20px; max-width: 75%; border: 1px solid #888; padding: 10px; border-radius: 5px; background-color: #FCFCFC; color: #555; text-align: left; }
  
-.chat_wrap .input-div { position: fixed; bottom: 0; width: 100%; background-color: #182bf9; text-align: center; border-top: 1px solid #888; }
+.chat_wrap .input-div { position: fixed; bottom: 0; width: 100%; background-color: #9e9e9e; text-align: center; border-top: 1px solid #888; }
 .chat_wrap .input-div > textarea { width: 100%; height: 80px; border: none; padding: 10px; resize: none;
 
 }
