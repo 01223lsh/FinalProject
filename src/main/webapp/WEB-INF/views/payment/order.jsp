@@ -6,9 +6,9 @@
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <!-- 아임포트 api 코드 -->
-<c:import url="/WEB-INF/views/payment/importPayment.jsp"></c:import>
+<c:import url="/WEB-INF/views/payment/importPayment.jsp"/>
 <!-- 카카오 우편번호 api -->
-<c:import url="/WEB-INF/views/payment/kakaoDelivery.jsp"/><br>
+<c:import url="/WEB-INF/views/payment/kakaoDelivery.jsp"/>
 
 <script type="text/javascript">
 
@@ -125,12 +125,12 @@
 	<div class="rewardInfo">
 	
 	<ul>
-		<c:forEach var="i" items="${rewardList}" varStatus="status">
+		<c:forEach var="i" items="${rewardOrderList}">
 		<li>
 			<hr>
-			<p>${i.rewardName}</p>
-			<p>${i.rewardIntro}</p>
-			<p>수량: ${rewardCountArr[status.index] }<p>
+				<p>${i.rewardName}</p>
+				<p>${i.rewardIntro}</p>
+				<p>수량: ${i.rewardCount}<p>
 			<hr>
 		</li>
 		</c:forEach>
@@ -142,27 +142,21 @@
 	<div class="priceInfo">
 		<dl>
 			<dt>추가 펀딩금: </dt>
-			<dd>${additionalFunding }원</dd>
+			<dd>${order.additionalFunding }원</dd>
 			<dt>총 금액: </dt>
-			<dd>${totalPrice }원</dd>
+			<dd>${order.totalPrice }원</dd>
 		</dl>
 	</div>
 	<hr>
 	
 	<div class="memberInfo">
-	세션정보 : 회원 정보 들어가는 칸
+		세션정보 : 회원 정보 들어가는 칸
 	</div>
 	
 	<hr>
-	<form action="/payment/order" method="post">
 		
-		<input type="hidden" id="totalPrice" name="totalPrice" value="${totalPrice }">
-		<input type="hidden" name="additionalFunding" value="${additionalFunding }">
-		
-		<c:forEach var="i" items="${rewardList}" varStatus="status">
-			<input type="hidden" name="rewardNo" value="${i.rewardNo}">
-			<input type="hidden" name="rewardCount" value="${rewardCountArr[status.index]}">
-		</c:forEach>
+		<input type="hidden" id="projectNo" name="projectNo" value="1">
+		<input type="hidden" id="orderNo" name="orderNo" value="${orderFunding.orderNo }">
 		
 		<div class="addressInfo">
 			<input type="text" class="dForm" name="postalCode" id="sample6_postcode" placeholder="우편번호">
@@ -176,20 +170,17 @@
 		
 		<!-- 수령인 정보 입력 -->
 		<div class="recipientDiv">
-			<input type="text" class="recipientInfo" name="recipientName" placeholder="수령인 성함">
+			<input type="text" class="recipientInfo" id="recipientName" name="recipientName" placeholder="수령인 성함">
 			<input type="text" class="recipientInfo" id="recipientPhone" name="recipientPhone" placeholder="수령인 연락처">
-			<input type="text" class="recipientInfo" name="precautions" placeholder="배송시 요청사항">		
+			<input type="text" class="recipientInfo" id="precautions" name="precautions" placeholder="배송시 요청사항">		
 		</div>
 		
-		<h2 align="center">총 <em style="font-size:2em;">${totalPrice}</em>원 결제 합니다</h2>
+		<h2 align="center">총 <em style="font-size:2em;">${orderFunding.totalPrice}</em>원 결제 합니다</h2>
 		<hr>
 		
-	</form>
-		<button id="paymentBtn" onclick="requestPay()" class="btn-lg" style="background: #d4dfff;">
-		결제진행
-		</button>
+		<input type="button" value="결제진행" onclick="requestPay()" class="btn-lg" style="background: #d4dfff;">
 
-
+	
 </div> <!-- .container end -->
 
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

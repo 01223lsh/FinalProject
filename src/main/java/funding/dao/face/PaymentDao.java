@@ -4,6 +4,7 @@ import java.util.List;
 
 import funding.dto.Delivery;
 import funding.dto.Order;
+import funding.dto.Payment;
 import funding.dto.Reward;
 
 public interface PaymentDao {
@@ -39,5 +40,31 @@ public interface PaymentDao {
 	 * @param delivery - 주문번호가 들어있는 DTO객
 	 */
 	public void insertDelivery(Delivery delivery);
+	
+	/**
+	 * 주문번호가 있는 DTO객체를 이용하여 조회 
+	 * @param order - 주문번호가 있는 DTO객체
+	 * @return order
+	 */
+	public List<Order> selectRewardOrderByOrderNo(Order order);
+
+	/**
+	 * 결제 정보를 삽입하는 쿼리문 실행 
+	 * @param payment - 결제 정보
+	 */
+	public void insertPayment(Payment payment);
+
+	/**
+	 * rewardNo와 주문한 리워드 갯수가 있는 DTO객체를 이용하여 
+	 * reward 남은재고를 update 시키는 쿼리문
+	 * @param reward - 주문번호와 주문갯수가 있는 DTO 객체 
+	 */
+	public void updateRewardAmount(Reward reward);
+
+	/**
+	 * 해당 주문번호의 결제 상태를 변경하는 쿼리문
+	 * @param orderNo
+	 */
+	public void updateOrderStatus(int orderNo);
 
 }

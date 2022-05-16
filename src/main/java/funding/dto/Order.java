@@ -12,13 +12,15 @@ public class Order {
 	private int totalPrice;
 	private int rewardOrderNo;
 	private int rewardNo;
+	private String rewardName;
+	private String rewardIntro;
 	private int rewardCount;
-	
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate + ", orderStatus="
 				+ orderStatus + ", additionalFunding=" + additionalFunding + ", totalPrice=" + totalPrice
-				+ ", rewardOrderNo=" + rewardOrderNo + ", rewardNo=" + rewardNo + ", rewardCount=" + rewardCount + "]";
+				+ ", rewardOrderNo=" + rewardOrderNo + ", rewardNo=" + rewardNo + ", rewardName=" + rewardName
+				+ ", rewardIntro=" + rewardIntro + ", rewardCount=" + rewardCount + "]";
 	}
 	public int getOrderNo() {
 		return orderNo;
@@ -68,11 +70,22 @@ public class Order {
 	public void setRewardNo(int rewardNo) {
 		this.rewardNo = rewardNo;
 	}
+	public String getRewardName() {
+		return rewardName;
+	}
+	public void setRewardName(String rewardName) {
+		this.rewardName = rewardName;
+	}
+	public String getRewardIntro() {
+		return rewardIntro;
+	}
+	public void setRewardIntro(String rewardIntro) {
+		this.rewardIntro = rewardIntro;
+	}
 	public int getRewardCount() {
 		return rewardCount;
 	}
 	public void setRewardCount(int rewardCount) {
 		this.rewardCount = rewardCount;
 	}
-	
 }

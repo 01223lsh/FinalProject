@@ -156,7 +156,8 @@ dd p em {
 			<hr>
 		</div>
 		
-		<form action="/payment/order" method="get">
+		
+		<form action="/payment/chooseReward" method="post">
 		
 		<!-- 넘겨줄 프로젝트 번호 -->
 		<input type="hidden" name="projectNo" value="1">
@@ -178,7 +179,7 @@ dd p em {
 					</dt>
 					<dd>
 					
-					<p><label for="checkbox"><em class="rewardPrice">${i.rewardPrice}</em> 펀딩 합니다.</label></p>
+					<p><label for="checkbox"><em class="rewardPrice">${i.rewardPrice}</em>원 펀딩 합니다.</label></p>
 					<p>리워드 품명: ${i.rewardName }</p>
 					<p>리워드 구성내용: ${i.rewardIntro }<em>(${i.rewardAmount}남음)</em></p>
 					<p>배송비 없음 | 리워드 배송 예정일 : yyyy-mm-dd</p>

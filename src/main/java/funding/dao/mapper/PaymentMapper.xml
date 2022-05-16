@@ -43,6 +43,25 @@
 		VALUES (reward_order_seq.nextval, #{orderNo}, #{rewardNo}, #{rewardCount})
 	</insert>
 	
+	<select id="selectRewardOrderByOrderNo" resultType="funding.dto.Order" parameterType="funding.dto.Order">
+		SELECT ro.reward_order_no
+		, ro.order_no
+		, ro.reward_no
+		, ro.reward_count 
+		, r.reward_name 
+		, r.reward_intro
+		FROM reward_order ro, reward r
+		WHERE order_no = #{orderNo}
+		AND ro.reward_no  = r.reward_no
+	</select>
+
+	<insert id="insertPayment" parameterType="funding.dto.Payment">
+		INSERT INTO payment 
+		VALUES (payment_seq.nextval, #{projectNo}
+		, #{orderNo}, #{paymentCode}, #{paymentTotal}
+		, #{paymentMethod}, #{paymentDate})
+	</insert>
+
 	<insert id="insertDelivery" parameterType="funding.dto.Delivery">
 		INSERT INTO delivery
 		VALUES (delivery_seq.nextval, #{orderNo}
@@ -50,5 +69,15 @@
 		, #{addressExtra}, #{recipientName}, #{recipientPhone}
 		, #{precautions})
 	</insert>
-
+	
+	<update id="updateRewardAmount" parameterType="funding.dto.Reward">
+		UPDATE reward SET reward_amount = #{rewardAmount} 
+		WHERE reward_no = #{rewardNo}
+	</update>
+	
+	<update id="updateOrderStatus" parameterType="int">
+		UPDATE order_tb SET order_status = 1 
+		WHERE order_no = #{orderNo}
+	</update>
+	
 </mapper>
