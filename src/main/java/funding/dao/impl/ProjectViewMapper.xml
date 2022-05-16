@@ -7,8 +7,8 @@
 <mapper namespace="funding.dao.face.ProjectViewDao">
 
 <select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
-	SELECT project_no, member_no, category_id, project_title, project_intro,  project_price,
-			open_date, close_date, delivery_date, project_content, fund_price, project_step
+	SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
+			open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
 	FROM project
 	WHERE project_no = #{projectNo}
 
@@ -83,7 +83,26 @@
 
 
 </select>
+<resultMap type="funding.dto.MemberSeller" id="MemberSeller"/>
 
+<resultMap type="funding.dto.Member" id="Member">
+	<collection property="memberSeller" resultMap="MemberSeller"/>
+</resultMap>
+
+<select id="selectSeller" parameterType="funding.dto.Project" resultMap="Member">
+	SELECT a.nick, b.seller_info
+	FROM member a
+	JOIN member_seller b
+	ON a.member_no = b.member_no
+	WHERE a.member_no = #{memberNo}
+
+</select>
+<select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+
+	SELECT project_step, project_no
+	 FROM project
+	WHERE project_no = #{projectNo}
+</select>
 
 
 </mapper>

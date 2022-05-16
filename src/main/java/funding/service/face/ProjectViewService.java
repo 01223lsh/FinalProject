@@ -3,6 +3,8 @@ package funding.service.face;
 
 import java.util.List;
 
+import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -31,5 +33,9 @@ public interface ProjectViewService {
 	public void deleteComment(ProjectComment comment);
 
 	public List<Reward> getReward(Project project);
+
+	public Member getSeller(Project project);
+
+	public Project getStep(Project project);
 
 }

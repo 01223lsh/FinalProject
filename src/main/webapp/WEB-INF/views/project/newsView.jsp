@@ -36,3 +36,4 @@ $(document).ready(function() {
 <hr>
 ${news.newsContent }
 </div>
+<br><br><br><br><br><br><br>

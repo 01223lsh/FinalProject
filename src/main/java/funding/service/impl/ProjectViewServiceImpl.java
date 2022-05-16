@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import funding.dao.face.ProjectViewDao;
+import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -85,5 +87,17 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 	public List<Reward> getReward(Project project) {
 		
 		return projectViewDao.selectRewardList(project);
+	}
+	
+	@Override
+	public Member getSeller(Project project) {
+		
+		return projectViewDao.selectSeller(project);
+	}
+	
+	@Override
+	public Project getStep(Project project) {
+		
+		return projectViewDao.selectStep(project);
 	}
 }

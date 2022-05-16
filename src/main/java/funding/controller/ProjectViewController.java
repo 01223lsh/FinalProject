@@ -1,6 +1,7 @@
 package funding.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -29,7 +31,7 @@ public class ProjectViewController {
 	private ProjectViewService projectViewService;
 
 	@RequestMapping(value = "/project/view")
-	public String projectView(Project project, Model model) {
+	public String projectView(Project project, Model model, Member seller) {
 		logger.info("/projectView/view");
 		
 		if( project.getProjectNo() < 1 ) {
@@ -37,8 +39,10 @@ public class ProjectViewController {
 		}
 		
 		project = projectViewService.getProject(project);
+		seller = projectViewService.getSeller(project);
 		
 		model.addAttribute("project", project);
+		model.addAttribute("seller", seller);
 		
 		List<Reward> rewardList = projectViewService.getReward(project);
 		
@@ -46,26 +50,19 @@ public class ProjectViewController {
 		
 		
 		//남은 일 계산
-		int d = 0;
-        
-        Date date1= project.getCloseDate();
-        Date date2 = new Date(System.currentTimeMillis());
-         
-        long calDateDays = 0;
-        Date FirstDate = date1;
-        Date SecondDate = date2;
-           
-        long calDate = SecondDate.getTime()-FirstDate.getTime(); 
-           
-        // Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환 
-        // 24*60*60*1000을 나눠주면 일수 나옴
-        calDateDays = calDate / ( 24*60*60*1000); 
-   
-        calDateDays = Math.abs(calDateDays);
-           
-        d = (int)calDateDays;
-        
-        model.addAttribute("d", d);
+		Calendar today = Calendar.getInstance();
+		Calendar dday = Calendar.getInstance();
+		
+		dday.setTime(project.getCloseDate());
+		
+		long day = dday.getTimeInMillis()/86400000;
+		long tday = today.getTimeInMillis()/86400000;
+		
+		
+		long count = day - tday; //오늘날짜에 day날짜를 빼준다
+		
+		
+        model.addAttribute("d", (int)count+1);
 		
         return null;
         
@@ -83,24 +80,27 @@ public class ProjectViewController {
 	
 	
 	@RequestMapping(value = "/project/news/list")
-	public String projectNewsList(int projectNo, Model model) {
+	public String projectNewsList(Project project, Model model) {
 		
-		List<ProjectNews> newsList = projectViewService.getNewsList(projectNo);
+		List<ProjectNews> newsList = projectViewService.getNewsList(project.getProjectNo());
+		
+		project = projectViewService.getStep(project);
 		
 		model.addAttribute("newsList", newsList);
-		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("project", project);
 		
 		return "project/newsList";
 		
 	}
 	
 	@RequestMapping(value = "/project/comment/list")
-	public String projectCommentList(int projectNo, Model model) {
+	public String projectCommentList(Project project, Model model) {
 		
-		List<ProjectComment> commentList = projectViewService.getCommentList(projectNo);
+		List<ProjectComment> commentList = projectViewService.getCommentList(project.getProjectNo());
+		project = projectViewService.getStep(project);
 		
 		model.addAttribute("commentList", commentList);
-		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("project", project);
 		
 		return "project/commentList";
 	}
@@ -133,16 +133,18 @@ public class ProjectViewController {
 	}
 	
 	@PostMapping("/project/news/write")
-	public String writeProcess(ProjectNews news,Model model) {
+	public String writeProcess(ProjectNews news,Model model, Project project) {
 		logger.info("/news/write");
 		logger.info("{}",news);
 		
 		
 		projectViewService.writeNews(news);
+		project = projectViewService.getStep(project);
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
 		
 		model.addAttribute("newsList", newsList);
+		model.addAttribute("project", project);
 		return "project/newsList";
 		
 	}
@@ -162,7 +164,7 @@ public class ProjectViewController {
 	
 	
 	@RequestMapping(value = "/project/comment/write")
-	public String projectCommentWrite(Model model, ProjectComment comment) {
+	public String projectCommentWrite(Model model, ProjectComment comment, Project project) {
 		
 		logger.info("/project/comment/write");
 		logger.info("{}",comment);
@@ -170,9 +172,11 @@ public class ProjectViewController {
 		projectViewService.writeComment(comment);
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
+		project = projectViewService.getStep(project);
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("projectNo", comment.getProjectNo());
+		model.addAttribute("project", project);
 		
 		return "project/commentList";
 	}

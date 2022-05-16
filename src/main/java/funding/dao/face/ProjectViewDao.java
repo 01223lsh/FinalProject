@@ -2,6 +2,8 @@ package funding.dao.face;
 
 import java.util.List;
 
+import funding.dto.Member;
+import funding.dto.MemberSeller;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -30,5 +32,9 @@ public interface ProjectViewDao {
 	public void deleteComment(ProjectComment comment);
 
 	public List<Reward> selectRewardList(Project project);
+
+	public Member selectSeller(Project project);
+
+	public Project selectStep(Project project);
 
 }

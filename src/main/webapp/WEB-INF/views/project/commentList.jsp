@@ -36,7 +36,7 @@
 		$.ajax({
 			url:"/project/comment/delete" ,
 			type:"post",
-			data:{commentNo:no, projectNo:${projectNo}},
+			data:{commentNo:no, projectNo:${project.projectNo}},
 			dataType: "html",
 			success:function(res){
 				console.log("성공")
@@ -66,13 +66,22 @@
 <b>- 댓글</b>
 <br>
 <br>
-
+					
 <form id="commentForm">
-<input type="hidden" name="projectNo" value="${projectNo }">
+<input type="hidden" name="projectNo" value="${project.projectNo }">
 <table>
 	<tr>
 		<td><textarea id="commentContent" name="commentContent" style="width: 500px; height: 80px;"></textarea></td>
-		<td><button id="commentBtn" type="button" class="btn btn-primary" style="vertical-align: middle;">작성</button></td>
+		<td>
+		<c:choose>
+					<c:when test="${project.projectStep eq 3}">
+					<button id="commentBtn" type="button" class="btn btn-primary" style="vertical-align: middle;">작성</button>
+					</c:when>
+					<c:when test="${project.projectStep eq 4 }">
+					
+					</c:when>
+					</c:choose>
+		</td>
 	</tr>
 </table>
 

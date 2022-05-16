@@ -60,8 +60,7 @@
 </tr>
 <tr>
 	<td>내용</td>
-	<td><textarea style="width: 400px; height: 300px" id="newsContent" name="newsContent">
-	</textarea></td>
+	<td><textarea style="width: 400px; height: 300px" id="newsContent" name="newsContent"></textarea></td>
 	
 </tr>
 

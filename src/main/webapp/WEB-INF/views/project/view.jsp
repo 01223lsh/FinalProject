@@ -238,19 +238,29 @@ div {
 }
 
 /*content3*/
-#content3_1, #content3_2 {
+#content3{
+	width: 1000px;
+}
+
+#content3_1 {
 	float: left;
 }
 
-#content3_1,#content3_2 {
-	width: 560px;
+#content3_1 {
+	width: 600px;
 	margin-left: 50px;
 	text-align: left;
 }
 
-#content3_1>img {
-	width: 480px;
-	height: 330px;
+
+#content3_2{
+	width: 300px;
+	margin-left: 50px;
+	text-align: left;
+	float: right;
+	padding: 30px;
+	padding-bottom: 10px;
+	border: 1px solid black;
 }
 
 
@@ -260,7 +270,7 @@ div {
 	width: 300px;
 	margin-left: 50px;
 	text-align: left;
-	float: left;
+	float: right;
 }
 
 #reward div {
@@ -287,6 +297,11 @@ div {
 	padding-bottom: 10px;
 }
 
+a.disabled{
+	pointer-events: none;
+	cursor: default;
+}
+
 
 </style>
 </head>
@@ -295,7 +310,19 @@ div {
 
 	<div id="outer">
 		<div id="category">
-			<p>${project.categoryNo }</p>
+			<p>
+			<c:choose>
+			<c:when test="${project.categoryNo eq 1}">홈·리빙</c:when>
+			<c:when test="${project.categoryNo eq 2}">테크·가전</c:when>
+			<c:when test="${project.categoryNo eq 3}">향수·뷰티</c:when>
+			<c:when test="${project.categoryNo eq 4}">잡화</c:when>
+			<c:when test="${project.categoryNo eq 5}">의류</c:when>
+			<c:when test="${project.categoryNo eq 6}">디자인·예술</c:when>
+			<c:when test="${project.categoryNo eq 7}">푸드</c:when>
+			<c:when test="${project.categoryNo eq 8}">반려동물</c:when>
+			
+			</c:choose>
+			</p>
 		</div>
 		<br>
 
@@ -313,7 +340,13 @@ div {
 			<div id="content1_2">
 				<div id="content1_2_1">
 					<b>남은 기간</b><br>
+					<c:choose>
+					<c:when test="${d > 0}">
 					<b style="font-size: 25px;">${d }</b><small>일 남음</small>
+					</c:when>
+					<c:when test="${d <= 0 }"><b style="font-size: 25px;">종료</b></c:when>
+					</c:choose>
+				
 				</div>
 				<br> <br><br>
 				<div id="content1_2_4"><b>모인 금액</b></div><br>
@@ -332,25 +365,22 @@ div {
 					<b style="font-size: 25px;"><fmt:formatNumber type="number"
 							value="${project.fundPrice }" /></b><small>원 펀딩</small>
 				</div>
-				<br> <br> <a href="" type="button" class="btn btn-success"
-					id="btn-success1">펀딩하기</a> <br> <br>
-
-
-
-
-
-
+				<br> <br> 
+				<c:choose>
+					<c:when test="${project.projectStep eq 3}">
+					<a href="" type="button" class="btn btn-success"
+					id="btn-success1">펀딩하기</a>
+					</c:when>
+					<c:when test="${project.projectStep eq 4 }">
+					<a href="" type="button" class="btn btn-success disabled"
+					id="btn-success1">펀딩하기</a></c:when>
+					</c:choose>
+					 <br> <br>
 
 
 
 			</div>
 		</div>
-
-
-
-		
-
-
 
 
 
@@ -380,41 +410,55 @@ div {
 				${project.projectContent }
 			</div>
 			
-
-			<div id="reward">
 			
+			<div id="content3_2">
+			<p>판매자</p>
+			<p>소개</p>
+			<p>대화가능시간</p>
+			</div>
+			
+
+			<c:choose>
+					<c:when test="${project.projectStep eq 3}">
+					<div id="reward">
+			<br>
+			<b>- 리워드 선택</b>
+			<a href="/#?rewardNo=">
 					<div id="reward_1" class="reward_1">
 
-						<a href="pay.me?rno=<%--리워드번호 --%>"> <b
+						 <b
 							style="font-size: 17px;">1000원</b><br> <br>
 							<span>선물 없이 후원하기</span>
-						</a>
+						
 
 					</div>
+					</a>
 					<br>
 				<c:forEach var="reward" items="${rewardList }">
 				
 				<a href="/#?rewardNo=${reward.rewardNo }">
 					<div id="reward_1" class="reward_1">
 						
-						
 						 <b style="font-size: 17px;">${reward.rewardPrice }원 </b><br> <br>
 							<span>${reward.rewardName }</span><br>
 							<small>${reward.rewardIntro }</small>
-							
-						
-
+					
 					</div>
 					</a>
 					<br>
 				</c:forEach>
+				
 			</div>
+					</c:when>
+					<c:when test="${project.projectStep eq 4}">
+					
+					</c:when>
+					</c:choose>
+			
 
 		</div>
 
 	</div>
-
-
 
 
 </body>

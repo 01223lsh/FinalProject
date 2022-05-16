@@ -32,7 +32,7 @@ $.ajax({
 			$.ajax({
 				url:"/project/news/write",
 				type:"get",
-				data:{projectNo:${projectNo}},
+				data:{projectNo:${project.projectNo}},
 				dataType: "html",
 				success:function(res){
 					console.log("성공")
@@ -64,7 +64,15 @@ $.ajax({
 
 <div id="news1">
 <b>- 최근소식</b>
-<button id="newsWrite" class="btn btn-primary">작성하기</button>
+<c:choose>
+		<c:when test="${project.projectStep eq 3}">
+		<button id="newsWrite" class="btn btn-primary">작성하기</button>
+		</c:when>
+		<c:when test="${project.projectStep eq 4 }">
+		
+		</c:when>
+	</c:choose>
+
 <br>
 <hr>
 
@@ -82,3 +90,6 @@ $.ajax({
 </c:forEach>
 
 </div>
+
+
+<br><br><br><br><br><br>
