@@ -160,33 +160,34 @@ $(document).ready(function() {
 
 button {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
-	width: 70px;
-	height: 30px;
-	border: 2px solid #81BEF7;
+	border-radius: 7px;
+	background-color: #035397;
+	color: white; 
+	width: 53px;
+	height: 27px;
+	border: 0px solid #81BEF7; 
 	font-size: 15px;
+	font-weight: bold;
 
 }
 
 #dupBtn {
 
-	border-radius: 10px;
-	background-color: #538fd9;
-	color: #fff; 
-	width: 90px;
-	height: 30px;
-	border: 0px solid #81BEF7;
-	font-size: 15px;
-	font-weight: bold;
+	border-radius: 7px;
+    background-color: #035397;
+    color: #fff;
+    width: 69px;
+    height: 27px;
+    border: 0px solid #81BEF7;
+    font-size: 14px;
+    font-weight: bold;
 
 }
 
 
 input {
 	border-radius : 5px;
-	border: 1px solid #DDD;
+	border: 2px solid #DDD;
 	box-shadow: none;
 	text-align: center;
 }
@@ -208,6 +209,16 @@ input {
 }
 
 
+.all {
+
+/* 	border: 1px solid #035397; */
+/* 	border-radius: 15px; */
+
+}
+
+
+
+
 </style>
 
 
@@ -215,6 +226,7 @@ input {
 <div class="right">
 <!-- <div class="container"> -->
 <br><br>
+<div class="all">
 <h1 style="text-align: center;">회원 정보 수정</h1>
 <br><br><br>
 
@@ -227,7 +239,7 @@ input {
 	<div class="box"  style="height : 500px; " >
 	<div style="margin-bottom: 30px;">
 		<div class="title" >
-			<label for="id" style="padding-top: 4px; color: #538fd9">아이디</label>
+			<label for="id" style="padding-top: 4px; color: #2E4C6D">아이디</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="id" id="id" value="${info.id }"  readonly="readonly">	
@@ -236,7 +248,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >			
-			<label for="name" style="padding-top: 4px; color: #538fd9 ">이름</label>
+			<label for="name" style="padding-top: 4px; color: #2E4C6D ">이름</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="name" id="name" value="${info.name }" >	
@@ -246,7 +258,7 @@ input {
 
 	<div style="margin-bottom: 15px;">
 		<div class="title" >	
-			<label for="nick" style="padding-top: 4px; color: #538fd9">닉네임</label>
+			<label for="nick" style="padding-top: 4px; color: #2E4C6D">닉네임</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="nick" id="nick" value="${info.nick }" >
@@ -262,7 +274,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="pw" style="padding-top: 4px; color: #538fd9">비밀번호</label>
+			<label for="pw" style="padding-top: 4px; color: #2E4C6D">비밀번호</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="pw" id="pw" >	
@@ -271,7 +283,7 @@ input {
 
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="pwChk" style="padding-top: 4px; color: #538fd9">비밀번호 확인</label>
+			<label for="pwChk" style="padding-top: 4px; color: #2E4C6D">비밀번호 확인</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="pwChk" id="pwChk" >	
@@ -280,7 +292,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="email" style="padding-top: 4px; color: #538fd9">이메일</label>
+			<label for="email" style="padding-top: 4px; color: #2E4C6D">이메일</label>
 		</div>
 		<div class = "ans">
 			<input type="email" name="email" id="email" value="${info.email }">	
@@ -290,7 +302,7 @@ input {
 
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="phone" style="padding-top: 4px; color: #538fd9">전화번호</label>
+			<label for="phone" style="padding-top: 4px; color: #2E4C6D">전화번호</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="phone" id="phone" value="${info.phone }">	
@@ -305,7 +317,7 @@ input {
 
 
 
-<br><br><br>
+
 <div style="text-align: center;">
 <button type="button" onclick="location.href='./infoview'" style="margin-right: 15px;">취소</button>
 <button id="update" onclick="location.href='./infoupdate'" style="margin-right: 15px;">수정</button>
@@ -313,6 +325,7 @@ input {
 </div>
 
 </div><!-- infoform -->
+</div><!-- .all -->
 </div><!-- right -->
 </div><!-- .container end -->
 

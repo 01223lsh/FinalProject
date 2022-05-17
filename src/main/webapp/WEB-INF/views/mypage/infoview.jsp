@@ -64,16 +64,23 @@ input {
 button {
 
 	border-radius: 5px;
-	background-color: #538fd9;
+	background-color: #183F7B;
 	color: #fff; 
-	width: 70px;
-	height: 30px;
-	border: 2px solid #538fd9;
+	width: 51px;
+	height: 25px;
+	border: 0px solid #538fd9;
 	font-size: 15px;
 	font-weight: bold;
 
 }
 
+.all {
+
+/* 	border : 2px solid #2E4C6D; */
+/* 	border-radius: 10px; */
+	
+
+}
 
 </style>
 
@@ -83,12 +90,13 @@ button {
 <!-- <div class="container"> -->
 <div class="right">
 <br>
+<div class="all">
 <h1 style="text-align:center;">회원 정보</h1>
 <br><br><br>
 
 
 	<div class="class="row">
-		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #538fd9;"  class="col-md-1 col-md-offset-3">
+		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #2E4C6D;"  class="col-md-1 col-md-offset-3">
 			<label for="id" style="padding-top: 4px;">아이디</label>
 		</div>
 		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
@@ -97,7 +105,7 @@ button {
 	</div>
 	<br><br><br>
 	<div class="class="row">
-		<div style="width: 120px; background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #538fd9;" class="col-md-1 col-md-offset-4">
+		<div style="width: 120px; background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #2E4C6D;" class="col-md-1 col-md-offset-4">
 			<label for="name" style="padding-top: 4px;">이름</label>
 		</div>
 		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
@@ -106,7 +114,7 @@ button {
 	</div>
 	<br><br><br>
 	<div class="class="row">
-		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #538fd9;" class="col-md-1 col-md-offset-4">
+		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #2E4C6D;" class="col-md-1 col-md-offset-4">
 			<label for="nick" style="padding-top: 4px;">닉네임</label>
 		</div>
 		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
@@ -116,7 +124,7 @@ button {
 
 	<br><br><br>
 	<div class="class="row">
-		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #538fd9;" class="col-md-1 col-md-offset-4">
+		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #2E4C6D;" class="col-md-1 col-md-offset-4">
 			<label for="email" style="padding-top: 4px;">이메일</label>
 		</div>
 		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
@@ -125,7 +133,7 @@ button {
 	</div>
 	<br><br><br>
 	<div class="class="row">
-		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #538fd9;" class="col-md-1 col-md-offset-4">
+		<div style="width: 120px;  background-color: #fff; border-radius: 5px; text-align: center; margin-left:30%; color: #2E4C6D;" class="col-md-1 col-md-offset-4">
 			<label for="phone" style="padding-top: 4px;">전화번호</label>
 		</div>
 		<div class="col-md-1 col-md-offset-1" style="width: 250px;">
@@ -138,7 +146,7 @@ button {
 <button onclick="location.href='./infoupdate'" style="margin-right: 15px;">수정</button>
 <button id="delete">탈퇴</button>
 </div>
-
+</div><!-- .all -->
 </div><!-- right -->
 </div><!-- .container end -->
 

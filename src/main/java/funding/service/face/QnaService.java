@@ -25,4 +25,6 @@ public interface QnaService {
 
 	public Qna qnareview(Qna qnaview);
 
+	public void deleteAd(Qna qna);
+
 }

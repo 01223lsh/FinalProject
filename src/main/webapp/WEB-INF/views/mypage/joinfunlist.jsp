@@ -53,6 +53,20 @@ a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
 
 
+button {
+
+	border-radius: 5px;
+	background-color: #183F7B;
+	color: #fff; 
+	width: 51px;
+	height: 25px;
+	border: 0px solid #538fd9;
+	font-size: 15px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+
 </style>
 
 

@@ -16,12 +16,12 @@ input {
 
 button {
 
-	border-radius: 8px;
-	background-color : #538fd9;
+	border-radius: 5px;
+	background-color : #183F7B;
 	color: #fff; 
-	width: 70px;
-	height: 30px;
-	border: 2px solid #538fd9;
+	width: 63px;
+	height: 28px;
+	border: 0px solid #538fd9;
 	font-size: 15px;
 	font-weight: bold;
 
@@ -38,6 +38,19 @@ p {
 	text-align: center;
 }
 
+.all {
+
+    border: 3px solid #183F7B;
+    width: 549px;
+    height: 308px;
+    border-radius: 15px;
+    padding-top: 42px;
+    margin: 0 auto;
+    margin-top: 13%;
+
+}
+
+
 </style>
 
 
@@ -45,8 +58,8 @@ p {
 
 <!-- <div class="container"> -->
 <div class="right">
-
-	<p style="font-size: 17px; font-weight: bold; margin-top: 200px;">개인정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
+	<div class="all">
+	<p style="font-size: 17px; font-weight: bold;">개인정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
 	
 	<div class="pwform">
 	<form action="/mypage/mypagepwchk" method="post">
@@ -59,12 +72,13 @@ p {
 		</div>
 	</div>
 	
-<br><br><br><br><br>
+<br><br><br>
 <div style="text-align: center; ">
 <button>확인</button>
 </div>
 </form>
 </div> <!-- .pwform -->
+</div><!-- .all -->
 </div><!-- right -->
 </div><!-- .container end -->
 

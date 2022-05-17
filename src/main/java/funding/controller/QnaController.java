@@ -161,6 +161,16 @@ public class QnaController {
 		
 	}
 	
+	@RequestMapping(value = "/qna/qnadeleteAd")
+	public String deleteAd(Qna qna) {
+		
+		logger.info("컨트롤러로 받아온 삭제용 게시글 번호 : {}", qna.getQnaNo());
+		
+		qnaService.deleteAd(qna);
+		
+		return "redirect:/qna/list";
+		
+	}
 	
 	
 	

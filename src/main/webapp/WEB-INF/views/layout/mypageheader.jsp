@@ -28,12 +28,14 @@ $(document).ready(function() {
 	 	 $("#delete").click(function(){
 		 
 		 if("${id}"==kakao){
-			 $(location).attr("href", "/member/naverunlink");
+			 $(location).attr("href", "https://www.naver.com/");
+// 			 $(location).attr("href", "/member/kakaounlink");
 			 console.log(${id} == kakao);
 		 };
 		 
 		 if("${id}"==naver){
 			 $(location).attr("href", "https://www.google.com/");
+// 			 $(location).attr("href", "/member/naverunlink");
 
 		 };
 	 	 }); 
@@ -207,7 +209,7 @@ ul {
 
 li a:hover {
 /* 	background-color : #538fd9; */
-    color: #4391e4;
+    color: #183F7B;
   text-decoration: none;
 }
 

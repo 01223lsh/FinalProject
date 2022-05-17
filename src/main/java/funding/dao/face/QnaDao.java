@@ -31,6 +31,8 @@ public interface QnaDao {
 
 	public Qna selectQnareByQnarefer(Qna qnaview);
 
+	public void deleteQnaAd(Qna qna);
+
 	
 	
 	

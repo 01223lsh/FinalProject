@@ -16,11 +16,11 @@ input {
 button {
 
 	border-radius: 5px;
-	background-color: #538fd9;
+	background-color: #2E4C6D;
 	color: #fff; 
-	width: 70px;
-	height: 30px;
-	border: 2px solid #538fd9;
+	width: 54px;
+	height: 29px;
+ 	border: 0px solid #538fd9;
 	font-size: 15px;
 	font-weight: bold;
 
@@ -57,7 +57,7 @@ button {
 <!-- 	<div class="sellerinfo" style="margin: 0 auto; width: 50%;"> -->
 		<div>
 			<div class="front">
-				<label for="bankName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color: #538fd9">은행명</label>
+				<label for="bankName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color: #2E4C6D">은행명</label>
 			</div>
 			<div style="display: inline;" class="data">
 				${sellerinfo.bankName }
@@ -65,7 +65,7 @@ button {
 			<br><br><br>
 		
 			<div class="front">
-				<label for="accountNumber" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #538fd9" >계좌번호</label>
+				<label for="accountNumber" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #2E4C6D" >계좌번호</label>
 			</div>
 			<div style="display: inline;" class="data">
 				${ sellerinfo.accountNumber}
@@ -73,7 +73,7 @@ button {
 			<br><br><br>
 			
 			<div class="front">
-				<label for="accountName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color : #538fd9 ">예금주</label>
+				<label for="accountName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color : #2E4C6D ">예금주</label>
 			</div>
 			<div style="display: inline;" class="data">
 				${ sellerinfo.accountName}
@@ -82,7 +82,7 @@ button {
 			
 			<div>
 				<div class="front" style="display: inline-block; float: left; background : none; padding: 8px 0px 8px 0px;;">
-					<label for="sellerInfo" style="margin-bottom: 20px; font-weight: bold; width: 115px; background-color: #fff; padding: 4px 2px; border-radius: 10px; color : #538fd9">판매자 소개</label>
+					<label for="sellerInfo" style="margin-bottom: 20px; font-weight: bold; width: 115px; background-color: #fff; padding: 4px 2px; border-radius: 10px; color : #2E4C6D">판매자 소개</label>
 				</div>
 				<div style="display:inline-block; width: 300px; float: left; margin-left: 15%;" class="data2" >
 					${ sellerinfo.sellerInfo}

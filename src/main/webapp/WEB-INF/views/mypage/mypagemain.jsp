@@ -156,6 +156,18 @@ button {
 	font-weight: bold;
 
 }
+
+#main {
+
+/* 	border: 2px solid #DDD; */
+	border-radius: 8px;
+	margin-left : 10%;
+	height: 100%;
+	width: 80%;
+
+
+}
+
 </style>
 
 
@@ -166,7 +178,7 @@ button {
 
 
 <div>
-<p style="font-size: 20px; font-weight: bolder; margin-top: 80px; display: inline-block;">${nick }님, 안녕하세요! </p>
+<p style="font-size: 20px; font-weight: bolder; margin-top: 40px; display: inline-block;">${nick }님, 안녕하세요! </p>
 <img src="/resources/img/mypage/smile.png" alt="안나오네" height="25px" width="25px;" style="margin-top: -10px;">
 </div><br><br>
 <%-- <span>안녕하세요! 등급확인을 해보죠 ${grade }</span> --%>
@@ -379,7 +391,7 @@ button {
 </div><!-- boderSeller -->
 
 <br>
-<div class="border2" style="margin-top: 50px;">
+<div class="border2" style="margin-top: 20px;">
 	<div id="first" style="height: 280px; width: 100%;">
 		<div style="height: 10%; line-height: 40px;">
 			<span style="font-size: 18px; font-weight: bold;">나의 최근 문의내역</span>
@@ -413,15 +425,15 @@ button {
 <br>
 <!-- <div style="clear: both;"></div> -->
 
-<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+<div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/notice2.png" alt="안나오네" height="40px" width="40px;" style="margin-top: -10px;">
 	<a href="/notice/list"><button>공지사항</button></a>
 </div>
-<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+<div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/guide.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -10px;">
 	<a href="/main/guide"><button>이용가이드</button></a>
 </div>
-<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+<div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/cs.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -15px;">
 	<a href="/qna/list"><button>고객센터</button></a>
 </div>

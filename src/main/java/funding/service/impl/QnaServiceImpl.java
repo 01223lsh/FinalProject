@@ -124,6 +124,14 @@ public class QnaServiceImpl implements QnaService{
 
 	}
 	
+	
+	@Override
+	public void deleteAd(Qna qna) {
+		logger.info("삭제하려는 글 번호 : {}", qna.getQnaNo());
+
+		qnaDao.deleteQnaAd(qna);
+	}
+	
 	@Override
 	public int qnaReCnt(Qna viewqna) {
 		return qnaDao.selectCntQnare(viewqna);

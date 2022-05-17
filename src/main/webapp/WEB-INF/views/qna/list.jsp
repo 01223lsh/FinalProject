@@ -33,8 +33,14 @@ input  {
 
 
 button {
-	border-radius: 3px;
-	border: 1px solid black;
+    border-radius: 5px;
+    border: 0px solid black;
+/*     background-color: #183F7B; */
+    background-color: #396EB0;
+    color: white;
+    width: 55px;
+    height: 25px;
+/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
 }
 
 select {
@@ -60,14 +66,14 @@ select {
 <!-- <hr> -->
 
 
-<table style="margin: auto; width: 100%;  border-radius: 10px; margin-top: 100px;" >
+<table style="margin: auto; width: 100%;  border-radius: 10px; margin-top: 70px;" >
 
 	<tr style="border-bottom: 2px #DDD solid;">
-		<th style="width: 5%;">글번호</th>
-		<th style="width: 45%">제목</th>
-		<th style="width: 10%">작성자</th>
+		<th style="width: 5%; font-size: 17px;">글번호</th>
+		<th style="width: 45%; font-size: 17px;">제목</th>
+		<th style="width: 10%; font-size: 17px;">작성자</th>
 <!-- 		<th style="width: 5%">조회수</th> -->
-		<th style="width: 10%">작성일</th>
+		<th style="width: 10%; font-size: 17px;">작성일</th>
 	</tr>
 	
 	
@@ -86,7 +92,7 @@ select {
 <div class="pull-right">
 <span >총 게시글 수 : ${paging.totalCount }</span>
 </div>
-<br><br>
+<br><br><br>
 <div><!-- searchform -->
 <form action="/qna/list" method="get">
 
