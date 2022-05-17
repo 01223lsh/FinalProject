@@ -13,6 +13,12 @@ window.onload = function(){
 	sumPrice()
 }
 
+//가격표시에 콤마를 표시해주는 함수 
+// $("#rewardPrice").on("keyup", function(e){ 
+// $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,').replace(/(^0+)/, "")); });
+	
+// function uncomma(str) { str = "" + str.replace(/,/gi, ''); str = str.replace(/(^\s*)|(\s*$)/g, ""); return (new Number(str));//문자열을 숫자로 반환 }
+
 //toggleAmount()는 onclick이라는 이벤트에 의해서 실헹 되기 때문에 
 //window.onload 를 통하여 페이지의 요소가 모두 로드되고 함수가 호출 되도록한다.
 //결제 페이지로 넘어가기전 선택한 리워드의 수량을 선택할 수 있도록 해준다.
@@ -32,7 +38,7 @@ function sumPrice() {
 	var checkBox = document.getElementsByName("rewardNo")
 	var rewardCount = document.getElementsByName("rewardCount")
 	var rewardPrice = document.getElementsByClassName("rewardPrice")
-	var addition = document.getElementById("additionalFunding")
+	var addition = document.getElementById("addtionalFunding")
 	
 	var sumArr = []
 	var sum = 0
@@ -160,8 +166,8 @@ dd p em {
 		<form action="/payment/chooseReward" method="post">
 		
 		<!-- 넘겨줄 프로젝트 번호 -->
-		<input type="hidden" name="projectNo" value="1">
-		<!-- 넘겨줄 프로젝트 번호 -->
+		<input type="hidden" name="projectNo" value="${projectNo}">
+		
 		<div class="rewardList">
 			<c:forEach var="i" items="${rewardList }">
 			<ul>
@@ -199,7 +205,7 @@ dd p em {
 		<div>
 			<h4 style="font-weight: bold;">추가 펀딩금 (선택)</h4>
 			<p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
-			<input type="text" id="additionalFunding" name="additionalFunding" min="0" maxlength="9" 
+			<input type="text" id="addtionalFunding" name="addtionalFunding" min="0" maxlength="9" 
 			oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 			value="0" onkeyup="sumPrice()">
 			원을 추가로 후원합니다. <em style="font-style: 12px;">(최대 9자리)</em>
@@ -209,7 +215,7 @@ dd p em {
 			</p>
 			<hr>
 			<button id="paymentBtn" class="btn-lg" style="background: #d4dfff;">
-			다음 단계로 >>
+				다음 단계로 >>
 			</button>
 		</div>
 		

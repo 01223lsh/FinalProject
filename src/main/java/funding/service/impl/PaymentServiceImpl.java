@@ -10,6 +10,7 @@ import funding.dao.face.PaymentDao;
 import funding.dto.Delivery;
 import funding.dto.Order;
 import funding.dto.Payment;
+import funding.dto.Project;
 import funding.dto.Reward;
 import funding.service.face.PaymentService;
 
@@ -18,6 +19,11 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	PaymentDao paymentDao;
+	
+	@Override
+	public List<Reward> rewardListByProjectNo(int projectNo) {
+		return paymentDao.selectRewardByProjectNo(projectNo);
+	}
 	
 	@Override
 	public List<Reward> rewardList() {
@@ -101,11 +107,21 @@ public class PaymentServiceImpl implements PaymentService {
 			reward.setRewardAmount(reward.getRewardAmount() - rewardOrderList.get(i).getRewardCount());
 			
 			paymentDao.updateRewardAmount(reward);
+			
 		}
 	}
 	
 	@Override
 	public void changeStatus(int orderNo) {
 		paymentDao.updateOrderStatus(orderNo);
+	}
+	
+	@Override
+	public Project checkProjectTitle(Project project) {
+		return paymentDao.selectProjectTitleByProjectNo(project);
+	}
+	@Override
+	public Order detailOrder(Order order) {
+		return paymentDao.selectByOrderNo(order);
 	}
 }

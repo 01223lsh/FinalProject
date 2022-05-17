@@ -5,6 +5,20 @@
   
 <mapper namespace="funding.dao.face.PaymentDao">
 
+	<select id="selectRewardByProjectNo" parameterType="int" resultType="funding.dto.Reward">
+		SELECT 
+		reward_no
+		, project_no
+		, reward_price
+		, reward_amount
+		, reward_name
+		, reward_intro
+		, reward_state  
+		FROM reward 
+		WHERE project_no = #{projectNo}
+		ORDER BY reward_no DESC
+	</select>
+	
 	<select id="selectReward" resultType="funding.dto.Reward">
 		SELECT 
 		reward_no
@@ -14,7 +28,7 @@
 		, reward_name
 		, reward_intro
 		, reward_state  
-		FROM reward
+		FROM reward ORDER BY reward_no DESC
 	</select>
 	
 	<select id="selectByRewardNo" resultType="funding.dto.Reward" parameterType="funding.dto.Reward">
@@ -35,7 +49,7 @@
 			SELECT order_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO order_tb
-		VALUES (#{orderNo}, 0, sysdate, 0, #{additionalFunding}, #{totalPrice})
+		VALUES (#{orderNo}, 0, CURRENT_DATE, 0, #{addtionalFunding}, #{totalPrice})
 	</insert>	
 	
 	<insert id="insertRewardOrder">
@@ -59,7 +73,7 @@
 		INSERT INTO payment 
 		VALUES (payment_seq.nextval, #{projectNo}
 		, #{orderNo}, #{paymentCode}, #{paymentTotal}
-		, #{paymentMethod}, #{paymentDate})
+		, #{paymentMethod})
 	</insert>
 
 	<insert id="insertDelivery" parameterType="funding.dto.Delivery">
@@ -79,5 +93,21 @@
 		UPDATE order_tb SET order_status = 1 
 		WHERE order_no = #{orderNo}
 	</update>
+	
+	<select id="selectProjectTitleByProjectNo" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+		SELECT project_no, project_title
+		FROM project WHERE project_no = #{projectNo}
+	</select>
+	
+	<select id="selectByOrderNo" parameterType="funding.dto.Order" resultType="funding.dto.Order">
+		SELECT order_no
+		, member_no
+		, order_date
+		, order_status
+		, addtional_funding
+		, total_price
+		FROM order_tb
+		WHERE order_no = #{orderNo} 
+	</select>
 	
 </mapper>

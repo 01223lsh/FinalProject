@@ -142,7 +142,7 @@
 	<div class="priceInfo">
 		<dl>
 			<dt>추가 펀딩금: </dt>
-			<dd>${order.additionalFunding }원</dd>
+			<dd>${order.addtionalFunding }원</dd>
 			<dt>총 금액: </dt>
 			<dd>${order.totalPrice }원</dd>
 		</dl>
@@ -155,8 +155,9 @@
 	
 	<hr>
 		
-		<input type="hidden" id="projectNo" name="projectNo" value="1">
-		<input type="hidden" id="orderNo" name="orderNo" value="${orderFunding.orderNo }">
+		<input type="hidden" id="projectNo" name="projectNo" value="${project.projectNo}">
+		<input type="hidden" id="projectTitle" value="${project.projectTitle}">
+		<input type="hidden" id="orderNo" name="orderNo" value="${order.orderNo }">
 		
 		<div class="addressInfo">
 			<input type="text" class="dForm" name="postalCode" id="sample6_postcode" placeholder="우편번호">
@@ -175,7 +176,7 @@
 			<input type="text" class="recipientInfo" id="precautions" name="precautions" placeholder="배송시 요청사항">		
 		</div>
 		
-		<h2 align="center">총 <em style="font-size:2em;">${orderFunding.totalPrice}</em>원 결제 합니다</h2>
+		<h2 align="center">총 <em style="font-size:2em;">${order.totalPrice}</em>원 결제 합니다</h2>
 		<hr>
 		
 		<input type="button" value="결제진행" onclick="requestPay()" class="btn-lg" style="background: #d4dfff;">

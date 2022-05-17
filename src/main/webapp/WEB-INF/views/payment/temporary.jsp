@@ -53,7 +53,7 @@ dl dd {color: #4a4a4a;}
 	
 	
 	<button id="rewardBtn" 
-	onclick="location.href='/payment/chooseReward?rewardNo=${i.rewardNo}'">
+	onclick="location.href='/payment/chooseReward?rewardNo=${i.rewardNo}&projectNo=${i.projectNo}'">
 		<div class="rewardInfo">
 		<dl>
 			<dt>리워드 가격: ${i.rewardPrice }</dt>

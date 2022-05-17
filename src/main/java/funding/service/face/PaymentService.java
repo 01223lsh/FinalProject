@@ -5,6 +5,7 @@ import java.util.List;
 
 import funding.dto.Order;
 import funding.dto.Payment;
+import funding.dto.Project;
 import funding.dto.Reward;
 
 /**
@@ -16,6 +17,12 @@ import funding.dto.Reward;
  *
  */
 public interface PaymentService {
+	
+	/**
+	 * 프로젝트 번호에 대한 reward 목록을 조회한다.
+	 * @return - rewardList
+	 */
+	public List<Reward> rewardListByProjectNo(int projectNo);
 	
 	/**
 	 * reward 목록을 조회한다.
@@ -71,4 +78,17 @@ public interface PaymentService {
 	 * @param orderNo
 	 */
 	public void changeStatus(int orderNo);
+
+	/**
+	 * 프로젝트 번호를 통하여 프로젝트 타이틀을 조회
+	 * @param project - 프로젝트 번호가 있는 DTO
+	 */
+	public Project checkProjectTitle(Project project);
+
+	/**
+	 * orderNo가 있는 order DTO객체를 이용하여 상세정보 조
+	 * @param order - 주문번호가 있는 DTO
+	 * @return
+	 */
+	public Order detailOrder(Order order);
 }

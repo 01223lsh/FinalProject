@@ -12,13 +12,14 @@ $(document).ready(function() {
 	
 function requestPay() {
 	// IMP.request_pay(param, callback) 결제창 호출
+	// order.jsp 와 분리 해두었기 때문에 에러 빨간줄이 생길 수도 있습니다. -> 문제 없이 작동
 	IMP.request_pay({ 
 		// param
 		pay_method: "card",
 		merchant_uid: "merchant_uid" + new Date().getTime(),
-		customer_uid: "customer_uid", //빌링키 발급 왜 안됨?
+// 		customer_uid: "customer_uid", //빌링키 발급 왜 안됨?
 // 		name: "프로젝트 이름 "
-		name: "테스트 이름",
+		name: $("#projectTitle").val(),
 // 		amount: 0,
 		amount: ${order.totalPrice},
 		buyer_email: "dudwo2144@gmail.com",
@@ -55,7 +56,7 @@ function requestPay() {
 				})
 			}).done(function (data) {
 				// 가맹점 서버 결제 API 성공시 로직
-				location.href="/payment/result?orderNo=" + $("#orderNo").val();
+				location.href="/payment/result?orderNo=" + $("#orderNo").val() + "&projectNo=" + $("#projectNo").val();
 			})
 		}
 	    else {

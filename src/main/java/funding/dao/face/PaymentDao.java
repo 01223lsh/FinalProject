@@ -5,9 +5,17 @@ import java.util.List;
 import funding.dto.Delivery;
 import funding.dto.Order;
 import funding.dto.Payment;
+import funding.dto.Project;
 import funding.dto.Reward;
 
 public interface PaymentDao {
+	
+	/**
+	 * 프로젝트 번호에 해당되는 리워드 리스트를 조회하는 쿼리문 
+	 * @param projectNo - 프로젝트 번호
+	 * @return
+	 */
+	public List<Reward> selectRewardByProjectNo(int projectNo);
 
 	/**
 	 * reward를 조회하는 쿼리문 실행
@@ -67,4 +75,17 @@ public interface PaymentDao {
 	 */
 	public void updateOrderStatus(int orderNo);
 
+	/**
+	 * 해당 프로젝트 번호의 프로젝트 타이틀을 조회하는 쿼리문 
+	 * @param project - 프로젝트 번호가 있는 DTO
+	 * @return
+	 */
+	public Project selectProjectTitleByProjectNo(Project project);
+
+	/**
+	 * 해당 주문번호의 상세정보 조회 쿼리문
+	 * @param order - 주문번호가 있는 DTO
+	 * @return
+	 */
+	public Order selectByOrderNo(Order order);
 }
