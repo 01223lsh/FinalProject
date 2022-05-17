@@ -20,6 +20,24 @@ $(document).ready(function() {
 	if("${socialchk}"==0){
 		$("#memberinfo").hide();
 		$("#delete").show();
+		
+		
+		
+	 	var kakao = "kakaoUser";
+	 	var naver = "naverUser";
+	 	 $("#delete").click(function(){
+		 
+		 if("${id}"==kakao){
+			 $(location).attr("href", "/member/naverunlink");
+			 console.log(${id} == kakao);
+		 };
+		 
+		 if("${id}"==naver){
+			 $(location).attr("href", "https://www.google.com/");
+
+		 };
+	 	 }); 
+		
 	};
 	
 	if("${grade}"==0){
@@ -30,7 +48,28 @@ $(document).ready(function() {
 		$("#makefunding").show();
 	};
 	
+// 	var id = ${id};
+// 	var kakao = "kakaoUser";
+// 	var naver = "naverUser";
+	
+// 	 $("#delete").click(function(){
+		 
+// 		 if(${id}==kakao){
+// 			 $(location).attr("href", "https://www.naver.com/");
+// 			 console.log(${id} == kakao);
+// 		 };
+		 
+// 		 if(${id}==naver){
+// 			 $(location).attr("href", "https://www.google.com/");
+
+// 		 };
+	
+	
+	
 });//end
+
+
+
 	
 // $(document).ready(function() {
 	
@@ -51,7 +90,7 @@ $(document).ready(function() {
 // 		 }
 	
 	
-// });
+// })
 	
 	
 	
@@ -197,8 +236,16 @@ a:vistied {
 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
 	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none;">내가 제작한 펀딩</a></li>
 	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
-	<li><a class="m"  id="delete" style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
 	
+	<c:if test="${id.equals('kakaoUser')}">
+	<li><a class="m"  class="delete" id="deleteK" href="/member/kakaounlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
+	</c:if>
+	<c:if test="${id.equals('naverUser')}">
+	<li><a class="m"  class="delete" id="deleteN" href="/member/naverunlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
+	</c:if>
+	
+		<li><a class="m"  id="delete" style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
+		
 	
 </ul>
 </div> <!-- menu -->
