@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import funding.dao.face.MypageDao;
 import funding.dao.face.QnaDao;
 import funding.dto.Qna;
 import funding.service.face.QnaService;
@@ -49,6 +50,15 @@ public class QnaServiceImpl implements QnaService{
 		Qna qna = qnaDao.selectByQnaNo(viewqna);
 		
 		return qna;
+	}
+	
+	@Override
+	public Qna qnareview(Qna qnaview) {
+	
+	//답글 가져오기
+	Qna qnare = qnaDao.selectQnareByQnarefer(qnaview);
+	
+	return qnare;
 	}
 	
 	@Override
@@ -120,6 +130,7 @@ public class QnaServiceImpl implements QnaService{
 	}
 	
 	
+
 	
 	
 }

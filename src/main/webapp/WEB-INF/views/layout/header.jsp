@@ -31,7 +31,7 @@ button {
 
 .container {
 	position: relative;
-	border: 1px solid black;
+	border: 0px solid black;
 	height: 1500px;;
 }
 

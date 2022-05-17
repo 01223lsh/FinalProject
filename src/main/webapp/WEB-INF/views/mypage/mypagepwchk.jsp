@@ -9,20 +9,21 @@
 <style>
 
 input {
-	border: 1px solid #2E9AFE;
+	border: 2px solid #DDD;
 	text-align: center;
 	border-radius: 5px;
 }
 
 button {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
+	border-radius: 8px;
+	background-color : #538fd9;
+	color: #fff; 
 	width: 70px;
 	height: 30px;
-	border: 2px solid #81BEF7;
+	border: 2px solid #538fd9;
 	font-size: 15px;
+	font-weight: bold;
 
 }
 
@@ -44,10 +45,8 @@ p {
 
 <!-- <div class="container"> -->
 <div class="right">
-<br>
-<h1 style="text-align: center;">비밀번호 확인</h1>
-<br><br><br>
-	<p>개인정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
+
+	<p style="font-size: 17px; font-weight: bold; margin-top: 200px;">개인정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
 	
 	<div class="pwform">
 	<form action="/mypage/mypagepwchk" method="post">

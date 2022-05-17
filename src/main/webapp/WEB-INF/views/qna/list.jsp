@@ -56,11 +56,11 @@ select {
 
 <div id="qnalist" style="text-align: center;" >
 
-<h1>고객센터</h1>
+<!-- <h1>고객센터</h1> -->
 <!-- <hr> -->
 
 
-<table style="margin: auto; width: 100%;  border-radius: 10px; margin-top: 50px;" >
+<table style="margin: auto; width: 100%;  border-radius: 10px; margin-top: 100px;" >
 
 	<tr style="border-bottom: 2px #DDD solid;">
 		<th style="width: 5%;">글번호</th>
@@ -110,8 +110,8 @@ select {
 </div><!-- searchform -->
 <br>
 
-</div><!-- main -->
+</div><!-- main --><br><br>
+<c:import url="/WEB-INF/views/qna/listpaging.jsp" />
 </div><!-- container -->
 
-<c:import url="/WEB-INF/views/qna/listpaging.jsp" />
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

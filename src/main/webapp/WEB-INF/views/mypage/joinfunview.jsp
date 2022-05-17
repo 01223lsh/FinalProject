@@ -59,8 +59,8 @@
 <div class="cont" style="text-align: left; margin-top: 20px;">
 	<p style="font-weight: bold;" >${view[0].CATEGORY_NAME }</p>
 	
-	<c:if test="${view[0].PROJECT_STEP ==3}"><p>펀딩 진행중</p></c:if>
-	<c:if test="${view[0].PROJECT_STEP ==4}"><p>펀딩 종료</p></c:if>
+	<c:if test="${view[0].PROJECT_STEP ==3}"><p style="color: blue; font-weight: bold;">펀딩 진행중</p></c:if>
+	<c:if test="${view[0].PROJECT_STEP ==4}"><p style="color: tomato; font-weight: bold;">펀딩 종료</p></c:if>
 	
 	<a href="/project/view?projectNo=${view[0].PROJECT_NO }"><p style="font-weight: bolder; font-size: 30px;">${view[0].PROJECT_TITLE }</p></a> 
 	<p style=" font-size: 15px; font-weight: bold;">by ${seller }</p>
@@ -82,9 +82,9 @@
 			<br>
 			<div>
 			<span style="float: left;">결제 상태</span>
-			<c:if test="${view[0].ORDER_STATUS==0}"><span style="float: right;">결제 전</span></c:if>
-			<c:if test="${view[0].ORDER_STATUS==1}"><span style="float: right;">결제 완료</span></c:if>
-			<c:if test="${view[0].ORDER_STATUS==2}"><span style="float: right;">결제 취소</span></c:if>
+			<c:if test="${view[0].ORDER_STATUS==0}"><span style="float: right; color: orange; font-weight: bold;">결제 전</span></c:if>
+			<c:if test="${view[0].ORDER_STATUS==1}"><span style="float: right; color: blue; font-weight: bold;">결제 완료</span></c:if>
+			<c:if test="${view[0].ORDER_STATUS==2}"><span style="float: right; color: tomato; font-weight: bold;">결제 취소</span></c:if>
 			</div>
 			<br>
 		</div>
@@ -118,19 +118,17 @@
 				
 				<span>추가후원금</span><br><br>
 				<span>최종 결제 금액</span><br><br>
-				<span>결제방법(추후추가)</span><br>
-				<span>결제수단(추후추가)</span><br>
+				<span>결제수단</span><br>
 				<br>
 				</div>	
 
 				<div  style=" text-align: right;">
 				<c:forEach var="v" items="${view }" begin="0" end="${fn:length(view)}" >
-				<span >${v.REWARD_PRICE} *${v.REWARD_COUNT}	  ${v.REWARD_PRICE * v.REWARD_COUNT}</span><br>
+				<span >(${v.REWARD_PRICE} *${v.REWARD_COUNT})	 &nbsp;&nbsp; &#8361;&nbsp;${v.REWARD_PRICE * v.REWARD_COUNT}</span><br>
 				</c:forEach>
 				<span>${view[0].ADDTIONAL_FUNDING}</span><br><br>
 				<span>${view[0].TOTAL_PRICE}</span><br><br>
-				<span>신용(체크)카드사(추후추가)</span><br>
-				<span>****~*7431(추후추가)<br>
+				<span>${paymentinfo.paymentMethod}</span><br>
 				</div>
 				
 <!-- 				<div class="clearfix"></div> -->

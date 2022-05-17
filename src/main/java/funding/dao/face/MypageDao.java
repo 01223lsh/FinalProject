@@ -6,6 +6,7 @@ import java.util.List;
 import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.util.Paging;
 import funding.util.PagingFundingList;
@@ -197,6 +198,7 @@ public interface MypageDao {
 	
 	public int selectCntMake4(int memberNo);
 	
+	public int selectCntMake5(int memberNo);
 	
 	/**
 	 * 최신 문의사항 리스트 5개 뽑기
@@ -204,6 +206,28 @@ public interface MypageDao {
 	 * @return
 	 */
 	public List<HashMap<String, Object>> selectQnaList(int memberNo);
+
+	/**
+	 * 주문번호따라 프로젝트 정보 가져오기
+	 * @param orderNo
+	 * @return
+	 */
+	public Payment selectProjectByorderNo(int orderNo);
+
+	
+//	/**
+//	 * 네이버 소셜 확인
+//	 * @param member
+//	 * @return
+//	 */
+//	public int selectCntNSocialById(Member member);
+//
+//	/**
+//	 * 카카오 소셜 확인
+//	 * @param member
+//	 * @return
+//	 */
+//	public int selectCntKSocialById(Member member);
 
 
 

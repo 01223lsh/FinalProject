@@ -12,6 +12,7 @@ import funding.dao.face.MypageDao;
 import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.service.face.MypageService;
 import funding.util.Paging;
@@ -224,9 +225,34 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
+	public int getMakefund5(int memberNo) {
+		return mypageDao.selectCntMake5(memberNo);
+	}
+	
+	@Override
 	public List<HashMap<String, Object>> getqnalist(int memberNo) {
 		return mypageDao.selectQnaList(memberNo);
 	}
+	
+	@Override
+	public Payment getPaymentInfo(int orderNo) {
+		return mypageDao.selectProjectByorderNo(orderNo);
+	}
+	
+//	@Override
+//	public int naverchk(Member member) {
+//		return mypageDao.selectCntNSocialById(member);
+//	}
+//	
+//	@Override
+//	public int kakaochk(Member member) {
+//		return mypageDao.selectCntKSocialById(member);
+//	}
+	
+	
+	
+	
+	
 	
 	
 }

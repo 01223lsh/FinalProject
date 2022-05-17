@@ -58,6 +58,9 @@ a:visited { color: black; text-decoration: none;}
 a:hover { color: black; text-decoration: none;}
 
 
+
+
+
 </style>
 
 
@@ -74,11 +77,12 @@ a:hover { color: black; text-decoration: none;}
 	<p >${fund.categoryName }</p>
 
 	
-	<c:if test="${fund.projectStep == 0}"><p style="font-weight: bold;">펀딩 작성중</p></c:if>
-	<c:if test="${fund.projectStep == 1}"><p style="font-weight: bold;">펀딩 승인대기중</p></c:if>
-	<c:if test="${fund.projectStep == 2}"><p style="font-weight: bold;">펀딩 승인거절</p></c:if>
-	<c:if test="${fund.projectStep == 3}"><p style="font-weight: bold;">펀딩 진행중</p></c:if>
-	<c:if test="${fund.projectStep == 4}"><p style="font-weight: bold;">펀딩 종료</p></c:if>
+	<c:if test="${fund.projectStep == 0}"><p style="font-weight: bold; color: orange;">펀딩 작성중</p></c:if>
+	<c:if test="${fund.projectStep == 1}"><p style="font-weight: bold; color: green;">펀딩 승인대기중</p></c:if>
+	<c:if test="${fund.projectStep == 2}"><p style="font-weight: bold; color: tomato;">펀딩 승인거절</p></c:if>
+	<c:if test="${fund.projectStep == 3}"><p style="font-weight: bold; color: blue;">펀딩 진행중</p></c:if>
+	<c:if test="${fund.projectStep == 4}"><p style="font-weight: bold; color: tomato;">펀딩 종료</p></c:if>
+	<c:if test="${fund.projectStep == 5}"><p style="font-weight: bold; color: green;">펀딩 진행대기중</p></c:if>
 	
 	
 	<a href="/mypage/makefunview?projectNo=${fund.projectNo }"><p style="font-weight: bolder; font-size: 25px;">${fund.projectTitle }</p></a>
@@ -112,14 +116,21 @@ a:hover { color: black; text-decoration: none;}
 </div>
 </form>
 
-<h3 id="result" style="display: none;">해당 진행과정의 프로젝트가 존재하지 않습니다.</h3>
+<div id="result" style="display: none;">
+<img src="/resources/img/mypage/sad.png" alt="안나오네">
+<p style="margin-top: 50px; font-size: 20px; font-weight: bold;">제작한 프로젝트가 존재하지 않습니다.</p>
+<p style="font-size: 16px; font-weight: bold;">다양하고 재밌는 프로젝트를 제작하시면, 만들고 싶은 상품을 직접 만들 수 있습니다!</p>
+</div>
 
 
 
 </div><!-- .allbox -->
-</div><!-- main -->
+</div><!-- main --><br><br>
+
+<c:if test="${paging.totalCount ne 0}">
+<c:import url="/WEB-INF/views/mypage/makelistpaging.jsp" />
+</c:if>
 </div><!-- right -->
 </div> <!-- container  -->
 
-<c:import url="/WEB-INF/views/mypage/makelistpaging.jsp" />
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

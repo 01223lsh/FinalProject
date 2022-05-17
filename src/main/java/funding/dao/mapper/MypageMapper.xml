@@ -311,6 +311,14 @@
 	
 	</select>
 	
+	<select id="selectCntMake5" resultType="int" parameterType="int">
+		select count(*)
+		from project
+		where member_no = #{memberNo}
+	    and project_step = 5
+	
+	</select>
+
 	<select id="selectQnaList" parameterType="int" resultType="hashmap">
 		SELECT * FROM (
 		    SELECT rownum rnum, list.* FROM (
@@ -326,7 +334,21 @@
 	
 	</select>
 	
+	<select id="selectProjectByorderNo" parameterType="int" resultType="funding.dto.Payment">
+		SELECT payment_method
+		FROM payment
+		where order_no = #{orderNo}
+	</select>
 
+
+	<select id="selectCntNSocialById" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) cnt 
+		FROM member
+		WHERE id = #{id}
+		AND ( naver_login is null and kakao_login is null)
+	
+	
+	</select>
 
 	
 	

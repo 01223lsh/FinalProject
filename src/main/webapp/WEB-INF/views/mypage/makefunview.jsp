@@ -81,11 +81,12 @@ button {
 <div class="cont" style="text-align: left; margin-top: 20px;">
 	<p style="font-weight: bold; font-size: 17px;" >${category }</p>
 	
-	<c:if test="${view.projectStep == 0}"><p style="font-weight: bold; font-size: 17px;">펀딩 작성중</p></c:if>
-	<c:if test="${view.projectStep == 1}"><p style="font-weight: bold; font-size: 17px;">펀딩 승인대기중</p></c:if>
-	<c:if test="${view.projectStep == 2}"><p style="font-weight: bold; font-size: 17px;">펀딩 승인거절</p></c:if>
-	<c:if test="${view.projectStep == 3}"><p style="font-weight: bold; font-size: 17px;">펀딩 진행중</p></c:if>
-	<c:if test="${view.projectStep == 4}"><p style="font-weight: bold; font-size: 17px;">펀딩 종료</p></c:if>
+	<c:if test="${view.projectStep == 0}"><p style="font-weight: bold; font-size: 17px; color: orange;">펀딩 작성중</p></c:if>
+	<c:if test="${view.projectStep == 1}"><p style="font-weight: bold; font-size: 17px; color: green;">펀딩 승인대기중</p></c:if>
+	<c:if test="${view.projectStep == 2}"><p style="font-weight: bold; font-size: 17px; color: tomato;">펀딩 승인거절</p></c:if>
+	<c:if test="${view.projectStep == 3}"><p style="font-weight: bold; font-size: 17px; color: blue;">펀딩 진행중</p></c:if>
+	<c:if test="${view.projectStep == 4}"><p style="font-weight: bold; font-size: 17px; color: tomato;">펀딩 종료</p></c:if>
+	<c:if test="${view.projectStep == 5}"><p style="font-weight: bold; font-size: 17px; color: green;">펀딩 진행대기중</p></c:if>
 	
 	<span>펀딩No ${view.projectNo }</span><br>
 	<a href="/project/view?projectNo=${view.projectNo }"><p style="font-weight: bolder; font-size: 30px;">${view.projectTitle }</p></a> 
@@ -107,7 +108,7 @@ button {
 			<br>
 			<div>
 			<span style="float: left;">진행 상황</span>
-			<span style="float: right;">${(view.fundPrice /view.projectPrice)*100 }%</span>
+			<span style="float: right; font-weight: bold;">${(view.fundPrice /view.projectPrice)*100 }%</span>
 			</div>
 			<br>
 			<div>

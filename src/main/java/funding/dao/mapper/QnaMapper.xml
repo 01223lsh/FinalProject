@@ -70,10 +70,10 @@
 	
 	<insert id="insertQna" parameterType="funding.dto.Qna">
 <!--     	INSERT INTO qna(qna_no, qna_title, nick, qna_content, member_no) -->
-<!--     	VALUES (#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{memberNo}) -->
+<!--     	VALUES (#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{memberNo}) --> 
 
-		insert into qna (QNA_NO, QNA_TITLE, NICK, QNA_CONTENT ,QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO)
-		values(#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{qnaNo}, 0, 0, #{memberNo})
+		insert into qna (QNA_NO, QNA_TITLE, NICK, QNA_CONTENT ,QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO, qna_create_date )
+		values(#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{qnaNo}, 0, 0, #{memberNo}, current_date)
 
     </insert>
     
@@ -116,6 +116,12 @@
 		where qna_refer = #{qnaNo}
 	</select>
 	
+	<select id="selectQnareByQnarefer" parameterType="funding.dto.Qna" resultType="funding.dto.Qna">
+		select *
+		from qna
+		where member_no != #{memberNo}
+		and qna_refer = #{qnaNo} 
+	</select>
 	
 	
 	

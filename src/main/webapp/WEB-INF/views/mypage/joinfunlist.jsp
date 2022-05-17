@@ -69,15 +69,15 @@ a:hover { color: black; text-decoration: none;}
 	<p >${fund.categoryName }</p>
 
 	
-	<c:if test="${fund.projectStep == 3}"><p>펀딩 진행중</p></c:if>
-	<c:if test="${fund.projectStep == 4}"><p>펀딩 종료</p></c:if>
+	<c:if test="${fund.projectStep == 3}"><p style="color: blue; font-weight: bold;">펀딩 진행중</p></c:if>
+	<c:if test="${fund.projectStep == 4}"><p style="color: tomato; font-weight: bold;">펀딩 종료</p></c:if>
 	
 	
 	<a href="/mypage/joinfunview?orderNo=${fund.orderNo }"><p style="font-weight: bolder; font-size: 25px;">${fund.projectTitle }</p></a>
 	<p> <fmt:formatDate value="${fund.orderDate }" pattern="yyyy/MM/dd"/></p>
-	<c:if test="${fund.orderStatus == 0 }"><p>결제 전</p></c:if> 
-	<c:if test="${fund.orderStatus == 1 }"><p>결제 완료</p></c:if> 
-	<c:if test="${fund.orderStatus == 2 }"><p>결제 취소</p></c:if> 
+	<c:if test="${fund.orderStatus == 0 }"><p style="color: orange; font-weight: bold;">결제 전</p></c:if> 
+	<c:if test="${fund.orderStatus == 1 }"><p style="color: blue; font-weight: bold;">결제 완료</p></c:if> 
+	<c:if test="${fund.orderStatus == 2 }"><p style="color: tomato; font-weight: bold;">결제 취소</p></c:if> 
 	</div>
 </div>
 
@@ -89,7 +89,7 @@ a:hover { color: black; text-decoration: none;}
 <!-- 	<button>검색</button> -->
 <!-- 	</form> -->
 <!-- </div> -->
-
+<br>
 <form action="joinfunlist" method="get">
 <div class="FORM">
 	<select name="select" id="select" style="border-radius: 1px; width: 80px; margin-right: 10px;">
@@ -104,14 +104,21 @@ a:hover { color: black; text-decoration: none;}
 </div>
 </form>
 
-<h3 id="result" style="display: none;">참여한 프로젝트가 존재하지 않습니다.</h3>
-
+<div id="result" style="display: none;">
+<img src="/resources/img/mypage/sad.png" alt="안나오네">
+<p style="margin-top: 50px; font-size: 20px; font-weight: bold;">참여한 프로젝트가 존재하지 않습니다.</p>
+<p style="font-size: 16px; font-weight: bold;">다양하고 재밌는 프로젝트에 참여하시면, 창의적인 상품을 만나보실 수 있습니다!</p>
+</div>
 
 </div><!-- .allbox -->
 
-</div><!-- main -->
+</div><!-- main --><br><br>
+
+<c:if test="${paging.totalCount ne 0}">
+<c:import url="/WEB-INF/views/mypage/joinlistpaging.jsp" />
+</c:if>
+
 </div><!-- right -->
 </div> <!-- container  -->
 
-<c:import url="/WEB-INF/views/mypage/joinlistpaging.jsp" />
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

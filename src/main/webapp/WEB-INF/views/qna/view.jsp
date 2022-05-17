@@ -8,13 +8,31 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	if("${grade}"==2  && "${memberNo == qna.memberNo}"){
-		$("#admindelete").hide();
+// 	if("${grade}"==2  && "${memberNo == qna.memberNo}"){
+// 		$("#admindelete").hide();
 		
-// 		if("${reCnt}" > 1){
-// 			$("#reply").hide();
-// 		}
-	};
+// 	}
+// 	if("${grade eq 2}"  && "${memberNo eq qna.memberNo}"){
+// 		$("#admindelete").hide();
+		
+// 	}
+
+	<c:if test="${grade ==2  && memberNo == qna.memberNo}">
+		$("#admindelete").hide();
+	</c:if>	
+
+
+	<c:if test="${reCnt eq 2 && qnare.qnaStep eq 1}">
+		$("#review").show();
+	</c:if>	
+
+
+		
+// 	if("${reCnt eq 2 && qnare.qnaStep eq 1}"){
+// 		$("#review").show();
+// 	} 
+	
+
 	
 
 })
@@ -24,14 +42,15 @@ $(document).ready(function() {
 
 
 
-<!-- <h1 style="text-align: center;">고객센터</h1> -->
+<%-- <h1 style="text-align: center;">고객센터d${reCnt } / ${qnare.qnaStep }</h1> --%>
 <br>
 
+<!-- <p style="font-size: 20px; font-weight: bold; margin-bottom: 20px; margin-left: 10px;" ma>문의 내역</p> -->
 <div id="view"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px;">
 
 
 
-<div style="margin-left: 20px; margin-bottom: 20px;"><h2>${qna.qnaTitle }</h2></div>
+<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold;">${qna.qnaTitle }</h2></div>
 <div style="float: left; margin-left: 15px; margin-bottom: 10px;">작성자 : ${qna.nick }</div>
 <%-- <div style="float: right;  margin-bottom: 20px; margin-left: 20px; margin-right: 20px;" >조회수 : ${qna.hit }</div> --%>
 <div style="float: right;  margin-bottom: 10px; margin-right: 10px;" >작성날짜 : <fmt:formatDate value="${qna.qnaCreateDate }" pattern="yy-MM-dd HH:mm:ss"/></div>
@@ -41,6 +60,23 @@ $(document).ready(function() {
 
 
 </div><!-- view -->
+
+
+
+<div id="review"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px; display: none; ">
+
+
+<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold;">${qnare.qnaTitle }</h2></div>
+<div style="float: left; margin-left: 15px; margin-bottom: 10px;">작성자 : ${qnare.nick }</div>
+<%-- <div style="float: right;  margin-bottom: 20px; margin-left: 20px; margin-right: 20px;" >조회수 : ${qna.hit }</div> --%>
+<div style="float: right;  margin-bottom: 10px; margin-right: 10px;" >작성날짜 : <fmt:formatDate value="${qnare.qnaCreateDate }" pattern="yy-MM-dd HH:mm:ss"/></div>
+<hr style="color: #DDD; width: 100%">
+<div style="clear: both; min-height: 400px; margin-left: 20px; ">${qnare.qnaContent }</div>
+
+
+
+</div><!-- view -->
+
 
 <br><br>
 <a href="/qna/list"><button class="pull-left;">목록</button></a>

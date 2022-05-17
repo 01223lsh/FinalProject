@@ -23,4 +23,6 @@ public interface QnaService {
 
 	public int qnaReCnt(Qna viewqna);
 
+	public Qna qnareview(Qna qnaview);
+
 }

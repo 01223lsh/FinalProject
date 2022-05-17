@@ -29,6 +29,8 @@ public interface QnaDao {
 
 	public int selectCntQnare(Qna viewqna);
 
+	public Qna selectQnareByQnarefer(Qna qnaview);
+
 	
 	
 	

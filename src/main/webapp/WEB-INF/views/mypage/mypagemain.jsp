@@ -73,35 +73,35 @@ $(document).ready(function() {
 <style>
 
 .border {
-	border: 1px solid #81BEF7;
-	border-radius: 15px;
+	border: 2px solid #DDD;
+	border-radius: 8px;
 	margin-left : 15%;
 	height: 150px;
 	width: 70%;
 }
 
 .borderUser {
-	border: 1px solid #81BEF7;
-	border-radius: 15px;
+	border: 2px solid #DDD;
+	border-radius: 8px;
 	margin-left : 15%;
 	height: 150px;
 	width: 70%;
 }
 
 .borderSeller {
-	border: 1px solid #81BEF7;
-	border-radius: 15px;
+	border: 2px solid #DDD;
+	border-radius: 8px;
 	margin-left : 15%;
 	height: 300px;
 	width: 70%;
 }
 
 .border2 {
-	border: 1px solid #81BEF7;
-	border-radius: 15px;
-	margin-left : 10%;
+	border: 2px solid #DDD;
+	border-radius: 8px;
+	margin-left : 15%;
 	height: 210px;
-	width: 80%;
+	width: 70%;
 }
 /*
 .user {
@@ -113,24 +113,49 @@ $(document).ready(function() {
 }
 */
 
+button {
+
+	border: none;
+	background-color: #FFF;
+	font-size: 23px;
+
+}
+
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: none;}
 
-
-button {
-	background-color: white; 
-	border: 0px solid #81BEF7;
-	margin-right: 40px;
-	width: 120px;
-	height: 50px;
-	border-radius: 8px;
-	font-size: 18px;
-/* 	font-weight: bold; */
-	color: black;
+.etcBtn a {
+	position: relative;
+    text-decoration: none;
+    color: #000000;
+    /*텍스트에서 밑줄 간격 띄우기*/
+    padding-bottom: 10px;
 }
 
+.etcBtn a:before {
 
+    content: '';
+    position: absolute; /*부모 요소에는 position: relative를 주어야 함*/
+    background-color: #538fd9;
+    height: 3px;
+
+    width: 0; /*초기에 보이지 않도록*/
+    bottom: 0; /*a태그 아래에 위치*/
+    transition: 0.7s; /*애니메이션 동작 실행 시간 정의*/
+
+}
+
+.etcBtn a:hover:before {
+    width: 100%;
+}
+
+.etcBtn {
+	display: inline-block;
+	margin-right: 30px;
+	font-weight: bold;
+
+}
 </style>
 
 
@@ -140,8 +165,10 @@ button {
 
 
 
-
-<p style="font-size: 20px; font-weight: bolder; margin-top: 80px;">${nick }님, 안녕하세요!</p><br><br>
+<div>
+<p style="font-size: 20px; font-weight: bolder; margin-top: 80px; display: inline-block;">${nick }님, 안녕하세요! </p>
+<img src="/resources/img/mypage/smile.png" alt="안나오네" height="25px" width="25px;" style="margin-top: -10px;">
+</div><br><br>
 <%-- <span>안녕하세요! 등급확인을 해보죠 ${grade }</span> --%>
 
 
@@ -208,7 +235,7 @@ button {
 </div><!-- .boderUser -->
 
 
-<!-- 판매자 - 준비중인 프로젝트	 -->
+<!-- 판매자 - 작성중인 프로젝트	 -->
 <div class="borderSeller">
 <div class="FinalSeller">
 <div class="seller1" style="display: none;">
@@ -232,7 +259,7 @@ button {
 </div>		
 
 
-<!-- 판매자 - 제작한 프로젝트 -->
+<!-- 판매자 - 승인대기 프로젝트 -->
 <div class="seller2" style="display: none;">
 	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 1px solid #DDD;">
 		<div style="height: 80px; line-height: 100px; ">
@@ -245,12 +272,13 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">승인대기중 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px;">승인 대기중 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
 </div>
 
+<!-- 판매자 - 승인거절된 프로젝트 -->
 <div class="seller3" style="display: none;">
 	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 1px solid #DDD;">
 		<div style="height: 80px; line-height: 100px; ">
@@ -269,6 +297,28 @@ button {
 <!-- 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div> -->
 </div>
 <!-- <hr style="margin-bottom: 150px"> -->
+
+<!-- 판매자 - 진행대기중 프로젝트 -->
+<div class="seller2" style="display: none;">
+	<div id="first"  style="height: 150px; width: 33%; float: left; ">
+		<div style="height: 80px; line-height: 100px; ">
+		
+			<c:choose>
+			<c:when test="${makefund5 == 0}"><strong><span style="font-size: 45px;">${makefund5}</span></strong></c:when>
+			<c:otherwise><a href="/mypage/makefunlist?select=projectStep&search=5" ><strong><span style="font-size: 45px;">${makefund5 }</span></strong></a></c:otherwise>
+			</c:choose>
+		
+		</div>
+			<hr>
+		<div>	
+			<span style="font-size: 18px; line-height: 0px;">진행 대기중 프로젝트</span>
+		</div>
+	</div>
+	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
+</div>
+
+
+<!-- 판매자 - 진행중인 프로젝트 -->
 <div class="seller4" style="display: none;">
 	<div id="first"  style="height: 150px; width: 33%; float: left; ">
 		<div style="height: 80px; line-height: 100px; ">
@@ -287,6 +337,7 @@ button {
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
 </div>
 
+<!-- 판매자 - 종료된 프로젝트 -->
 <div class="seller5" style="display: none;">
 	<div id="first"  style="height: 150px; width: 33%; float: left; ">
 		<div style="height: 80px; line-height: 100px; ">
@@ -303,55 +354,56 @@ button {
 			<span style="font-size: 18px; line-height: 0px;">종료된 프로젝트</span>
 		</div>
 	</div>
-	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
+<!-- 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div> -->
 </div>
 
-<div class="sellerqna" style="display: none;">
-<div id="first" style="height: 150px; width: 33%; float: left;">
-		<div style="height: 80px; line-height: 100px; ">
+<!-- <div class="sellerqna" style="display: none;"> -->
+<!-- <div id="first" style="height: 150px; width: 33%; float: left;"> -->
+<!-- 		<div style="height: 80px; line-height: 100px; "> -->
 			
-			<c:choose>
-			<c:when test="${qnaCnt == 0}"><strong><span style="font-size: 45px;">${qnaCnt}</span></strong></c:when>
-			<c:otherwise><a href="/qna/list?select=nick&search=${nick }" ><strong><span style="font-size: 45px;">${qnaCnt }</span></strong></a></c:otherwise>
-			</c:choose>
+<%-- 			<c:choose> --%>
+<%-- 			<c:when test="${qnaCnt == 0}"><strong><span style="font-size: 45px;">${qnaCnt}</span></strong></c:when> --%>
+<%-- 			<c:otherwise><a href="/qna/list?select=nick&search=${nick }" ><strong><span style="font-size: 45px;">${qnaCnt }</span></strong></a></c:otherwise> --%>
+<%-- 			</c:choose> --%>
 			
-		</div>
-			<hr>
-		<div>	
-			<span style="font-size: 18px; line-height: 0px;">나의 문의사항</span>
-		</div>
-	</div>
+<!-- 		</div> -->
+<!-- 			<hr> -->
+<!-- 		<div>	 -->
+<!-- 			<span style="font-size: 18px; line-height: 0px;">나의 문의사항</span> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
-</div>
+<!-- </div> -->
 
 </div>
 </div><!-- boderSeller -->
 
-<!-- <div class="border2" style="margin-top: 30px;"> -->
-<!-- 	<div id="first" style="height: 280px; width: 100%;"> -->
-<!-- 		<div style="height: 10%; line-height: 40px;"> -->
-<!-- 			<span style="font-size: 18px; font-weight: bold;">나의 최근 문의내역</span> -->
-<!-- 		</div> -->
-<!-- 			<hr style="margin-bottom: 5px;"> -->
-<!-- 		<div>	 -->
+<br>
+<div class="border2" style="margin-top: 50px;">
+	<div id="first" style="height: 280px; width: 100%;">
+		<div style="height: 10%; line-height: 40px;">
+			<span style="font-size: 18px; font-weight: bold;">나의 최근 문의내역</span>
+		</div>
+			<hr style="margin-bottom: 5px;">
+		<div>	
 		
-<%-- 			<c:forEach var="q" items="${qnalist }" begin="0" end="${fn:length(qnalist)}" > --%>
+			<c:forEach var="q" items="${qnalist }" begin="0" end="${fn:length(qnalist)}" >
 			
-<%-- 			<a href="/qna/view?qnaNo=${q.QNA_NO }" ><span style="font-size: 15px; line-height: 20px; float: left; margin-left: 10px;">${q.QNA_TITLE }</span></a> --%>
+			<a href="/qna/view?qnaNo=${q.QNA_NO }" ><span style="font-size: 15px; line-height: 20px; float: left; margin-left: 10px;">${q.QNA_TITLE }</span></a>
 			
 <%-- 			<c:if test="${q.QNA_REFER >1 }"><span style="font-size: 15px; line-height: 20px; float: right; margin-right: 10px; color: tomato; ">답변완료</span></c:if> --%>
 <%-- 			<c:if test="${q.QNA_REFER <1 }"><span style="font-size: 15px; line-height: 20px; float: right; margin-right: 10px; color: tomato; "></span></c:if> --%>
 <%-- 			<a href="/qna/view?qnaNo=${q.QNA_NO }" ><span style="font-size: 15px; line-height: 20px; float: right; margin-right: 10px; color: tomato; ">답변확인</span></a> --%>
 			
 			
-<%-- 			<span style="font-size: 15px; line-height: 20px; float: right; margin-right: 10px;"><fmt:formatDate value="${q.QNA_CREATE_DATE}" pattern="yy.MM.dd"/></span> --%>
-<!-- 			<br> -->
-<!-- 			<hr style="margin-top: 5px; margin-bottom: 5px;">		 -->
+			<span style="font-size: 15px; line-height: 20px; float: right; margin-right: 10px;"><fmt:formatDate value="${q.QNA_CREATE_DATE}" pattern="yy.MM.dd"/></span>
+			<br>
+			<hr style="margin-top: 5px; margin-bottom: 5px;">		
 			
-<%-- 			</c:forEach> --%>
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
+			</c:forEach>
+		</div>
+	</div>
+</div>
 
 
 <div class="admin">
@@ -361,10 +413,17 @@ button {
 <br>
 <!-- <div style="clear: both;"></div> -->
 
-<div style="margin-top: 50px; text-align: center;">
-	<button>공지사항 </button>
-	<button>이용가이드 </button>
-	<button>고객센터 </button>
+<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+	<img src="/resources/img/mypage/notice2.png" alt="안나오네" height="40px" width="40px;" style="margin-top: -10px;">
+	<a href="/notice/list"><button>공지사항</button></a>
+</div>
+<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+	<img src="/resources/img/mypage/guide.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -10px;">
+	<a href="/main/guide"><button>이용가이드</button></a>
+</div>
+<div style="margin-top: 100px; text-align: center;" class="etcBtn">
+	<img src="/resources/img/mypage/cs.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -15px;">
+	<a href="/qna/list"><button>고객센터</button></a>
 </div>
 
 

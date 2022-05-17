@@ -65,8 +65,13 @@ public class QnaController {
 		//refer >2 일 경우, 답글 작성 불가하게 "답글 작성" 버튼 숨기기
 		int reCnt = qnaService.qnaReCnt(viewqna);
 		
+		//답글 같이 보여주기
+		Qna qnareview = qnaService.qnareview(qnaview);
+		logger.info("상세보기 답글 게시글 확인하기 : {}", qnareview);
+		
 		model.addAttribute("qna", qnaview);
 		model.addAttribute("reCnt", reCnt);
+		model.addAttribute("qnare", qnareview);
 		
 	}
 	

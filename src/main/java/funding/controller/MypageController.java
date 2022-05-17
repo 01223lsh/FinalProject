@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.service.face.MypageService;
 import funding.util.PagingFundingList;
@@ -119,6 +120,13 @@ public class MypageController {
 		
 		int chk = mypageService.chkSocialId(member);
 		
+//		//네이버 소셜 확인..
+//		int soNChk = mypageService.naverchk(member);
+//		
+//		//카카오 소셜 확인..
+//		int soKChk = mypageService.kakaochk(member);
+		
+		
 		//세션에 저장한 닉값 jsp로 보내기
 		String nick = (String) session.getAttribute("nick");
 		model.addAttribute("nick", nick);
@@ -170,6 +178,11 @@ public class MypageController {
 			int makefund4 = mypageService.getMakefund4(memberNo);
 			logger.info("makingFund갯수 확인하자 : {}", makefund4);
 			model.addAttribute("makefund4", makefund4);
+	
+			//사업자 - 종료된 프로젝트(5)
+			int makefund5 = mypageService.getMakefund5(memberNo);
+			logger.info("makingFund갯수 확인하자 : {}", makefund5);
+			model.addAttribute("makefund5", makefund5);
 			
 			
 			
@@ -435,7 +448,7 @@ public class MypageController {
 
 	//참여중인 펀딩 view
 	@GetMapping("/mypage/joinfunview")
-	public void joinfundview(HttpSession session, Model model, JoinFunding joinFunding) {
+	public void joinfundview(HttpSession session, Model model, JoinFunding joinFunding, Payment payment) {
 		
 		logger.info("/mypage/joinfunview [GET]" );
 		
@@ -454,10 +467,17 @@ public class MypageController {
 		logger.info("나와라좀 : {} ", projectNo);
 		
 		String seller = mypageService.getseller(projectNo);
+
+		int orderNo = Integer.parseInt(view.get(0).get("ORDER_NO").toString());
+		logger.info("나와라좀 : {} ", orderNo);
+		
+		Payment paymentinfo = mypageService.getPaymentInfo(orderNo);
+		logger.info("나와라좀_paymentinfo : {} ", paymentinfo);
+		
 		
 		model.addAttribute("view", view);
 		model.addAttribute("seller", seller);
-		
+		model.addAttribute("paymentinfo", paymentinfo);
 	}
 
 	//제작한 펀딩 list

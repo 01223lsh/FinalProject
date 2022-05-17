@@ -6,23 +6,28 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <c:import url="/WEB-INF/views/layout/mypageheader.jsp" />
 
+
+
+
+
 <style>
 
 input {
-	border: 1px solid #2E9AFE;
+	border: 2px solid #DDD;
 	text-align: center;
 	border-radius: 5px;
 }
 
 button {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
+	border-radius: 8px;
+	background-color : #538fd9;
+	color: #fff; 
 	width: 70px;
 	height: 30px;
-	border: 2px solid #81BEF7;
+	border: 2px solid #538fd9;
 	font-size: 15px;
+	font-weight: bold;
 
 }
 
@@ -44,10 +49,8 @@ p {
 
 <!-- <div class="container"> -->
 <div class="right">
-<br>
-<h1 style="text-align: center;">비밀번호 확인</h1>
-<br><br><br>
-	<p>판매자의 판매정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
+
+	<p style="font-size: 17px; font-weight: bold; margin-top: 200px;">판매자의 판매정보 확인 및 수정을 위한 비밀번호 확인이 필요합니다.</p>
 	
 	<div class="pwform">
 	<form action="/mypage/mypagepwchkseller" method="post">
@@ -62,7 +65,7 @@ p {
 	
 <br><br><br><br><br>
 <div style="text-align: center; ">
-<button>확인</button>
+<button id="OkBtn">확인</button>
 </div>
 </form>
 </div> <!-- .pwform -->

@@ -6,6 +6,7 @@ import java.util.List;
 import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.util.Paging;
 import funding.util.PagingFundingList;
@@ -200,12 +201,37 @@ public interface MypageService {
 	
 	public int getMakefund4(int memberNo);
 	
+	public int getMakefund5(int memberNo);
+
 	/**
 	 * 최신 qna 리스트 가져오기
 	 * @param memberNo
 	 * @return
 	 */
 	public List<HashMap<String, Object>> getqnalist(int memberNo);
+
+	/**
+	 * 결제수단 가져오기
+	 * @param projectNo
+	 * @param orderNo
+	 * @return
+	 */
+	public Payment getPaymentInfo(int orderNo);
+
+//	/**
+//	 * 소셜 - 로그인 네이버 확인
+//	 * @param member
+//	 * @return
+//	 */
+//	public int naverchk(Member member);
+//
+//	/**
+//	 * 소셜 - 로그인 카카오 확인
+//	 * @param member
+//	 * @return
+//	 */
+//	public int kakaochk(Member member);
+
 
 
 

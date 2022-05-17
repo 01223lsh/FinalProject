@@ -154,7 +154,7 @@ $(document).ready(function() {
 <style>
 
 .lab {
-	background-color: #E0ECF8;
+	background-color: #538fd9;
 
 }
 
@@ -172,20 +172,21 @@ button {
 
 #dupBtn {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
+	border-radius: 10px;
+	background-color: #538fd9;
+	color: #fff; 
 	width: 90px;
 	height: 30px;
-	border: 3px solid #81BEF7;
+	border: 0px solid #81BEF7;
 	font-size: 15px;
+	font-weight: bold;
 
 }
 
 
 input {
 	border-radius : 5px;
-	border: 2px solid #CEE3F6;
+	border: 1px solid #DDD;
 	box-shadow: none;
 	text-align: center;
 }
@@ -193,8 +194,8 @@ input {
 .title {
 	margin-left: 30%;
 	width: 120px;  
-	background-color: #E0ECF8; 
-	border-radius: 10px; 
+	background-color: #fff; 
+	border-radius: 5px; 
 	text-align: center; 
 	display: inline-block;
 }
@@ -226,7 +227,7 @@ input {
 	<div class="box"  style="height : 500px; " >
 	<div style="margin-bottom: 30px;">
 		<div class="title" >
-			<label for="id" style="padding-top: 4px;">아이디</label>
+			<label for="id" style="padding-top: 4px; color: #538fd9">아이디</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="id" id="id" value="${info.id }"  readonly="readonly">	
@@ -235,7 +236,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >			
-			<label for="name" style="padding-top: 4px;">이름</label>
+			<label for="name" style="padding-top: 4px; color: #538fd9 ">이름</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="name" id="name" value="${info.name }" >	
@@ -245,7 +246,7 @@ input {
 
 	<div style="margin-bottom: 15px;">
 		<div class="title" >	
-			<label for="nick" style="padding-top: 4px;">닉네임</label>
+			<label for="nick" style="padding-top: 4px; color: #538fd9">닉네임</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="nick" id="nick" value="${info.nick }" >
@@ -261,7 +262,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="pw" style="padding-top: 4px;">비밀번호</label>
+			<label for="pw" style="padding-top: 4px; color: #538fd9">비밀번호</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="pw" id="pw" >	
@@ -270,7 +271,7 @@ input {
 
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="pwChk" style="padding-top: 4px;">비밀번호 확인</label>
+			<label for="pwChk" style="padding-top: 4px; color: #538fd9">비밀번호 확인</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="pwChk" id="pwChk" >	
@@ -279,7 +280,7 @@ input {
 	
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="email" style="padding-top: 4px;">이메일</label>
+			<label for="email" style="padding-top: 4px; color: #538fd9">이메일</label>
 		</div>
 		<div class = "ans">
 			<input type="email" name="email" id="email" value="${info.email }">	
@@ -289,7 +290,7 @@ input {
 
 	<div style="margin-bottom: 30px;">
 		<div class="title" >	
-			<label for="phone" style="padding-top: 4px;">전화번호</label>
+			<label for="phone" style="padding-top: 4px; color: #538fd9">전화번호</label>
 		</div>
 		<div class = "ans">
 			<input type="text" name="phone" id="phone" value="${info.phone }">	
@@ -308,7 +309,7 @@ input {
 <div style="text-align: center;">
 <button type="button" onclick="location.href='./infoview'" style="margin-right: 15px;">취소</button>
 <button id="update" onclick="location.href='./infoupdate'" style="margin-right: 15px;">수정</button>
-<button type="button" onclick="location.href='./memberdelete'">탈퇴</button>
+<!-- <button type="button" onclick="location.href='./memberdelete'">탈퇴</button> -->
 </div>
 
 </div><!-- infoform -->

@@ -65,26 +65,27 @@ $(document).ready(function() {
 
 input {
 	border-radius : 5px;
-	border: 2px solid #CEE3F6;
+	border: 1px solid #DDD;
 	box-shadow: none;
 	text-align: center;
 }
 
 textarea {
 	border-radius : 5px;
-	border: 2px solid #CEE3F6;
+	border: 1px solid #DDD;
 
 }
 
 button {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
+	border-radius: 5px;
+	background-color: #538fd9;
+	color: #fff; 
 	width: 70px;
 	height: 30px;
-	border: 2px solid #81BEF7;
+	border: 2px solid #538fd9;
 	font-size: 15px;
+	font-weight: bold;
 
 }
 
@@ -100,9 +101,10 @@ button {
 	text-align: center;
 	margin-left: 20%;
 	
-	background-color: #E0ECF8; 
+	background-color: #fff; 
 	border-radius: 10px;
 	padding: 8px 5px 8px 5px;
+	color: #538fd9;
 }
 
 </style>
@@ -147,8 +149,8 @@ button {
 			<br><br><br>
 			
 			<div>
-				<div class="front" style="display: inline-block; float: left; background : none; padding: 8px 0px 8px 0px;;">
-					<label for="sellerInfo" style="margin-bottom: 20px; font-size: 18px; font-weight: bold; width: 115px; background-color: #E0ECF8; padding: 4px 2px; border-radius: 10px;">판매자 소개</label>
+				<div class="front" style="display: inline-block; float: left; background : none; padding: 8px 0px 8px 0px;">
+					<label for="sellerInfo" style="margin-bottom: 20px; font-size: 18px; font-weight: bold; width: 115px; background-color: #fff; padding: 4px 2px; border-radius: 10px; color: #538fd9; ">판매자 소개</label>
 				</div>
 				<div style="display:inline-block; width: 300px; float: left; font-size: 18px; margin-left: 15%;" class="data2" >
 <%-- 					<input type="text" id="sellerInfo" name="sellerInfo" value="${ sellerinfo.sellerInfo}"> --%>
