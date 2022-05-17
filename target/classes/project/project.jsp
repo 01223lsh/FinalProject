@@ -294,19 +294,30 @@ $(document).ready(function(){
 	float: left;
 }
 .btncate {
-        border: 1px solid;
+        border: 1px solid #47423f;
+        background-color : #47423f;
+        color : white;
         width: 100px;
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
 }
+.btncate:hover {
+        color : #527578;
+        background-color: #b3b1b2;
+}
 
+table.test{width: 100%; width: 1000px; margin:auto;}
+table.test td{height: 30px; padding : 10px;}
 
 </style>
 </head>
 
 <body>
+<br>
+<br>
+<br>
 <div class="row container py-3 text-center0" id="center">
 	<div class="col text-center" id="ing">
 		<a onclick="step(3)"><i class="fa-regular fa-circle-check fa-5x"></i></a>
@@ -325,7 +336,7 @@ $(document).ready(function(){
 	</div>
 	
 </div>
-<div class="text-center" style="width:800px; margin : 50px auto;">
+<div class="text-center" style="width:805px; margin : 50px auto;">
 
 <c:forEach items="${catelist }" var="c">
 <a onclick="categorya(${c.categoryNo})" class="btncate category">${c.categoryName}</a>
@@ -333,104 +344,36 @@ $(document).ready(function(){
 </div>
 <div style="clear:both"></div>
 <br>
-<!-- <div class="text-center" style="width:800px; margin : 50px auto;"> -->
-<!-- <table class="table table-striped table-hover table-condensed"> -->
-<!-- <tr> -->
-<!-- 	<th>No</th> -->
-<!-- 	<th>프로젝트 이름</th> -->
-<!-- 	<th>펀딩률</th> -->
-<!-- 	<th>진행 단계</th> -->
-<!-- 	<th>카테고리</th> -->
-<!-- </tr> -->
 
-<%-- 	<c:forEach items="${project }" var="i"> --%>
-<!-- 	<tr> -->
-<%-- 	<td>${i.projectNo }</td> --%>
-<%-- 	<td>${i.projectTitle}</td> --%>
-
-<%-- 	<td>${percent}%</td> --%>
-<%-- 	<td><c:choose> --%>
-<%-- 	<c:when test="${i.projectStep eq '3'}">진행중</c:when> --%>
-<%-- 	<c:when test="${i.projectStep eq '4'}">펀딩 종료</c:when> --%>
-<%-- 	</c:choose></td> --%>
-<%-- 	<td><c:choose> --%>
-<%-- 	<c:when test="${i.categoryNo eq '1'}">홈·리빙</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '2'}">테크·가전</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '3'}">향수·뷰티</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '4'}">잡화</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '5'}">의류</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '6'}">디자인·예술</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '7'}">푸드</c:when> --%>
-<%-- 	<c:when test="${i.categoryNo eq '8'}">반려동물</c:when> --%>
-<%-- 	</c:choose></td> --%>
-<!-- 	</tr> -->
-<%-- 	</c:forEach> --%>
-
-<!-- </table> -->
-<!-- </div> -->
-
-
-<!-- <div class="container text-center" style="display: flex; justify-content: center;"> -->
-<!--     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="min-width : 800px; max-width : 800px; float:center; "> -->
-
-<%-- 		<c:forEach var="p" items="${project}"> --%>
-<!--       <div class="col" style="max-width: 250px;"> -->
-<!--         <div class="card shadow-sm"> -->
-<%--           <img src="${p.projectImage }" style="min-height: 250px;"> --%>
-<!--           <div class="card-body"> -->
-<%--             <strong>${p.projectTitle}</strong> --%>
-<%--             <c:if test="${p.projectStep eq 4}"> --%>
-<!--               <span id="project-status">마감</span> -->
-<%--             </c:if> --%>
-<%--             <p class="card-text">${p.projectIntro}</p> --%>
-<!--             <div class="row fs-6"> -->
-<!--               <div class="col d-flex"> -->
-<!--                 <span style="margin-right: 10px;"> -->
-<%-- <%--                 	<fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
-<%--                 	<fmt:formatNumber type="percent" value="${p.fundPrice/p.projectPrice}"  /> --%>
-<!--                 </span> -->
-<!--                 <span> -->
-<%-- 	                <fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/> --%>
-<!--                 </span> -->
-<!--               </div> -->
-<!--               <div class="col text-end"> -->
-<!--                 <span> -->
-<%--                 <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/> --%>
-<!--                 </span> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<%--       </c:forEach> --%>
-
-<!--     </div> -->
-<!--   </div> -->
- <div class="container" style="display: flex;">
+<table class="table-condensed test" >
+   <c:forEach items="${project}" var="i">
+   
+    <c:if test="${i.rnum mod 3 eq '1'}">
+    <tr>
+    </c:if>
+      <input type="hidden" value="${i.projectNo}"/>
+      <td class="projectView">
+       <div style="display: flex;">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto; display: flex;
     flex-wrap: wrap;
-    width: 750px;
-    justify-content: space-between;">
 
-      <c:forEach var="p" items="${project}">
+    justify-content: space-between;">
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
-      <a onclick="projectView(${p.projectNo})">
+      
         <div class="card shadow-sm" style=" border: 1px solid;">
-          <img src="${p.projectImage }" style="min-height: 250px;">
+          <img src="${i.projectImage }" style="min-height: 250px;">
           <div class="card-body">
-            <strong>${p.projectTitle}</strong>
-            <c:if test="${p.projectStep eq 4}">
+            <strong>${i.projectTitle}</strong>
+            <c:if test="${i.projectStep eq 4}">
               <span id="project-status">마감</span>
             </c:if>
-            <p class="card-text">${p.projectIntro}</p>
+            <p class="card-text">${i.projectIntro}</p>
             <div >
               <div class="col d-flex">
-              <span style="margin-right: 10px;">
-                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
-              </span>
-                <span>
-                  
-              </span>
+<!--               <span style="margin-right: 10px;"> -->
+<%--                 <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
+<!--               </span> -->
+                
               </div>
               <div class="col text-end">
               <span>
@@ -440,11 +383,20 @@ $(document).ready(function(){
             </div>
           </div>
         </div>
-      </a>
-      </div>
-      </c:forEach>
+      
       </div>
       </div>
+      </div>
+      </td>
+   <c:if test="${i.rnum / 3 eq '3' }">
+	    </tr>
+    </c:if>
+
+  </c:forEach>
+
+
+
+</table>
 </body>
   
 </html>

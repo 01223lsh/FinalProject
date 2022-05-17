@@ -57,8 +57,7 @@
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 	
-	<!-- DownloadView 빈 설정 -->
-	<beans:bean id="down" class="funding.view.DownloadView" />
+
 	
 	
 	<!-- MultipartResover 설정 -->

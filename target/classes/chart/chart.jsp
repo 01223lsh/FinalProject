@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<br><br>
+<br><br>
 <div id="chart-line">
 	<select id="chartDate" onchange="chartDate(this)">
 		<option value="7" <c:if test="${chart.chartCheck eq 0 }">selected</c:if>>최근 1주일</option>
 		<option value="30" <c:if test="${chart.chartCheck eq 1 }">selected</c:if>>최근 한달</option>
 	</select>
-	<canvas id="line-chart" style=" width:300px; height:250px"></canvas>
 
+
+     <canvas id="chart"></canvas>
+
+ 
 	<input type="button" value="엑셀 다운로드" id="btn_chart_excel_download" class="btn_excel"/>
 </div>
 
 
+
 <script type="text/javascript">
+
 
         
 $("#btn_chart_excel_download").click(function() {
@@ -80,27 +88,27 @@ $("#btn_chart_excel_download").click(function() {
 		 
 		
 	</c:forEach>
-const ctx = document.getElementById('line-chart'); // getContext('2d') 를 하는 경우가 있는데 없어야 엑셀다운가능
+const ctx = document.getElementById('chart'); // getContext('2d') 를 하는 경우가 있는데 없어야 엑셀다운가능
 
-new Chart(document.getElementById("line-chart"), {
+new Chart(document.getElementById("chart"), {
     type: 'line',
     data: {
       labels: allDate,
       datasets: [{ 
           data: allcnt
        	  ,label: "회원가입 수",
-          borderColor: "#3e95cd",
-          fill: false
+          borderColor: "#E5AE86",
+//           fill: start
         },{
         data: normalcnt
         ,label: "일반 회원가입 수",
-        borderColor: "red",
-         fill: false
+        borderColor: "#DFD27C",
+//          fill: start
         },{
        data: buisnesscnt
        ,label: "사업자 회원가입 수",
-       borderColor: "blue",
-       fill: false
+       borderColor: "#B7A6AD",
+       //        fill: start
        }]  
     },
     options: {
@@ -110,4 +118,5 @@ new Chart(document.getElementById("line-chart"), {
       }
     }
   });
+
 </script>

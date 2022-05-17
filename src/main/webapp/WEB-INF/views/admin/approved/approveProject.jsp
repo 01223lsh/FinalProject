@@ -23,8 +23,10 @@
          $("#approve-modal-projectTitle").text(projectTitle)
        });
 
-       $(".projectView").click(function(e) {
+
+	     $(".projectView").click(function(e) {
          const projectNo = $(this).children("input").val();
+         
          $.ajax({
            type: "get"
            , url: "/admin/approved/projectDetail"
@@ -163,24 +165,25 @@
   </script>
 <style type="text/css">
 table.test{width: 100%; width: 1000px; margin:auto;}
-table.test td{height: 30px;}
+table.test td{height: 30px; padding : 10px;}
 
 </style>
 </head>
 <body>
-<h1>프로젝트 승인</h1>
+<h1 style="text-align: center;">프로젝트 승인</h1>
 <hr>
-<table class="table table-condensed test" >
+
+<table class="test" >
    <c:forEach items="${list}" var="i">
    
     <c:if test="${i.rnum mod 3 eq '1'}">
-    <tr>
+    <tr class="row-project">
     </c:if>
-      <input type="hidden" value="${i.projectNo}"/>
       <td class="projectView">
+      <input type="hidden" value="${i.projectNo}"/>
        <div style="display: flex;">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto; display: flex;
-    flex-wrap: wrap;
+     flex-wrap: wrap; 
 
     justify-content: space-between;">
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
@@ -195,15 +198,15 @@ table.test td{height: 30px;}
             <p class="card-text">${i.projectIntro}</p>
             <div >
               <div class="col d-flex">
-<!--               <span style="margin-right: 10px;"> -->
-<%--                 <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
-<!--               </span> -->
+              <span style="margin-right: 10px;">
+                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
+              </span>
                 
               </div>
               <div class="col text-end">
               <span>
               <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/>
-              </span>
+		       </span>
               </div>
             </div>
           </div>
@@ -212,7 +215,7 @@ table.test td{height: 30px;}
       </div>
       </div>
       </div>
-      </td>
+      </td> 
    <c:if test="${i.rnum / 3 eq '3' }">
 	    </tr>
     </c:if>

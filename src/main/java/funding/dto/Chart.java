@@ -6,8 +6,6 @@ public class Chart {
 	private int cnt;
 	private int normalcnt;
 	private int buisnesscnt;
-	
-	
 	private String regDate;
 	private int selectDate;
 	private int chartCheck;

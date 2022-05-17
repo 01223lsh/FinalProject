@@ -162,21 +162,40 @@ $(document).ready(function(){
 })
 
 </script>
+<style type="text/css">
+th{
+	text-align: center;
+}
+th, td {
+	border-bottom: 1px #DDD solid;
+}
+td {
+	height: 40px;
+}
+button{   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;}
+
+</style>
 </head>
 <body>
-<h3>공지사항</h3>
-<hr>
+<br><br><br><br>
 
-<table class="table table-striped table-hover table-condensed">
-<tr>
-	<th>번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일자</th>
+<h3 style="text-align: center;" >공지사항</h3>
+<hr>
+<div style="width: 1070px; margin:0 auto;">
+<table style="margin: auto; width: 100%;  border-radius: 10px;  margin-bottom: 20px;">
+<tr style="border-bottom: 2px #DDD solid;">
+	<th style="width: 5%;">글번호</th>
+	<th style="width: 45%">제목</th>
+	<th style="width: 10%">작성자</th>
+	<th style="width: 10%">작성일</th>
 	
 </tr>
 <c:forEach items="${list}" var="i">
-<tr class="noticeView">
+<tr class="noticeView trcss" >
 	<td>${i.noticeNo }</td>
 	<td>${i.title }
 	<input type="hidden" class="noticeNo" value="${i.noticeNo }"> 
@@ -191,6 +210,7 @@ $(document).ready(function(){
 
 </table>
 <button onclick="noticeWrite()">작성</button>
+</div>
 
 </body>
 </html>

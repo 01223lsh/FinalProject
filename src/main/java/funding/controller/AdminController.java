@@ -1,6 +1,7 @@
 package funding.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import funding.dto.AdminMain;
 import funding.dto.Alert;
 import funding.dto.Category;
 import funding.dto.Chart;
@@ -45,8 +47,27 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	//관리자 페이지 - 통계
 	@RequestMapping(value = "/admin/main")
-	public void admin() {
+	public void admin(Model model) {
+		Chart chart = new Chart();
+		chart.setSelectDate(30);
+		List<Chart> chartlist = adminService.selectByMemberDate(chart);
+		List<Qna> qnalist = adminService.mainQnaAll();
+		AdminMain admin = adminService.memberAndProjectAllCnt();
+		List<AdminMain> category = adminService.categoryCntList();
+		List<Notice> notice = adminService.mainNoticeAll();
+		List<AdminMain> projectList = adminService.adminProjectList();
+		List<AdminMain> adminList = adminService.projectSelectPayment();
+		AdminMain cnt = adminService.selectCntAll();
+		model.addAttribute("projectList",projectList);
+		model.addAttribute("cnt",cnt);
+		model.addAttribute("projectinfoList",adminList);
+		model.addAttribute("qnalist",qnalist);
+		model.addAttribute("monthChart",chartlist);
+		model.addAttribute("notice",notice);
+		model.addAttribute("category",category);
+		model.addAttribute("admin",admin);
 	}
+
 	@RequestMapping(value = "/admin/chart/chart" , method= {RequestMethod.GET, RequestMethod.POST})
 	public void chart(Model model,Chart chart,String dayType) {
 
@@ -233,7 +254,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/notice/noticeWrite", method = RequestMethod.GET)
 	public void noticeWrite() {	}
 	//공지사항 작성
-	@RequestMapping(value = "/admin/noticeWrite", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/notice/noticeWrite", method = RequestMethod.POST)
 	public void noticeWriteResult(Notice notice, MultipartHttpServletRequest mtfRequest) {
 		List<MultipartFile> filelist;
 		if (mtfRequest.getFile("file").getSize() > 0) {
@@ -245,15 +266,6 @@ public class AdminController {
 		adminService.noticeWrite(notice, filelist);
 	}
 
-	//다운로드 ***삭제예정
-	@RequestMapping(value = "/download")
-	public String download(Notice notice, Model model) {
-		//파일정보 불러오기
-		notice = adminService.getFile(notice);
-		model.addAttribute("downFile", notice);
-
-		return "down";
-	}
 	
 	//공지사항 수정 GET
 	@RequestMapping(value = "/admin/notice/noticeUpdate", method = RequestMethod.GET)
@@ -307,7 +319,7 @@ public class AdminController {
 		model.put("list", list);
 		model.put("paging",paging);
 		model.put("cnt",cnt);
-		logger.info("test{}",cnt);
+		
 		
 		return mav;
 	}
@@ -329,9 +341,9 @@ public class AdminController {
 
 		// View 전달 데이터 (JSON)
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		if (project.getProjectStep() == 3 && result == 1) {
+		if (project.getProjectStep() == 5 && result == 1) {
 			jsonMap.put("msg", "프로젝트 승인에 성공하였습니다.");
-		} else if (project.getProjectStep() == 3 && result == -1) {
+		} else if (project.getProjectStep() == 5 && result == -1) {
 			jsonMap.put("msg", "프로젝트 승인에 실패했습니다.");
 		} else if (project.getProjectStep() == 2 && result == 1) {
 			jsonMap.put("msg", "프로젝트 승인을 거절했습니다.");
@@ -412,7 +424,8 @@ public class AdminController {
 		logger.info("[write reqna] : {}", qna);
 		adminService.qnarewrite(qna);
 	}
-
 	
+	
+
 }
 

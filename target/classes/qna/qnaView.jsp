@@ -59,10 +59,11 @@ function qnaDelete(qnaNo){
 </script>
 </head>
 <body>
-<h1 style="text-align: center;">고객센터 상세페이지</h1>
+<h1 style="text-align: center; ">고객센터 상세페이지</h1>
 <br>
 
-<div id="view"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px;">
+<div id="view"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px; width: 1000px;
+    margin: 0 auto;">
 
 
 
@@ -78,15 +79,31 @@ function qnaDelete(qnaNo){
 </div><!-- view -->
 
 <br><br>
-<button class="pull-left;" onclick="qnaManagement()">목록</button>
+<button class="pull-left;" onclick="qnaManagement()" style=" margin-left: 267px;
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;">목록</button>
 	<c:forEach items="${list}" var="i">
 		<c:if test="${ qna.qnaNo eq i.qnaRefer}">
-			<button class="pull-right" style="margin-right: 10px;" onclick="qnaRewrite(${qna.qnaNo})">답변작성</button>
+			<button class="pull-right" style="margin-right: 10px;    margin-right: 267px;
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;" onclick="qnaRewrite(${qna.qnaNo})">답변작성</button>
 		</c:if>
 	</c:forEach>
 <c:if test="${qna.qnaStep>0 }">
-<button class="pull-right" style="margin-right:10px;" onclick="qnaUpdate(${qna.qnaNo})">수정</button>
-<button class="pull-right" style="margin-right:10px;" onclick="qnaDelete(${qna.qnaNo})">삭제</button>
+<button class="pull-right" style="margin-right:10px; margin-right: 267px;
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;" onclick="qnaUpdate(${qna.qnaNo})">수정</button>
+<button class="pull-right" style="margin-right:10px;   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;" onclick="qnaDelete(${qna.qnaNo})">삭제</button>
 </c:if>
 
 

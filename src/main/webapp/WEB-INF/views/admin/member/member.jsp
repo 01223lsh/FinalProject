@@ -55,9 +55,6 @@ function viewmember(memberno){
 	})
 	
 }
-
-
-
 $(document).ready(function(){
 
 	$("#DisabledAllDelete").click(function(){
@@ -80,8 +77,7 @@ $(document).ready(function(){
 				
 			})
 		}
-	})
-	
+	})	
 	$("#memberSearch").click(function(){
 		var cat= $("#memberCategory").val();
 		var con = $("#memberContent").val();	
@@ -96,11 +92,8 @@ $(document).ready(function(){
 			}
 			,error : function(){
 				console.log("검색 오류");
-			}
-			
+			}	
 		})
-
-			console.log(con);
 // 		$.ajax({
 // 			type : "post"
 // 			,url : "/layout/memberpaging"
@@ -116,7 +109,6 @@ $(document).ready(function(){
 			
 // 		})
 	})
-	
 	for(var i = startPage; i <= endPage; i++){
 		(function(i){
 			$(".paging"+i).click(function(){	
@@ -171,7 +163,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
 	$(".pagingGoAll").click(function(){	
 		var con = $("#memberContent").val();
 		var cat = $("#memberCategory").val();
@@ -276,10 +267,18 @@ $(document).ready(function(){
 #center{
 	margin:0 auto; 
 }
+
+td {
+	height: 40px;
+}
+
 </style>
 </head>
 <body>
 
+<br>
+<br>
+<br>
 
 
 <div class="row container py-3 text-center0" id="center">
@@ -317,6 +316,7 @@ $(document).ready(function(){
 
 
 
+<div style="width: 1070px; margin:0 auto;">
 <select id="memberCategory">
 	<option value="id" <c:if test="${cat eq 'id'}">selected</c:if>>아이디</option>
 	<option value="nick" <c:if test="${cat eq 'nick'}">selected</c:if>>닉네임</option>
@@ -324,30 +324,29 @@ $(document).ready(function(){
 	<option value="email" <c:if test="${cat eq 'email'}">selected</c:if>>이메일</option>
 	<option value="phone" <c:if test="${cat eq 'phone'}">selected</c:if>>전화번호</option>
 </select>
-<input type="text" id="memberContent" value="${con }">
-<button id="memberSearch">검색</button>
+<input type="text" id="memberContent" >
+<button id="memberSearch" >검색</button>
 
 <c:if test="${membergrade eq '3' }"> 
 <button id="DisabledAllDelete">비활성화 유저 삭제</button>
 </c:if>
 <br>
-
-<table class="table table-striped table-hover table-condensed">
-<tr>
-	<th>번호</th>
-	<th>아이디</th>
-	<th>닉네임</th>
-	<th>이름</th>
-	<th>이메일</th>
-	<th>전화번호</th>
-	<th>회원등급</th>
+<table style="margin: auto; width: 100%;  border-radius: 10px;">
+<tr style="border-bottom: 2px #DDD solid;" >
+	<th style="width: 5%;">번호</th>
+	<th style="width: 5%;">아이디</th>
+	<th style="width: 5%;">닉네임</th>
+	<th style="width: 5%;">이름</th>
+	<th style="width: 7%;">이메일</th>
+	<th style="width: 7%;">전화번호</th>
+	<th style="width: 5%;">회원등급</th>
 	
 </tr>
 
 	<c:forEach items="${list}" var="i">
-<tr onclick="viewmember(${i.memberNo})">
+<tr onclick="viewmember(${i.memberNo})" style="border-bottom:1px solid #ddd" class="trcss">
 	<td>${i.memberNo }</td>
-	<td><a  style="color : blue;">${i.id }</a>
+	<td>${i.id }
 	<input type="hidden" class="viewmemberno" value="${i.memberNo}"/>
 	</td>
 	<td>${i.nick}</td>
@@ -371,6 +370,7 @@ $(document).ready(function(){
 
 </table>
  total : ${total}
+</div>
 </body>
 </html>
 <%@ include file="../../../layout/paging.jsp" %>

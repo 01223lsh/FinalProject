@@ -1,0 +1,10 @@
+1.일반유저0 Mnormal
+2.판매자1 Mbuisness
+3.비활성화3 Mdisabled
+4.전체 회원 0,1 MuserAll
+5. 승인대기중1 Mapproved
+6. 진행 대기중5 Mwaiting
+7.진행중3 Mproceeding
+8. 전체 프로젝트 MprojectAll
+
+

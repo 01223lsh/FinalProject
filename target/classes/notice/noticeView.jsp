@@ -87,13 +87,23 @@ function noticeDownload(fileNo){
 }
 html { overflow-y:scroll; }
 
+button{   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;}
 </style>
 
 </head>
 
 <body>
-<div class="noticeView">
-<div style="height:20px;">
+<br>
+<br>
+<div class="noticeView" style="width: 1000px;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 1px solid #ddd; margin-bottom: 30px;">
+<div style="height:20px; ">
 	<div class="noticeTitle" >${notice.title}</div>
 
 	<div class="noticeDate" style="color :#ccc;">작성일자 : ${notice.regDate} | 작성자  : 관리자</div>
@@ -103,18 +113,15 @@ html { overflow-y:scroll; }
 <hr>
 	<c:forEach items="${listfile}" var="i">
 	<c:if test="${not empty i.fileOrigin}"> 
-	<img src="/noticeimg/${i.fileStorage}" class="noticeimg"> 
-	
-	<a onclick="noticeDownload(${i.fileNo})">${i.fileOrigin}</a><br>
-	
+	<img src="/noticeimg/${i.fileStorage}" class="noticeimg"> <br>
 	</c:if>
 	</c:forEach> 
 	<div class="notice Content">${notice.content}</div>
 </div>
 <div class="text-center">
 <button onclick="noticeManagement()">목록</button>
-<button onclick="noticeUpdate(${notice.noticeNo})">수정</button>
-<button onclick="noticeDelete(${notice.noticeNo})">삭제</button>
+<button onclick="noticeUpdate(${notice.noticeNo})" >수정</button>
+<button onclick="noticeDelete(${notice.noticeNo})" >삭제</button>
 </div>
 
 </body>

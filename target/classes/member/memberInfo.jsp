@@ -33,10 +33,62 @@ $(document).ready(function(){
 })
 
 </script>
+<style type="text/css">
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+  
+  text-align: center;
+  background: #84978f;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  font-size: 0.9em;
+  font-weight: bold;
+	margin: 1em auto;
+   padding: 0.5em 2em;
+  position: relative;
+  text-transform: uppercase;
+}
+button::before,
+button::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+	background-color:#527578;;
+  
+}
+.memberbtn::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.memberbtn:hover:after {
+  height: 100%;
+}
+
+</style>
 </head>
 <body>
-<h3>회원정보</h3>
-<hr>
+<br>
+<br>
+<br>
+<h1 style="text-align: center; margin-bottom:50px; font-size: 40px;">회원정보</h1>
+
+<div style="width: 700px; margin:0px auto; margin-bottom : 30px; border: 1px solid #ddd; border-radius: 10px;">
 <table class="table table-striped table-hover table-condensed">
 <tr>
 	<td>회원 번호</td>
@@ -112,9 +164,10 @@ $(document).ready(function(){
 </tr>
 </table>
 </c:if>
-
-<button id="memberupdate">수정</button> <button onclick="memberManagement()">취소</button>
-
+</div>
+<div style="margin:0 auto;display: flex; width: 300px;">
+<button id="memberupdate" class="memberbtn">수정</button> <button class="memberbtn" onclick="memberManagement()">취소</button>
+</div>
 
 </body>
 </html>

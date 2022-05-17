@@ -67,7 +67,11 @@ $(document).ready(function(){
   font-size: .9em;
 }
 
-
+button{   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;}
 </style>
 </head>
 <body>
@@ -97,9 +101,9 @@ $(document).ready(function(){
       data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
   </div>
 
-<div class="text-center">
-	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<button type="reset" onclick="noticeManagement()" class="btn btn-danger" >취소</button>
+<div class="text-center" style="margin-top: 20px;">
+	<button id="btnWrite">작성</button>
+	<button type="reset" onclick="noticeManagement()"  >취소</button>
 </div>
 </form>
 <script type="text/javascript">

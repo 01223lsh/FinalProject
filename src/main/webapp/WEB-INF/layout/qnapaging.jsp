@@ -8,8 +8,7 @@
 
 <%-- 첫 페이지로 이동 --%> 
 <c:if test="${paging.curPage ne 1}">
-	<li><a class="pagingFirst" 
-	>처음</a></li>
+	<li><a class="pagingFirst" >처음</a></li>
 </c:if>
 	
 	
@@ -21,8 +20,7 @@
 
 	<c:otherwise>
 		<li>
-			<a class="pagingBackAll" 
-			>
+			<a class="pagingBackAll" >
 				&laquo;
 			</a>
 		</li>
@@ -32,8 +30,7 @@
 	<%-- 이전 페이지로 이동 --%>
 <c:if test="${paging.curPage > 1 }">
 	<li>
-		<a  class="pagingBack"  
-		>
+		<a  class="pagingBack" >
 			&lt; 
 		</a>
 	</li>
@@ -45,16 +42,14 @@
 	<c:choose>
 		<c:when test="${paging.curPage eq i}">
 			<li class="active">
-				<a class="paging${i}"
-				 >
+				<a class="paging${i}" >
 					${i }
 				</a>
 			</li>
 		</c:when>
 		<c:otherwise>
 			<li>
-				<a class="paging${i}" 
-				>
+				<a class="paging${i}" >
 					${i }
 				</a>
 			</li>
@@ -65,8 +60,7 @@
 <%-- 다음 페이지로 이동 --%>
 <c:if test="${paging.curPage < paging.totalPage }">
 	<li>
-		<a class="pagingGo" 
-		>
+		<a class="pagingGo" >
 			&gt; 
 		</a>
 	</li>
@@ -80,8 +74,7 @@
    
    <c:otherwise>
       <li>
-         <a class="pagingGoAll" 
-         >
+         <a class="pagingGoAll" >
             &raquo;
          </a>
       </li>
@@ -90,8 +83,7 @@
 	
 <%-- 마지막 페이지로 이동 --%>
 <c:if test="${paging.curPage ne paging.totalPage }">
-	<li><a class="pagingLast" 
-	>
+	<li><a class="pagingLast" >
 		끝
 	</a>
 	</li>

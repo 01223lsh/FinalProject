@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import funding.dto.AdminMain;
 import funding.dto.Alert;
 import funding.dto.Category;
 import funding.dto.Chart;
@@ -103,12 +104,7 @@ public interface AdminService {
 	 */
 	public void noticeWrite(Notice notice, List<MultipartFile> filelist);
 
-	/**
-	 * 공지사항 파일정보 불러오기 *** 삭제예정
-	 * @param notice 공지사항 정보
-	 * @return 공지사항 파일 정보
-	 */
-	public Notice getFile(Notice notice);
+	
 
 	/**
 	 * 공지사항 정보 수정
@@ -236,6 +232,48 @@ public interface AdminService {
 	 * qna 작성 정보 갱신
 	 */
 	public void qnaUpdate(Qna qna);
+
+	/**
+	 * 관리자 페이지 첫페이지 보여줄 값 
+	 * @return cnt
+	 */
+	public AdminMain memberAndProjectAllCnt();
+
+	/**
+	 * 카테고리 별 count
+	 * @return 카테고리 명, count
+	 */
+	public List<AdminMain> categoryCntList();
+
+	/**
+	 * 메인페이지 공지사항 목록 조회
+	 * @return 공지사항 리스트
+	 */
+	public List<Notice> mainNoticeAll();
+
+	/**
+	 * 메인페이지 문의게시판 목록 조회
+	 * @return qna 목록
+	 */
+	public List<Qna> mainQnaAll();
+
+	/**
+	 * 프로젝트 주문 내역 확인 리스트
+	 * @return 프로젝트 리스트
+	 */
+	public List<AdminMain> adminProjectList();
+
+	/**
+	 * 프로젝트 결제 내역 - 회원별로
+	 * @return 회원별 결제 리스트
+	 */
+	public List<AdminMain> projectSelectPayment();
+
+	/**
+	 * 전일 금일 데이터 비교
+	 * @return 전일 데이터
+	 */
+	public AdminMain selectCntAll();
 
 
 

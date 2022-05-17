@@ -209,7 +209,7 @@ td {
 
 <div class="container">
 
-<div id="qnalist" style="text-align: center;" >
+<div id="qnalist" style="text-align: center; " >
 
 <h1>고객센터 목록페이지</h1>
 <hr>
@@ -243,7 +243,7 @@ td {
 	
 	
 	<c:forEach items="${list }" var="qna">
-	<tr style=" height: 20px;" class="qnaView" onclick="qnaView(${qna.qnaNo})">
+	<tr style=" height: 20px;" class="qnaView trcss" onclick="qnaView(${qna.qnaNo})">
 		<td >${qna.qnaNo} </td>
 		<td style="text-align: left;">
 		<input type="hidden" value="${qna.qnaNo }" class="qnaNo">

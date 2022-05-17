@@ -1,43 +1,68 @@
 <%@ page import="java.util.*"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ include file="../../layout/admin_header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.0/exceljs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script type="text/javascript">
-// $(function() {
-// 	var dayType = $("#chartDate option:selected").val();
-// 	console.log(dayType)
-// 	$.ajax({
-// 		type : "get"
-// 		,url : "/admin/chart"
-// 		,data : "dayType="+dayType
-// 		,dataType : "html"
-// 		,success : function(res){
-// 			$("#resultLayout").html(res)
-// 		},error : function(){
-// 			console.log("차트 변경 실패");
-// 		}
-		
-// 	})
+function projectNoSelect(projectNo){
+	$.ajax({
+		success : function(){
+			console.log("버튼 조작 성공")
+			dis(projectNo);
+			
+		},error : function(){
+			console.log("버튼 조작 실패")
+		}
+	})
+}
+function dis(projectNo){
+    if($('.pro'+projectNo).css('display') == 'none'){
+    $('.pro'+projectNo).show();
+    
+    }else{
+    $('.pro'+projectNo).hide();
+    }
+}
+$(document).ready(function(){
+	$(".Mnotice").click(function(){
+		noticeManagement();
+	})	
+	$(".Mqna").click(function(){
+		qnaManagement();
+	})	
+	$(".monthChart").click(function(){
+		chartManagement();
+	})
+	$(".MprojectCategoryChart").click(function(){
+		projectManagement();
+	})
 	
-// });
+	
+})
+
 function chartDate(){
 	var selectDate = document.getElementById("#chartDate");
 	var dayType = $("#chartDate option:selected").val();
@@ -183,6 +208,16 @@ function qnaManagement(searchtest){
 
 </script>
 <style>
+/* div{ */
+/* 	border: 1px solid; */
+/* } */
+body{
+	background-color: #f9f9f9;
+ 	font-family: 'Noto Serif KR', serif;
+
+}
+
+
 html { overflow-y:scroll; }
 #btn_chart_excel_download {
     border: 0;
@@ -196,11 +231,11 @@ html { overflow-y:scroll; }
 
 nav{ 
     width:200px; 
-    background-color:#eee; 
+    background-color:#527578; 
     border-right:1px solid #ddd;
     /* height:100% 그냥 적용 안됨. 부모개념이 있어야 채워질 수 있음 */
     /*공중에 떠서 공간을 차지하지 않음*/
-    height:100% /*fixed를 해서 높이 100%가 가능해짐*/
+    height:100%; /*fixed를 해서 높이 100%가 가능해짐*/
 }
 h1{ font-size:18px;  padding:20px; }
 	.menu {}
@@ -211,11 +246,11 @@ h1{ font-size:18px;  padding:20px; }
     height:30px;
     line-height:30px;
     display:block;
-    padding:0 20px;
+/*     padding:0 20px; */
     font-size:12px;
-    color:#555;
+    color:#fff;
 }
-.menu li a:hover { background-color:yellowgreen; color:white;}
+.menu li a:hover { background-color:#b3b1b2;; color:white;}
 
 #center{
 	margin:0 auto; 
@@ -223,11 +258,12 @@ h1{ font-size:18px;  padding:20px; }
 #menu {
     width:15%;
     box-sizing: border-box;
+    
 }
 
 #managerLayout{
 	width: 100%;
-    margin: 0px auto;
+    margin: -20px auto;
     display: flex;
 }
 #Layout{
@@ -238,20 +274,102 @@ h1{ font-size:18px;  padding:20px; }
 	width: 700px;
 	height: 700px;
 }
+.Mtotal>div{
+	float: left;
+    width: 12%;
+    margin : 1px auto;
+    text-align: center;
+
+}
+.MprojectCategoryChart{
+	float: left;
+    width: 33%;
+    margin: 0;
+    text-align: center;
+    height: 150px;
+}
+.noticeTabletr{
+	border: 1px solid #ddd;
+}
+.monthChart{
+	float: left;
+    width: 59%;
+    text-align: center;
+    margin: 0.5% 0.5%;
+}
+.prjectCategorychartAndNotice>div{
+ 	width:32%; 
+ 	height:150px;	
+ 	float: left;
+ 	margin: 0.5% 0.5%;
+ 	
+    display: flex;
+    background-color: white;
+ 	
+}
+.projectMoney {display:none}
+.Mtotal>div{
+	border: 1px solid white;
+	background-color: white;
+}
+.Mnotice>table{
+	width: 100%;
+}
+.Mqna>table{
+	width : 100%;
+
+}
+
+.projectOrder{
+	float: left;
+	width: 39%;
+	margin: 0.5% 0.5%;
+}
+.monthChartAndOrder>div{
+	background-color: white;
+}
+::-webkit-scrollbar {
+width: 11px;
+}
+::-webkit-scrollbar-track {
+background-color: #b3b1b2;
+border-radius: 9px;
+}
+::-webkit-scrollbar-thumb {
+background-color: #527578;
+border-radius: 9px;
+}
+
+.mainCnt{
+	display: flex;
+  justify-content : center;
+}
+.downarrow>i,.downarrow>div{
+
+	color : #FF9696;
+	font-size: 11px;
+}
+.uparrow>i,.uparrow>div{
+
+	color : #84978F;
+	font-size: 11px;
+}
+.downarrow>i:hover{
+	color : #FF9696;
+}
+.uparrow>i:hover{
+	color : #84978F;
+}
 </style>
 
 
 </head>
-<body>
+<body >
 
-<!-- <button  onclick="memberManagement()">회원관리</button><br> -->
-<!-- <button>프로젝트 관리</button><br> -->
-<!-- <button>프로젝트 승인</button><br> -->
-
-<div id="managerLayout" style="height:1000px">
-<div  id="menu">
+<div id="managerLayout" style="height:100%">
+<div  id="menu" >
 <nav >
-    관리자 페이지 <!-- h1태그 검색사이트가 좋아함. 문서상에 1개만 있는 것을 권장한다. -->
+   <h1  ><a href="" style="color:#fff;">관리자 페이지</a> </h1>
     <ul class="menu">
         <li><a onclick="memberManagement()">회원관리</a></li>
         <li><a onclick="projectManagement()">프로젝트 목록</a></li>
@@ -259,18 +377,406 @@ h1{ font-size:18px;  padding:20px; }
         <li><a onclick="approveProject()">프로젝트 승인</a></li>
         <li><a onclick="noticeManagement()">공지사항</a></li>
         <li><a onclick="qnaManagement()">문의 게시판</a></li>
-        <li><a onclick="chartManagement()">통계</a></li>
+<!--         <li><a onclick="chartManagement()">통계</a></li> -->
     </ul>
  
 </nav>
 </div>
 <br><br>
-<div id="Layout">
-	<div id="resultLayout">
-		
-	</div>
+	<div id="Layout">
+		<div id="resultLayout">
+		<br><br>
+			<div class="Mtotal" style="display: flex; height: 100px;">
+				<div class="Mnormal">
+				<div><i class="fa-solid fa-user"></i>
+					일반 회원</div>
+					<br>
+					<div style="font-size: 20px;">${admin.normalCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.normalCnt ne cnt.normalCnt }">
+								<c:if test="${admin.normalCnt - cnt.normalCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.normalCnt - cnt.normalCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.normalCnt - cnt.normalCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.normalCnt - cnt.normalCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.normalCnt - cnt.normalCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+					</div>
+				</div>
+				<div class="Mbuisness">
+				<div><i class="fa-solid fa-briefcase"></i>
+					사업자</div> 
+					<br>
+					<div style="font-size: 20px;"> ${admin.buisnessCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.buisnessCnt ne cnt.buisnessCnt }">
+								<c:if test="${admin.buisnessCnt - cnt.buisnessCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.buisnessCnt - cnt.buisnessCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.buisnessCnt - cnt.buisnessCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.buisnessCnt - cnt.buisnessCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.buisnessCnt - cnt.buisnessCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+				<div class="Mdisabled">
+				<div><i class="fa-solid fa-user-ninja"></i>
+					탈퇴 </div>
+					<br>
+					<div style="font-size: 20px;"> ${admin.disabledCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.disabledCnt ne cnt.disabledCnt }">
+								<c:if test="${admin.disabledCnt - cnt.disabledCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.disabledCnt - cnt.disabledCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.disabledCnt - cnt.disabledCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.disabledCnt - cnt.disabledCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.disabledCnt - cnt.disabledCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+				<div class="MuserAll">
+				<div><i class="fa-solid fa-users"></i>
+					전체 유저</div>
+					<br> 
+					<div style="font-size: 20px;"> ${admin.userAllCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.userAllCnt ne cnt.userAllCnt }">
+								<c:if test="${admin.userAllCnt - cnt.userAllCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.userAllCnt - cnt.userAllCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.userAllCnt - cnt.userAllCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.userAllCnt - cnt.userAllCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.userAllCnt - cnt.userAllCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+				<div class="Mapproved">
+				<div><i class="fa-solid fa-check"></i>
+					승인 프로젝트 </div> 
+					<br>
+					<div style="font-size: 20px;"> ${admin.approvedCnt }</div>
+				</div>
+				<div class="Mwaiting">
+				<div><i class="fa-regular fa-credit-card"></i>
+					진행 대기 프로젝트 </div>
+					<br>
+					<div style="font-size: 20px;">${admin.waitingCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.waitingCnt ne cnt.waitingCnt }">
+								<c:if test="${admin.waitingCnt - cnt.waitingCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.waitingCnt - cnt.waitingCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.waitingCnt - cnt.waitingCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.waitingCnt - cnt.waitingCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.waitingCnt - cnt.waitingCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+				<div class="Mproceeding">
+				<div><i class="fa-solid fa-sack-dollar"></i>
+					진행 프로젝트</div>  
+					<br>
+					<div style="font-size: 20px;">${admin.proceedingCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.proceedingCnt ne cnt.proceedingCnt }">
+								<c:if test="${admin.proceedingCnt - cnt.proceedingCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.proceedingCnt - cnt.proceedingCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.proceedingCnt - cnt.proceedingCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.proceedingCnt - cnt.proceedingCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.proceedingCnt - cnt.proceedingCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+				<div class="MprojectAll">
+				<div><i class="fa-solid fa-hand-holding-dollar"></i>
+					총 프로젝트  </div>
+					<br>
+					<div style="font-size: 20px;">${admin.projectAllCnt }</div>
+					<div class="mainCnt ">
+						<c:choose>
+							<c:when test="${admin.projectAllCnt ne cnt.projectAllCnt }">
+								<c:if test="${admin.projectAllCnt - cnt.projectAllCnt lt 0 }">
+									<div class="downarrow" style="font-size: 11px;"><i class="fa-solid fa-caret-down" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${(admin.projectAllCnt - cnt.projectAllCnt) * -1 } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+								<c:if test="${admin.projectAllCnt - cnt.projectAllCnt gt 0 }">
+									<div class="uparrow" style="font-size: 11px;"><i class="fa-solid fa-caret-up" ></i></div>
+									<div class="degree" style="font-size: 11px;margin-top:2px;">
+										${admin.projectAllCnt - cnt.projectAllCnt } 
+									</div>
+									<div class="guide" style="font-size: 9px; color:#ccc;margin-top: 4px;">compared to yesterday</div>
+								</c:if>
+							</c:when>
+							<c:when test="${ admin.projectAllCnt - cnt.projectAllCnt eq 0}">
+								<div style="color:#ccc;">-</div>
+							</c:when>
+						</c:choose>
+				</div>
+				</div>
+			
+			</div>
+			<br>
+			<div class="prjectCategorychartAndNotice" >
+				<div class="MprojectCategoryChart">
+					<canvas id="mychart"></canvas>
+				</div>
+				<div class="Mnotice" style="overflow:scroll; width:33%; height:150px; overflow-x: hidden; ">
+				<div style=" position: absolute; z-index: 999; background-color: white;width: 25.5%;  text-align: center;" >공지사항 리스트</div>
+					<table class="MnoticeList">
+						<tr style="border-bottom: 2px solid #ddd;">
+						
+							<td style="width: 10%;">.</td><td style="width: 76%;"></td><td></td>
+						</tr>
+						<c:forEach items="${notice}" var='i'>
+						<tr class="noticeTabletr">
+						
+							<td>${i.noticeNo }</td><td>${i.title}</td><td style="font-size: 12px;">${i.regDate }</td>
+						</tr>
+						</c:forEach>
+					</table>
+					
+				</div>
+				<div class="Mqna" style="overflow:scroll; overflow-x: hidden;">
+				<div style=" position: absolute; z-index: 999; background-color: white; width:  24.9%;  text-align: center;" >문의게시판 답변 안한 리스트</div>
+
+						<table class="MqnaList">
+							<tr style="border-bottom: 2px solid #ddd;">
+								<td style="width: 10%;">.</td><td style="width: 76%;"></td><td style="width: 17%;" ></td>
+							</tr>
+							<c:forEach items="${qnalist}" var='i'>
+							<tr class="noticeTabletr">
+								<td>${i.qnaNo }</td><td>${i.qnaTitle}</td>
+								<td style="font-size: 12px;"><fmt:formatDate value="${i.qnaCreateDate }" pattern="yyyy-MM-dd"/>  </td>
+							</tr>
+							</c:forEach>
+						</table>
+					</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="monthChartAndOrder" >
+				<div class="monthChart">
+					<canvas id="monthchart"></canvas>
+				</div>
+				<div class="projectOrder" style="overflow:scroll; height: 449px; overflow-x: hidden;">
+								<div style=" position: absolute; z-index: 999; background-color: white; width: 30.3%;  text-align: center;" >프로젝트 펀딩률</div>
+					<table style="    width: 100%;">
+					<tr style="border-bottom: 1px solid #ddd;">
+						<th style="width: 8%;">.</th>
+						<th style="width: 50%;"></th>
+						<th style="width: 19%;"></th>
+						<th style="width: 10%;"></th>
+						<th style="width: 7%;"></th>
+					</tr>
+					<c:forEach items="${projectList }" var="i">
+						<tr style="border-bottom: 1px solid #ddd;">
+							<td>${i.projectNo }</td>
+							<td>${i.projectTitle }</td>
+							<td>${i.paymentTotal}</td>
+							<td><fmt:formatNumber value="${i.paymentTotal / i.projectPrice}" type="percent"/></td>
+							<td>
+							<c:if test="${i.paymentTotal ne 0}">
+								<button onclick="projectNoSelect(${i.projectNo})" >
+								<i class="fa-solid fa-caret-down caretBottom(${i.projectNo })" ></i>
+							</button>
+							</c:if>
+							</td>
+						</tr>
+							<c:forEach items="${projectinfoList}" var="j">
+								<c:if test="${j.projectNo eq i.projectNo}">
+									
+									<tr style="border-bottom: 1px solid #ddd;">
+										<td colspan=5 style="font-size: 13px; text-align: center;" class="projectMoney pro${j.projectNo }" >
+											${j.id }(${j.nick }) | ${j.email} | 
+										 	펀딩 금액 : ${j.paymentTotal }
+										 	| 날짜 : ${j.orderDate  }
+										 </td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
+
+
+<script type="text/javascript">
+
+	var categoryCnt = new Array();
+	var categoryName = new Array();
+	<c:forEach items="${category}" var='i'>
+		categoryCnt.push('${i.categoryCnt}')
+		categoryName.push('${i.categoryName}')
+	</c:forEach>
+	var dataset = {
+		    labels: categoryName,
+		    backgroundColor: ['#527578', '#84978F', '#ADA692', '#B3B1B2','#218559','#21B6A8','#177F75','#66A7C5'],//라벨별 컬러설정
+		    borderColor: '#22252B',
+		    data: categoryCnt
+		}
+	var labels=categoryName;
+	var datasets={ datasets:[dataset], labels:categoryName }
+
+
+		  
+	var config = {
+		   type: 'pie',
+		   data: datasets, //데이터 셋 
+		   options: {
+			   title: {
+				   responsive: true,
+			        display: true,
+			        text: '프로젝트 카테고리 별 '
+			      },
+		       responsive: true,
+		       maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다.
+		       legend: {
+		           position: 'right',
+		           fontColor: 'black',
+		           align: 'center',
+		           display: true,
+		           fullWidth: true,
+		           labels: {
+		               fontColor: 'rgb(0, 0, 0)'
+		           }
+		       }
+		      
+	    }
+	}
+	var canvas=document.getElementById('mychart');
+	var pieChart = new Chart(canvas,config);
+	var allcnt = new Array();
+	var allDate = new Array();
+	var buisnesscnt = new Array();
+	var normalcnt = new Array();
+
+	<c:forEach items="${monthChart}" var='i'>
+		allcnt.push('${i.cnt}')
+		allDate.push('${i.regDate}')
+		buisnesscnt.push('${i.buisnesscnt}')
+		normalcnt.push('${i.normalcnt}')
+		 
+		
+	</c:forEach>
+	const ctx = document.getElementById('monthchart'); // getContext('2d') 를 하는 경우가 있는데 없어야 엑셀다운가능
+
+	new Chart(document.getElementById("monthchart"), {
+    	type: 'line',
+    	data: {
+      	labels: allDate,
+      	datasets: [{ 
+          data: allcnt
+       	  ,label: "회원가입 수",
+          borderColor: "#E5AE86",
+//           fill: start
+     	   },{
+ 	      data: normalcnt
+          ,label: "일반 회원가입 수",
+          borderColor: "#DFD27C",
+//          fill: start
+        	},{
+       	  data: buisnesscnt
+          ,label: "사업자 회원가입 수",
+          borderColor: "#B7A6AD",
+       //        fill: start
+       }]  
+    },
+    options: {
+      title: {
+        display: true,
+        text: '30일 회원 가입 현황 그래프'
+      }
+    }
+ });
+
+</script>
 </body>
 </html>

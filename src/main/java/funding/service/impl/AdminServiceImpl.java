@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import funding.dao.face.AdminDao;
+import funding.dto.AdminMain;
 import funding.dto.Alert;
 import funding.dto.Category;
 import funding.dto.Chart;
@@ -141,11 +142,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 
-	@Override
-	public Notice getFile(Notice notice) {
-
-		return adminDao.selectNoticeFileByFileNo(notice);
-	}
+	
 
 	@Override
 	@Transactional
@@ -323,5 +320,33 @@ public class AdminServiceImpl implements AdminService {
 	public void qnaUpdate(Qna qna) {
 		 adminDao.qnaUpdate(qna);
 	}
+	@Override
+	public AdminMain memberAndProjectAllCnt() {
+		return adminDao.memberAndProjectAllCnt();
+	}
+	@Override
+	public List<AdminMain> categoryCntList() {
+		return adminDao.categoryCntList();
+	}
+	@Override
+	public List<Notice> mainNoticeAll() {
+		return adminDao.mainNoticeAll();
+	}
+	@Override
+	public List<Qna> mainQnaAll() {
+		return adminDao.mainQnaAll();
+	}
+	@Override
+	public List<AdminMain> adminProjectList() {
+		return adminDao.adminProjectList();
+	}
+	@Override
+	public List<AdminMain> projectSelectPayment() {
+		return adminDao.projectSelectPayment();
+	}
 	
+	@Override
+	public AdminMain selectCntAll() {
+		return adminDao.selectCntAll();
+	}
 }

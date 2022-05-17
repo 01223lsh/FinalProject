@@ -8,15 +8,22 @@
     <title>Insert title here</title>
     
 
-    <style>
-    
-        img {
-            max-width: 100%;
-        }
-        .p-content-section {
-            width: 500px;
-        }
-    </style>
+<style>
+    	
+   img {
+      max-width: 100%;
+   }
+   .p-content-section {
+      width: 500px;
+   }
+   .btn{
+   margin-right:10px;   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;
+    }
+</style>
 
     <script type="text/javascript">
         // 프로젝트 심사 요청 처리
@@ -126,7 +133,7 @@
     </div>
     <div class="p-content-section">
         <div class="row text-center">
-            <button class="btn btn-primary" onclick="updateProjectStep(3)">승인</button>
+            <button class="btn btn-primary" onclick="updateProjectStep(5)">승인</button>
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-approve">거절</button>
             <button class="btn btn-success" onclick="approveProject()">목록</button>
         </div>

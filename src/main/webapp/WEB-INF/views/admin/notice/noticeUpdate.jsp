@@ -100,7 +100,11 @@ $(document).ready(function(){
 	height:100%;
 	z-index:none
 }
-
+button{   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;}
 
 </style>
 </head>
@@ -146,9 +150,9 @@ $(document).ready(function(){
 
 
 
-<div class="text-center">
-	<button class="btn btn-primary" id="btnNoticeUpdate">작성</button>
-	<button type="reset" onclick="noticeManagement()" class="btn btn-danger" >취소</button>
+<div class="text-center" style="margin-top: 20px;">
+		<button id="btnNoticeUpdate">작성</button>
+	<button type="reset" onclick="noticeManagement()"  >취소</button>
 </div>
 <input type="hidden" value="${notice.fileNo }" id="fileNo" name="fileNo">
 <input type="hidden" value="${notice.noticeNo }" id="noticeNo" name="noticeNo">
