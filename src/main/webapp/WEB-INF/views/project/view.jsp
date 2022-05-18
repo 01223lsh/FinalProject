@@ -377,7 +377,7 @@ a.disabled{
 				<br> <br> 
 				<c:choose>
 					<c:when test="${project.projectStep eq 3}">
-					<a href="" type="button" class="btn btn-success"
+					<a href="/payment/chooseReward?projectNo=${project.projectNo}" type="button" class="btn btn-success"
 					id="btn-success1">펀딩하기</a>
 					</c:when>
 					<c:when test="${project.projectStep eq 4 }">
@@ -436,7 +436,7 @@ a.disabled{
 					<div id="reward">
 			<br>
 			<b>- 리워드 선택</b>
-			<a href="/payment/chooseReward?projectNo=${project.projectNo }">
+			<a href="/payment/chooseReward?projectNo=${project.projectNo}">
 					<div id="reward_1" class="reward_1">
 
 						 <b
