@@ -34,7 +34,7 @@ public class PaymentController {
 		
 		//병합 때 넘어온 프로젝트 번호를 통해 해당되는 reward만 조회한다. 
 		//: : : 임시 : : :
-		int projectNo = 2;
+		int projectNo = 4;
 		
 		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo);
 //		for (Reward r : rewardList) {
