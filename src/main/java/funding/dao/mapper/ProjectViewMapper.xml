@@ -34,8 +34,6 @@
  	FROM project_comment
  	WHERE project_no = #{projectNo}
  	ORDER BY comment_no DESC
- 	
- 
  
  </select>
  
