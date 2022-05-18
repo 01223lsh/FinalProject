@@ -17,11 +17,6 @@ public class Member {
 	private Date regDate;
 	
 	private MemberSeller memberSeller;
-	
-	
-
-
-
 
 	@Override
 	public String toString() {
@@ -29,7 +24,6 @@ public class Member {
 				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverLogin=" + naverLogin
 				+ ", kakaoLogin=" + kakaoLogin + ", regDate=" + regDate + ", memberSeller=" + memberSeller + "]";
 	}
-	
 	
 	
 

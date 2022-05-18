@@ -88,10 +88,4 @@ public class Reward {
 		this.rewardState = rewardState;
 	}
 	
-	
-	
-	
-	
-	
-
 }
