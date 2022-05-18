@@ -47,7 +47,8 @@
 		) py
     		on pj.project_no = py.project_no 
 		
-		<where> 
+		<where>
+		AND project_step BETWEEN 3 AND 4
 		<if test="category != null and !''.equals(category)">
 		AND category_no = #{category}
 		</if>

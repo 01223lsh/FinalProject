@@ -26,21 +26,17 @@ public class ProjectController {
 	private ProjectService projectService;
 	
 	@RequestMapping(value = "/project/list", method = RequestMethod.GET)
-	public String list(
-				Pagination pagination
-				, Model model
-			) {
+	public String list(Pagination pagination, Model model) {
 		log.info("[/project/list][GET]");
-		
-		
+
 		List<Project> list = projectService.getPageList(pagination);
-		
-		List<Category> cList = projectService.getCategoryList();
-		
-		model.addAttribute("cList", cList);
-		log.info("카테고리 조회결과: {}", cList);
-		model.addAttribute("list", list);
 		log.info("조회결과: {}", list);
+
+		List<Category> cList = projectService.getCategoryList();
+		log.info("카테고리 조회결과: {}", cList);
+
+		model.addAttribute("cList", cList);
+		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
 		log.info("pagination: {}", pagination);
 		
