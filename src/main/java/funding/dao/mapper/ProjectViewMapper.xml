@@ -79,7 +79,7 @@
 	SELECT reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro
 	FROM reward
 	WHERE project_no = #{projectNo}
-	ORDER BY reward_price
+	ORDER BY reward_no
 
 </select>
 

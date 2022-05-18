@@ -417,6 +417,8 @@ a.disabled{
 				<b>-프로젝트 소개</b>
 				<br><br>
 				${project.projectContent }
+				<br><br><br><br><br><br>
+				<br><br><br><br><br><br>
 			</div>
 			
 			
@@ -436,16 +438,7 @@ a.disabled{
 					<div id="reward">
 			<br>
 			<b>- 리워드 선택</b>
-			<a href="/payment/chooseReward?projectNo=${project.projectNo}">
-					<div id="reward_1" class="reward_1">
-
-						 <b
-							style="font-size: 17px;">1000원</b><br> <br>
-							<span>선물 없이 후원하기</span>
-						
-
-					</div>
-					</a>
+			
 					<br>
 				<c:forEach var="reward" items="${rewardList }">
 				
