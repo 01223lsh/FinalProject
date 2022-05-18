@@ -65,7 +65,7 @@
 
 <insert id="insertComment" parameterType="funding.dto.ProjectComment">
 	INSERT INTO project_comment(comment_no,project_no,comment_content,comment_date)
-	VALUES (comment_seq.nextval, #{projectNo}, #{commentContent},sysdate)
+	VALUES (comment_seq.nextval, #{projectNo}, #{commentContent},current_date)
 
 </insert>
 
@@ -83,14 +83,18 @@
 
 
 </select>
-<resultMap type="funding.dto.MemberSeller" id="MemberSeller"/>
+
 
 <resultMap type="funding.dto.Member" id="Member">
-	<collection property="memberSeller" resultMap="MemberSeller"/>
+	<id property="nick" column="nick"/>
+	<result property="memberNo" column="member_no"/>
+	<association property="memberSeller" column="member_no" javaType="funding.dto.MemberSeller">
+	<id property="sellerInfo" column="seller_info"/>
+	</association>
 </resultMap>
 
 <select id="selectSeller" parameterType="funding.dto.Project" resultMap="Member">
-	SELECT a.nick, b.seller_info
+	SELECT a.member_no, b.seller_info, a.nick
 	FROM member a
 	JOIN member_seller b
 	ON a.member_no = b.member_no
@@ -103,6 +107,13 @@
 	 FROM project
 	WHERE project_no = #{projectNo}
 </select>
+
+<update id="updateTalktime" parameterType="funding.dto.Project">
+	UPDATE project
+	SET talk_time = #{talkTime}
+	WHERE project_no = #{projectNo}
+
+</update>
 
 
 </mapper>

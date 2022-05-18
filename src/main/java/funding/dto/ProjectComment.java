@@ -9,8 +9,15 @@ public class ProjectComment {
 	private String commentContent;
 	private String commentWriter;
 	private Date commentDate;
+	private int memberNo;
 	
 	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public int getCommentNo() {
 		return commentNo;
 	}
@@ -44,7 +51,8 @@ public class ProjectComment {
 	@Override
 	public String toString() {
 		return "ProjectComment [commentNo=" + commentNo + ", projectNo=" + projectNo + ", commentContent="
-				+ commentContent + ", commentWriter=" + commentWriter + ", commentDate=" + commentDate + "]";
+				+ commentContent + ", commentWriter=" + commentWriter + ", commentDate=" + commentDate + ", memberNo="
+				+ memberNo + "]";
 	}
 	
 	

@@ -212,6 +212,15 @@ div {
 	border: none;
 }
 
+#chatbtn{
+	width: 160px;
+	height: 36px;
+	background-color: rgb(240, 240, 240);
+
+}
+
+
+
 
 #btn-success1:hover {
 	background-color: rgb(78, 104, 72);
@@ -258,7 +267,7 @@ div {
 	margin-left: 50px;
 	text-align: left;
 	float: right;
-	padding: 30px;
+	padding-left: 10px;
 	padding-bottom: 10px;
 	border: 1px solid black;
 }
@@ -301,6 +310,7 @@ a.disabled{
 	pointer-events: none;
 	cursor: default;
 }
+
 
 
 </style>
@@ -412,9 +422,13 @@ a.disabled{
 			
 			
 			<div id="content3_2">
-			<p>판매자</p>
-			<p>소개</p>
+			<b style="font-size: 15px;">창작자 소개</b>
+			<br><br>
+			<b style="font-size: 15px;">${seller.nick }</b>
+			<br>
+			<p>${seller.memberSeller.sellerInfo }</p>
 			<p>대화가능시간</p>
+			<a type="button" id="chatbtn" href="">대화하기</a>
 			</div>
 			
 
@@ -423,7 +437,7 @@ a.disabled{
 					<div id="reward">
 			<br>
 			<b>- 리워드 선택</b>
-			<a href="/#?rewardNo=">
+			<a href="/payment/chooseReward?projectNo=${project.projectNo }">
 					<div id="reward_1" class="reward_1">
 
 						 <b
@@ -436,7 +450,7 @@ a.disabled{
 					<br>
 				<c:forEach var="reward" items="${rewardList }">
 				
-				<a href="/#?rewardNo=${reward.rewardNo }">
+				<a href="/payment/chooseReward?projectNo=${project.projectNo }&rewardNo=${reward.rewardNo }">
 					<div id="reward_1" class="reward_1">
 						
 						 <b style="font-size: 17px;">${reward.rewardPrice }원 </b><br> <br>

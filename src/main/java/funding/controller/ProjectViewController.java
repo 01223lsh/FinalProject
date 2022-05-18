@@ -3,7 +3,12 @@ package funding.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import funding.dto.Member;
 import funding.dto.MemberSeller;
@@ -35,11 +44,12 @@ public class ProjectViewController {
 		logger.info("/projectView/view");
 		
 		if( project.getProjectNo() < 1 ) {
-			return "redirect:/";
+			return "redirect:/main";
 		}
 		
 		project = projectViewService.getProject(project);
 		seller = projectViewService.getSeller(project);
+		logger.info("{}",seller);
 		
 		model.addAttribute("project", project);
 		model.addAttribute("seller", seller);
@@ -150,15 +160,17 @@ public class ProjectViewController {
 	}
 	
 	@RequestMapping(value = "/project/news/delete")
-	public String projectNewsDelete(Model model, ProjectNews news) {
+	public String projectNewsDelete(Model model, ProjectNews news,Project project) {
 		
 		logger.info("{}",news);
 		projectViewService.deleteNews(news);
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
+		project = projectViewService.getStep(project);
 		
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("projectNo", news.getProjectNo());
+		model.addAttribute("project", project);
 		return "project/newsList";
 	}
 	
@@ -193,6 +205,39 @@ public class ProjectViewController {
 		model.addAttribute("projectNo", comment.getProjectNo());
 		
 		return "project/commentList";
+	}
+	
+	@RequestMapping(value = "/project/ck/upload", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ckUpload(
+	HttpServletRequest req
+	, HttpServletResponse resp
+	, @RequestParam("upload") MultipartFile file) {
+	Map<String, Object> json = new HashMap<>();
+	
+	
+	// 파일은 컨텍스트 루트의 '/img' 에 저장되도록 설정
+	// 저장된 파일이름을 반환
+	String fileName = projectViewService.fileUpload(file);
+	// servlet-context.xml 에 <resources> url로 설정
+	String fileUrl = "/ckImg/" + fileName;
+	// ckEditor 4.9.0 버전 이후에는 JSON 형태로 리턴하도록 ckEditor document 에서 정의
+	json.put("uploaded", 1);
+	json.put("fileName", fileName);
+	json.put("url", fileUrl);
+	
+	logger.info("json: {}", json);
+	
+	return json;
+	}
+	
+	
+	@RequestMapping(value = "/project/talktime")
+	public String projectTalktimeUpdate(Project project) {
+		
+		projectViewService.updateTalktime(project);
+		
+		return null;
 	}
 	
 }

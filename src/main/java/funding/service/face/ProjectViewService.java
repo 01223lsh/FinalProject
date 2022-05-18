@@ -3,6 +3,8 @@ package funding.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import funding.dto.Member;
 import funding.dto.MemberSeller;
 import funding.dto.Project;
@@ -37,5 +39,9 @@ public interface ProjectViewService {
 	public Member getSeller(Project project);
 
 	public Project getStep(Project project);
+
+	public String fileUpload(MultipartFile file);
+
+	public void updateTalktime(Project project);
 
 }

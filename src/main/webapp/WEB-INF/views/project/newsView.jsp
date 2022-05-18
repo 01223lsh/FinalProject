@@ -34,6 +34,8 @@ $(document).ready(function() {
 <small><fmt:formatDate value="${news.newsDate }" pattern="yyyy.MM.dd"/></small>
 <br>
 <hr>
+<div>
 ${news.newsContent }
+</div>
 </div>
 <br><br><br><br><br><br><br>

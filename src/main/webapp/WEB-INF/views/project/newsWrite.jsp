@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     
-
+<script src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 
 
@@ -10,6 +10,7 @@
 	$("#newsSubmit").click(function(){
 		
 		var from1 = $("#newsForm").serialize();
+		from1 += "&newsContent="+CKEDITOR.instances['newsContent'].getData();
 		console.log(from1);
 		
 		$.ajax({
@@ -47,29 +48,42 @@
 		}
 	
 
+	
+	
 </script>
 
 
 <div>
-<form id="newsForm" >
+<form id="newsForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="projectNo" value="${projectNo }">
 <table style="width: 500px; height: 350px;">
 <tr>
 	<td style="width: 15%">제목</td>
 	<td><input type="text" id="newsTitle" name="newsTitle" style="width:400px "></td>
 </tr>
+
 <tr>
 	<td>내용</td>
-	<td><textarea style="width: 400px; height: 300px" id="newsContent" name="newsContent"></textarea></td>
+	<td><textarea style="width: 400px; height: 300px" id="newsContent"></textarea></td>
 	
 </tr>
 
 
 </table>
+</form>
 <div class="text-center">
 <button id="newsSubmit" type="button" class="btn btn-primary">작성</button>
 <button id="newsCancel" type="button" class="btn btn-default" onclick="cancel()">취소</button>
 </div>
-</form>
 
+<br><br><br><br><br>
 </div>   
+
+<script>
+$(function () {
+	CKEDITOR.replace('newsContent', { // ck에디터를 지정하고자 하는 textarea 태그의 id
+	filebrowserUploadUrl: '/project/ck/upload',// 이미지 업로드를 진행할 url
+	language: 'ko'
+	})
+	})
+</script>
