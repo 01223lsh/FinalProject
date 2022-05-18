@@ -117,7 +117,7 @@ select {
 <br>
 
 </div><!-- main --><br><br>
-<c:import url="/WEB-INF/views/qna/listpaging.jsp" />
+<c:import url="/WEB-INF/views/qna/listpaging2.jsp" />
 </div><!-- container -->
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

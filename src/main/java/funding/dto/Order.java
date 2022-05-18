@@ -8,7 +8,7 @@ public class Order {
 	private int memberNo;
 	private Date orderDate;
 	private int orderStatus;
-	private int additionalFunding;
+	private int addtionalFunding;
 	private int totalPrice;
 	private int rewardOrderNo;
 	private int rewardNo;
@@ -17,9 +17,10 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + ", additionalFunding=" + additionalFunding + ", totalPrice=" + totalPrice
+				+ orderStatus + ", addtionalFunding=" + addtionalFunding + ", totalPrice=" + totalPrice
 				+ ", rewardOrderNo=" + rewardOrderNo + ", rewardNo=" + rewardNo + ", rewardCount=" + rewardCount + "]";
 	}
+	
 	public int getOrderNo() {
 		return orderNo;
 	}
@@ -44,11 +45,11 @@ public class Order {
 	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public int getAdditionalFunding() {
-		return additionalFunding;
+	public int getAddtionalFunding() {
+		return addtionalFunding;
 	}
-	public void setAdditionalFunding(int additionalFunding) {
-		this.additionalFunding = additionalFunding;
+	public void setAddtionalFunding(int addtionalFunding) {
+		this.addtionalFunding = addtionalFunding;
 	}
 	public int getTotalPrice() {
 		return totalPrice;
@@ -74,5 +75,9 @@ public class Order {
 	public void setRewardCount(int rewardCount) {
 		this.rewardCount = rewardCount;
 	}
+	
+	
+	
+	
 	
 }
