@@ -35,11 +35,39 @@
 		<beans:property name="contentType" value="application/json; charset=utf-8"/>
 	</beans:bean>
 	
+	<!-- 네이버로그인 api 사용 bean 설정 추가-->
+	<beans:bean id="naverLoginBO" class="funding.controller.NaverLoginBO" />
+
+	
+	<!-- navermail설정 -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<beans:property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
+	<beans:property name="port" value="587"/> <!-- 메이서버 포트번호 -->
+	<beans:property name="username" value="id"/> <!-- 자신의 이메일 아이디 -->
+	<beans:property name="password" value="pw"/> <!-- 자신의 비밀번호 -->
+
+	<!-- 보안연결 SSL과 관련된 설정 --> 
+		<beans:property name="javaMailProperties"> 
+			<beans:props> 
+				<beans:prop key="mail.smtp.auth">true</beans:prop> 
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop> 
+				<beans:prop key="mail.smtps.checkserveridentity">true</beans:prop>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop> 
+				<beans:prop key="mail.smtps.ssl.trust">*</beans:prop> 
+				<beans:prop key="mail.debug">true</beans:prop> 
+				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	<!-- navermail 설정 end -->
+
+
 	
 	
 	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
 	<!-- 	-> @Controller, @Service -->
-	<context:component-scan base-package="a.b.c" />
+	<context:component-scan base-package="a.b.c, funding.controller, funding.service" />
+	
 	
 	
 	
