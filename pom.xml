@@ -15,6 +15,8 @@
 	</properties>
 	
 	
+	
+	
 
 <!-- ODJDBC8를 위한 추가 저장소 설정 -->
 <repositories>
@@ -27,6 +29,58 @@
 	
 	<dependencies>
 	
+	 <!-- : : : Oracle Cloud 전자지갑을 통해 DB에 접속할 때 필요한 라이브러리들이다. : : :  -->
+		 <!-- ojdbc를 제외한 oraclepki, osdt_cert, osdt_core 라이브리가 필요하다.  --> 
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+	
+	
+	
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.24</version>
+    <scope>provided</scope>
+</dependency>
+
+		<!-- 채팅 페이지 관련 웹소켓 설정 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.3.18</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
+			<version>2.11.3</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>5.3.18</version>
+		</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+<groupId>com.google.code.gson</groupId>
+<artifactId>gson</artifactId>
+<version>2.8.7</version>
+</dependency>
+
+
 		<!-- STMP 메일 전송 관련 라이브러리 -->
 		<dependency>
 			<groupId>javax.mail</groupId> 

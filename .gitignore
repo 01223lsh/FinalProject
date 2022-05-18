@@ -1,9 +1,14 @@
 # DB info
 src/main/resources/dbconfig.properties
 
+<<<<<<< HEAD
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,java,eclipse,maven
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,java,eclipse,maven
+=======
+# Created by https://www.toptal.com/developers/gitignore/api/windows,java,macos,eclipse,maven
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,macos,eclipse,maven
+>>>>>>> refs/heads/fund/chat
 
 ### Eclipse ###
 .metadata
@@ -175,4 +180,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,java,eclipse,maven
+=======
+# End of https://www.toptal.com/developers/gitignore/api/windows,java,macos,eclipse,maven
+>>>>>>> refs/heads/fund/chat

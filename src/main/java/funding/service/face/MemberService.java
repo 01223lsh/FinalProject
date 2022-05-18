@@ -197,28 +197,6 @@ public interface MemberService {
 	 */
 	public List<Member> getinfo(JSONObject naverInfo);
 
-	
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
 
 
 }

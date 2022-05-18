@@ -17,6 +17,7 @@ public class Paging {
 	
 	private String search; //검색어
 	private String select; //검색 목록
+
 	
 	
 	//디폴트 생성자 - 페이징 계산이 완료되지 않는다
@@ -39,8 +40,7 @@ public class Paging {
 //	}
 	
 	
-	
-	
+
 	//총 게시글 수, 현제 페이지번호를 입력하는 생성자
 	public Paging(int totalCount, int curPage) {
 		setTotalCount(totalCount);
@@ -100,12 +100,13 @@ public class Paging {
 		endNo = curPage * listCount;
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", select=" + select + "]";
+
 	}
 
 	public int getCurPage() {
@@ -187,6 +188,7 @@ public class Paging {
 	public void setSearch(String search) {
 		this.search = search;
 	}
+
 
 	public String getSelect() {
 		return select;

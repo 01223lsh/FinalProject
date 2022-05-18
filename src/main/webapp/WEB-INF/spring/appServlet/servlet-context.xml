@@ -5,11 +5,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -26,9 +28,9 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		
 	</beans:bean>
 	
+		
 	
 	<!-- jsonView 빈 설정 -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
@@ -63,12 +65,33 @@
 
 
 	
+	 <!-- websocket handler -->
+	<!--<beans:bean id="replyEchoHandler"
+		class="com.test.www.ReplyEchoHandler" />
+	<websocket:handlers>
+		<websocket:mapping path="/replyEcho"
+			handler="replyEchoHandler" />
+		<websocket:handshake-interceptors>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers> -->
+	
+
+<!-- websocket handler -->
+<beans:bean id="replyEchoHandler" class="funding.handler.ReplyEchoHandler"/>
+<websocket:handlers>
+<websocket:mapping path="/replyEcho" handler="replyEchoHandler"/>
+<websocket:handshake-interceptors>
+<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+</websocket:handshake-interceptors>
+</websocket:handlers> 
+
 	
 	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
 	<!-- 	-> @Controller, @Service -->
-	<context:component-scan base-package="funding.controller, funding.service" />
+	<context:component-scan base-package="a.b.c, funding.controller, funding.service, funding.repository, funding.config" />
 
-	
 	
 	
 </beans:beans>
