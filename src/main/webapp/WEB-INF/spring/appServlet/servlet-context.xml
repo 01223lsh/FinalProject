@@ -66,12 +66,8 @@
 	
 	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
 	<!-- 	-> @Controller, @Service -->
-<<<<<<< HEAD
 	<context:component-scan base-package="funding.controller, funding.service" />
-=======
-	<context:component-scan base-package="a.b.c, funding.controller, funding.service" />
-	
->>>>>>> origin/fund/login
+
 	
 	
 	
