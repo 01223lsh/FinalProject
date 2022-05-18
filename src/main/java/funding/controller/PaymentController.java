@@ -25,6 +25,8 @@ public class PaymentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
+	//브랜치 변경후 커밋 
+	
 	@Autowired
 	PaymentService paymentService;
 	
