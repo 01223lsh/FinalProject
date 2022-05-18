@@ -11,29 +11,26 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="a.b.c">
-		<level value="info" />
-	</logger>
-	
 	<logger name="funding">
 		<level value="info" />
 	</logger>
 	
 		<!-- 마이바티스 Loggers -->
+
 	<logger name="jdbc.connection">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.audit">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.sqlonly">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.resultset">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.resultsettable">
@@ -45,7 +42,11 @@
 	</logger>
 	
 	<logger name="jdbc.mybatis">
-		<level value="WARN" />
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="funding">
+		<level value="INFO" />
 	</logger>
 	
 	

@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
-		<!-- 한글 인코딩 필터 설정 -->
+	<!-- 한글 인코딩 필터 설정 -->
 	<!-- web.xml파일의 첫 부분으로 작성한다 -->
 	<filter>
 	  <filter-name>encodingFilter</filter-name>

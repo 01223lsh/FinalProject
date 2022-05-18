@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
- <%@ include file="../layout/funding_header.jsp" %>
+ <%@ include file="../layout/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -305,4 +305,4 @@ function setCondition() {
 
 
 
-<%@ include file="../layout/funding_footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

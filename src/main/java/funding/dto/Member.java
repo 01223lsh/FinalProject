@@ -3,24 +3,24 @@ package funding.dto;
 import java.util.Date;
 
 public class Member {
-	
-	private int memberNo;		// 회원번호
-	private String id;			// 아이디
-	private String pw;			// 비밀번호
-	private String name;		// 이름
-	private String email;		// 이메일
-	private String nick;		// 닉네임
-	private String phone;		// 전화번호
-	private int grade;			// 회원유형
-	private String naverLogin;	// 네이버 아이디
-	private String kakaoLogin;	// 네이버 아이디
-	private Date reg_date; 		// 가입날짜
-	
+
+	private int memberNo;
+	private String id;
+	private String pw;
+	private String name;
+	private String email;
+	private String nick;
+	private String phone;
+	private int grade;
+	private String naverlogin;
+	private String kakaologin;
+	private Date regDate;
+
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email
-				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverLogin=" + naverLogin
-				+ ", kakaoLogin=" + kakaoLogin + ", reg_date=" + reg_date + "]";
+				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverlogin=" + naverlogin
+				+ ", kakaologin=" + kakaologin + ", regDate=" + regDate + "]";
 	}
 
 	public int getMemberNo() {
@@ -87,28 +87,28 @@ public class Member {
 		this.grade = grade;
 	}
 
-	public String getNaverLogin() {
-		return naverLogin;
+	public String getNaverlogin() {
+		return naverlogin;
 	}
 
-	public void setNaverLogin(String naverLogin) {
-		this.naverLogin = naverLogin;
+	public void setNaverlogin(String naverlogin) {
+		this.naverlogin = naverlogin;
 	}
 
-	public String getKakaoLogin() {
-		return kakaoLogin;
+	public String getKakaologin() {
+		return kakaologin;
 	}
 
-	public void setKakaoLogin(String kakaoLogin) {
-		this.kakaoLogin = kakaoLogin;
+	public void setKakaologin(String kakaologin) {
+		this.kakaologin = kakaologin;
 	}
 
-	public Date getReg_date() {
-		return reg_date;
+	public Date getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 }
