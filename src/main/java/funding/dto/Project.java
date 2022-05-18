@@ -19,4 +19,5 @@ public class Project {
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
+	
 }
