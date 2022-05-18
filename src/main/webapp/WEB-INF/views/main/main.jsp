@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
+<%@ include file="../layout/funding_header.jsp" %>
 
 <style>
   /* 마감된 프로젝트 표시 */
@@ -29,9 +21,38 @@
   #category-section .row {
     flex-flow: nowrap;
   }
+  
 </style>
 
 <style>
+
+.caption li {
+			font-size: 9pt;
+			color: #9e9e9e;
+			font-weight: bold;
+			 list-style:none;
+		}
+		
+		.caption strong {
+			font-size: 10pt;
+		
+		}
+		
+		.caption p {
+			color: red;
+			font-size: 9.5pt;
+			font-weight: bold;
+		}
+		
+		.thumbnail {
+			magin: auto 0;
+			padding: 20;
+		
+		}
+
+
+
+
   .section-img {
     padding: 3px;
   }
@@ -170,76 +191,52 @@ function setCondition() {
 </head>
 <body>
 
-<!-- header -->
-<header>
-
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="container py-2">
-      <a class="navbar-brand" href="#">크라우드 펀딩</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <div class="col-md-3 text-end">
-          <button type="button" class="btn btn-outline-primary me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-</header>
-<!-- /header -->
-
 <main>
 
-<!-- 카테고리 -->
-<section id="category-section">
-  <div class="container py-5">
-    <div class="row">
-      <div class="col text-center" onclick="getList()">
-        <div><img src="/resources/img/project/category/all.svg" style="withd: 800px; height: 60px"></div>
-        <span>전체</span>
+<div class="container">
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/resources/jpg/vegan.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>달콤하게 떠먹는 비건식</h5>
+        <p>우유 없는 초코 & 카라멜 비건 아이스크림</p>
       </div>
-      
-      <c:forEach var="c" items="${cList}">
-      <div class="col text-center me-4" onclick="getList('${c.categoryNo}')">
-        <div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="withd: 80px; height: 60px"></div>
-        <span>${c.categoryName}</span>
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/jpg/perfume.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>포근하고 달콤한 향기</h5>
+        <p>부드러운 느낌의 프루티-플로럴 계열의 향수</p>
       </div>
-      </c:forEach>
-
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/jpg/perfume.JPG"" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- /카테고리 -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div><br><br>
 
 
 <!-- 프로젝트 목록 -->
-<section>
+<%-- <section>
 
 <div class="album py-5 bg-light">
 
@@ -270,44 +267,12 @@ function setCondition() {
     </div>
 
     <hr>
-  </div>
+  </div> --%>
   <!-- /프로젝트 목록 네비게션바 -->
 
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto;">
 
-      <%--<c:forEach var="p" items="${list}">
-      <div class="col" style="max-width: 250px;">
-        <div class="card shadow-sm">
-          <img src="${p.projectImage }" style="min-height: 250px;">
-          <div class="card-body">
-            <strong>${p.projectTitle}</strong>
-            <c:if test="${p.projectStep eq 4}">
-              <span id="project-status">마감</span>
-            </c:if>
-            <p class="card-text">${p.projectIntro}</p>
-            <progress value="${p.sum}" max="${p.projectPrice}"></progress>
-            <div class="row fs-6">
-              <div class="col d-flex">
-              <span style="margin-right: 10px;">
-                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
-              </span>
-                <span>
-                  <fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/>
-              </span>
-              </div>
-              <div class="col text-end">
-              <span>
-              <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/>
-              </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </c:forEach>--%>
-
-      <c:forEach var="p" items="${list}">
+      <%-- <c:forEach var="p" items="${list}"> --%>
+      <c:forEach var="p" items="${list }" begin="0" end="9" >
       <%-- 테스트 영역 --%>
       <div class="col" style="max-width: 250px;">
         <!-- 카드 영역 -->
@@ -345,12 +310,8 @@ function setCondition() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
       </c:forEach>
-
-
-
-
 
     </div>
   </div>
@@ -362,22 +323,4 @@ function setCondition() {
 
 </main>
 
-<!-- footer-->
-<div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-    </ul>
-    <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
-  </footer>
-</div>
-<!-- /footer-->
-
-
-
-</body>
-</html>
+<%@ include file="../layout/funding_footer.jsp" %>

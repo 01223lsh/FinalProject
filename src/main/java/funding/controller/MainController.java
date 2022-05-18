@@ -10,4 +10,9 @@ public class MainController {
 	public void viewGuide() {
 
 	}
+
+	@RequestMapping(value = "/member/main_update")
+	public void viewMainUpdate() {
+
+	}
 }

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+ <%@ include file="../layout/funding_header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -145,73 +148,11 @@ function setCondition() {
         }
     }
 }
-// 카테고리 이동 - 중도 포기 그냥 scroll로 하자
-// function nextCategory() {
-//   const row = document.querySelector("#category-section .row");
-//   const parentX = document.querySelector("#category-section .container").getBoundingClientRect().x;
-//   const childX = document.querySelector("#category-section .row").getBoundingClientRect().x;
-//   const parentR = document.querySelector("#category-section .container").getBoundingClientRect().right;
-//   const childR = document.querySelector("#category-section .row").getBoundingClientRect().right;
-//
-//   const parent = document.querySelector("#category-section .container");
-//   const child = document.querySelector("#category-section .row");
-//
-//   console.log("P-x: ", parentX)
-//   console.log("C-x: ", childX)
-//   console.log("P-right: ", parentR)
-//   console.log("C-right: ", childR)
-//
-//   console.log("parent: ", parent.clientWidth)
-//   console.log("child: ", child.clientWidth)
-//
-//   row.style.transform = 'translateX(' + (childX - parentX - 100) + 'px)';
-// }
+
 </script>
 </head>
 <body>
 
-<!-- header -->
-<header>
-
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="container py-2">
-      <a class="navbar-brand" href="#">크라우드 펀딩</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <div class="col-md-3 text-end">
-          <button type="button" class="btn btn-outline-primary me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-</header>
-<!-- /header -->
 
 <main>
 
@@ -306,8 +247,10 @@ function setCondition() {
         </div>
       </div>
       </c:forEach>--%>
-
-      <c:forEach var="p" items="${list}">
+     
+		
+     <%--  <c:forEach var="p" items="${list}"> --%>
+      <c:forEach var="p" items="${list }" begin="0" end="9" >
       <%-- 테스트 영역 --%>
       <div class="col" style="max-width: 250px;">
         <!-- 카드 영역 -->
@@ -348,10 +291,6 @@ function setCondition() {
       </div>
       </c:forEach>
 
-
-
-
-
     </div>
   </div>
 
@@ -362,22 +301,8 @@ function setCondition() {
 
 </main>
 
-<!-- footer-->
-<div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-    </ul>
-    <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
-  </footer>
-</div>
-<!-- /footer-->
 
 
 
-</body>
-</html>
+
+<%@ include file="../layout/funding_footer.jsp" %>

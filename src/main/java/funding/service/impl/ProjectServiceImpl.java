@@ -12,6 +12,7 @@ import funding.dao.face.ProjectDao;
 import funding.dto.Category;
 import funding.dto.Project;
 import funding.service.face.ProjectService;
+import funding.util.Paging;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -39,6 +40,32 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Category> getCategoryList() {
 
 		return projectDao.findCategoryList();
+	}
+
+	@Override
+	public List<Project> list(Paging paging) {
+
+		return projectDao.selectList(paging);
+	}
+
+	@Override
+	public Paging getPaging(Paging paramData) {
+
+		// 총 게시글 수 조회
+		int totalCount = projectDao.selectCntAll(paramData);
+
+		// 페이징 계산
+		Paging paging = new Paging(totalCount, paramData.getCurPage());
+		paging.setSearch(paramData.getSearch());
+
+		return paging;
+	}
+
+	@Override
+	public Project view(Project viewProject) {
+
+		// 상세보기 조회 결과 리턴
+		return projectDao.select(viewProject);
 	}
 
 }

@@ -1,39 +1,165 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%@ include file="../layout/funding_header.jsp" %>
+ <%@ include file="../layout/funding_header.jsp" %>
 
-<style type="text/css">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
 
-.caption li {
-			font-size: 9pt;
-			color: #9e9e9e;
-			font-weight: bold;
-			 list-style:none;
-		}
-		
-		.caption strong {
-			font-size: 10pt;
-		
-		}
-		
-		.caption p {
-			color: red;
-			font-size: 9.5pt;
-			font-weight: bold;
-		}
-		
-		.thumbnail {
-			magin: auto 0;
-			padding: 20;
-		
-		}
-		
-		
-	
+<style>
+  /* 마감된 프로젝트 표시 */
+  #project-status {
+    color: white;
+    background: red;
+    padding: 3px 5px;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+  #category-section .container {
+    overflow: auto;
+  }
+  #category-section .row {
+    flex-flow: nowrap;
+  }
+  
+  .main_pr {
+  	position: absolute;
+  	left : 8%;
+  }
 </style>
 
+<style>
+  .section-img {
+    padding: 3px;
+  }
+  .section-img img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .section-body {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-around;*/
+    min-height: 220px;
+  }
+  [class^="body"] {
+    margin: 5px 0;
+  }
+  .section-body .body-title {
+    margin: 5px 0;
+    font-size: 14px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-intro {
+    font-size: 12px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-progress {
+    flex-grow: 1;
+  }
+  .section-body .body-progress progress {
+    width: 100%;
+  }
+  .section-body .body-etc {
+    flex-grow: 1;
+  }
+  .section-body .body-etc span {
+    font-size: 12px;
+  }
+  .section-body .body-etc div:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .section-body .body-etc div:first-child > span:first-child{
+    color: red;
+  }
+</style>
 
+<script>
+
+$(document).ready(function() {
+
+	// 검색어 입력
+	$("input[name=keyword]").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			getList('${pagination.category}');
+		}
+	})
+	// 필터 선택
+	$("select[name=filter]").change(function() {
+		getList('${pagination.category}');
+	})
+	// 정렬 선택
+	$("select[name=order]").change(function() {
+		getList('${pagination.category}');
+	})
+	// 필터, 정렬 조건 유지
+	setCondition()	
+	
+	
+})
+
+
+
+// 프로젝트 리스트 조회
+function getList(category) {
+	var curPage = '${pagination.curPage}';
+	var keyword = $("input[name=keyword]").val();
+	if (category === undefined) var category = '';
+	var category = category; 
+	var filter = $("select[name=filter]").val();
+	var order = $("select[name=order]").val();
+	
+	console.log(
+		'cuarPage: ' + curPage
+		+ ' / keyward: ' + keyword
+		+ ' / category: ' + category
+		+ ' / filter: ' + filter
+		+ ' / order: ' + order
+	)
+	
+	location.href="/project/listsearch?curPage=" + curPage + "&keyword=" + keyword + "&category=" + category + "&filter=" + filter + "&order=" + order;
+	
+}
+// 정렬 조건 유지
+function setCondition() {
+    const selectOrder = document.querySelector("select[name=order]")
+    const selectFilter = document.querySelector("select[name=filter]")
+
+    for (i = 0; i < selectOrder.length; i++) {
+        if (selectOrder.options[i].value == '${pagination.order}') {
+            selectOrder.options[i].selected = true
+            break
+        }
+    }
+    
+    for (i = 0; i < selectFilter.length; i++) {
+        if (selectFilter.options[i].value == '${pagination.filter}') {
+        	selectFilter.options[i].selected = true
+            break
+        }
+    }
+}
+
+</script>
+</head>
+<body>
+
+
+<main>
 
 <div class="container">
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -76,118 +202,81 @@
 </div>
 </div><br><br>
 
-<div class="container">
-			<h5><strong>주목할 만한 프로젝트</strong></h5><br>
-    <div class="row">
-       <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
+
+
+
+<!-- 프로젝트 목록 -->
+<section>
+
+ 	  <div class="main_pr">
+      <h5>주목할 만한 프로젝트</h5>
+	  </div>
+
+<div class="album py-5 bg-light">
+
+
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto;">
+
+
+     <%--  <c:forEach var="p" items="${list}"> --%>
+      <c:forEach var="p" items="${list }" begin="0" end="9" >
+      <%-- 테스트 영역 --%>
+      <div class="col" style="max-width: 250px;">
+        <!-- 카드 영역 -->
+        <div class="card shadow-sm card-section">
+          <!-- 카드 이미지 -->
+          <div class="section-img">
+            <img src="${p.projectImage}" style="min-height: 250px;">
+          </div>
+          <!-- 카드 몸통 -->
+          <div class="card-body section-body">
+            <!-- 타이틀 영역 -->
+            <div class="body-title">
+              <strong>${p.projectTitle}</strong>
+              <c:if test="${p.projectStep eq 4}">
+                <span id="project-status">마감</span>
+              </c:if>
             </div>
-        </div>
-         <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
+            <!-- 인트로 영역 -->
+            <div class="body-intro">
+              <p class="card-text">${p.projectIntro}</p>
             </div>
-        </div>
-         <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
+            <!-- 진행바 영역 -->
+            <div class="body-progress">
+              <progress value="${p.sum}" max="${p.projectPrice}"></progress>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
+            <!-- 기타 정보 영역 -->
+            <div class="row fs-6 body-etc">
+              <div class="col d-flex">
+                <span style="margin-right: 10px;"><fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/></span>
+                <span><fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/></span>
+              </div>
+              <div class="col text-end">
+                <span><fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/></span>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      </c:forEach>
+
+
+
+
+
     </div>
-    <div class="row">
- <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
-            </div>
-        </div>
-       <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
-            </div>
-        </div>
-       <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a href="#"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:150px;"></a>
-                <div class="caption" style="width:150px; height:150px;">
-                  <li>푸드 ㅣ 마카롱</li>
-                  <strong>맛있는 비건 마카롱 건강하게 즐겨보세요~</strong>
-                  <p>798% 달성</p>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+
 </div>
 
+</section>
+<!-- /프로젝트 목록 -->
+
+</main>
 
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" alt="..." style="width:150px; height:200px;">
-                <div class="caption">
-                  <h3>Thumbnail label</h3>
-                  <p>...</p>
-                  <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
-                </div>
-              </div>
-        </div>
-        <div class="col-sm-6 col-md-3"></div>
-        <div class="col-sm-6 col-md-3"></div>
-        <div class="col-sm-6 col-md-3"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-md-3"></div>
-        <div class="col-sm-6 col-md-3"></div>
-        <div class="col-sm-6 col-md-3"></div>
-        <div class="col-sm-6 col-md-3"></div>
-    </div>
-</div> -->
+
 
 <%@ include file="../layout/funding_footer.jsp" %>

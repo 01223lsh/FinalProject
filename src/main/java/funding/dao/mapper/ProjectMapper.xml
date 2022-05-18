@@ -4,6 +4,52 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="funding.dao.face.ProjectDao">
+
+ <resultMap type="funding.dto.Project" id="Project">
+		<id column="project_no" property="projectNo"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_intro" property="projectIntro"/>
+		<result column="budget_plan" property="budgetPlan"/>
+		<result column="schedule_plan" property="schedulePlan"/>
+		<result column="project_image" property="projectImage"/>
+		<result column="project_price" property="projectPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="delivery_date" property="deliveryDate"/>
+		<result column="project_content" property="projectContent"/>
+		<result column="fund_price" property="fundPrice"/>
+		<result column="project_step" property="projectStep"/>
+		<result column="sum" property="sum"/>
+	</resultMap>
+
+	<select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, P.* FROM (
+				SELECT
+					project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+					project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step
+				FROM project
+				WHERE project_title LIKE '%' || #{search} || '%' 
+				ORDER BY project_no DESC
+			) P
+		) PROJECT
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+	<select id="selectCntAll" resultType="int">
+		SELECT count(*) FROM project
+		WHERE project_title LIKE '%' || #{search} || '%' 
+	</select>
+	
+		<select id="select" resultMap="Project" parameterType="funding.dto.Project">
+		SELECT
+			project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
+			project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
 	
 	<select id="getTotalCnt" parameterType="funding.commons.Pagination" resultType="int">
 		select count(*)
@@ -79,32 +125,8 @@
 		order by category_no
 	</select>
 	
-		<select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
-		SELECT * FROM (
-			SELECT rownum rnum, P.* FROM (
-				SELECT
-					project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
-					project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
-				FROM project
-				WHERE title LIKE '%' || #{search} || '%' 
-				ORDER BY project_no DESC
-			) P
-		) PROJECT
-		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-	</select>
-
-	<select id="selectCntAll" resultType="int">
-		SELECT count(*) FROM project
-		WHERE title LIKE '%' || #{search} || '%' 
-	</select>
 	
-	<select id="select" resultMap="Project" parameterType="funding.dto.Project">
-		SELECT
-			project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
-			project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step, sum
-		FROM project
-		WHERE project_no = #{projectNo}
-	</select>
+	
 	
 	
 </mapper>
