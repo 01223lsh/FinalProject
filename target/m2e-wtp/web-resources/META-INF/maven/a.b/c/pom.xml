@@ -76,6 +76,23 @@
 		    <version>21.5.0.0</version>
 		</dependency>
 		
+		<!-- : : : Oracle Cloud 전자지갑을 통해 DB에 접속할 때 필요한 라이브러리들이다. : : : -->
+		<!-- ojdbc를 제외한 oraclepki, osdt_cert, osdt_core 라이브리가 필요하다.  -->
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
 
 		<!-- MyBatis 로그 -->
 		<dependency>
