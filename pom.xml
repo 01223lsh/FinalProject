@@ -243,25 +243,25 @@
 	</dependencies>
     <build>
 		<!-- intellij setting -->
-		<resources>
-			<resource>
-				<!-- src/main/java 폴더의 xml파일들을 빌드에 포함 -->
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<!-- src/main/resources 폴더의 xml, properties, yml, setting파일들을 빌드에 포함 -->
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.properties</include>
-					<include>**/*.yml</include>
-					<!-- <include>**/*.setting</include>-->
-				</includes>
-			</resource>
-		</resources>
+<!--		<resources>-->
+<!--			<resource>-->
+<!--				&lt;!&ndash; src/main/java 폴더의 xml파일들을 빌드에 포함 &ndash;&gt;-->
+<!--				<directory>src/main/java</directory>-->
+<!--				<includes>-->
+<!--					<include>**/*.xml</include>-->
+<!--				</includes>-->
+<!--			</resource>-->
+<!--			<resource>-->
+<!--				&lt;!&ndash; src/main/resources 폴더의 xml, properties, yml, setting파일들을 빌드에 포함 &ndash;&gt;-->
+<!--				<directory>src/main/resources</directory>-->
+<!--				<includes>-->
+<!--					<include>**/*.xml</include>-->
+<!--					<include>**/*.properties</include>-->
+<!--					<include>**/*.yml</include>-->
+<!--					&lt;!&ndash; <include>**/*.setting</include>&ndash;&gt;-->
+<!--				</includes>-->
+<!--			</resource>-->
+<!--		</resources>-->
 
         <plugins>
 			<!-- JUnit 관련 플러그인 -->
