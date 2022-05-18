@@ -29,6 +29,13 @@
 		
 	</beans:bean>
 	
+	<!-- MultipartResover 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxInMemorySize" value="1048576"/> <!-- 1MB -->
+		<beans:property name="maxUploadSize" value="10485760"/> <!-- 10MB -->
+		<beans:property name="maxUploadSizePerFile" value="5242880" /> <!-- 5MB -->
+	</beans:bean>
+	
 	
 	<!-- jsonView 빈 설정 -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
@@ -39,8 +46,9 @@
 	
 	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
 	<!-- 	-> @Controller, @Service -->
-	<context:component-scan base-package="a.b.c, funding" />
+	<context:component-scan base-package="funding" />
 	
+	<resources mapping="/ckImg/**" location="/img/" />
 	
 	
 </beans:beans>

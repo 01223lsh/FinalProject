@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="funding.dao.face.ProjectViewDao">
+
+<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+	SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
+			open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
+	FROM project
+	WHERE project_no = #{projectNo}
+
+</select>
+
+<select id="selectPlan" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+	SELECT budget_plan, schedule_plan
+	FROM project
+	WHERE project_no = #{projectNo}
+
+</select>
+
+<select id="selectNewsList" parameterType="int" resultType="funding.dto.ProjectNews">
+	SELECT news_no, news_title, news_date,project_no
+	FROM project_news
+	WHERE project_no = #{projectNo}
+	ORDER BY news_no DESC
+	
+ </select>
+ 
+ <select id="selectCommentList" parameterType="int" resultType="funding.dto.ProjectComment">
+ 	SELECT comment_no, comment_content, comment_writer, comment_date,project_no
+ 	FROM project_comment
+ 	WHERE project_no = #{projectNo}
+ 	ORDER BY comment_no DESC
+ 	
+ 
+ 
+ </select>
+ 
+ <select id="selectContent" parameterType="int" resultType="funding.dto.Project">
+ 	SELECT project_content FROM project
+ 	WHERE project_no = #{projectNo}
+ 
+ </select>
+ 
+ <select id="selectNewsView" parameterType="funding.dto.ProjectNews" resultType="funding.dto.ProjectNews">
+ 	SELECT news_no,news_title, news_content, news_date, project_no
+ 	FROM project_news
+ 	WHERE news_no = #{newsNo}
+ </select>
+ 
+<insert id="insertNews" parameterType="funding.dto.ProjectNews">
+	INSERT INTO project_news(news_no,project_no, news_title, news_content)
+	VALUES (news_seq.nextval, #{projectNo}, #{newsTitle}, #{newsContent})
+ 
+
+</insert>
+
+<delete id="deleteNews" parameterType="funding.dto.ProjectNews">
+	DELETE project_news
+	WHERE news_no = #{newsNo}
+</delete>
+
+<insert id="insertComment" parameterType="funding.dto.ProjectComment">
+	INSERT INTO project_comment(comment_no,project_no,comment_content,comment_date)
+	VALUES (comment_seq.nextval, #{projectNo}, #{commentContent},current_date)
+
+</insert>
+
+<delete id="deleteComment" parameterType="funding.dto.ProjectComment">
+	DELETE project_comment
+	WHERE comment_no = #{commentNo}
+</delete>
+
+<select id="selectRewardList" parameterType="funding.dto.Project" resultType="funding.dto.Reward">
+
+	SELECT reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro
+	FROM reward
+	WHERE project_no = #{projectNo}
+	ORDER BY reward_no
+
+</select>
+
+
+<resultMap type="funding.dto.Member" id="Member">
+	<id property="nick" column="nick"/>
+	<result property="memberNo" column="member_no"/>
+	<association property="memberSeller" column="member_no" javaType="funding.dto.MemberSeller">
+	<id property="sellerInfo" column="seller_info"/>
+	</association>
+</resultMap>
+
+<select id="selectSeller" parameterType="funding.dto.Project" resultMap="Member">
+	SELECT a.member_no, b.seller_info, a.nick
+	FROM member a
+	JOIN member_seller b
+	ON a.member_no = b.member_no
+	WHERE a.member_no = #{memberNo}
+
+</select>
+<select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+
+	SELECT project_step, project_no
+	 FROM project
+	WHERE project_no = #{projectNo}
+</select>
+
+<update id="updateTalktime" parameterType="funding.dto.Project">
+	UPDATE project
+	SET talk_time = #{talkTime}
+	WHERE project_no = #{projectNo}
+
+</update>
+
+
+</mapper>

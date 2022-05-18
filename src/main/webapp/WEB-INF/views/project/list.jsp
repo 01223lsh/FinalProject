@@ -292,7 +292,7 @@ function setCondition() {
       <%-- 테스트 영역 --%>
       <div class="col" style="max-width: 250px;">
         <!-- 카드 영역 -->
-        <div class="card shadow-sm card-section">
+        <div class="card shadow-sm card-section" data-projectNo="${p.projectNo}" onclick="location.href='/project/view?projectNo=${p.projectNo}'">
           <!-- 카드 이미지 -->
           <div class="section-img">
             <img src="${p.projectImage}" style="min-height: 250px;">
