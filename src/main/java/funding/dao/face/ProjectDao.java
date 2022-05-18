@@ -5,7 +5,6 @@ import java.util.List;
 import funding.commons.Pagination;
 import funding.dto.Category;
 import funding.dto.Project;
-import funding.util.Paging;
 
 public interface ProjectDao {
 
@@ -40,22 +39,25 @@ public interface ProjectDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return 페이징이 적용된 프로젝트 목록
 	 */
-	public List<Project> selectList(Paging paging);
-
-	/**
-	 * 전체 프로젝트 수를 조회한다
+	/*
+	 * public List<Project> selectList(Paging paging);
 	 * 
-	 * @param paramData - search를 포함한 페이징 객체
-	 * @return 총 게시글 수
-	 */
-	public int selectCntAll(Paging paramData);
-
-	/**
-	 * 프로젝트 번호를 이용하여 프로젝트를 조회한다
+	 *//**
+		 * 전체 프로젝트 수를 조회한다
+		 * 
+		 * @param paramData - search를 포함한 페이징 객체
+		 * @return 총 게시글 수
+		 */
+	/*
+	 * public int selectCntAll(Paging paramData);
 	 * 
-	 * @param viewProject - 조회하려는 프로젝트 번호
-	 * @return 조회된 프로젝트 정보
-	 */
-	public Project select(Project viewProject);
+	 *//**
+		 * 프로젝트 번호를 이용하여 프로젝트를 조회한다
+		 * 
+		 * @param viewProject - 조회하려는 프로젝트 번호
+		 * @return 조회된 프로젝트 정보
+		 *//*
+			 * public Project select(Project viewProject);
+			 */
 
 }

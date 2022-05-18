@@ -92,6 +92,6 @@
 	<!-- 	-> @Controller, @Service -->
 	<context:component-scan base-package="a.b.c, funding.controller, funding.service, funding.repository, funding.config" />
 
-	
+	<resources mapping="/ckImg/**" location="/img/" />
 	
 </beans:beans>

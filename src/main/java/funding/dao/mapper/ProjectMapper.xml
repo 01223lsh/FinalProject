@@ -5,7 +5,7 @@
     
 <mapper namespace="funding.dao.face.ProjectDao">
 
- <resultMap type="funding.dto.Project" id="Project">
+ <!-- <resultMap type="funding.dto.Project" id="Project">
 		<id column="project_no" property="projectNo"/>
 		<result column="member_no" property="memberNo"/>
 		<result column="category_no" property="categoryNo"/>
@@ -22,9 +22,9 @@
 		<result column="fund_price" property="fundPrice"/>
 		<result column="project_step" property="projectStep"/>
 		<result column="sum" property="sum"/>
-	</resultMap>
+	</resultMap> -->
 
-	<select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
+	<!-- <select id="selectList" resultMap="Project" parameterType="funding.util.Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, P.* FROM (
 				SELECT
@@ -41,15 +41,15 @@
 	<select id="selectCntAll" resultType="int">
 		SELECT count(*) FROM project
 		WHERE project_title LIKE '%' || #{search} || '%' 
-	</select>
+	</select> -->
 	
-		<select id="select" resultMap="Project" parameterType="funding.dto.Project">
+		<!-- <select id="select" resultMap="Project" parameterType="funding.dto.Project">
 		SELECT
 			project_no, member_no, category_no, project_title, project_intro, budget_plan, schedule_plan, project_image,  
 			project_price, open_date, close_date, delivery_date, project_content, fund_price, project_step
 		FROM project
 		WHERE project_no = #{projectNo}
-	</select>
+	</select> -->
 	
 	<select id="getTotalCnt" parameterType="funding.commons.Pagination" resultType="int">
 		select count(*)
@@ -94,6 +94,7 @@
     		on pj.project_no = py.project_no 
 		
 		<where> 
+		AND project_step BETWEEN 3 AND 4
 		<if test="category != null and !''.equals(category)">
 		AND category_no = #{category}
 		</if>
