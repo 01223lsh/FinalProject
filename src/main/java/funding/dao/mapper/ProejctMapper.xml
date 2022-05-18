@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.ProjectDao">
+	
+	<select id="getTotalCnt" parameterType="funding.commons.Pagination" resultType="int">
+		select count(*)
+		from project
+		<where>
+		<if test="category != null and !''.equals(category)">
+		AND category_no = #{category}
+		</if>
+		<if test="keyword != null and !''.equals(keyword)">
+		AND project_title LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="filter != null and !''.equals(filter)">
+		AND project_step = #{filter}
+		</if>
+		</where>
+	</select>
+	
+	<!-- <select id="findAllByFilterAndOrder" parameterType="kh3.commons.Pagination" resultType="kh3.dto.Project">
+		select * 
+		from (
+		    select row_number() over (order by project_no desc) r, project.* from project
+		)
+		<where> 
+		<if test="category != null and keyword != null">
+		AND ${category} LIKE '%' || #{keyword} || '%' 
+		</if>
+		</where>
+		order by r
+	</select> -->
+	
+	<select id="findAllByFilterAndOrder" parameterType="funding.commons.Pagination" resultType="funding.dto.Project">
+		select 
+			row_number() over (order by pj.project_no desc) r
+			, pj.*
+			, nvl(sum, 0) sum
+		from project pj
+		left join (
+    		select project_no, sum(payment_total) sum
+    		from payment
+    		group by project_no    
+		) py
+    		on pj.project_no = py.project_no 
+		
+		<where>
+		AND project_step BETWEEN 3 AND 4
+		<if test="category != null and !''.equals(category)">
+		AND category_no = #{category}
+		</if>
+		<if test="keyword != null and !''.equals(keyword)">
+		AND project_title LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="filter != null and !''.equals(filter)">
+		AND project_step = #{filter}
+		</if>
+		</where>
+		
+		<choose>
+			<when test="order != null and order.equals('open_date')">
+			order by open_date desc 
+			</when>
+			<when test="order != null and order.equals('close_date')">
+			order by close_date
+			</when>
+			<otherwise>
+			order by r
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<select id="findCategoryList" resultType="funding.dto.Category">
+		select category_no, category_name 
+		from category
+		order by category_no
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -27,6 +27,23 @@
 	
 	
 	<dependencies>
+	
+		<!-- DB 클라우드 접속에 필요한 라이브러리 -->
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>oraclepki</artifactId>
+			<version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>osdt_cert</artifactId>
+			<version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.database.security</groupId>
+			<artifactId>osdt_core</artifactId>
+			<version>21.5.0.0</version>
+		</dependency>
 		
 		<!-- Jackson Databind -->
 		<dependency>
