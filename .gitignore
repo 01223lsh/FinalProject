@@ -17,6 +17,7 @@ local.properties
 .loadpath
 .recommenders
 
+
 # External tool builders
 .externalToolBuilders/
 
@@ -97,3 +98,10 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+
+## 폴더 무시
+properties/
+
+## 다음과 같은 확장자는 전체 무시
+.properties
+.gitignore
