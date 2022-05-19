@@ -338,9 +338,10 @@ position: relative;
 <body>
 	<div id="outer"  style="margin-top: 20px; background-color: white;">
 		<div class="reward-header" style="height: 170px; overflow: hidden;">
-        <div class="bg" style="position: relative;background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(/resources/img/test.jpg);"></div>
-        <!-- 병합 후 변경 -->
-<!--         <div class="bg" style="position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),);"></div> -->
+        <!-- 병합 전 -->
+<!--         <div class="bg" style="position: relative;background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(/resources/img/test.jpg);"></div> -->
+        <!-- 병합 후 -->
+        <div class="bg" style="position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),);"></div>
         
         <div class="categoryTitle" style="position: relative;top: -110px; z-index: 1; ">
 
@@ -376,10 +377,11 @@ position: relative;
 		<div id="content1" style="margin-top: -10px;">
 
 			<div id="content1_1">
-			
-				<img src="/resources/img/test.jpg" style="margin-top: 20px;">
+	
+				<!-- 병합 전 변경 -->
+<!-- 				<img src="/resources/img/test.jpg" style="margin-top: 20px;"> -->
 				<!-- 병합 후 변경 -->
-<%-- 				<img src="${project.projectImage}"> --%>
+				<img src="${project.projectImage}">
 			</div>
 
 			<div id="content1_2" style="min-width: 400px; margin-top: 20px;">
