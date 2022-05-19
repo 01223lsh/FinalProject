@@ -36,7 +36,7 @@ $(document).ready(function(){
 			$(".paging"+i).click(function(){	
 				$.ajax({
 					type : "get"
-					,url : "/layout/paging"
+					,url : "/layout/paging2"
 					,data : "curPage="+i+"&str="+str
 					,dataType : "html"
 					,success : function(res){

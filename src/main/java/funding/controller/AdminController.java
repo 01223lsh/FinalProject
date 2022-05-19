@@ -212,7 +212,7 @@ public class AdminController {
 		
 	}
 	// 페이징
-	@RequestMapping(value = "/layout/paging", method = RequestMethod.GET)
+	@RequestMapping(value = "/layout/paging2", method = RequestMethod.GET)
 	public String memberpaging(Paging paging, String str, Model model) {
 		
 			// 공지사항 페이징

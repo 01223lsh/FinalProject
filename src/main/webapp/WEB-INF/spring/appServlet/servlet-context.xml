@@ -4,10 +4,16 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -15,6 +21,9 @@
 	<annotation-driven />
 
 	<aop:aspectj-autoproxy />
+
+	<tx:annotation-driven/>    
+    
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -45,20 +54,17 @@
 		</interceptor>
 	</interceptors>
 
+	<resources mapping="/projectImage/**" location="/projectImage/" />
+
+	<resources mapping="/projectPhoto/**" location="/projectPhoto/" />
+	
+	<resources mapping="/ckImg/**" location="/img/" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 
-		<beans:property name="order" value="1"/>
 	</beans:bean>
-	
-	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<beans:property name="order" value="0"/>
-	</beans:bean>
-	
-
-	
 	
 	<!-- MultipartResover 설정 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -66,6 +72,63 @@
 		<beans:property name="maxUploadSize" value="10485760"/> <!-- 10MB -->
 		<beans:property name="maxUploadSizePerFile" value="5242880" /> <!-- 5MB -->
 	</beans:bean>
+	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"/>
+	</beans:bean>
+	
+
+	<!-- 네이버로그인 api 사용 bean 설정 추가-->
+	<beans:bean id="naverLoginBO" class="funding.controller.NaverLoginBO" />
+	
+	<!-- navermail설정 -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
+		<beans:property name="port" value="587"/> <!-- 메이서버 포트번호 -->
+		<beans:property name="username" value="id"/> <!-- 자신의 이메일 아이디 -->
+		<beans:property name="password" value="pw"/> <!-- 자신의 비밀번호 -->
+	
+		<!-- 보안연결 SSL과 관련된 설정 --> 
+		<beans:property name="javaMailProperties"> 
+			<beans:props> 
+				<beans:prop key="mail.smtp.auth">true</beans:prop> 
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop> 
+				<beans:prop key="mail.smtps.checkserveridentity">true</beans:prop>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop> 
+				<beans:prop key="mail.smtps.ssl.trust">*</beans:prop> 
+				<beans:prop key="mail.debug">true</beans:prop> 
+				<beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	<!-- navermail 설정 end -->
+	
+	 <!-- websocket handler -->
+	<!--<beans:bean id="replyEchoHandler"
+		class="com.test.www.ReplyEchoHandler" />
+	<websocket:handlers>
+		<websocket:mapping path="/replyEcho"
+			handler="replyEchoHandler" />
+		<websocket:handshake-interceptors>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers> -->
+
+	<!-- websocket handler -->
+	<beans:bean id="replyEchoHandler" class="funding.handler.ReplyEchoHandler"/>
+	<websocket:handlers>
+		<websocket:mapping path="/replyEcho" handler="replyEchoHandler"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+	</websocket:handlers> 
+	
+
+	<!-- 스프링 컴포넌트 어노테이션이 붙은 클래스를 스캔할 패키지를 지정한다 -->
+	<!-- 	-> @Controller, @Service -->
+	<context:component-scan base-package="funding.controller, funding.service, funding.repository, funding.config" />
+
 	
 		
 		<context:component-scan base-package="a.b.c,funding.controller, funding.service" />

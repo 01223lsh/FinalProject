@@ -15,6 +15,7 @@ public class Order {
 	private String rewardName;
 	private String rewardIntro;
 	private int rewardCount;
+
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate + ", orderStatus="
@@ -46,7 +47,7 @@ public class Order {
 	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	
+
 	public int getAddtionalFunding() {
 		return addtionalFunding;
 	}
@@ -89,4 +90,5 @@ public class Order {
 	public void setRewardCount(int rewardCount) {
 		this.rewardCount = rewardCount;
 	}
+
 }

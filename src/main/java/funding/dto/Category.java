@@ -1,12 +1,16 @@
 package funding.dto;
 
 public class Category {
-	private int categoryNo;
-	private String categoryName;
+
+	
+	private int categoryNo;			// 카테고리 번호
+	private String categoryName;	// 카테고리 이름
+	
 	@Override
 	public String toString() {
 		return "Category [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
 	}
+
 	public int getCategoryNo() {
 		return categoryNo;
 	}
@@ -20,6 +24,5 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
-	
 	
 }
