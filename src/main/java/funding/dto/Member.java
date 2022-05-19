@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Member {
 
+
 	private int memberNo;		// 회원번호
 	private String id;			// 아이디
 	private String pw;			// 비밀번호
@@ -25,6 +26,7 @@ public class Member {
 				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverLogin=" + naverlogin
 				+ ", kakaoLogin=" + kakaologin + ", regDate=" + regDate + ", memberSeller=" + memberSeller + "]";
 	}
+
 
 	public int getMemberNo() {
 		return memberNo;
@@ -90,6 +92,7 @@ public class Member {
 		this.grade = grade;
 	}
 
+
 	public String getNaverlogin() {
 		return naverlogin;
 	}
@@ -104,6 +107,7 @@ public class Member {
 
 	public void setKakaologin(String kakaologin) {
 		this.kakaologin = kakaologin;
+
 	}
 
 	public Date getRegDate() {
@@ -113,11 +117,11 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
-	// memberSeller 
+
 	public MemberSeller getMemberSeller() {
 		return memberSeller;
 	}
+
 
 	public void setMemberSeller(MemberSeller memberSeller) {
 		this.memberSeller = memberSeller;

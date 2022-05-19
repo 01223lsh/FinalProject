@@ -2,6 +2,7 @@ package funding.dto;
 
 import java.util.Date;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -28,7 +29,7 @@ public class Project {
 	private int sum;				// 현재 모집된 총 금액
 	private String talkTime;		// 판매자 채팅 가능 시간
 	
-	
+	private int rnum;
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
@@ -36,8 +37,17 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ ", sum=" + sum + ", talkTime=" + talkTime + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", sum=" + sum + ", talkTime=" + talkTime + ", rnum=" + rnum + "]";
+	}
+
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 
@@ -46,9 +56,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
 	}
+
+
+
 
 
 	public int getMemberNo() {
@@ -56,9 +72,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+
+
+
 
 
 	public int getCategoryNo() {
@@ -66,9 +88,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
 	}
+
+
+
 
 
 	public String getProjectTitle() {
@@ -76,9 +104,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
+
+
+
 
 
 	public String getProjectIntro() {
@@ -86,9 +120,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectIntro(String projectIntro) {
 		this.projectIntro = projectIntro;
 	}
+
+
+
 
 
 	public String getBudgetPlan() {
@@ -96,9 +136,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setBudgetPlan(String budgetPlan) {
 		this.budgetPlan = budgetPlan;
 	}
+
+
+
 
 
 	public String getSchedulePlan() {
@@ -106,9 +152,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setSchedulePlan(String schedulePlan) {
 		this.schedulePlan = schedulePlan;
 	}
+
+
+
 
 
 	public String getProjectImage() {
@@ -116,9 +168,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectImage(String projectImage) {
 		this.projectImage = projectImage;
 	}
+
+
+
 
 
 	public int getProjectPrice() {
@@ -126,9 +184,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectPrice(int projectPrice) {
 		this.projectPrice = projectPrice;
 	}
+
+
+
 
 
 	public Date getOpenDate() {
@@ -136,9 +200,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setOpenDate(Date openDate) {
 		this.openDate = openDate;
 	}
+
+
+
 
 
 	public Date getCloseDate() {
@@ -146,9 +216,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;
 	}
+
+
+
 
 
 	public Date getDeliveryDate() {
@@ -156,9 +232,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
+
+
+
 
 
 	public String getProjectContent() {
@@ -166,9 +248,15 @@ public class Project {
 	}
 
 
+
+
+
 	public void setProjectContent(String projectContent) {
 		this.projectContent = projectContent;
 	}
+
+
+
 
 
 	public int getFundPrice() {
@@ -181,6 +269,7 @@ public class Project {
 	}
 
 
+
 	public int getProjectStep() {
 		return projectStep;
 	}
@@ -190,10 +279,10 @@ public class Project {
 		this.projectStep = projectStep;
 	}
 
-
 	public int getSum() {
 		return sum;
 	}
+
 
 
 	public void setSum(int sum) {
@@ -211,3 +300,4 @@ public class Project {
 	}
 	
 }
+

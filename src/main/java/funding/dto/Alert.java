@@ -1,5 +1,6 @@
 package funding.dto;
 
+
 import java.util.Date;
 
 public class Alert {
@@ -9,12 +10,13 @@ public class Alert {
 	private String alertContent;
 	private int alertRead;
 	private Date alertDate;
-	
+
 	@Override
 	public String toString() {
 		return "Alert [alertNo=" + alertNo + ", memberNo=" + memberNo + ", alertContent=" + alertContent
 				+ ", alertRead=" + alertRead + ", alertDate=" + alertDate + "]";
 	}
+
 
 	public int getAlertNo() {
 		return alertNo;

@@ -3,6 +3,7 @@ package funding.dto;
 public class MemberSeller {
 
 	private int memberNo;
+
 	private String id;
 	private String pw;
 	private String name;
@@ -10,6 +11,7 @@ public class MemberSeller {
 	private String nick;
 	private String phone;
 	private int grade;
+
 	private String bankName;
 	private String accountNumber;
 	private String accountName;
@@ -17,6 +19,7 @@ public class MemberSeller {
 	
 	@Override
 	public String toString() {
+
 		return "MemberSeller [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email="
 				+ email + ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", bankName=" + bankName
 				+ ", accountNumber=" + accountNumber + ", accountName=" + accountName + ", sellerInfo=" + sellerInfo
@@ -118,5 +121,6 @@ public class MemberSeller {
 	public void setSellerInfo(String sellerInfo) {
 		this.sellerInfo = sellerInfo;
 	}
+
 
 }

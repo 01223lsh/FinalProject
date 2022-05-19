@@ -1,6 +1,8 @@
 package funding.dto;
 
+
 import java.util.Date;
+
 
 public class Notice {
 	private int fileNo;
@@ -10,12 +12,13 @@ public class Notice {
 	private String fileOrigin;
 	private String fileStorage;
 	private Date regDate;
-	
+
 	@Override
 	public String toString() {
 		return "Notice [fileNo=" + fileNo + ", noticeNo=" + noticeNo + ", title=" + title + ", content=" + content
 				+ ", fileOrigin=" + fileOrigin + ", fileStorage=" + fileStorage + ", regDate=" + regDate + "]";
 	}
+
 	
 	public int getFileNo() {
 		return fileNo;
@@ -55,13 +58,14 @@ public class Notice {
 	public void setFileStorage(String fileStorage) {
 		this.fileStorage = fileStorage;
 	}
+
 	public Date getregDate() {
 		return regDate;
 	}
 	public void setregDate(Date regDate) {
+
 		this.regDate = regDate;
 	}
-	
 	
 	
 
