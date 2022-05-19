@@ -2,120 +2,281 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:import url="/WEB-INF/views/layout/header.jsp" />
-	<!-- 로그인시 userID세션값을 저장 -->
-	<%
-		String Id = null;
-		if(session.getAttribute("Id") != null) {
-			//userID의 세션값을 변수에 저장
-			Id = (String) session.getAttribute("loginID"); 
-		}
-	%>
+ <%@ include file="../layout/header.jsp" %>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
 
-<style type="text/css">
-
-
-h4 {
-	font-weight : bold;
-}
-
-
+<style>
+  /* 마감된 프로젝트 표시 */
+  #project-status {
+    color: white;
+    background: red;
+    padding: 3px 5px;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+  #category-section .container {
+    overflow: auto;
+  }
+  #category-section .row {
+    flex-flow: nowrap;
+  }
+  
+  .main_pr {
+  	position: absolute;
+  	left : 8%;
+  }
 </style>
 
+<style>
+  .section-img {
+    padding: 3px;
+  }
+  .section-img img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .section-body {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-around;*/
+    min-height: 220px;
+  }
+  [class^="body"] {
+    margin: 5px 0;
+  }
+  .section-body .body-title {
+    margin: 5px 0;
+    font-size: 14px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-intro {
+    font-size: 12px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .section-body .body-progress {
+    flex-grow: 1;
+  }
+  .section-body .body-progress progress {
+    width: 100%;
+  }
+  .section-body .body-etc {
+    flex-grow: 1;
+  }
+  .section-body .body-etc span {
+    font-size: 12px;
+  }
+  .section-body .body-etc div:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .section-body .body-etc div:first-child > span:first-child{
+    color: red;
+  }
+</style>
+
+<script>
+
+$(document).ready(function() {
+
+	// 검색어 입력
+	$("input[name=keyword]").on("keyup", function(key) {
+		if (key.keyCode == 13) {
+			getList('${pagination.category}');
+		}
+	})
+	// 필터 선택
+	$("select[name=filter]").change(function() {
+		getList('${pagination.category}');
+	})
+	// 정렬 선택
+	$("select[name=order]").change(function() {
+		getList('${pagination.category}');
+	})
+	// 필터, 정렬 조건 유지
+	setCondition()	
+	
+	
+})
+
+
+
+// 프로젝트 리스트 조회
+function getList(category) {
+	var curPage = '${pagination.curPage}';
+	var keyword = $("input[name=keyword]").val();
+	if (category === undefined) var category = '';
+	var category = category; 
+	var filter = $("select[name=filter]").val();
+	var order = $("select[name=order]").val();
+	
+	console.log(
+		'cuarPage: ' + curPage
+		+ ' / keyward: ' + keyword
+		+ ' / category: ' + category
+		+ ' / filter: ' + filter
+		+ ' / order: ' + order
+	)
+	
+	location.href="/project/listsearch?curPage=" + curPage + "&keyword=" + keyword + "&category=" + category + "&filter=" + filter + "&order=" + order;
+	
+}
+// 정렬 조건 유지
+function setCondition() {
+    const selectOrder = document.querySelector("select[name=order]")
+    const selectFilter = document.querySelector("select[name=filter]")
+
+    for (i = 0; i < selectOrder.length; i++) {
+        if (selectOrder.options[i].value == '${pagination.order}') {
+            selectOrder.options[i].selected = true
+            break
+        }
+    }
+    
+    for (i = 0; i < selectFilter.length; i++) {
+        if (selectFilter.options[i].value == '${pagination.filter}') {
+        	selectFilter.options[i].selected = true
+            break
+        }
+    }
+}
+
+</script>
+</head>
+<body>
+
+
+<main>
+
 <div class="container">
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/resources/jpg/vegan.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>달콤하게 떠먹는 비건식</h5>
+        <p>우유 없는 초코 & 카라멜 비건 아이스크림</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/jpg/perfume.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>포근하고 달콤한 향기</h5>
+        <p>부드러운 느낌의 프루티-플로럴 계열의 향수</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/resources/jpg/perfume.JPG"" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div><br><br>
 
-<c:if test="${empty Login  }">
-<h4>
-	${sessionScope.nick }님, 환영합니다
-</h4>
-</c:if>
 
-<c:if test="${empty not Login  }">
-	${sessionScope.msg }
-</c:if>
-	<!-- 서버로부터 메세지를 받게되면 모달 팝업창 출력 -->
-	<%
-		String messageContent = null;
-		if(session.getAttribute("messageContent") != null) {
-			messageContent = (String) session.getAttribute("messageContent");
-		}
-		String messageType = null;
-		if(session.getAttribute("messageType") != null) {
-			messageType = (String) session.getAttribute("messageType");
-		}
-		
-		// 세션값이 존재한다면 각 메세지 타입과 내용 출력 - 회원가입 성공 메세지
-		if(messageContent != null) { 
-	%>
-	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
-				<div class="modal-content <% if(messageType.equals("오류메세지")) out.println("panel-warning"); else out.println("panel-success"); %> ">
-					<div class="modal-header panel-heading">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times</span>
-							<span class="sr-only">Close</span>
-						</button>
-						<h4 class="modal-title">
-							<%= messageType %>
-						</h4>
-					</div>
-					<div class="modal-body">
-						<%= messageContent %>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-dark" data-dismiss="modal">확인</button>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</div>
-	<form  action="/apply/category" method="get">
-	<button>프로젝트 만들기</button>
-	</form>
-	
-	<!-- 로그인시 실행 -->
-	<script>
-		$('#messageModal').modal("show");
-	</script>
-	<%
-		session.removeAttribute("messageContent");
-		session.removeAttribute("messageType");
-		}
-	%>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- 
-</div><%-- Container 끝 --%>
-	
+
+
+<!-- 프로젝트 목록 -->
+<section>
+
+ 	  <div class="main_pr">
+      <h5>주목할 만한 프로젝트</h5>
+	  </div>
+
+<div class="album py-5 bg-light">
+
+
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto;">
+
+
+     <%--  <c:forEach var="p" items="${list}"> --%>
+      <c:forEach var="p" items="${list }" begin="0" end="9" >
+      <%-- 테스트 영역 --%>
+      <div class="col" style="max-width: 250px;">
+        <!-- 카드 영역 -->
+        <div class="card shadow-sm card-section" onclick="location.href='/project/view?projectNo=${p.projectNo}'">
+          <!-- 카드 이미지 -->
+          <div class="section-img">
+            <img src="${p.projectImage}" style="min-height: 250px;">
+          </div>
+          <!-- 카드 몸통 -->
+          <div class="card-body section-body">
+            <!-- 타이틀 영역 -->
+            <div class="body-title">
+              <strong>${p.projectTitle}</strong>
+              <c:if test="${p.projectStep eq 4}">
+                <span id="project-status">마감</span>
+              </c:if>
+            </div>
+            <!-- 인트로 영역 -->
+            <div class="body-intro">
+              <p class="card-text">${p.projectIntro}</p>
+            </div>
+            <!-- 진행바 영역 -->
+            <div class="body-progress">
+              <progress value="${p.sum}" max="${p.projectPrice}"></progress>
+            </div>
+            <!-- 기타 정보 영역 -->
+            <div class="row fs-6 body-etc">
+              <div class="col d-flex">
+                <span style="margin-right: 10px;"><fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/></span>
+                <span><fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/></span>
+              </div>
+              <div class="col text-end">
+                <span><fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </c:forEach>
+
+
+
+
+
+    </div>
+  </div>
+
+</div>
+
+</section>
+<!-- /프로젝트 목록 -->
+
+</main>
+
+
+
+
 <%@ include file="../layout/footer.jsp" %>
-
-<c:import url="/WEB-INF/views/layout/footer.jsp" />

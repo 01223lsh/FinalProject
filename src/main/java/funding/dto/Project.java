@@ -24,8 +24,10 @@ public class Project {
 	private Date deliveryDate;		// 예상 배송시작일
 	private String projectContent;	// 소개글 내용
 	private int fundPrice; 			// 펀딩금액(현재)
-	private String projectStep;		// 프로젝트 진행 단계
-//	ProjectPhoto projectPhoto;		// 프로젝트 사진 객체
+	private int projectStep;		// 프로젝트 진행 단계
+	private int sum;				// 현재 모집된 총 금액
+	private String talkTime;		// 판매자 채팅 가능 시간
+	
 	
 	@Override
 	public String toString() {
@@ -34,110 +36,178 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ "]";
+				+ ", sum=" + sum + ", talkTime=" + talkTime + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-//	public ProjectPhoto getProjectPhoto() {
-//		return projectPhoto;
-//	}
-//
-//
-//	public void setProjectPhoto(ProjectPhoto projectPhoto) {
-//		this.projectPhoto = projectPhoto;
-//	}
 
 
 	public int getProjectNo() {
 		return projectNo;
 	}
+
+
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
 	}
+
+
 	public int getMemberNo() {
 		return memberNo;
 	}
+
+
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+
+
 	public int getCategoryNo() {
 		return categoryNo;
 	}
+
+
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
 	}
+
+
 	public String getProjectTitle() {
 		return projectTitle;
 	}
+
+
 	public void setProjectTitle(String projectTitle) {
 		this.projectTitle = projectTitle;
 	}
+
+
 	public String getProjectIntro() {
 		return projectIntro;
 	}
+
+
 	public void setProjectIntro(String projectIntro) {
 		this.projectIntro = projectIntro;
 	}
+
+
 	public String getBudgetPlan() {
 		return budgetPlan;
 	}
+
+
 	public void setBudgetPlan(String budgetPlan) {
 		this.budgetPlan = budgetPlan;
 	}
+
+
 	public String getSchedulePlan() {
 		return schedulePlan;
 	}
+
+
 	public void setSchedulePlan(String schedulePlan) {
 		this.schedulePlan = schedulePlan;
 	}
+
+
 	public String getProjectImage() {
 		return projectImage;
 	}
+
+
 	public void setProjectImage(String projectImage) {
 		this.projectImage = projectImage;
 	}
+
+
 	public int getProjectPrice() {
 		return projectPrice;
 	}
+
+
 	public void setProjectPrice(int projectPrice) {
 		this.projectPrice = projectPrice;
 	}
+
+
 	public Date getOpenDate() {
 		return openDate;
 	}
+
+
 	public void setOpenDate(Date openDate) {
 		this.openDate = openDate;
 	}
+
+
 	public Date getCloseDate() {
 		return closeDate;
 	}
+
+
 	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;
 	}
+
+
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
+
+
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
+
+
 	public String getProjectContent() {
 		return projectContent;
 	}
+
+
 	public void setProjectContent(String projectContent) {
 		this.projectContent = projectContent;
 	}
+
+
 	public int getFundPrice() {
 		return fundPrice;
 	}
+
+
 	public void setFundPrice(int fundPrice) {
 		this.fundPrice = fundPrice;
 	}
-	public String getProjectStep() {
+
+
+	public int getProjectStep() {
 		return projectStep;
 	}
-	public void setProjectStep(String projectStep) {
+
+
+	public void setProjectStep(int projectStep) {
 		this.projectStep = projectStep;
 	}
-	
+
+
+	public int getSum() {
+		return sum;
+	}
+
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+
+	public String getTalkTime() {
+		return talkTime;
+	}
+
+
+	public void setTalkTime(String talkTime) {
+		this.talkTime = talkTime;
+	}
 	
 }

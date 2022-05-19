@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="funding.dao.face.QnaDao">
+    
+    <select id="selectList" resultType="funding.dto.Qna" parameterType="funding.util.Paging">
+
+		select row_number() over(order by rnum desc) as rnum2, QNA.* from (
+   			 select rownum rnum, Q.* from(
+   			     select
+           			 QNA_NO, QNA_TITLE, NICK, QNA_CONTENT, QNA_CREATE_DATE ,QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO
+       			 from qna
+       			 
+       			 WHERE 1=1
+       			 <choose>
+       			 <when test="select != null and select.equals('nick')">
+       			 	AND nick LIKE '%'|| #{search} ||'%'
+       			 </when>
+       			 <when test="select != null and select.equals('qnaTitle')">
+       			 	AND qna_title LIKE '%'|| #{search} ||'%'
+       			 </when>
+       			 <when test="select != null and select.equals('qnaContent')">
+       			 	AND qna_content LIKE '%'|| #{search} ||'%'
+       			 </when>
+       			 </choose>
+       			 
+       			 order by qna_refer desc, qna_step)Q
+    		)QNA
+		WHERE rnum between #{startNo } and #{endNo }
+		ORDER BY rnum2 desc
+
+    </select>
+    
+    <select id="selectCntAll" resultType="int" parameterType="funding.util.Paging">
+    	SELECT count(*) cnt FROM qna
+       	WHERE 1=1
+       	<choose>
+
+      		<when test="select != null and select.equals('nick')">
+      			 AND nick LIKE '%'|| #{search} ||'%'
+      		</when>
+      		<when test="select != null and select.equals('qnaTitle')">
+      		 	AND qna_title LIKE '%'|| #{search} ||'%'
+      		</when>
+      		<when test="select != null and select.equals('qnaContent')">
+      		 	AND qna_content LIKE '%'|| #{search} ||'%'
+      		</when>
+      	</choose>
+    	
+    </select>
+    
+   	<select id="selectByQnaNo" resultType="funding.dto.Qna" parameterType="funding.dto.Qna">
+		SELECT * FROM qna
+		WHERE qna_no = #{qnaNo}
+	</select>    
+	
+	<select id="getQnaNo" resultType="int">
+		SELECT qna_seq.nextval FROM dual
+	</select>
+	
+	<select id="getMemberNo" resultType="int">
+		SELECT member_no
+		FROM member
+		WHERE nick = #{nick}
+	
+	</select>
+	
+	<insert id="insertQna" parameterType="funding.dto.Qna">
+<!--     	INSERT INTO qna(qna_no, qna_title, nick, qna_content, member_no) -->
+<!--     	VALUES (#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{memberNo}) --> 
+
+		insert into qna (QNA_NO, QNA_TITLE, NICK, QNA_CONTENT ,QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO, qna_create_date )
+		values(#{qnaNo}, #{qnaTitle}, #{nick}, #{qnaContent}, #{qnaNo}, 0, 0, #{memberNo}, current_date)
+
+    </insert>
+    
+    
+    
+	
+	<update id="updateQna" parameterType="funding.dto.Qna">
+    	UPDATE qna
+    	SET qna_title = #{qnaTitle}, qna_content = #{qnaContent}
+    	WHERE qna_no = #{qnaNo}
+    </update>
+	
+	
+	<update id="updateQnaAll" parameterType="funding.dto.Qna">
+		UPDATE qna
+		SET qna_step = qna_step+1
+		WHERE qna_refer = (select qna_refer from qna where qna_no = #{qnaNo})
+		AND qna_step > (select qna_step from qna where qna_no = #{qnaNo})
+	</update>
+	
+	
+	<insert id="insertQnare" parameterType="funding.dto.Qna">
+		INSERT INTO qna (QNA_NO, QNA_TITLE, NICK, QNA_CONTENT, QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO)
+		VALUES(qna_seq.nextval, #{qnaTitle }, #{nick} , #{qnaContent},
+		    (select qna_refer from qna where qna_no = #{qnaNo}),
+		    (select qna_step from qna where qna_no = #{qnaNo})+1 ,
+		    (select qna_depth from qna where qna_no = #{qnaNo})+1 , #{memberNo})
+	
+	</insert>
+	
+	
+	<delete id="deleteQna" parameterType="funding.dto.Qna">
+    	DELETE qna
+    	WHERE qna_no = #{qnaNo}
+    </delete>
+    
+	<delete id="deleteQnaAd" parameterType="funding.dto.Qna">
+    	DELETE qna
+    	WHERE qna_refer = #{qnaNo}
+    </delete>
+    
+    
+	
+	<select id="selectCntQnare" parameterType="funding.dto.Qna" resultType="int">
+		select count(*)
+		from qna
+		where qna_refer = #{qnaNo}
+	</select>
+	
+	<select id="selectQnareByQnarefer" parameterType="funding.dto.Qna" resultType="funding.dto.Qna">
+		select *
+		from qna
+		where member_no != #{memberNo}
+		and qna_refer = #{qnaNo} 
+	</select>
+	
+	
+	
+	
+	
+    
+    </mapper>

@@ -13,20 +13,102 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-	
-	
 
-<!-- ODJDBC8를 위한 추가 저장소 설정 -->
-<repositories>
-	<repository>
-		<id>oracle</id>
-		<url>http://maven.jahia.org/maven2</url>
-	</repository>
-</repositories>
-	
-	
+	<!-- ODJDBC8를 위한 추가 저장소 설정 -->
+	<repositories>
+		<repository>
+			<id>oracle</id>
+			<url>http://maven.jahia.org/maven2</url>
+		</repository>
+	</repositories>
 	
 	<dependencies>
+	
+		<!-- : : : Oracle Cloud 전자지갑을 통해 DB에 접속할 때 필요한 라이브러리들이다. : : :  -->
+		<!-- ojdbc를 제외한 oraclepki, osdt_cert, osdt_core 라이브리가 필요하다.  --> 
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.24</version>
+		    <scope>provided</scope>
+		</dependency>
+
+		<!-- 채팅 페이지 관련 웹소켓 설정 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.3.18</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
+			<version>2.11.3</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>5.3.18</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+
+		<!-- STMP 메일 전송 관련 라이브러리 -->
+		<dependency>
+			<groupId>javax.mail</groupId> 
+			<artifactId>javax.mail-api</artifactId> 
+			<version>1.5.5</version> 
+		</dependency> 
+		
+		<dependency> 
+			<groupId>javax.mail</groupId> 
+			<artifactId>mail</artifactId> 
+			<version>1.4.7</version> 
+		</dependency> 
+		
+		<dependency> 
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId> 
+			<version>1.6.2</version> 
+		</dependency> 
+		
+		<dependency> 
+			<groupId>org.apache.httpcomponents</groupId> 
+			<artifactId>httpclient</artifactId> 
+			<version>4.5.13</version>
+		</dependency> 
+		
+		<dependency> 
+			<groupId>org.apache.commons</groupId> 
+			<artifactId>commons-email</artifactId> 
+			<version>1.5</version> 
+		</dependency>
+		<!-- STMP 메일 전송 관련 라이브러리  end -->
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 		
 		<!-- Jackson Databind -->
 		<dependency>
@@ -76,14 +158,31 @@
 		    <version>21.5.0.0</version>
 		</dependency>
 		
-
+		
+		<!-- : : : Oracle Cloud 전자지갑을 통해 DB에 접속할 때 필요한 라이브러리들이다. : : : -->
+		<!-- ojdbc를 제외한 oraclepki, osdt_cert, osdt_core 라이브리가 필요하다.  -->
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		
 		<!-- MyBatis 로그 -->
 		<dependency>
 		    <groupId>org.lazyluke</groupId>
 		    <artifactId>log4jdbc-remix</artifactId>
 		    <version>0.2.7</version>
 		</dependency>
-			
 	
 		<!-- Spring -->
 		<dependency>
@@ -117,7 +216,27 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- GSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
 		
+		<!-- naver 로그인 api 사용 관련 -->
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		
+		<!-- 제이슨 파싱 - naverLogin 에서 사용-->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -216,8 +335,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
