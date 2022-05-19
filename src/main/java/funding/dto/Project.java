@@ -19,7 +19,16 @@ public class Project {
 	private int fundPrice;
 	private int projectStep;
 	private int sum;
+	private String talkTime;
 	
+	public String getTalkTime() {
+		return talkTime;
+	}
+
+	public void setTalkTime(String talkTime) {
+		this.talkTime = talkTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
@@ -27,7 +36,7 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ ", sum=" + sum + "]";
+				+ ", sum=" + sum + ", talkTime=" + talkTime + "]";
 	}
 
 	public int getProjectNo() {

@@ -132,6 +132,14 @@
 		
 	})
 	
+	function updatetalk(){
+		$("#upmodal").fadeIn();
+	}
+	
+	function upclose(){
+		$("#upmodal").fadeOut();
+	}
+	
 	</script>
 <style>
 * {
@@ -310,7 +318,23 @@ a.disabled{
 	cursor: default;
 }
 
+#upmodal{
+	position: absolute;
+	width: 100%; height: 130%;
+	background: rgba(0,0,0,0.8);
+	top:0; left: 0;
+	display: none;
+}
 
+#upmodal_content{
+  width:400px; height:200px;
+  background:#fff; border-radius:10px;
+  position:relative; top:50%; left:50%;
+  margin-top:-100px; margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; padding:74px 0;
+  line-height:23px; 
+}
 
 </style>
 </head>
@@ -348,17 +372,15 @@ a.disabled{
 
 			<div id="content1_2">
 				<div id="content1_2_1">
-					<b>남은 기간</b><br>
 					<c:choose>
 					<c:when test="${d > 0}">
 					<b style="font-size: 25px;">${d }</b><small>일 남음</small>
 					</c:when>
 					<c:when test="${d <= 0 }"><b style="font-size: 25px;">종료</b></c:when>
 					</c:choose>
-				
 				</div>
-				<br> <br><br>
-				<div id="content1_2_4"><b>모인 금액</b></div><br>
+				<br><br>
+				
 				<div class="progress" id="progress">
 					
 					<div class="progress-bar"
@@ -374,6 +396,10 @@ a.disabled{
 					<b style="font-size: 25px;"><fmt:formatNumber type="number"
 							value="${project.fundPrice }" /></b><small>원 펀딩</small>
 				</div>
+				<div id="content1_2_4">
+				
+				</div>
+				
 				<br> <br> 
 				<c:choose>
 					<c:when test="${project.projectStep eq 3}">
@@ -428,9 +454,33 @@ a.disabled{
 			<b style="font-size: 15px;">${seller.nick }</b>
 			<br>
 			<p>${seller.memberSeller.sellerInfo }</p>
-			<p>대화가능시간</p>
+			<p>대화가능시간</p><button onclick="updatetalk()">수정</button>
+			<div>
 			<a type="button" id="chatbtn" href="">대화하기</a>
 			</div>
+			</div>
+			
+			
+			<div id="upmodal">
+
+	<div id="upmodal_content">
+		<p>대화가능 시간을 입력해주세요.</p>
+		<form action="/project/talktime" method="post">
+		<input type="hidden" name="projectNo" value="${project.projectNo }">
+		<label for="time">대화가능시간</label>
+		<input type="text" id="time" name="talkTime" placeholder="ex) 14시~ 16시">
+		
+		<button>변경</button>
+		<button type="button" onclick="upclose()">취소</button>
+		</form>
+		
+			
+		
+		<hr>
+		
+	</div>
+</div>
+			
 			
 
 			<c:choose>

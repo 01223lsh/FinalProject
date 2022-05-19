@@ -237,7 +237,9 @@ public class ProjectViewController {
 		
 		projectViewService.updateTalktime(project);
 		
-		return null;
+		return "redirect:/project/view?projectNo"+project.getProjectNo();
 	}
+	
+	
 	
 }

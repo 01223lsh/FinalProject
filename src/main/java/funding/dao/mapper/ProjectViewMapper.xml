@@ -50,8 +50,8 @@
  </select>
  
 <insert id="insertNews" parameterType="funding.dto.ProjectNews">
-	INSERT INTO project_news(news_no,project_no, news_title, news_content)
-	VALUES (news_seq.nextval, #{projectNo}, #{newsTitle}, #{newsContent})
+	INSERT INTO project_news(news_no,project_no, news_title, news_content, news_date)
+	VALUES (news_seq.nextval, #{projectNo}, #{newsTitle}, #{newsContent}, current_date)
  
 
 </insert>
