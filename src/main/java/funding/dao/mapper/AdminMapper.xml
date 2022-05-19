@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.AdminDao">
+	<select id="selectByMemberDate" resultType="funding.dto.Chart">
+		select * from(SELECT to_char(CURRENT_DATE-${selectDate}  + LEVEL,'YYYY-MM-DD') AS regDate FROM dual a CONNECT BY LEVEL &lt;= ${selectDate} ) A
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as rdate
+		, count(*) as cnt from member
+		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+		and grade between 0 and 1
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		) B
+		on A.regDate=B.rdate
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as buisness
+		, count(*) as buisnesscnt from member
+		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+        and grade =1
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		)C
+		on A.regDate=C.buisness
+		left outer join
+		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as normal
+		, count(*) as normalcnt from member
+		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+        and grade =0
+		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
+		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
+		)D
+		on A.regDate=D.normal
+		order by regDate
+	</select>
+	
+	<select id="selectMemberAll" resultType="funding.dto.Member" parameterType="int">
+		select * from (
+			select rownum rnum, A.* from(
+				select * from member
+				order by member_no desc
+			)A
+		) member
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	   
+	<select id="selectBymemberNo" resultType="funding.dto.Member" parameterType="int">
+		select * from member
+		where member_no = #{memberNo}
+	
+	</select>
+	<select id="selectCntMember" resultType="int">
+		select count(*) from member
+	</select>
+	<select id="selectCntMemberGrade" resultType="int" parameterType="int">
+		select count(*) from member
+		where grade = ${i}
+	
+	</select>
+	<select id="selectCntMemberSearch" resultType="int" parameterType="string">
+		select count(*) from member
+		where ${category} like '%'||#{content}||'%'
+	</select>
+	<select id="selectByGrade" resultType="funding.dto.Member" parameterType="int">
+		<choose>
+			<when test='grade == null or grade.equals("")'>
+			select * from (
+		         select rownum rnum, B.* from(
+		            select * from member
+		            order by member_no desc
+		         )B
+		      ) member
+		      where rnum between #{paging.startNo} and #{paging.endNo}
+			</when>
+		
+			<when test='grade != null or grade.equals("")'>
+		      select * from (
+		         select rownum rnum, B.* from(
+		            select * from member
+		            where grade =#{grade}
+		            order by member_no desc
+		         )B
+		      ) member
+		      where rnum between #{paging.startNo} and #{paging.endNo}
+			</when>
+		</choose>
+	</select>
+	<update id="gradeUpdate" parameterType="funding.dto.Member">
+		update member set grade = #{grade}
+		where member_no = #{memberNo}
+		
+	</update>
+	
+	<select id="MemberSearch" resultType="funding.dto.Member">
+		
+		select * from (
+		     select rownum rnum, B.* from(
+		         select * from member
+		         where ${category} like '%'||#{content}||'%'
+		          order by member_no desc
+		        )B
+		     ) member
+		where rnum between #{paging.startNo} and #{paging.endNo}
+	</select>
+	<delete id="DisabledAllDelete" parameterType="int">
+		delete from member
+		where grade = #{i}
+	</delete>
+	
+	<select id="selectCntNotice" resultType="int">
+		select count(*) from notice
+	</select>
+	<select id ="selectCntProject" resultType="int">
+		select count(*) from project
+		where project_step in(3,4)
+		<if test="step!=5"> 
+			and project_step = #{step}
+		</if>
+		<if test="categoryNo!=0">
+			and category_no = #{categoryNo}
+		</if>
+	</select>
+	<select id="noticeAll" resultType="funding.dto.Notice">
+	
+		select * from (
+		     select rownum rnum, N.* from(
+		         select * from notice
+		          order by notice_no desc
+		        )N
+		     ) notice
+		where rnum between #{startNo} and #{endNo}
+	</select>
+	
+	<select id="selectByNotice" resultType="funding.dto.Notice">
+
+		select notice_no,title,content,reg_date from notice
+		where notice_no = #{noticeNo} 
+	</select>
+	<select id="selectByNoticeFile" resultType="funding.dto.NoticeFile" parameterType="funding.dto.Notice">
+		select 
+		file_no fileNo
+		,notice_no noticeNo
+		,file_origin fileOrigin
+		,file_storage fileStorage
+		 from noticefile
+		where notice_no = #{noticeNo}
+	</select>
+	<delete id="fileNoByDelete" parameterType="int">
+		delete from noticefile
+		where notice_no = #{notice.noticeNo}
+		and file_no not in
+		<foreach collection="fileNolist" item="item"  open="(" separator="," close=")" > 
+	     #{item} 
+		</foreach>
+	</delete>
+	
+	<select id="selectBynoticeno" resultType="int">
+		select notice_seq.nextval from dual
+	</select>
+	
+	<insert id="noticeWrite" parameterType="funding.dto.Notice">
+		insert into notice(notice_no, title, content)
+		values(#{noticeNo},#{title},#{content})
+	</insert>
+	
+    <insert id="insertNoticeFile" parameterType="funding.dto.Notice" >
+    	insert into noticefile
+    	values(noticefile_seq.nextval,#{noticeNo},#{fileOrigin},#{fileStorage})
+    </insert>
+    
+    <select id="selectNoticeFileByFileNo" resultType="funding.dto.Notice">
+    	select 
+    	file_no fileNo
+    	,notice_no noticeNo
+    	,file_origin fileOrigin
+    	,file_storage fileStorage    	
+    	from noticefile
+    	where file_no = #{fileNo}
+    
+    </select>
+    <update id="noticeUpdate" parameterType="funding.dto.Notice">
+    	update notice set title=#{title}, content=#{content}
+    	where notice_no = #{noticeNo}
+    </update>
+  
+    
+    <delete id="noticeDelete" parameterType="funding.dto.Notice">
+    	delete from notice
+    	where notice_no = #{noticeNo}
+    </delete>
+    <delete id="noticeFileDelete" parameterType="funding.dto.Notice">
+    	delete from noticefile
+    	where notice_no = #{noticeNo}
+    </delete>
+    <select id="projectList" resultType="funding.dto.Project" >
+    	select * from (
+		     select rownum rnum, N.* from(
+		         select * from project 
+		      		where project_step between 3 and 4
+		      		<if test="step!=5">
+						and project_step = #{step}
+					</if>
+					<if test="categoryNo!=0">
+						and category_no = #{categoryNo}
+					</if>
+		          order by project_no desc
+		        )N
+		     ) project
+		where rnum between #{paging.startNo} and #{paging.endNo}
+    </select>
+    <select id="selectCntapproveProject" resultType="int">
+    	select count(*) from project
+    	where project_step = 1
+    </select>
+
+	<!-- create by young -->
+	<!-- 심사대기중인 프로젝트 목록 -->
+	<select id="findAllWaitingProject" resultType="funding.dto.Project">
+		select * from (
+		     select rownum rnum, N.* from(
+		         select * from project 
+		      		where project_step =1
+		          order by project_no desc
+		        )N
+		     ) project
+		where rnum between #{startNo} and #{endNo}
+	</select>
+
+	<!-- create by young -->
+	<!-- 프로젝트 상태 업데이트 -->
+	<update id="updateProjectStep" parameterType="funding.dto.Project">
+		update project
+		set project_step = #{projectStep}
+		where project_no = #{projectNo}
+	</update>
+
+	<select id="findByNo" resultType="funding.dto.Project">
+		select *
+		from project
+		where project_no = #{projectNo}
+	</select>
+	
+	<select id="categoryList" resultType="funding.dto.Category">
+		select * from category
+		order by category_no
+	</select>
+	<select id="selectCntQna" resultType="int">
+		select count(*) from qna
+		where 1=1
+		<choose>
+			<when test="complete==1">
+				and qna_refer IN (
+				SELECT qna_refer
+				FROM qna
+				GROUP BY qna_refer 
+				HAVING COUNT(*) &lt; 2)
+			</when>
+			<when test="complete==2">
+				and qna_refer IN (
+				SELECT qna_refer
+				FROM qna
+				GROUP BY qna_refer
+				HAVING COUNT(*) &gt; 1)
+			</when>
+		
+		</choose>
+	</select>
+	<select id="selectQnaList" resultType="funding.dto.Qna" >
+		select row_number() over(order by rnum desc) as rnum2, QNA.* from (
+   			 select rownum rnum, Q.* from(
+   			     select
+           			 QNA_NO, QNA_TITLE, NICK, QNA_CONTENT, QNA_CREATE_DATE ,QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO
+       			 from qna
+       			 WHERE 1=1
+       			 <choose>
+					<when test="complete==1">
+						and qna_refer IN (
+						SELECT qna_refer
+						FROM qna
+						GROUP BY qna_refer 
+						HAVING COUNT(*) &lt; 2)
+					</when>
+					<when test="complete==2">
+						and qna_refer IN (
+						SELECT qna_refer
+						FROM qna
+						GROUP BY qna_refer
+						HAVING COUNT(*) &gt; 1)
+					</when>
+				</choose>
+       			 order by qna_refer desc, qna_step)Q
+    		)QNA
+		WHERE rnum between #{paging.startNo } and #{paging.endNo }
+		ORDER BY rnum2 desc
+	</select>
+	<select id="selectByQnaNo" resultType="funding.dto.Qna" parameterType="funding.dto.Qna">
+		SELECT * FROM qna
+		WHERE qna_no = #{qnaNo}
+	</select>    
+	
+	<delete id="deleteQna" parameterType="funding.dto.Qna">
+    	DELETE qna
+    	WHERE qna_no = #{qnaNo}
+    </delete>
+    
+    	<update id="updateQnaAll" parameterType="funding.dto.Qna">
+		UPDATE qna
+		SET qna_step = qna_step+1
+		WHERE qna_refer = (select qna_refer from qna where qna_no = #{qnaNo})
+		AND qna_step > (select qna_step from qna where qna_no = #{qnaNo})
+	</update>
+	
+	
+	<insert id="insertQnare" parameterType="funding.dto.Qna">
+		INSERT INTO qna (QNA_NO, QNA_TITLE, NICK, QNA_CONTENT, QNA_REFER, QNA_STEP, QNA_DEPTH, MEMBER_NO)
+		VALUES(qna_seq.nextval, #{qnaTitle }, #{nick} , #{qnaContent},
+		    (select qna_refer from qna where qna_no = #{qnaNo}),
+		    (select qna_step from qna where qna_no = #{qnaNo})+1 ,
+		    (select qna_depth from qna where qna_no = #{qnaNo})+1 , #{memberNo})
+	
+	</insert>
+	<insert id="insertqnaAlert" parameterType="funding.dto.Qna">
+		insert into alert 
+		values
+		(ALERT_SEQ.nextval,(select member_no from qna where qna_no = #{qnaRefer}),
+		'문의 게시글의 답변이 달렸습니다.',0,CURRENT_DATE)	
+	</insert>
+	<select id="selectQnaListStep" resultType="funding.dto.Qna">
+		SELECT
+ 		qna_refer
+		FROM qna
+		GROUP BY qna_refer
+		HAVING COUNT(qna_refer) &lt; 2
+	</select>
+	
+	<select id="selectBymemberSeller" resultType="funding.dto.MemberSeller">
+		select * from member_seller
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectbyqnainfo" resultType="funding.dto.Qna">
+		select * from qna
+		where qna_no = #{qnaNo}
+	</select>
+	<update id="qnaUpdate" parameterType="funding.dto.Qna">
+		update qna set 
+		qna_title =#{qnaTitle}
+		,qna_content=#{qnaContent}
+		where qna_no = #{qnaNo}
+	
+	</update>
+	
+	<insert id="insertAlert" parameterType="funding.dto.Alert">
+		insert into alert(alert_no,member_no,alert_content,alert_read)
+		values(alert_seq.nextval,#{memberNo},#{alertContent},#{alertRead})
+	</insert>
+	<select id="memberAndProjectAllCnt" resultType="funding.dto.AdminMain">
+		select * from (select count(*) as userAllCnt from member)A,
+		(select count(*) as buisnessCnt from member where grade=1)B,
+		(select count(*) as normalCnt from member where grade=0)C,
+		(select count(*) as disabledCnt from member where grade=3)D,
+		(select count(*) as projectAllCnt from project)E,
+		(select count(*) as approvedCnt from project where project_step=1)F,
+		(select count(*) as proceedingCnt from project where project_step=3)G,
+		(select count(*) as waitingCnt from project where project_step=5)H
+	</select>
+	<select id="categoryCntList" resultType="funding.dto.AdminMain">
+		select * from (
+		select category_no,count(*) as categoryCnt from project
+		group by category_no
+		)A
+		left outer join
+		(select category_name as categoryName,category_no from category)B
+		on A.category_no=B.category_no
+	
+	</select>
+	<select id="mainNoticeAll" resultType="funding.dto.Notice">
+		select * from notice
+		order by notice_no desc
+	</select>
+	<select id="mainQnaAll" resultType="funding.dto.Qna">
+		select * from qna
+		where qna_no in (
+		SELECT
+	 		qna_refer
+			FROM qna
+			GROUP BY qna_refer
+			HAVING COUNT(qna_refer)  &lt; 2)
+		order by qna_no 
+	</select>
+	
+	<select id="adminProjectList" resultType="funding.dto.AdminMain">
+		select * from (
+		select project_no as projectNo,project_title as projectTitle,project_price as projectPrice  from project
+		where project_step =3
+		order by project_no desc)A
+		left  join
+		(
+        select distinct project_no,sum(payment_total) as paymentTotal from payment D
+        inner join (select * from order_tb where order_status=1 )E on E.order_no =D.order_no
+		group by project_no
+		)B
+		on A.projectNo=B.project_no
+	</select>
+	<select id="projectSelectPayment" resultType="funding.dto.AdminMain">
+		select * from(select order_date,member_no ,total_price paymentTotal,order_no from order_tb 
+		where order_status=1)A
+		left outer join
+		(select member_no,id,nick,email from member) B
+    	on A.member_no = B.member_no
+    	left outer join
+    	(select project_no,order_no from payment)C
+    	on A.order_no = C.order_no
+	</select>
+	
+	<select id="selectCntAll" resultType="funding.dto.AdminMain">
+		select normal_cnt,buisness_cnt,disabled_cnt,userAll_cnt,approved_cnt,waiting_cnt,proceeding_cnt,projectAll_cnt,reg_date
+		from cnt_tb
+		where to_char(reg_date,'yy/mm/dd') = to_char(CURRENT_DATE-1,'yy/mm/dd')
+	
+	</select>
+	
+	<!-- 최원석님 코드 -->
+	<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+		SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
+				open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectPlan" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+		SELECT budget_plan, schedule_plan
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectNewsList" parameterType="int" resultType="funding.dto.ProjectNews">
+		SELECT news_no, news_title, news_date,project_no
+		FROM project_news
+		WHERE project_no = #{projectNo}
+		ORDER BY news_no DESC
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectCommentList" parameterType="int" resultType="funding.dto.ProjectComment">
+ 		SELECT comment_no, comment_content, comment_writer, comment_date,project_no
+ 		FROM project_comment
+ 		WHERE project_no = #{projectNo}
+ 		ORDER BY comment_no DESC
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectContent" parameterType="int" resultType="funding.dto.Project">
+ 		SELECT project_content FROM project
+ 		WHERE project_no = #{projectNo}
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectNewsView" parameterType="funding.dto.ProjectNews" resultType="funding.dto.ProjectNews">
+	 	SELECT news_no,news_title, news_content, news_date, project_no
+	 	FROM project_news
+	 	WHERE news_no = #{newsNo}
+ 	</select>
+	<!-- 최원석님 코드 -->
+	<delete id="deleteNews" parameterType="funding.dto.ProjectNews">
+		DELETE project_news
+		WHERE news_no = #{newsNo}
+	</delete>
+
+	<!-- 최원석님 코드 -->
+	<select id="selectRewardList" parameterType="funding.dto.Project" resultType="funding.dto.Reward">
+		SELECT reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro
+		FROM reward
+		WHERE project_no = #{projectNo}
+		ORDER BY reward_price
+	</select>
+
+	<!-- 최원석님 코드 -->
+	<resultMap type="funding.dto.Member" id="Member">
+	<id property="nick" column="nick"/>
+	<result property="memberNo" column="member_no"/>
+		<association property="memberSeller" column="member_no" javaType="funding.dto.MemberSeller">
+			<id property="sellerInfo" column="seller_info"/>
+		</association>
+	</resultMap>
+	<!-- 최원석님 코드 -->
+	<select id="selectSeller" parameterType="funding.dto.Project" resultMap="Member">
+		SELECT a.member_no, b.seller_info, a.nick
+		FROM member a
+		JOIN member_seller b
+		ON a.member_no = b.member_no
+		WHERE a.member_no = #{memberNo}
+
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+
+		SELECT project_step, project_no
+	 	FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+
+	
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
