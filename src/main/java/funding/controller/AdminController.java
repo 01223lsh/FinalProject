@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +30,10 @@ import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.ProjectComment;
+import funding.dto.ProjectNews;
 import funding.dto.Qna;
+import funding.dto.Reward;
 import funding.service.face.AdminService;
 import funding.util.Paging;
 import funding.util.ApprovedPaging;
@@ -311,7 +316,7 @@ public class AdminController {
 	public ModelAndView approveProjectPage(ApprovedPaging paging) {
 		logger.info("[/admin/approveProject][GET]");
 		paging = adminService.getapproveProjectpaging(paging);
-		ModelAndView mav = new ModelAndView("admin/approved/approveProject");
+		ModelAndView mav = new ModelAndView("/admin/approved/approveProject");
 		Map<String, Object> model = mav.getModel();
 		logger.info("{}",mav);
 		List<Project> list = adminService.getWaitingProject(paging);
@@ -357,19 +362,21 @@ public class AdminController {
 	// create by young
 	// 프로젝트 심사 처리
 	@RequestMapping("/admin/approved/projectDetail")
-	public ModelAndView getProject(Project project) {
+	public void getProject(Project project,Model model) {
 		logger.info("[/admin/projectDetail][GET]");
 		logger.info("파라미터: projectNo - {}", project.getProjectNo());
-		ModelAndView mav = new ModelAndView("admin/approved/projectDetail");
-		Map<String, Object> model = mav.getModel();
-
+		
+		
+		List<Category> category = adminService.categoryList();
 		// 개별 프로젝트 상세내용 조회
 		Project result = adminService.getProject(project);
 		logger.info("조회된 프로젝트: {}", result);
 
 		// View 전달 데이터
-		model.put("project", result);
-		return mav;
+		model.addAttribute("category", category);
+		model.addAttribute("project", result);
+		
+		
 	}
 	
 	//은지님 코드 (ajax)수정
@@ -423,6 +430,125 @@ public class AdminController {
 //		qna.setMemberNo((int) session.getAttribute("memberNo"));
 		logger.info("[write reqna] : {}", qna);
 		adminService.qnarewrite(qna);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//최원석님 코드
+	@RequestMapping(value = "/admin/project/view")
+	public void projectView(Project project, Model model, Member seller) {
+		logger.info("/admin/projectView/view");
+		
+		
+		
+		project = adminService.getProject2(project);
+		seller = adminService.getSeller(project);
+		logger.info("{}",seller);
+		
+		model.addAttribute("project", project);
+		model.addAttribute("seller", seller);
+		
+		List<Reward> rewardList = adminService.getReward(project);
+		
+		model.addAttribute("rewardList", rewardList);
+		
+		
+		//남은 일 계산
+		Calendar today = Calendar.getInstance();
+		Calendar dday = Calendar.getInstance();
+		
+		dday.setTime(project.getCloseDate());
+		
+		long day = dday.getTimeInMillis()/86400000;
+		long tday = today.getTimeInMillis()/86400000;
+		
+		
+		long count = day - tday; //오늘날짜에 day날짜를 빼준다
+		
+		
+        model.addAttribute("d", (int)count+1);
+		
+        
+        
+	}
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/plan")
+	public String projectPlan(Project project, Model model) {
+		
+		project = adminService.getPlan(project);
+		
+		model.addAttribute("plan", project);
+		
+		return "admin/project/plan";
+	}
+	
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/news/list")
+	public String projectNewsList(Project project, Model model) {
+		
+		List<ProjectNews> newsList = adminService.getNewsList(project.getProjectNo());
+		
+		project = adminService.getStep(project);
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("project", project);
+		
+		return "admin/project/newsList";
+		
+	}
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/comment/list")
+	public String projectCommentList(Project project, Model model) {
+		
+		List<ProjectComment> commentList = adminService.getCommentList(project.getProjectNo());
+		project = adminService.getStep(project);
+		
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("project", project);
+		
+		return "admin/project/commentList";
+	}
+	
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/content")
+	public String projectContent(int projectNo,Model model) {
+		
+		Project p = adminService.getContent(projectNo);
+		model.addAttribute("p",p);
+		return "admin/project/content";
+	}
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/news/view")
+	public String projectNewsView(ProjectNews news, Model model) {
+		
+		news = adminService.getNewsView(news);
+		
+		model.addAttribute("news", news);
+		
+		return "admin/project/newsView";
+	}
+	
+	//최원석님 코드	
+	@RequestMapping(value = "/admin/project/news/delete")
+	public String projectNewsDelete(Model model, ProjectNews news,Project project) {
+		
+		logger.info("{}",news);
+		adminService.deleteNews(news);
+		
+		List<ProjectNews> newsList = adminService.getNewsList(news.getProjectNo());
+		project = adminService.getStep(project);
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("projectNo", news.getProjectNo());
+		model.addAttribute("project", project);
+		return "admin/project/newsList";
 	}
 	
 	

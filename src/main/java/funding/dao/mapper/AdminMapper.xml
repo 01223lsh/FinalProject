@@ -63,9 +63,6 @@
 		select count(*) from member
 		where ${category} like '%'||#{content}||'%'
 	</select>
-	
-
-	
 	<select id="selectByGrade" resultType="funding.dto.Member" parameterType="int">
 		<choose>
 			<when test='grade == null or grade.equals("")'>
@@ -239,7 +236,7 @@
 		where project_no = #{projectNo}
 	</update>
 
-	<select id="findByNo" resultType="funding.dto.Project" parameterType="funding.dto.Project">
+	<select id="findByNo" resultType="funding.dto.Project">
 		select *
 		from project
 		where project_no = #{projectNo}
@@ -424,6 +421,85 @@
 		where to_char(reg_date,'yy/mm/dd') = to_char(CURRENT_DATE-1,'yy/mm/dd')
 	
 	</select>
+	
+	<!-- 최원석님 코드 -->
+	<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+		SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
+				open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectPlan" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+		SELECT budget_plan, schedule_plan
+		FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectNewsList" parameterType="int" resultType="funding.dto.ProjectNews">
+		SELECT news_no, news_title, news_date,project_no
+		FROM project_news
+		WHERE project_no = #{projectNo}
+		ORDER BY news_no DESC
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectCommentList" parameterType="int" resultType="funding.dto.ProjectComment">
+ 		SELECT comment_no, comment_content, comment_writer, comment_date,project_no
+ 		FROM project_comment
+ 		WHERE project_no = #{projectNo}
+ 		ORDER BY comment_no DESC
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectContent" parameterType="int" resultType="funding.dto.Project">
+ 		SELECT project_content FROM project
+ 		WHERE project_no = #{projectNo}
+ 	</select>
+ 	<!-- 최원석님 코드 -->
+ 	<select id="selectNewsView" parameterType="funding.dto.ProjectNews" resultType="funding.dto.ProjectNews">
+	 	SELECT news_no,news_title, news_content, news_date, project_no
+	 	FROM project_news
+	 	WHERE news_no = #{newsNo}
+ 	</select>
+	<!-- 최원석님 코드 -->
+	<delete id="deleteNews" parameterType="funding.dto.ProjectNews">
+		DELETE project_news
+		WHERE news_no = #{newsNo}
+	</delete>
+
+	<!-- 최원석님 코드 -->
+	<select id="selectRewardList" parameterType="funding.dto.Project" resultType="funding.dto.Reward">
+		SELECT reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro
+		FROM reward
+		WHERE project_no = #{projectNo}
+		ORDER BY reward_price
+	</select>
+
+	<!-- 최원석님 코드 -->
+	<resultMap type="funding.dto.Member" id="Member">
+	<id property="nick" column="nick"/>
+	<result property="memberNo" column="member_no"/>
+		<association property="memberSeller" column="member_no" javaType="funding.dto.MemberSeller">
+			<id property="sellerInfo" column="seller_info"/>
+		</association>
+	</resultMap>
+	<!-- 최원석님 코드 -->
+	<select id="selectSeller" parameterType="funding.dto.Project" resultMap="Member">
+		SELECT a.member_no, b.seller_info, a.nick
+		FROM member a
+		JOIN member_seller b
+		ON a.member_no = b.member_no
+		WHERE a.member_no = #{memberNo}
+
+	</select>
+	<!-- 최원석님 코드 -->
+	<select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+
+		SELECT project_step, project_no
+	 	FROM project
+		WHERE project_no = #{projectNo}
+	</select>
+
+	
 	
 
 </mapper>

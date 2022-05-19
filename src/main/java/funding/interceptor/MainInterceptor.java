@@ -14,11 +14,11 @@ public class MainInterceptor implements HandlerInterceptor{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		HttpSession session = request.getSession();
+		
 		if(session.getAttribute("grade")==null) {
 			
 		} 
 		else if (((Integer) session.getAttribute("grade"))==2) {
-			System.out.println(session.getAttribute("grade")+"sssssssss");
 			
 			response.sendRedirect("/admin/main");
 		}

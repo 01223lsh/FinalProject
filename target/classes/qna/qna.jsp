@@ -29,7 +29,6 @@ function complete(No){
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
-var cnt = ${paging.totalCount };
 var str = "qna";
 
 $(document).ready(function(){
@@ -290,4 +289,4 @@ td {
 
 </body>
 </html>
-<%@ include file="../../../layout/qnapaging.jsp" %>
+<%@ include file="../../../layout/paging.jsp" %>

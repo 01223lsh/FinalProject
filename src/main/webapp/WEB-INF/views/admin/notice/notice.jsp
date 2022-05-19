@@ -11,23 +11,7 @@
 
 
 <script type="text/javascript">
-$(".noticeView").click(function(){
-	var noticeNo = $(".noticeNo").val();
 
-	$.ajax({
-		type : "post"
-		,url : "/admin/notice/noticeView"
-		,data : "noticeNo="+noticeNo
-		,dataType  :"html"
-		,success : function(res){
-			console.log("notice view success");
-			$("#resultLayout").html(res)
-		}
-		,error : function(){
-			console.log("notice view error")
-		}
-	})
-})
 function noticeWrite(){
 	$.ajax({
 		type : "get"
@@ -45,7 +29,6 @@ function noticeWrite(){
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
-var cnt = ${cnt};
 var str = "notice";
 $(document).ready(function(){
 	for(var i = startPage; i <= endPage; i++){
@@ -195,7 +178,7 @@ button{
 	
 </tr>
 <c:forEach items="${list}" var="i">
-<tr class="noticeView trcss" >
+<tr class="noticeView trcss"  onclick="noticeView(${i.noticeNo})">
 	<td>${i.noticeNo }</td>
 	<td>${i.title }
 	<input type="hidden" class="noticeNo" value="${i.noticeNo }"> 

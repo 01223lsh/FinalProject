@@ -34,7 +34,7 @@ function grade(grade){
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
-var cnt = ${cnt};
+// var cnt = ${cnt};
 
 var gradep = ${membergrade};
 function viewmember(memberno){

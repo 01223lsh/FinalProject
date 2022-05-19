@@ -27,6 +27,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script type="text/javascript">
+function projectView(projectNo){
+	console.log(projectNo + "test");
+	$.ajax({
+		type: "get"
+		,url : "/admin/project/view"
+		,data : {projectNo:projectNo}
+		,dataType : "html"
+		,success  : function(res){
+			console.log("프로젝트 상세보기 성공")
+			$("#resultLayout").html(res);
+		},error : function(){
+			console.log("프로젝트 상세 보기 실패")
+		}
+		
+	})
+}
 function projectNoSelect(projectNo){
 	$.ajax({
 		success : function(){
@@ -46,17 +62,38 @@ function dis(projectNo){
     $('.pro'+projectNo).hide();
     }
 }
+function MnoticeView(noticeNo){
+	noticeView(noticeNo);
+}
+function noticeView(noticeNo){
+	$.ajax({
+		type : "post"
+		,url : "/admin/notice/noticeView"
+		,data : "noticeNo="+noticeNo
+		,dataType  :"html"
+		,success : function(res){
+			console.log("notice view success");
+			$("#resultLayout").html(res)
+		}
+		,error : function(){
+			console.log("notice view error")
+		}
+	})
+}
 $(document).ready(function(){
-	$(".Mnotice").click(function(){
+	$(".MnoticeManagement").click(function(){
 		noticeManagement();
 	})	
-	$(".Mqna").click(function(){
+	$(".MqnaManagement").click(function(){
 		qnaManagement();
 	})	
 	$(".monthChart").click(function(){
 		chartManagement();
 	})
 	$(".MprojectCategoryChart").click(function(){
+		projectManagement();
+	})
+	$(".Mprojectmanagement").click(function(){
 		projectManagement();
 	})
 	
@@ -211,6 +248,11 @@ function qnaManagement(searchtest){
 /* div{ */
 /* 	border: 1px solid; */
 /* } */
+.mainTotal{
+	min-width: 132px !important;
+	min-height: 98px !important;
+}
+
 body{
 	background-color: #f9f9f9;
  	font-family: 'Noto Serif KR', serif;
@@ -238,7 +280,11 @@ nav{
     height:100%; /*fixed를 해서 높이 100%가 가능해짐*/
 }
 h1{ font-size:18px;  padding:20px; }
-	.menu {}
+.menu {
+	min-width: 200px;
+	min-height: 800px;	
+	list-style: none;	
+}
     .menu li {}
 
     
@@ -258,6 +304,8 @@ h1{ font-size:18px;  padding:20px; }
 #menu {
     width:15%;
     box-sizing: border-box;
+    min-width: 200px;
+	min-height: 800px;
     
 }
 
@@ -287,6 +335,8 @@ h1{ font-size:18px;  padding:20px; }
     margin: 0;
     text-align: center;
     height: 150px;
+    min-width: 415px;
+    min-height: 150px;
 }
 .noticeTabletr{
 	border: 1px solid #ddd;
@@ -296,6 +346,8 @@ h1{ font-size:18px;  padding:20px; }
     width: 59%;
     text-align: center;
     margin: 0.5% 0.5%;
+    min-width: 900px;
+    min-height: 450px;
 }
 .prjectCategorychartAndNotice>div{
  	width:32%; 
@@ -312,18 +364,31 @@ h1{ font-size:18px;  padding:20px; }
 	border: 1px solid white;
 	background-color: white;
 }
+.Mtotal{
+	min-width: 1520px;
+	min-height: 100px;
+}
 .Mnotice>table{
 	width: 100%;
+}
+.Mnotice{
+	min-width: 500px;
+	min-height: 150px;
 }
 .Mqna>table{
 	width : 100%;
 
 }
-
+.Mqna{
+	min-width: 480px;
+	min-height: 150px;
+}
 .projectOrder{
 	float: left;
 	width: 39%;
 	margin: 0.5% 0.5%;
+	min-width: 590px;
+	min-height: 440px;
 }
 .monthChartAndOrder>div{
 	background-color: white;
@@ -360,6 +425,13 @@ border-radius: 9px;
 .uparrow>i:hover{
 	color : #84978F;
 }
+.menu li i{
+	color:white;
+}
+.noticeTabletr:hover {
+	background-color : #DCDCDC;
+}
+
 </style>
 
 
@@ -371,12 +443,12 @@ border-radius: 9px;
 <nav >
    <h1  ><a href="" style="color:#fff;">관리자 페이지</a> </h1>
     <ul class="menu">
-        <li><a onclick="memberManagement()">회원관리</a></li>
-        <li><a onclick="projectManagement()">프로젝트 목록</a></li>
+        <li><a onclick="memberManagement()"><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;회원관리</a></li>
+        <li><a onclick="projectManagement()"><i class="fa-solid fa-briefcase"></i>&nbsp;&nbsp;프로젝트 목록</a></li>
         <%-- edit by young --%>
-        <li><a onclick="approveProject()">프로젝트 승인</a></li>
-        <li><a onclick="noticeManagement()">공지사항</a></li>
-        <li><a onclick="qnaManagement()">문의 게시판</a></li>
+        <li><a onclick="approveProject()"><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;프로젝트 승인</a></li>
+        <li><a onclick="noticeManagement()"><i class="fa-solid fa-paste"></i>&nbsp;&nbsp;공지사항</a></li>
+        <li><a onclick="qnaManagement()"><i class="fa-solid fa-q"></i>&nbsp;&nbsp;문의 게시판</a></li>
 <!--         <li><a onclick="chartManagement()">통계</a></li> -->
     </ul>
  
@@ -387,7 +459,7 @@ border-radius: 9px;
 		<div id="resultLayout">
 		<br><br>
 			<div class="Mtotal" style="display: flex; height: 100px;">
-				<div class="Mnormal">
+				<div class="Mnormal mainTotal">
 				<div><i class="fa-solid fa-user"></i>
 					일반 회원</div>
 					<br>
@@ -416,7 +488,7 @@ border-radius: 9px;
 						</c:choose>
 					</div>
 				</div>
-				<div class="Mbuisness">
+				<div class="Mbuisness mainTotal">
 				<div><i class="fa-solid fa-briefcase"></i>
 					사업자</div> 
 					<br>
@@ -445,7 +517,7 @@ border-radius: 9px;
 						</c:choose>
 				</div>
 				</div>
-				<div class="Mdisabled">
+				<div class="Mdisabled mainTotal">
 				<div><i class="fa-solid fa-user-ninja"></i>
 					탈퇴 </div>
 					<br>
@@ -474,7 +546,7 @@ border-radius: 9px;
 						</c:choose>
 				</div>
 				</div>
-				<div class="MuserAll">
+				<div class="MuserAll mainTotal">
 				<div><i class="fa-solid fa-users"></i>
 					전체 유저</div>
 					<br> 
@@ -503,7 +575,7 @@ border-radius: 9px;
 						</c:choose>
 				</div>
 				</div>
-				<div class="Mapproved">
+				<div class="Mapproved mainTotal">
 				<div><i class="fa-solid fa-check"></i>
 					승인 프로젝트 </div> 
 					<br>
@@ -538,7 +610,7 @@ border-radius: 9px;
 						</c:choose>
 				</div>
 				</div>
-				<div class="Mproceeding">
+				<div class="Mproceeding mainTotal">
 				<div><i class="fa-solid fa-sack-dollar"></i>
 					진행 프로젝트</div>  
 					<br>
@@ -567,7 +639,7 @@ border-radius: 9px;
 						</c:choose>
 				</div>
 				</div>
-				<div class="MprojectAll">
+				<div class="MprojectAll mainTotal">
 				<div><i class="fa-solid fa-hand-holding-dollar"></i>
 					총 프로젝트  </div>
 					<br>
@@ -599,19 +671,20 @@ border-radius: 9px;
 			
 			</div>
 			<br>
-			<div class="prjectCategorychartAndNotice" >
+			<div class="prjectCategorychartAndNotice"  style="min-width: 1520px;">
+			
 				<div class="MprojectCategoryChart">
 					<canvas id="mychart"></canvas>
 				</div>
 				<div class="Mnotice" style="overflow:scroll; width:33%; height:150px; overflow-x: hidden; ">
-				<div style=" position: absolute; z-index: 999; background-color: white;width: 25.5%;  text-align: center;" >공지사항 리스트</div>
+				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC;width: 25.9%;  text-align: center; min-width: 486px; min-height: 20px; "  class="MnoticeManagement">공지사항 리스트</div>
 					<table class="MnoticeList">
 						<tr style="border-bottom: 2px solid #ddd;">
 						
 							<td style="width: 10%;">.</td><td style="width: 76%;"></td><td></td>
 						</tr>
 						<c:forEach items="${notice}" var='i'>
-						<tr class="noticeTabletr">
+						<tr class="noticeTabletr" onclick="MnoticeView(${i.noticeNo})">
 						
 							<td>${i.noticeNo }</td><td>${i.title}</td><td style="font-size: 12px;">${i.regDate }</td>
 						</tr>
@@ -620,14 +693,14 @@ border-radius: 9px;
 					
 				</div>
 				<div class="Mqna" style="overflow:scroll; overflow-x: hidden;">
-				<div style=" position: absolute; z-index: 999; background-color: white; width:  24.9%;  text-align: center;" >문의게시판 답변 안한 리스트</div>
+				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC; width:  25.1%;  text-align: center;min-width: 470px; min-height: 20px;" class="MqnaManagement">문의게시판 답변 안한 리스트</div>
 
 						<table class="MqnaList">
 							<tr style="border-bottom: 2px solid #ddd;">
 								<td style="width: 10%;">.</td><td style="width: 76%;"></td><td style="width: 17%;" ></td>
 							</tr>
 							<c:forEach items="${qnalist}" var='i'>
-							<tr class="noticeTabletr">
+							<tr class="noticeTabletr" onclick="qnaView(${i.qnaNo})">
 								<td>${i.qnaNo }</td><td>${i.qnaTitle}</td>
 								<td style="font-size: 12px;"><fmt:formatDate value="${i.qnaCreateDate }" pattern="yyyy-MM-dd"/>  </td>
 							</tr>
@@ -638,12 +711,12 @@ border-radius: 9px;
 			<br>
 			<br>
 			<br>
-			<div class="monthChartAndOrder" >
+			<div class="monthChartAndOrder" style="min-width: 1530px;">
 				<div class="monthChart">
 					<canvas id="monthchart"></canvas>
 				</div>
 				<div class="projectOrder" style="overflow:scroll; height: 449px; overflow-x: hidden;">
-								<div style=" position: absolute; z-index: 999; background-color: white; width: 30.3%;  text-align: center;" >프로젝트 펀딩률</div>
+				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC; width: 30.65%;  text-align: center; min-width:580px;min-height: 20px; " class="Mprojectmanagement" >프로젝트 펀딩률</div>
 					<table style="    width: 100%;">
 					<tr style="border-bottom: 1px solid #ddd;">
 						<th style="width: 8%;">.</th>
@@ -653,9 +726,9 @@ border-radius: 9px;
 						<th style="width: 7%;"></th>
 					</tr>
 					<c:forEach items="${projectList }" var="i">
-						<tr style="border-bottom: 1px solid #ddd;">
+						<tr style="border-bottom: 1px solid #ddd;" class="noticeTabletr">
 							<td>${i.projectNo }</td>
-							<td>${i.projectTitle }</td>
+							<td  onclick="projectView(${i.projectNo})">${i.projectTitle } </td>
 							<td>${i.paymentTotal}</td>
 							<td><fmt:formatNumber value="${i.paymentTotal / i.projectPrice}" type="percent"/></td>
 							<td>
@@ -669,11 +742,13 @@ border-radius: 9px;
 							<c:forEach items="${projectinfoList}" var="j">
 								<c:if test="${j.projectNo eq i.projectNo}">
 									
-									<tr style="border-bottom: 1px solid #ddd;">
-										<td colspan=5 style="font-size: 13px; text-align: center;" class="projectMoney pro${j.projectNo }" >
-											${j.id }(${j.nick }) | ${j.email} | 
-										 	펀딩 금액 : ${j.paymentTotal }
-										 	| 날짜 : ${j.orderDate  }
+									<tr style="border-bottom: 1px solid #ddd; background-color: #F5F5F5;">
+										<td colspan=5 style="font-size: 13px; text-align: left;" class="projectMoney pro${j.projectNo }" >
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											${j.id }(${j.nick })&nbsp;&nbsp; |&nbsp;&nbsp; ${j.email} &nbsp;&nbsp;| &nbsp;&nbsp;
+										 	펀딩 금액 : ${j.paymentTotal }&nbsp;&nbsp;
+										 	| &nbsp;&nbsp;&nbsp;&nbsp;날짜 : ${j.orderDate  }
 										 </td>
 									</tr>
 								</c:if>

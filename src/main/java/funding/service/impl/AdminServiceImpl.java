@@ -24,7 +24,10 @@ import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.ProjectComment;
+import funding.dto.ProjectNews;
 import funding.dto.Qna;
+import funding.dto.Reward;
 import funding.service.face.AdminService;
 import funding.util.ApprovedPaging;
 import funding.util.Paging;
@@ -247,7 +250,7 @@ public class AdminServiceImpl implements AdminService {
 		// 프로젝트 상황 업데이트
 		int result = adminDao.updateProjectStep(project);
 		
-		if (project.getProjectStep() == 3) {
+		if (project.getProjectStep() == 5) {
 			// 프로젝트 상태 변경이 승인거절인 경우 메시지 보내는 로직 추가
 			alert.setAlertContent("\""+project.getProjectTitle()+"\"의 프로젝트가 승인 되었습니다.") ;
 		}else if(project.getProjectStep() == 2) {
@@ -267,7 +270,7 @@ public class AdminServiceImpl implements AdminService {
 	// create by young
 	// 개별 프로젝트 상세내용 조회
 	@Override
-	public Project getProject(Project project) {
+	public Project getProject2(Project project) {
 		return adminDao.findByNo(project);
 	}
 	@Override
@@ -349,4 +352,89 @@ public class AdminServiceImpl implements AdminService {
 	public AdminMain selectCntAll() {
 		return adminDao.selectCntAll();
 	}
+	
+	
+	//최원석님 코드
+	@Override
+	public Project getProject(Project project) {
+		
+		return adminDao.selectProject(project);
+	}
+	//최원석님 코드
+	@Override
+	public Project getPlan(Project project) {
+		
+		return adminDao.selectPlan(project);
+	}
+	//최원석님 코드
+	@Override
+	public List<ProjectNews> getNewsList(int projectNo) {
+
+		return adminDao.selectNewsList(projectNo);
+	}
+	//최원석님 코드
+	@Override
+	public Project getContent(int projectNo) {
+		
+		return adminDao.selectContent(projectNo);
+	}
+	//최원석님 코드
+	@Override
+	public ProjectNews getNewsView(ProjectNews news) {
+		
+		return adminDao.selectNewsView(news);
+	}
+	
+	//최원석님 코드
+	@Override
+	public Member getSeller(Project project) {
+		
+		return adminDao.selectSeller(project);
+	}
+	//최원석님 코드
+	@Override
+	public Project getStep(Project project) {
+		
+		return adminDao.selectStep(project);
+	}
+	//최원석님 코드
+	@Override
+	public String fileUpload(MultipartFile file) {
+	// 파일 저장 경로 생성
+	String storedPath = context.getRealPath("img");
+	File storedFolder = new File(storedPath);
+	if (storedFolder.exists() == false) {
+	storedFolder.mkdir();
+	}
+	// 저장 파일 이름 생성
+	String fileName = UUID.randomUUID().toString().split("-")[4] + file.getOriginalFilename();
+	// 업로드 파일 객체 생성
+	File dest = new File(storedFolder, fileName);
+	// 파일 업로드
+	try {
+	file.transferTo(dest);
+	} catch (IOException e) {
+	e.printStackTrace();
+	}
+	return fileName;
+	}
+	//최원석님 코드
+	@Override
+	public List<ProjectComment> getCommentList(int projectNo) {
+		
+		return adminDao.selectCommentList(projectNo);
+	}
+	//최원석님 코드
+	@Override
+	public List<Reward> getReward(Project project) {
+		
+		return adminDao.selectRewardList(project);
+	}
+	//최원석님 코드
+	@Override
+	public void deleteNews(ProjectNews news) {
+		
+		adminDao.deleteNews(news);
+	}
+
 }

@@ -31,7 +31,7 @@
            type: "get"
            , url: "/admin/approved/projectDetail"
            , dataType: "html"
-           , data: {projectNo: projectNo}
+           , data: "projectNo="+projectNo
            , success: function(res) {
              console.log("성공")
              $("#resultLayout").html(res)
@@ -45,7 +45,6 @@
        var endNo=${paging.endNo/10};
        var startPage=${paging.startPage};
        var endPage = ${paging.endPage};
-       var cnt = ${cnt};
        var str = "approveProject";
        $(document).ready(function(){
        	for(var i = startPage; i <= endPage; i++){
@@ -189,7 +188,7 @@ table.test td{height: 30px; padding : 10px;}
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
       
         <div class="card shadow-sm" style=" border: 1px solid;">
-          <img src="${i.projectImage }" style="min-height: 250px;">
+         <img src="${i.projectImage}" style="min-height: 250px;">
           <div class="card-body">
             <strong>${i.projectTitle}</strong>
             <c:if test="${p.projectStep eq 4}">
@@ -198,9 +197,9 @@ table.test td{height: 30px; padding : 10px;}
             <p class="card-text">${i.projectIntro}</p>
             <div >
               <div class="col d-flex">
-              <span style="margin-right: 10px;">
-                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
-              </span>
+<!--               <span style="margin-right: 10px;"> -->
+<%--                 <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
+<!--               </span> -->
                 
               </div>
               <div class="col text-end">
@@ -268,4 +267,4 @@ table.test td{height: 30px; padding : 10px;}
 
 </body>
 </html>
-<%@ include file="../../../layout/projectpaging.jsp" %>
+<%@ include file="../../../layout/paging.jsp" %>

@@ -13,7 +13,10 @@ import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.ProjectComment;
+import funding.dto.ProjectNews;
 import funding.dto.Qna;
+import funding.dto.Reward;
 import funding.util.ApprovedPaging;
 import funding.util.Paging;
 import funding.util.ProjectPaging;
@@ -337,6 +340,39 @@ public interface AdminDao {
 	 * @return 전일 데이터
 	 */
 	public AdminMain selectCntAll();
+	
+	
+	
+	
+	
+	
+	//최원석님 코드
+	public Project selectProject(Project project);
+	//최원석님 코드
+	public Project selectPlan(Project project);
+	//최원석님 코드
+	public List<ProjectNews> selectNewsList(int projectNo);
+	
+	//최원석님 코드
+	public Project selectContent(int projectNo);
+	//최원석님 코드
+	public ProjectNews selectNewsView(ProjectNews news);
+
+	//최원석님 코드
+	public Member selectSeller(Project project);
+	//최원석님 코드
+	public Project selectStep(Project project);
+
+	//최원석님 코드
+	public void deleteNews(ProjectNews news);
+
+	//최원석님 코드
+	public List<Reward> selectRewardList(Project project);
+
+	//최원석님 코드
+	public List<ProjectComment> selectCommentList(int projectNo);
+
+
 
 
 }

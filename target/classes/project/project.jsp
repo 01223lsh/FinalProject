@@ -10,21 +10,7 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 <script type="text/javascript">
 
-function projectView(projectNo){
-	$.ajax({
-		type: "get"
-		,url : "/project/view"
-		,data : {projectNo:projectNo}
-		,dataType : "html"
-		,success  : function(res){
-			console.log("프로젝트 상세보기 성공")
-			$("#resultLayout").html(res);
-		},error : function(){
-			console.log("프로젝트 상세 보기 실패")
-		}
-		
-	})
-}
+
 var projectStep =${step};
 function categorya(categoryNo){
 	  var btn = document.getElementsByClassName("btncate");
@@ -88,7 +74,6 @@ var category=${categoryNo};
 var endNo=${paging.endNo/10};
 var startPage=${paging.startPage};
 var endPage = ${paging.endPage};
-var cnt = ${cnt};
 var str = "project";
 
 $(document).ready(function(){
@@ -352,7 +337,7 @@ table.test td{height: 30px; padding : 10px;}
     <tr>
     </c:if>
       <input type="hidden" value="${i.projectNo}"/>
-      <td class="projectView">
+      <td class="projectView" onclick="projectView(${i.projectNo})">
        <div style="display: flex;">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto; display: flex;
     flex-wrap: wrap;
@@ -361,7 +346,7 @@ table.test td{height: 30px; padding : 10px;}
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
       
         <div class="card shadow-sm" style=" border: 1px solid;">
-          <img src="${i.projectImage }" style="min-height: 250px;">
+          <img src="${i.projectImage}" style="min-height: 250px;">
           <div class="card-body">
             <strong>${i.projectTitle}</strong>
             <c:if test="${i.projectStep eq 4}">
@@ -370,9 +355,9 @@ table.test td{height: 30px; padding : 10px;}
             <p class="card-text">${i.projectIntro}</p>
             <div >
               <div class="col d-flex">
-<!--               <span style="margin-right: 10px;"> -->
-<%--                 <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/> --%>
-<!--               </span> -->
+              <span style="margin-right: 10px;">
+                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
+              </span>
                 
               </div>
               <div class="col text-end">
@@ -400,4 +385,4 @@ table.test td{height: 30px; padding : 10px;}
 </body>
   
 </html>
-<%@ include file="../../../layout/projectpaging.jsp" %>
+<%@ include file="../../../layout/paging.jsp" %>

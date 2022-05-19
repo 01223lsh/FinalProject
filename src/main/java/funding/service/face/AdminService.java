@@ -13,7 +13,10 @@ import funding.dto.MemberSeller;
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.dto.Project;
+import funding.dto.ProjectComment;
+import funding.dto.ProjectNews;
 import funding.dto.Qna;
+import funding.dto.Reward;
 import funding.util.ApprovedPaging;
 import funding.util.Paging;
 import funding.util.ProjectPaging;
@@ -274,6 +277,33 @@ public interface AdminService {
 	 * @return 전일 데이터
 	 */
 	public AdminMain selectCntAll();
+	
+	
+	
+	
+	//최원석님 코드
+	public Project getProject2(Project project);
+	//최원석님 코드
+	public Project getPlan(Project project);
+	//최원석님 코드
+	public List<ProjectNews> getNewsList(int projectNo);
+	//최원석님 코드
+	public Project getContent(int projectNo);
+	//최원석님 코드
+	public ProjectNews getNewsView(ProjectNews news);
+	//최원석님 코드
+	public Member getSeller(Project project);
+	//최원석님 코드
+	public Project getStep(Project project);
+	//최원석님 코드
+	public String fileUpload(MultipartFile file);
+
+	public void deleteNews(ProjectNews news);
+
+	public List<Reward> getReward(Project project);
+
+	public List<ProjectComment> getCommentList(int projectNo);
+	
 
 
 

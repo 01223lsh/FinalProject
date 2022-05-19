@@ -67,15 +67,21 @@
         <h2>카테고리</h2>
         <hr>
         <p>
-            (categoryNo - categoryId 이름 차이로 가져오지 못함)
-            ${project.categoryNo}
+        
+        
+        <c:forEach items="${category}" var='i'>
+        <c:if test="${project.categoryNo eq i.categoryNo}">
+            ${i.categoryName}
+        </c:if>
+        
+        </c:forEach>
         </p>
     </div>
     <div class="p-content-section">
-        <h2>대표사진(하드코딩)</h2>
+        <h2>대표사진</h2>
         <hr>
         <p>
-            <img src="/resources/img/test1.jpg" alt="">
+            <img src="${projectInfo.projectImage}">
         </p>
     </div>
     <div class="p-content-section">
@@ -120,15 +126,11 @@
         </p>
     </div>
     <div class="p-content-section">
-        <h2>소개글 내용(이미지 하드코딩)</h2>
+        <h2>소개글 내용</h2>
         <hr>
         <p>
             ${project.projectContent}
-            <img src="/resources/img/content1.jpg" alt="">
-            <img src="/resources/img/content2.jpg" alt="">
-            <img src="/resources/img/content3.jpg" alt="">
-            <img src="/resources/img/content4.jpg" alt="">
-            <img src="/resources/img/content5.jpg" alt="">
+           
         </p>
     </div>
     <div class="p-content-section">

@@ -64,6 +64,7 @@ function noticeDownload(fileNo){
 	padding: 1px 3px;
 	border-width: 2px;
 	border-color: #aaa;
+	text-align: center;
 	border-style: solid;
 		
 }
@@ -99,12 +100,12 @@ button{
 <body>
 <br>
 <br>
-<div class="noticeView" style="width: 1000px;
+<div class="noticeView" style="width: 800px;
     margin: 0 auto;
     border-radius: 15px;
     border: 1px solid #ddd; margin-bottom: 30px;">
 <div style="height:20px; ">
-	<div class="noticeTitle" >${notice.title}</div>
+	<div class="noticeTitle" style="text-align: left;" >${notice.title}</div>
 
 	<div class="noticeDate" style="color :#ccc;">작성일자 : ${notice.regDate} | 작성자  : 관리자</div>
 </div>
