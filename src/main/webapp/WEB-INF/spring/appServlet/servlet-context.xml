@@ -122,7 +122,7 @@
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
-	</websocket:handlers> 
+	</websocket:handlers>
 	
 	<!-- HandlerInterceptor interface를 사용하기 위한 태그 -->
 	<!-- 인터셉터 설정 -->
