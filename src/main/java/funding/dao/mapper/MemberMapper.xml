@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="funding.dao.face.MemberDao">
+
+	<select id="selectCntMember" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) FROM member
+		WHERE id = #{id} AND pw = #{pw}
+	</select>
+	
+	<select id="selectNickByMember" resultType="string" parameterType="funding.dto.Member">
+		SELECT nick FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectGradeByMember" resultType="integer" parameterType="funding.dto.Member">
+		SELECT grade FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectMemberNoByMember" resultType="integer" parameterType="funding.dto.Member">
+		SELECT member_no FROM member
+		WHERE id = #{id}
+	</select>
+
+</mapper>

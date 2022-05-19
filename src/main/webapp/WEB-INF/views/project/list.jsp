@@ -184,7 +184,7 @@ function setCondition() {
           </li>
         </ul>
         <div class="col-md-3 text-end">
-          <button type="button" class="btn btn-outline-primary me-2">Login</button>
+          <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/login'">Login</button>
           <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
       </div>

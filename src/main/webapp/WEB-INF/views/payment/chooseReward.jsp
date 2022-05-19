@@ -167,6 +167,8 @@ dd p em {
 		
 		<!-- 넘겨줄 프로젝트 번호 -->
 		<input type="hidden" name="projectNo" value="${projectNo}">
+		<!-- 넘겨줄 세션에 존재하는 멤버 번호  -->
+		<input type="hidden" name="memberNo" value="${memberNo}">
 		
 		<div class="rewardList">
 			<c:forEach var="i" items="${rewardList }">

@@ -49,7 +49,7 @@
 			SELECT order_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO order_tb
-		VALUES (#{orderNo}, 2, CURRENT_DATE, 0, #{addtionalFunding}, #{totalPrice})
+		VALUES (#{orderNo}, #{memberNo}, CURRENT_DATE, 0, #{addtionalFunding}, #{totalPrice})
 	</insert>	
 	
 	<insert id="insertRewardOrder">

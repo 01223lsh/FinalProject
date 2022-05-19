@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class PaymentController {
 	PaymentService paymentService;
 	
 	@GetMapping(value = "/payment/chooseReward")
-	public void chooseReward(Model model, Reward reward, int projectNo) {
+	public void chooseReward(HttpSession session, Model model, Reward reward, int projectNo) {
 		
 		logger.info("/payment/chooseReward [GET]");
 		
@@ -44,11 +46,17 @@ public class PaymentController {
 		//전달받은 rewardNo 확인
 		logger.info("전송된 RewardNo : {}", reward.getRewardNo());
 		
+		//로그인 되어 있는 세션 정보 불러오기
+		int memberNo = (int) session.getAttribute("memberNo");
+		
+		//세션정보 확인
+//		logger.info("세션 memberNo : {}", memberNo);
 		
 		//모델값 전송
 		model.addAttribute("rewardNo", reward.getRewardNo());
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("memberNo", memberNo);
 	}
 	
 	@PostMapping(value = "/payment/chooseReward")
@@ -56,8 +64,6 @@ public class PaymentController {
 			, @RequestParam("rewardNo") int[] rewardNoArr
 			, @RequestParam("rewardCount") int[] rewardCountArr
 			, Order order
-//			, int addtionalFunding
-//			, int totalPrice
 			, int projectNo) {
 		logger.info("/payment/chooseRewardProc [POST]");
 		
@@ -88,7 +94,7 @@ public class PaymentController {
 	}
 	
 	@GetMapping(value = "/payment/order")
-	public void paymentOrder(Model model, Order order, Project project) {
+	public void paymentOrder(HttpSession session, Model model, Order order, Project project) {
 		
 		logger.info("/payment/order [GET]");
 		
