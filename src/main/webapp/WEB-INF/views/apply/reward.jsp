@@ -478,6 +478,11 @@ textarea::placeholder {
      border: 1px solid rgb(220, 220, 220);
 }
 
+.introDeleteButton:hover, .introDeleteButton:active {
+/*     opacity: 0.6; */
+	background-color: rgb(250, 250, 250);
+}
+
 .lastSubmitButton:hover, .lastSubmitButton:active {
     opacity: 0.6;
 }
@@ -610,11 +615,11 @@ function deleteButton(btnDelete){
 
 $(function(){     
 
-	$("#btnAdd").on("click", function(){ 
-		var newRow = $("#formList>li:last").clone(); 
-		newRow.insertAfter($("#formList>li:last"));
-		return false;
-	}); 
+// 	$("#btnAdd").on("click", function(){ 
+// 		var newRow = $("#formList>li:last").clone(); 
+// 		newRow.insertAfter($("#formList>li:last"));
+// 		return false;
+// 	}); 
 	
 	$("#rewardAmount").on("keyup", function(e){
 		
@@ -671,13 +676,14 @@ function addFunc() {
 
 //리워드 구성 마지막 요소 삭제
 function deleteLastIntro() {
-	debugger;
+// 	debugger;
 	if(rIntroNo == 0) {
 		deleteAlert();
 		return;
 	}
 	rIntroNo = rIntroNo - 1;
-	document.getElementById("show_rewardIntro").lastElementChild.remove;
+	document.getElementById("show_rewardIntro").remove;
+	alert(document.getElementById("show_rewardIntro").val)
 }
 
 
@@ -699,37 +705,9 @@ function rewardIntroAdd() {
 // 	debugger;
 	const rewardIntro = document.getElementById("show_rewardIntro");
 	document.getElementById("rewardIntro").value = rewardIntro.innerHTML;
-	alert(document.getElementById("rewardIntro").value);
+// 	alert(document.getElementById("rewardIntro").value);
 }
 
-// // 리워드 리스트
-// function RewardList() {
-//     $.ajax({
-//         type: "GET"
-//         , url: "/rewards"
-//         , dataType: "JSON"
-//         , data: {projectNo: "${project.projectNo}"}
-//         , success: function(res) {
-//             // 화면에 표시된 리워드 목록 제거
-//             $("#item-area li").remove()
-//             // 조회 결과 리워드 목록랜더링
-//             for (var i in res.list) {
-//                 renderReward(
-//                     res.list[i].rewardPrice
-//                     , res.list[i].rewardIntro
-//                     , res.list[i].rewardContent
-//                     , res.list[i].rewardNo)
-//             }
-//         }
-//         , error: function (jqXHR) {
-//             console.log("ajax 실패")
-//             console.log(jqXHR.status)
-//             console.log(jqXHR.statusText)
-//             // console.log(jqXHR.responseText)
-//             console.log(jqXHR.readyState)
-//         }
-//     })
-// }
 
 
 </script>
@@ -817,7 +795,7 @@ function rewardIntroAdd() {
 								<textarea id="rewardIntro" name="rewardIntro" style="display: none;"></textarea>
 								<div class="createItem_rewardName" id="show_rewardIntro" style="height: 230px; padding-right:0px;">
 									<p id="rewardIntro_placeHolder" style="color: rgb(200, 200, 200); font-size: px important!; ">리워드를 구성하는 아이템을 추가해주세요.</p>
-									<ul>
+									<ul class="removeIntro" >
 									</ul>
 								</div>
 								<div class="createItem_rewardName" style="padding-right: 0px !important;">
@@ -833,9 +811,9 @@ function rewardIntroAdd() {
 								<span class="introAlert">리워드 구성은 8개를 넘을 수 없습니다.</span>
 								<span class="deleteAlert">더 이상 삭제할 수 없습니다.</span>
 								
-								<ul class="form_list">
-								    <li><a href="#" id="btnAdd" class="btn btn_add">추가</a></li>
-								</ul>
+<!-- 								<ul class="form_list"> -->
+<!-- 								    <li><a href="#" id="btnAdd" class="btn btn_add">추가</a></li> -->
+<!-- 								</ul> -->
 							</div>
 						</section>
 						<section>

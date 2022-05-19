@@ -60,7 +60,7 @@ public class MemberController {
 		
 		if(result == 1) {
 			session.setAttribute("login", true);
-			session.setAttribute("Id", memberInfo.getId());
+			session.setAttribute("id", memberInfo.getId());
 			session.setAttribute("name", memberInfo.getName());
 			session.setAttribute("nick", memberInfo.getNick());
 			session.setAttribute("memberNo", memberInfo.getMemberNo());
