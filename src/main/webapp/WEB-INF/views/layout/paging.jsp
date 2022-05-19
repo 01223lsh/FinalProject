@@ -8,7 +8,7 @@
 
 <%-- 첫 페이지로 이동 --%> 
 <c:if test="${paging.curPage ne 1}">
-	<li><a class="pagingFirst" 
+	<li class="page-item"><a class="pagingFirst" 
 	>처음</a></li>
 </c:if>
 	
@@ -16,11 +16,11 @@
 <%-- 이전 페이징 리스트로 이동 --%>
 <c:choose>
 	<c:when test="${paging.curPage < 11}">
-		<li class="disabled"><a>&laquo;</a></li>
+		<li class="disabled page-item"><a>&laquo;</a></li>
 	</c:when>
 
 	<c:otherwise>
-		<li>
+		<li  class="page-item">
 			<a class="pagingBackAll" 
 			>
 				&laquo;
@@ -31,7 +31,7 @@
 	
 	<%-- 이전 페이지로 이동 --%>
 <c:if test="${paging.curPage > 1 }">
-	<li>
+	<li class="page-item">
 		<a  class="pagingBack"  
 		>
 			&lt; 
@@ -44,7 +44,7 @@
 <c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 	<c:choose>
 		<c:when test="${paging.curPage eq i}">
-			<li class="active">
+			<li class="active" page-item">
 				<a class="paging${i}"
 				 >
 					${i }

@@ -47,11 +47,6 @@
 		<beans:property name="contentType" value="application/json; charset=utf-8"/>
 	</beans:bean>
 	
-	<!-- 파일 업로드로 들어오는 데이터를 처리하는 객체 -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="10485760" /> <!-- 10mb 제한 -->
-	</beans:bean>
-	
 	<!-- 네이버로그인 api 사용 bean 설정 추가-->
 	<beans:bean id="naverLoginBO" class="funding.controller.NaverLoginBO" />
 	
