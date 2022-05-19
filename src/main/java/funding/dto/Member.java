@@ -15,12 +15,15 @@ public class Member {
 	private String naverlogin;
 	private String kakaologin;
 	private Date regDate;
+	
+	// 원석님이 필요해서 만든 필드값
+	private MemberSeller memberSeller;
 
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email
-				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverlogin=" + naverlogin
-				+ ", kakaologin=" + kakaologin + ", regDate=" + regDate + "]";
+				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverLogin=" + naverlogin
+				+ ", kakaoLogin=" + kakaologin + ", regDate=" + regDate + ", memberSeller=" + memberSeller + "]";
 	}
 
 	public int getMemberNo() {
@@ -109,6 +112,15 @@ public class Member {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	// memberSeller 
+	public MemberSeller getMemberSeller() {
+		return memberSeller;
+	}
+
+	public void setMemberSeller(MemberSeller memberSeller) {
+		this.memberSeller = memberSeller;
 	}
 
 }

@@ -92,7 +92,7 @@ public class ProjectController {
 		model.addAttribute("paramData", paramData);
 		log.info("paramData : {} ", paramData);
 
-		return "project/listsearch";
+		return "project/list";
 
 	}
 

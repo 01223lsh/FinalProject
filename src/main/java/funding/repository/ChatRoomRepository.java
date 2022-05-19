@@ -1,5 +1,7 @@
 package funding.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,8 +10,10 @@ import funding.dto.ChatRoom;
 import lombok.extern.slf4j.Slf4j;
 
 @Repository
-@Slf4j
+//@Slf4j
 public class ChatRoomRepository { // 채팅방을 생성하고 정보를 조회함
+	
+	private static Logger log = LoggerFactory.getLogger(ChatRoomRepository.class);
 
 	@Autowired
 	private ChatDao chatDao;

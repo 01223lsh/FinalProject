@@ -2,6 +2,8 @@ package funding.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,13 @@ import funding.dto.ChatRoom;
 import funding.repository.ChatRoomRepository;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+//@Slf4j
 @Controller
 @RequestMapping("/chat")
 public class RoomController {
 
+	private static Logger log = LoggerFactory.getLogger(RoomController.class);
+	
 	@Autowired
 	private ChatRoomRepository repository;
 

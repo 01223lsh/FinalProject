@@ -3,6 +3,8 @@ package funding.controller;
 import java.security.Principal;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import funding.dto.ChatMessage;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+//@Slf4j
 @RestController
 public class MessageController {
+	
+	private static Logger log = LoggerFactory.getLogger(MessageController.class);
 
 	@Autowired
 	private SimpMessageSendingOperations sendingOperations;

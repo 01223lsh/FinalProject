@@ -1,5 +1,7 @@
 package funding.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -13,9 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
 @Configuration
-@Slf4j
+//@Slf4j
 public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+	private static Logger log = LoggerFactory.getLogger(StompWebSocketConfig.class);
+	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// 소켓 연결 URI

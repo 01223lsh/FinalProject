@@ -78,6 +78,9 @@
   .section-body .body-etc div:first-child > span:first-child{
     color: red;
   }
+  #category-section img {
+    padding: 15px;
+  }
 </style>
 
 <script>
@@ -123,7 +126,7 @@ function getList(category) {
 		+ ' / order: ' + order
 	)
 	
-	location.href="/project/listsearch?curPage=" + curPage + "&keyword=" + keyword + "&category=" + category + "&filter=" + filter + "&order=" + order;
+	location.href="/project/list?curPage=" + curPage + "&keyword=" + keyword + "&category=" + category + "&filter=" + filter + "&order=" + order;
 	
 }
 // 정렬 조건 유지
@@ -145,32 +148,14 @@ function setCondition() {
         }
     }
 }
-// 카테고리 이동 - 중도 포기 그냥 scroll로 하자
-// function nextCategory() {
-//   const row = document.querySelector("#category-section .row");
-//   const parentX = document.querySelector("#category-section .container").getBoundingClientRect().x;
-//   const childX = document.querySelector("#category-section .row").getBoundingClientRect().x;
-//   const parentR = document.querySelector("#category-section .container").getBoundingClientRect().right;
-//   const childR = document.querySelector("#category-section .row").getBoundingClientRect().right;
-//
-//   const parent = document.querySelector("#category-section .container");
-//   const child = document.querySelector("#category-section .row");
-//
-//   console.log("P-x: ", parentX)
-//   console.log("C-x: ", childX)
-//   console.log("P-right: ", parentR)
-//   console.log("C-right: ", childR)
-//
-//   console.log("parent: ", parent.clientWidth)
-//   console.log("child: ", child.clientWidth)
-//
-//   row.style.transform = 'translateX(' + (childX - parentX - 100) + 'px)';
-// }
+
 </script>
 </head>
 <body>
 
 <!-- header -->
+<%@include file="/WEB-INF/views/layout/header.jsp" %>
+<!--
 <header>
 
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
@@ -203,7 +188,7 @@ function setCondition() {
           </li>
         </ul>
         <div class="col-md-3 text-end">
-          <button type="button" class="btn btn-outline-primary me-2">Login</button>
+<button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/login'">Login</button>
           <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
       </div>
@@ -211,6 +196,7 @@ function setCondition() {
   </nav>
 
 </header>
+-->
 <!-- /header -->
 
 <main>
@@ -220,13 +206,13 @@ function setCondition() {
   <div class="container py-5">
     <div class="row">
       <div class="col text-center" onclick="getList()">
-        <div><img src="/resources/img/project/category/all.svg" style="withd: 800px; height: 60px"></div>
+<div><img src="/resources/img/project/category/all.svg" style="height: 60px"></div>
         <span>전체</span>
       </div>
       
       <c:forEach var="c" items="${cList}">
       <div class="col text-center me-4" onclick="getList('${c.categoryNo}')">
-        <div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="withd: 80px; height: 60px"></div>
+<div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="height: 60px"></div>
         <span>${c.categoryName}</span>
       </div>
       </c:forEach>
@@ -311,7 +297,7 @@ function setCondition() {
       <%-- 테스트 영역 --%>
       <div class="col" style="max-width: 250px;">
         <!-- 카드 영역 -->
-        <div class="card shadow-sm card-section">
+        <div class="card shadow-sm card-section" data-projectNo="${p.projectNo}" onclick="location.href='/project/view?projectNo=${p.projectNo}'">
           <!-- 카드 이미지 -->
           <div class="section-img">
             <img src="${p.projectImage}" style="min-height: 250px;">

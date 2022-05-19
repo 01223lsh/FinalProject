@@ -2,7 +2,7 @@ package funding.dto;
 
 public class MemberSeller {
 
-	private int sellerNo;
+	private int memberNo;
 	private String id;
 	private String pw;
 	private String name;
@@ -14,22 +14,21 @@ public class MemberSeller {
 	private String accountNumber;
 	private String accountName;
 	private String sellerInfo;
-
+	
 	@Override
 	public String toString() {
-		return "Member_Seller [sellerNo=" + sellerNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email="
+		return "MemberSeller [memberNo=" + memberNo + ", id=" + id + ", pw=" + pw + ", name=" + name + ", email="
 				+ email + ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", bankName=" + bankName
 				+ ", accountNumber=" + accountNumber + ", accountName=" + accountName + ", sellerInfo=" + sellerInfo
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
 
-	public int getSellerNo() {
-		return sellerNo;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setSellerNo(int sellerNo) {
-		this.sellerNo = sellerNo;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public String getId() {
@@ -104,19 +103,19 @@ public class MemberSeller {
 		this.accountNumber = accountNumber;
 	}
 
-	public String getaccountName() {
+	public String getAccountName() {
 		return accountName;
 	}
 
-	public void setaccountName(String accountName) {
+	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
 
-	public String getsellerInfo() {
+	public String getSellerInfo() {
 		return sellerInfo;
 	}
 
-	public void setsellerInfo(String sellerInfo) {
+	public void setSellerInfo(String sellerInfo) {
 		this.sellerInfo = sellerInfo;
 	}
 

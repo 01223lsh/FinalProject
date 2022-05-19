@@ -3,17 +3,19 @@ package funding.dto;
 public class Reward {
 	private int rewardNo;
 	private int projectNo;
-	private String rewardPrice;
+	private int rewardPrice;
 	private int rewardAmount;
 	private String rewardName;
 	private String rewardIntro;
 	private int rewardState;
+	
 	@Override
 	public String toString() {
 		return "Reward [rewardNo=" + rewardNo + ", projectNo=" + projectNo + ", rewardPrice=" + rewardPrice
 				+ ", rewardAmount=" + rewardAmount + ", rewardName=" + rewardName + ", rewardIntro=" + rewardIntro
 				+ ", rewardState=" + rewardState + "]";
 	}
+	
 	public int getRewardNo() {
 		return rewardNo;
 	}
@@ -26,10 +28,11 @@ public class Reward {
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
 	}
-	public String getRewardPrice() {
+	
+	public int getRewardPrice() {
 		return rewardPrice;
 	}
-	public void setRewardPrice(String rewardPrice) {
+	public void setRewardPrice(int rewardPrice) {
 		this.rewardPrice = rewardPrice;
 	}
 	public int getRewardAmount() {

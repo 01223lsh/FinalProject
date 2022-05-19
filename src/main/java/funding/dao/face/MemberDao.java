@@ -17,7 +17,6 @@ public interface MemberDao {
 	 * @return 조회된 행 수
 	 */
 	public int selectCntMember(Member member);
-
 	/**
 	 * id을 이용하여 nick을 조회한다
 	 * 

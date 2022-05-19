@@ -17,8 +17,9 @@ public class Project {
 	private Date deliveryDate;
 	private String projectContent;
 	private int fundPrice;
-	private String projectStep;
+	private int projectStep;
 	private int sum;
+	private String talkTime;
 
 	@Override
 	public String toString() {
@@ -27,7 +28,19 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ ", sum=" + sum + "]";
+				+ ", sum=" + sum + ", talkTime=" + talkTime + "]";
+	}
+
+	public String getTalkTime() {
+		return talkTime;
+	}
+
+	public void setTalkTime(String talkTime) {
+		this.talkTime = talkTime;
+	}
+
+	public void setProjectStep(int projectStep) {
+		this.projectStep = projectStep;
 	}
 
 	public int getProjectNo() {
@@ -142,12 +155,8 @@ public class Project {
 		this.fundPrice = fundPrice;
 	}
 
-	public String getProjectStep() {
+	public int getProjectStep() {
 		return projectStep;
-	}
-
-	public void setProjectStep(String projectStep) {
-		this.projectStep = projectStep;
 	}
 
 	public int getSum() {

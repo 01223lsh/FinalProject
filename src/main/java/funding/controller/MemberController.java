@@ -197,7 +197,7 @@ public class MemberController {
 
 		} else {
 			logger.info("로그인 실패");
-//			session.invalidate();
+//				session.invalidate();
 
 			return "/member/login";
 		}
