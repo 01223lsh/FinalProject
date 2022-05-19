@@ -2,28 +2,27 @@ package funding.dto;
 
 public class Category {
 
-	private int CategoryNo;
-	private String CategoryName;
-
+	
+	private int categoryNo;			// 카테고리 번호
+	private String categoryName;	// 카테고리 이름
+	
 	@Override
 	public String toString() {
-		return "Category [CategoryNo=" + CategoryNo + ", CategoryName=" + CategoryName + "]";
+		return "Category [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
 	}
 
 	public int getCategoryNo() {
-		return CategoryNo;
+		return categoryNo;
 	}
-
 	public void setCategoryNo(int categoryNo) {
-		CategoryNo = categoryNo;
+		this.categoryNo = categoryNo;
 	}
-
 	public String getCategoryName() {
-		return CategoryName;
+		return categoryName;
 	}
-
 	public void setCategoryName(String categoryName) {
-		CategoryName = categoryName;
+		this.categoryName = categoryName;
 	}
 
+	
 }

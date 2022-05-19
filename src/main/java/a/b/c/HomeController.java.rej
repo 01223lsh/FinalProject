@@ -1,8 +1,0 @@
-diff a/src/main/java/a/b/c/HomeController.java b/src/main/java/a/b/c/HomeController.java	(rejected hunks)
-@@ -35,5 +35,5 @@
- 		
- 		return "home";
- 	}
--	///ffffff
-+
- }

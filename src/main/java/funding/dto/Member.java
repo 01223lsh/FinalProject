@@ -4,17 +4,18 @@ import java.util.Date;
 
 public class Member {
 
-	private int memberNo;
-	private String id;
-	private String pw;
-	private String name;
-	private String email;
-	private String nick;
-	private String phone;
-	private int grade;
-	private String naverlogin;
-	private String kakaologin;
-	private Date regDate;
+
+	private int memberNo;		// 회원번호
+	private String id;			// 아이디
+	private String pw;			// 비밀번호
+	private String name;		// 이름
+	private String email;		// 이메일
+	private String nick;		// 닉네임
+	private String phone;		// 전화번호
+	private int grade;			// 회원유형
+	private String naverlogin;	// 네이버 아이디
+	private String kakaologin;	// 카카오 아이디
+	private Date regDate;		// 가입날짜
 	
 	// 원석님이 필요해서 만든 필드값
 	private MemberSeller memberSeller;
@@ -25,6 +26,7 @@ public class Member {
 				+ ", nick=" + nick + ", phone=" + phone + ", grade=" + grade + ", naverLogin=" + naverlogin
 				+ ", kakaoLogin=" + kakaologin + ", regDate=" + regDate + ", memberSeller=" + memberSeller + "]";
 	}
+
 
 	public int getMemberNo() {
 		return memberNo;
@@ -90,6 +92,7 @@ public class Member {
 		this.grade = grade;
 	}
 
+
 	public String getNaverlogin() {
 		return naverlogin;
 	}
@@ -104,6 +107,7 @@ public class Member {
 
 	public void setKakaologin(String kakaologin) {
 		this.kakaologin = kakaologin;
+
 	}
 
 	public Date getRegDate() {
@@ -113,11 +117,11 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
-	// memberSeller 
+
 	public MemberSeller getMemberSeller() {
 		return memberSeller;
 	}
+
 
 	public void setMemberSeller(MemberSeller memberSeller) {
 		this.memberSeller = memberSeller;

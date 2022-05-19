@@ -1,6 +1,7 @@
 package funding.util;
 
 public class Paging {
+
 	private int curPage;	//현재 페이지 번호
 	
 	private int totalCount;	//총 게시글 수
@@ -30,17 +31,6 @@ public class Paging {
 		makePaging();
 	}
 	
-	
-//	public Paging(int totalCount, int curPage, String search) {
-//		setTotalCount(totalCount);
-//		setCurPage(curPage);
-//		setSearch(search);
-//		
-//		makePaging();
-//	}
-	
-	
-
 	//총 게시글 수, 현제 페이지번호를 입력하는 생성자
 	public Paging(int totalCount, int curPage) {
 		setTotalCount(totalCount);
@@ -50,6 +40,7 @@ public class Paging {
 	}
 
 	//총 게시글 수, 현제 페이지번호, 보여질 게시글 수를 입력하는 생성자
+
 	public Paging(int totalCount, int curPage, int listCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
@@ -58,7 +49,7 @@ public class Paging {
 		makePaging();
 	}
 	
-	//총 게시글 수, 현제 페이지번호, 보여질 게시글 수, 보여질 페이지 수를 입력하는 생성자
+
 	public Paging(int totalCount, int curPage, int listCount, int pageCount) {
 		setTotalCount(totalCount);
 		setCurPage(curPage);
@@ -69,8 +60,7 @@ public class Paging {
 	}
 	
 	
-	
-	
+
 	
 	//페이징 정보를 생성하는 메소드
 	private void makePaging() {
@@ -100,7 +90,6 @@ public class Paging {
 		endNo = curPage * listCount;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
@@ -108,6 +97,10 @@ public class Paging {
 				+ ", startNo=" + startNo + ", endNo=" + endNo + ", search=" + search + ", select=" + select + "]";
 
 	}
+	
+
+
+	
 
 	public int getCurPage() {
 		return curPage;
@@ -189,7 +182,6 @@ public class Paging {
 		this.search = search;
 	}
 
-
 	public String getSelect() {
 		return select;
 	}
@@ -197,6 +189,5 @@ public class Paging {
 	public void setSelect(String select) {
 		this.select = select;
 	}
-
 	
 }
