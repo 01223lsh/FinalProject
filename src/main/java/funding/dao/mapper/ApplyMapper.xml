@@ -60,7 +60,7 @@
         WHERE project_no = #{projectNo}
 	</select>
 
-	<insert id="productUpdate" parameterType="funding.dto.Project">
+	<update id="productUpdate" parameterType="funding.dto.Project">
 		UPDATE project
            SET category_no = #{categoryNo}
               , project_title = #{projectTitle}
@@ -71,30 +71,42 @@
        	      </if> 
 
         WHERE project_no = #{projectNo} 
-	</insert>
+	</update>
 	
-	<insert id="planUpdate" parameterType="funding.dto.Project">
+	<update id="planUpdate" parameterType="funding.dto.Project">
 		UPDATE project
            SET project_price = #{projectPrice}
               , open_date = #{openDate}
               , close_date = #{closeDate}
               , delivery_date = #{deliveryDate}
         WHERE project_no = #{projectNo}
-	</insert>
+	</update>
 	
-	<insert id="contentUpdate" parameterType="funding.dto.Project">
+	<update id="contentUpdate" parameterType="funding.dto.Project">
 		UPDATE project
            SET project_content = #{projectContent}
               , budget_plan = #{budgetPlan}
               , schedule_plan = #{schedulePlan}
         WHERE project_no = #{projectNo}
-	</insert>
+	</update>
 	
-	<select id="rewardSelect" resultMap="Reward" parameterType="funding.dto.Project">
+	<select id="rewardSelect" resultMap="Reward" parameterType="int">
 		SELECT * from reward
-        WHERE project_no = #{projectNo}
+         WHERE project_no = #{projectNo}
+           AND reward_state = 0
 	</select>
 	
+	<insert id="rewardInsert" parameterType="funding.dto.Reward">
+		<selectKey order="BEFORE" resultType="int" keyProperty="rewardNo">
+			SELECT reward_seq.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO reward(reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro) 
+		VALUES( #{rewardNo}, #{projectNo}, #{rewardPrice}, #{rewardAmount}, #{rewardName}, #{rewardIntro} )
+	</insert>
 	
-
+<!-- 	<select id=""> -->
+		
+<!-- 	</select> -->
+	
+	
 </mapper>	

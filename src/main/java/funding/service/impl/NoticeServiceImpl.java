@@ -3,6 +3,7 @@ package funding.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import funding.dao.face.NoticeDao;
 import funding.dto.Notice;
@@ -10,6 +11,7 @@ import funding.dto.NoticeFile;
 import funding.service.face.NoticeService;
 import funding.util.Paging;
 
+@Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired NoticeDao noticeDao;

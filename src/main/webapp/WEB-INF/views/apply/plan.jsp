@@ -538,7 +538,7 @@ $(function() {
 		let commission = Math.floor($("#projectPrice").val() * 0.05) + "";			
 		
 		//컴마 찍어주는 함수
-		$("#projectPrice").val($("#projectPrice").val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+		$("#projectPrice").val($("#projectPrice").val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,').replace(/(^0+)/, ""));
 		price = price.toString().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		commission = commission.toString().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		
@@ -558,7 +558,7 @@ $(function() {
 		commission = Math.floor($("#projectPrice").val() * 0.05) + "";			
 		
 		//컴마 찍어주는 함수
-		$(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+		$(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,').replace(/(^0+)/, ""));
 		price = price.toString().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		commission = commission.toString().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		

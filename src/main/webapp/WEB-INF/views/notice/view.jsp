@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,9 @@ function noticeDownload(fileNo){
 <div class="noticeView">
 <div style="height:20px;">
 	<div class="noticeTitle" >${notice.title}</div>
-
-	<div class="noticeDate" style="color :#ccc;">작성일자 : ${notice.date} | 작성자  : 관리자</div>
+	<fmt:formatDate value = "${notice.regDate }" pattern = "yyyy-MM-dd HH:mm:ss" var = "noticeDateView"/>
+	
+	<div class="noticeDate" style="color :#ccc;">작성일자 : ${noticeDateView} | 작성자  : 관리자</div>
 </div>
 
 
@@ -71,7 +73,6 @@ function noticeDownload(fileNo){
 	<c:if test="${not empty i.fileOrigin}"> 
 	<img src="/upload/${i.fileStorage}" class="noticeimg"> 
 	
-	<a onclick="noticeDownload(${i.fileNo})">${i.fileOrigin}</a><br>
 	
 	</c:if>
 	</c:forEach> 
@@ -79,8 +80,6 @@ function noticeDownload(fileNo){
 </div>
 <div class="text-center">
 <button onclick="noticeManagement()">목록</button>
-<button onclick="noticeUpdate(${notice.noticeNo})">수정</button>
-<button onclick="noticeDelete(${notice.noticeNo})">삭제</button>
 </div>
 
 </body>

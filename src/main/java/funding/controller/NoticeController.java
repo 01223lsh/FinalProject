@@ -7,14 +7,17 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import funding.dto.Notice;
 import funding.dto.NoticeFile;
 import funding.service.face.NoticeService;
 import funding.util.Paging;
 
+@Controller
 public class NoticeController {
 	
 	@Autowired NoticeService noticeService;
@@ -40,6 +43,19 @@ public class NoticeController {
 		model.addAttribute("upload",context.getRealPath("upload"));
 		model.addAttribute("listfile",listfile);
 		model.addAttribute("notice",notice);
+	}
+	
+	@RequestMapping(value="/layout/paging", method = RequestMethod.GET)
+	public String memberpaging(Paging paging,String str,Model model){	
+		 if(str.equals("qna")) {
+			return "redirect:/admin/qna?curPage="+paging.getCurPage();
+		}else if(str.equals("notice")) {
+			logger.info("notice");
+			return "redirect:/notice/list?curPage="+paging.getCurPage();
+		}else {
+			return "redirect:/admin/order?curPage="+paging.getCurPage();
+		}
+		
 	}
 	
 //	@RequestMapping(value="/admin/noticeWrite",method = RequestMethod.POST)

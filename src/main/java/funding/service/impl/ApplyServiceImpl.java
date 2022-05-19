@@ -195,5 +195,12 @@ public class ApplyServiceImpl implements ApplyService{
 		return applyDao.rewardSelect(projectNo);
 	}
 	
+	@Override
+	public void rewardInsert(Reward reward) {
+		
+		//리워드 정보 입력하기
+		applyDao.rewardInsert(reward);
+	}
+	
 	
 }

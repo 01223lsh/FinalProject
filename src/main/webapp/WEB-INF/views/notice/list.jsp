@@ -2,19 +2,43 @@
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
+
+function noticeManagement(){
+	$.ajax({
+		type : "get"
+		,url : "/notice/list"
+		,data : "str=notice"
+		,dataType : "html"
+		,success : function(res){
+			console.log("공지사항 뷰 성공"),
+			$("#resultLayout").html(res)
+			
+		}
+		,error : function(){
+			console.log("공지사항 뷰 실패")
+		}
+	})
+}
+
 function noticeView(noticeNo){
 	$.ajax({
 		type : "post"
-		,url : "/notice/View"
+		,url : "/notice/view"
 		,data : "noticeNo="+noticeNo
 		,dataType  :"html"
 		,success : function(res){
@@ -148,6 +172,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<div id="resultLayout">
 <h3>공지사항</h3>
 <hr>
 
@@ -164,15 +189,15 @@ $(document).ready(function(){
 	<td>${i.noticeNo }</td>
 	<td><a onclick="noticeView(${i.noticeNo})">${i.title }</a></td>
 	<td>관리자</td>
-	<td>${i.date}</td>
+	<fmt:formatDate value = "${i.regDate }" pattern = "yyyy-MM-dd HH:mm:ss" var = "noticeDateView"/>
+	<td>${noticeDateView}</td>
 	
 </tr>
-
 </c:forEach>
+</div>
 
 
 </table>
-<button onclick="noticeWrite()">작성</button>
 </body>
 </html>
 <%@ include file="../layout/paging.jsp" %>

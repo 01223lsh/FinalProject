@@ -42,8 +42,8 @@ public class ApplyController {
 		logger.info("/apply/category [GET]");
 	}
 
-	@RequestMapping(value = "/category", method = RequestMethod.POST)
 	
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
 	public @ResponseBody String categoryInsert(@RequestBody Project project, HttpSession session, Model model) {
 		logger.info("/apply/category [POST]");
 		
@@ -233,6 +233,8 @@ public class ApplyController {
 		//리워드 정보 불러옴
 		List<Reward> rewardList = applyService.rewardSelect(projectNo);
 		
+		System.out.println(rewardList);
+		
 		//모델값 저장
 		model.addAttribute("projectInfo", projectInfo);
 		
@@ -243,8 +245,18 @@ public class ApplyController {
 	
 	//리워드 입력
 	@RequestMapping(value = "/reward", method = RequestMethod.POST)
-	public void rewardInsert(Reward reward) {
+	public void rewardInsert(@RequestBody Reward reward, Model model) {
 		logger.info("/apply/reward [POST]");
+		
+		System.out.println(reward);
+		
+		//계획 정보 입력 
+		applyService.rewardInsert(reward);
+		
+//		List<Reward> rewardList = applyService.rewardSelect(projectNo);
+		
+		//모델값 전달
+//		model.addAttribute("rewardInfo", rewardInfo);
 	}
 	
 	//선택한 리워드 삭제

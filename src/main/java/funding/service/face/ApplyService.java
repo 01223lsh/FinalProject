@@ -61,6 +61,13 @@ public interface ApplyService {
 	 */
 	public String fileUpload(MultipartFile file);
 	
+	/**
+	 * 리워드 정보 입력
+	 * 
+	 * @param reward - 입력한 리워드 정보
+	 */
+	public void rewardInsert(Reward reward);
+	
 	
 
 }

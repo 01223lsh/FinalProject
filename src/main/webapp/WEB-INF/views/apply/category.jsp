@@ -36,14 +36,20 @@ color:#fff;
 
 .apply-back{
     display: block;
-    width: 438px;
+    width: 600px;
     height: 100%;
     display:flex; 
     position: fixed;
 /*     background-image: url(https://tumblbug-assets.s3-ap-northeast-1.amazonaws.com/static_assets/editor-start-image-03.jpg); */
 /* 	background-image: user */
 /*     background: url(https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/30034/images/YIHaFaIQeWQ5u7uk4u2g_Montessori-Rhyming-Objects-Set.png) 0% 0% / cover no-repeat rgb(237, 229, 227);  */
-    background: url(https://tumblbug-assets.s3-ap-northeast-1.amazonaws.com/static_assets/editor-start-image-03.jpg) 0% 0% / cover no-repeat rgb(237, 229, 227); 
+    background: url(https://source.unsplash.com/featured/?{object}) 0% 0% / cover no-repeat rgb(237, 229, 227);  
+/*     background: url(https://tumblbug-assets.s3-ap-northeast-1.amazonaws.com/static_assets/editor-start-image-03.jpg) 0% 0% / cover no-repeat rgb(237, 229, 227);  */
+}
+
+@media screen and (max-width: 1000px) { 
+	.apply-back { display: none; } 
+	.right-content { left: 70px !important;}
 }
 
 
@@ -53,7 +59,7 @@ color:#fff;
     left: 5%;
     top:100px;  
 /*     overflow:auto; */
-	width:550x;
+	width:550\x;
 /* 	margin: 0 auto; */
 /* 	text-align: justify; */
 }
@@ -70,7 +76,7 @@ color:#fff;
 .right-content{
 /* 	flex:1; */
     position: relative; 
-    left: 438px;
+    left: 610px;
 	width:auto;
 }
 
@@ -243,7 +249,7 @@ $(function() {
 					
 					<div class="item-intro-text">
 						<textarea placeholder="프로젝트 요약을 입력해주세요." id="projectIntro" name="projectIntro" maxlength="200"></textarea>		
-						<span id=item-intro-limit>최소 10자이상 입력해주세요.</span>
+						<span id="item-intro-limit">최소 10자이상 입력해주세요.</span>
 						<span id="textTotal">/ 50자</span>		
 						<span id="textCount">0자</span>
 					</div>

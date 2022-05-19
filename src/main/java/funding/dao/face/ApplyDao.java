@@ -37,13 +37,6 @@ public interface ApplyDao {
 	 */
 	public void productUpdate(Project project);
 
-	/**
-	 * 입력했던 리워드 정보 불러오기
-	 * 
-	 * @param project
-	 * @return list - 작성하던 리워드 정보
-	 */
-	public List<Reward> rewardSelect(int projectNo);
 
 	/**
 	 * 프로젝트에 저장되있던 대표사진 삭제
@@ -65,7 +58,27 @@ public interface ApplyDao {
 	 * @param project
 	 */
 	public void contentUpdate(Project project);
-
+	
+	/**
+	 * 입력했던 리워드 정보 불러오기
+	 * 
+	 * @param project
+	 * @return list - 작성하던 리워드 정보
+	 */
+	public List<Reward> rewardSelect(int projectNo);
+	
+    /**
+     * 리워드 정보 저장
+     * @param reward 등록할 리워드 정보가 담긴 DTO
+     */
+    public void rewardInsert(Reward reward);
+	
+    /**
+     * 선택한 리워드 삭제
+     * @param rewardNo 삭제할 리워드 식별값
+     * @return 삭제 결과
+     */
+    public void rewardDelete(int rewardNo);
 
 	
 }

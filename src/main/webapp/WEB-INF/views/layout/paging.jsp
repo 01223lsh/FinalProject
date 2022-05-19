@@ -3,7 +3,7 @@
     
 
 <div class="text-center">
-
+<!-- <nav aria-label="Page navigation example"> -->
 <ul class="pagination">
 
 <%-- 첫 페이지로 이동 --%> 
@@ -98,5 +98,5 @@
 </c:if>
 	
 </ul>
-
-</div>>
+<!-- </nav> -->
+</div>
