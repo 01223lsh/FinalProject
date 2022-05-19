@@ -150,7 +150,7 @@
 	<hr>
 	
 	<div class="memberInfo">
-		세션정보 : 회원 정보 들어가는 칸
+		세션정보 : ${member}
 	</div>
 	
 	<hr>
@@ -158,6 +158,9 @@
 		<input type="hidden" id="projectNo" name="projectNo" value="${project.projectNo}">
 		<input type="hidden" id="projectTitle" value="${project.projectTitle}">
 		<input type="hidden" id="orderNo" name="orderNo" value="${order.orderNo }">
+		<input type="hidden" id="memberName" value="${member.name}">
+		<input type="hidden" id="memberEmail" value="${member.email}">
+		<input type="hidden" id="memberPhone" value="${member.phone}">
 		
 		<div class="addressInfo">
 			<input type="text" class="dForm" name="postalCode" id="sample6_postcode" placeholder="우편번호">

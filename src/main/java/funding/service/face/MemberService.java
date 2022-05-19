@@ -208,5 +208,14 @@ public interface MemberService {
 	 * @return DB에 등록된 계정 정보
 	 */
 	public List<Member> getinfo(JSONObject naverInfo);
+	
+	/**
+	 * memberNo가 존재하는 DTO객체로 멤버 정보를 조회하는 메소드
+	 * made by 정영재
+	 * 
+	 * @param memberNo
+	 * @return
+	 */
+	public Member getUserInfoByMemberNo(int memberNo);
 
 }
