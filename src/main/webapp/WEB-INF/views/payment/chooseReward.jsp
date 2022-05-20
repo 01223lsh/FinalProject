@@ -133,7 +133,6 @@ function sumPrice() {
 .rewardLeft {
 	width: 10%;
 	text-align: center;
-	vertical-align: center;
 }
 </style>
 
