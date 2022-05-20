@@ -13,6 +13,7 @@
 
 var projectStep =${step};
 function categorya(categoryNo){
+	
 	  var btn = document.getElementsByClassName("btncate");
 
       function handleClick(event) {
@@ -47,7 +48,9 @@ function categorya(categoryNo){
 		,data : "categoryNo="+categoryNo+"&projectStep="+projectStep
 		,dataType : "html"
 		,success : function(res){
+			console.log(this);
 			$("#resultLayout").html(res)
+			$(".category"+categoryNo).css("background-color","#b3b1b2");
 		},error : function(){
 			console.log("프로젝트 카테고리 error");
 		}
@@ -62,6 +65,7 @@ function step(stepe){
 		,success : function(res){
 			console.log("등급별로");
 			$("#resultLayout").html(res)
+			$(".category"+categoryNo).css("background-color","#b3b1b2");
 		}
 		,error : function(res){
 			console.log("오류")
@@ -77,6 +81,7 @@ var endPage = ${paging.endPage};
 var str = "project";
 
 $(document).ready(function(){
+
 	for(var i = startPage; i <= endPage; i++){
 		(function(i){
 			$(".paging"+i).click(function(){	
@@ -88,6 +93,7 @@ $(document).ready(function(){
 					,success : function(res){
 						console.log("성공");
 						$("#resultLayout").html(res)
+						
 					},
 					error : function(){
 						console.log("실패");
@@ -279,7 +285,6 @@ $(document).ready(function(){
 	float: left;
 }
 .btncate {
-        border: 1px solid #47423f;
         background-color : #47423f;
         color : white;
         width: 100px;
@@ -289,13 +294,17 @@ $(document).ready(function(){
         justify-content: center;
 }
 .btncate:hover {
-        color : #527578;
+        color : white;
         background-color: #b3b1b2;
 }
 
 table.test{width: 100%; width: 1000px; margin:auto;}
 table.test td{height: 30px; padding : 10px;}
 
+.CategoryNo>a{
+	border-radius: 10px;
+	margin: auto 5px;
+}
 </style>
 </head>
 
@@ -305,26 +314,28 @@ table.test td{height: 30px; padding : 10px;}
 <br>
 <div class="row container py-3 text-center0" id="center">
 	<div class="col text-center" id="ing">
-		<a onclick="step(3)"><i class="fa-regular fa-circle-check fa-5x"></i></a>
+		<a onclick="step(3)"><i class="fa-regular fa-circle-check fa-5x step(3)"></i></a>
 		<br>
 		<span>진행중인 펀딩</span>
 	</div>
 	<div class="col text-center" id="end">
-		<a onclick="step(4)"><i class="fa-solid fa-sack-xmark fa-5x"></i></a>
+		<a onclick="step(4)"><i class="fa-solid fa-sack-xmark fa-5x step(4)"></i></a>
 		<br>
 		<span>종료된 펀딩</span>
 	</div>
 	<div class="col text-center" id="All">
-		<a onclick="step(5)"><i class="fa-solid fa-scale-balanced fa-5x"></i></a>
+		<a onclick="step(5)"><i class="fa-solid fa-scale-balanced fa-5x step(5)"></i></a>
 		<br>
 		<span>전체</span>
 	</div>
 	
 </div>
-<div class="text-center" style="width:805px; margin : 50px auto;">
+<div class="CategoryNo" style="width:880px;; margin : 50px auto;">
 
 <c:forEach items="${catelist }" var="c">
-<a onclick="categorya(${c.categoryNo})" class="btncate category">${c.categoryName}</a>
+
+<a onclick="categorya(${c.categoryNo})" class="btncate category category${c.categoryNo }" >${c.categoryName}</a>
+
 </c:forEach>
 </div>
 <div style="clear:both"></div>
@@ -345,8 +356,8 @@ table.test td{height: 30px; padding : 10px;}
     justify-content: space-between;">
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
       
-        <div class="card shadow-sm" style=" border: 1px solid;">
-          <img src="${i.projectImage}" style="min-height: 250px;">
+        <div class="card shadow-sm" style=" border: 1px solid; max-width: 250px; max-height:332px; padding: 5px;">
+          <img src="${i.projectImage}" style="min-height: 250px; width: 100%; ">
           <div class="card-body">
             <strong>${i.projectTitle}</strong>
             <c:if test="${i.projectStep eq 4}">

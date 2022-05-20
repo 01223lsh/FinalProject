@@ -230,7 +230,7 @@ td {
 	</div>
 </div>
 <br>
-<table style="margin: auto; width: 100%;  border-radius: 10px;" >
+<table style="margin: auto; width: 100%;  border-radius: 10px; background-color: white;" >
 
 	<tr style="border-bottom: 2px #DDD solid;">
 		<th style="width: 5%;">글번호</th>

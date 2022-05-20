@@ -81,7 +81,7 @@
         <h2>대표사진</h2>
         <hr>
         <p>
-            <img src="${projectInfo.projectImage}">
+            <img src="${project.projectImage}">
         </p>
     </div>
     <div class="p-content-section">

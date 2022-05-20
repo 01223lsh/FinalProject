@@ -355,7 +355,7 @@ h1{ font-size:18px;  padding:20px; }
  	float: left;
  	margin: 0.5% 0.5%;
  	
-    display: flex;
+/*     display: flex; */
     background-color: white;
  	
 }
@@ -431,17 +431,23 @@ border-radius: 9px;
 .noticeTabletr:hover {
 	background-color : #DCDCDC;
 }
-
+a {
+  text-decoration-line: none;
+}
+a:hover {
+	  text-decoration-line: none;
+}
 </style>
 
 
 </head>
 <body >
 
-<div id="managerLayout" style="height:100%">
+<div id="managerLayout" style="height:100%;margin-top: 0px;">
 <div  id="menu" >
+
 <nav >
-   <h1  ><a href="" style="color:#fff;">관리자 페이지</a> </h1>
+   <a href="" style="color:#fff; font-size: 18px;">관리자 페이지</a>
     <ul class="menu">
         <li><a onclick="memberManagement()"><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;회원관리</a></li>
         <li><a onclick="projectManagement()"><i class="fa-solid fa-briefcase"></i>&nbsp;&nbsp;프로젝트 목록</a></li>
@@ -686,7 +692,7 @@ border-radius: 9px;
 						<c:forEach items="${notice}" var='i'>
 						<tr class="noticeTabletr" onclick="MnoticeView(${i.noticeNo})">
 						
-							<td>${i.noticeNo }</td><td>${i.title}</td><td style="font-size: 12px;">${i.regDate }</td>
+							<td>${i.noticeNo }</td><td>${i.title}</td><td style="font-size: 12px;"><fmt:formatDate value="${i.regDate}" pattern="yyyy-MM-dd" /></td>
 						</tr>
 						</c:forEach>
 					</table>
