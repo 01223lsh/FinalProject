@@ -369,7 +369,7 @@ $(document).ready(function(){
 		 <section class="content">
 		        <div class="box bg-1">
 		          <button class="button button--saqui button--round-l button--text-thick" data-text="일반 회원가입" onClick="location.href='/member/join_step2_consumer'">일반 회원가입</button>
-		          <button class="button button--saqui button--round-l button--text-thick" data-text="판매자 회원가입">판매자 회원가입</button>
+		          <button class="button button--saqui button--round-l button--text-thick" data-text="판매자 회원가입" id="certify">판매자 회원가입</button>
 		        </div>
 		</section>
 	</div>

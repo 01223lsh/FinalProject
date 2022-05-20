@@ -177,9 +177,16 @@ public interface MemberDao {
 	public int comparePw(@Param("pw")String pw, @Param("id")String id);
 	
 	/**
+	 * 회원 탈퇴 - 생성된 주문이력 있는지 확인
+	 * @param memberNo - 회원번호
+	 * @return 행 조회해서 0보다 크면 주문이력이 존재하는 것이라서 회원 탈퇴 안됨
+	 */
+	public int selectCntByOrder(int memberNo);
+
+	/**
 	 * 회원 탈퇴 - 생성된 프로젝트 있는지 확인
 	 * @param memberNo - 회원번호
-	 * @return 행 조회해서 0보다 크면 프로젝트가 존재하는 것이라서 회원 탈퇴 안됌
+	 * @return 행 조회해서 0보다 크면 프로젝트가 존재하는 것이라서 회원 탈퇴 안됨
 	 */
 	public int selectCntByProject(int memberNo);
 
@@ -209,6 +216,13 @@ public interface MemberDao {
 	 * @return DB에 등록된 해당 유저의 정보
 	 */
 	public List<Member> selectNaverInfo(JSONObject naverInfo);
+
+	/** 중복된 Email 인지 확인
+	 * 
+	 * @param naverEmail - 네이버 계정 이메일
+	 * @return 행 수로 반환
+	 */
+	public int chkNaverEmail(String naverEmail);
 
 
 

@@ -277,6 +277,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	
 	//카카오 탈퇴하기
+	/*
 	@Override
 	public boolean delete(int memberNo) {
 		logger.info("memberNo : {}", memberNo);
@@ -292,6 +293,29 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 		}
 	}
+	*/
+	
+	@Override
+	public boolean delete(int memberNo) {
+		logger.info("memberNo : {}", memberNo);
+		
+		if( memberDao.selectCntByOrder(memberNo) > 0 ) {
+			logger.info("주문 이력 있음 -> 탈퇴 불가");
+			return false;
+			
+		} else if(memberDao.selectCntByProject(memberNo) > 0) {
+			logger.info("프로젝트 이력 있음 -> 탈퇴불가");
+			return false;
+		} else {
+			memberDao.updateKakaoUser(memberNo);
+			return true;
+		}
+	}
+	
+	
+	
+	
+	
 	
 	//카카오 계정 최초 로그인 확인 유무
 	@Override
@@ -435,11 +459,11 @@ public class MemberServiceImpl implements MemberService {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
-		String hostSMTPid = "id";
-		String hostSMTPpwd = "pw";
+		String hostSMTPid = "finaltest2221@gmail.com";
+		String hostSMTPpwd = "final2221@@";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "id";
+		String fromEmail = "finaltest2221@gmail.com";
 		String fromName = "kh final";
 		String subject = "";
 		String msg = "";
@@ -506,7 +530,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean chkEmailbynaver(String naverEmail) {
 		
 		//중복된 Email 인지 확인
-		int emailChk = memberDao.selectByEmail(naverEmail);
+		int emailChk = memberDao.chkNaverEmail(naverEmail);
 		
 		if( emailChk > 0 )	return true;
 		return false;
