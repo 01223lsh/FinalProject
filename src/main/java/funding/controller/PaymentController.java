@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import funding.dto.Member;
 import funding.dto.Order;
 import funding.dto.Project;
 import funding.dto.Reward;
+import funding.service.face.MemberService;
 import funding.service.face.PaymentService;
 
 @Controller
@@ -28,25 +32,11 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@RequestMapping(value = "/payment/temporary")
-	public void projectView(Model model) {
-		logger.info("/payment/temporary");
-		
-		//병합 때 넘어온 프로젝트 번호를 통해 해당되는 reward만 조회한다. 
-		//: : : 임시 : : :
-		int projectNo = 4;
-		
-		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo);
-//		for (Reward r : rewardList) {
-//			logger.info("RewardList : {}", r);
-//		}
-		
-		//모델값 전송
-		model.addAttribute("rewardList", rewardList);
-	}
+	@Autowired
+	MemberService memberService;
 	
 	@GetMapping(value = "/payment/chooseReward")
-	public void chooseReward(Model model, Reward reward, int projectNo) {
+	public void chooseReward(HttpSession session, Model model, Reward reward, int projectNo) {
 		
 		logger.info("/payment/chooseReward [GET]");
 		
@@ -61,11 +51,17 @@ public class PaymentController {
 		//전달받은 rewardNo 확인
 		logger.info("전송된 RewardNo : {}", reward.getRewardNo());
 		
+		//로그인 되어 있는 세션 정보 불러오기
+		int memberNo = (int) session.getAttribute("memberNo");
+		
+		//세션정보 확인
+//		logger.info("세션 memberNo : {}", memberNo);
 		
 		//모델값 전송
 		model.addAttribute("rewardNo", reward.getRewardNo());
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("memberNo", memberNo);
 	}
 	
 	@PostMapping(value = "/payment/chooseReward")
@@ -73,8 +69,6 @@ public class PaymentController {
 			, @RequestParam("rewardNo") int[] rewardNoArr
 			, @RequestParam("rewardCount") int[] rewardCountArr
 			, Order order
-//			, int addtionalFunding
-//			, int totalPrice
 			, int projectNo) {
 		logger.info("/payment/chooseRewardProc [POST]");
 		
@@ -105,12 +99,10 @@ public class PaymentController {
 	}
 	
 	@GetMapping(value = "/payment/order")
-	public void paymentOrder(Model model, Order order, Project project) {
+	public void paymentOrder(HttpSession session, Model model, Order order, Project project) {
 		
 		logger.info("/payment/order [GET]");
-		
 		logger.info("project 정보 : {}", project);
-		
 		logger.info("order 정보 : {}", order);
 		
 		//주문 리워드에 대한 개수
@@ -128,10 +120,15 @@ public class PaymentController {
 		project = paymentService.checkProjectTitle(project);
 		logger.info("checkProjectTitle 메소드 이후 project : {}", project);
 		
+		//세션에서의 멤버번호를 통해 멤버 정보를 조회
+		int memberNo = (int) session.getAttribute("memberNo");
+		Member member = memberService.getUserInfoByMemberNo(memberNo);
+		
 		//추가금, 총금액 모델값 전송
 		model.addAttribute("order", order);
 		model.addAttribute("rewardOrderList", rewardOrderList);
 		model.addAttribute("project", project);
+		model.addAttribute("member", member);
 	}
 	
 	
@@ -151,7 +148,7 @@ public class PaymentController {
 		paymentService.changeStatus(Integer.parseInt(map.get("orderNo")));
 		
 		//결제 완료 후 어떤 URL (주문번호와 프로젝트 번호 전달)이동할 지 importPayment.jsp에서 볼 수 있다.
-		//location.href="/payment/result?orderNo=" + orderNo + "&projectNo=" + projectNo;
+		//location.href="/payment/result?orderNo=" + orderNo + "&projectNo=" + projectNo + "&memberNo=" + memberNo";
 	}
 	
 	@RequestMapping(value = "/payment/result")
