@@ -67,7 +67,7 @@ textarea::placeholder {
 
 .submit_button {
 	font-weight: 500;
-    background: rgb(248, 100, 83);
+    background: #39AEA9;
     align-items: center;
     display: inline-flex;
     width: 112px;
