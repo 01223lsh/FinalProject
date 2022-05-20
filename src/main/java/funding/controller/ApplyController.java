@@ -260,12 +260,14 @@ public class ApplyController {
 	}
 	
 	//선택한 리워드 삭제
-	@RequestMapping(value = "/rewardDelete")
-	public String rewardDelete(Reward reward) {
+	@RequestMapping(value = "/rewardDelete" )
+	public String rewardDelete(int rewardNo) {
 		logger.info("/apply/rewardDelete");
-		
+	
+		System.out.println(rewardNo);
+
 		// rewardNo를 가져와서 일치하는 데이터 삭제 
-		
+		applyService.rewardDelete(rewardNo);
 		
 		return "redirect:/apply/reward";
 	}

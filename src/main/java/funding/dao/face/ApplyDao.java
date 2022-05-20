@@ -75,7 +75,8 @@ public interface ApplyDao {
 	
     /**
      * 선택한 리워드 삭제
-     * @param rewardNo 삭제할 리워드 식별값
+     * 
+     * @param rewardNo 삭제할 리워드 번호
      * @return 삭제 결과
      */
     public void rewardDelete(int rewardNo);

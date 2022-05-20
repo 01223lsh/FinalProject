@@ -202,5 +202,12 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.rewardInsert(reward);
 	}
 	
+	@Override
+	public void rewardDelete(int rewardNo) {
+		
+		//리워드 삭제하기
+		applyDao.rewardDelete(rewardNo);
+	}
+	
 	
 }

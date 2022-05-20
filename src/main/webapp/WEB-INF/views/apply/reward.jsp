@@ -850,7 +850,7 @@ function rewardIntroAdd() {
 							</div>
 						</section>		
 						<div class="createItem_lastButton">
-							<button class="lastSubmitButton">
+							<button class="lastSubmitButton" onclick="applySubmit()">
 								<span>저장</span>
 							</button>
 						</div>				
