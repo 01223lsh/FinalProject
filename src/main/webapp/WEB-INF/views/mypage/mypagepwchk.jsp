@@ -19,7 +19,7 @@ input {
 	width: 220px;
 }
 
-button {
+#OkBtn {
 
 	border-radius: 5px;
 	background-color : #39AEA9;
@@ -59,6 +59,10 @@ p {
 	background-color: #557B83;
 	transition: background-color 0.2s;
 }
+
+a:visited {
+	color: #000;
+}
 </style>
 
 
@@ -88,7 +92,7 @@ p {
 </div> <!-- .pwform -->
 </div><!-- .all -->
 </div><!-- right -->
-</div><!-- .container end -->
+<!-- </div>.container end -->
 
 <br><br><br><br><br><br>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
