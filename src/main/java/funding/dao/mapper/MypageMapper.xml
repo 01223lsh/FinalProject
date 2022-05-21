@@ -350,6 +350,26 @@
 	
 	</select>
 
+	<select id="selectCntDeliveryByOrderNo" parameterType="funding.dto.JoinFunding" resultType="int" >
+		select count(*) cnt
+		from delivery
+		where order_no = #{orderNo}
+	</select>
+
+	<select id="selectjoinfundBymemberNoBefore" parameterType="funding.dto.JoinFunding" resultType="hashmap">
+		select  *
+		from reward r, reward_order ro, order_tb o, project p, category c
+		where p.project_no = r.project_no and
+		    r.reward_no = ro.reward_no and
+		    ro.order_no = o.order_no and
+		   c.category_no = p.category_no
+		  
+		   and o.member_no = #{memberNo}
+		   and o.order_no = #{orderNo}
 	
+	</select>
+
+
+
 	
     </mapper>

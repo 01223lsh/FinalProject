@@ -249,7 +249,15 @@ public class MypageServiceImpl implements MypageService{
 //		return mypageDao.selectCntKSocialById(member);
 //	}
 	
+	@Override
+	public int getChkDelivery(JoinFunding joinFunding) {
+		return mypageDao.selectCntDeliveryByOrderNo(joinFunding);
+	}
 	
+	@Override
+	public List<HashMap<String, Object>> joinfundviewBefore(JoinFunding joinFunding) {
+		return mypageDao.selectjoinfundBymemberNoBefore(joinFunding);
+	}
 	
 	
 	
