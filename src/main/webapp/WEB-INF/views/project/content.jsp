@@ -4,9 +4,7 @@
     
 
 <div>
-<b>- 프로젝트 소개</b>
-<br>
-<br>
+<b>- 프로젝트 소개</b><br><br>
+<div>
 ${p.projectContent }
-</div>
-<br><br><br><br><br><br><br><br>
+</div></div>

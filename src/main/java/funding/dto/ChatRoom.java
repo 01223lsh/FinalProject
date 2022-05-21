@@ -1,16 +1,31 @@
 package funding.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@ToString
 public class ChatRoom {
 
-	private String chatroomId; // 채팅방 번호
-	private String memberNo; // 메세지 받는 유저 번호
+	private int chatroomId; // 채팅방 번호
+	private int projectNo; // 프로젝트 넘버
+
+	@Override
+	public String toString() {
+		return "ChatRoom [chatroomId=" + chatroomId + ", projectNo=" + projectNo + "]";
+	}
+
+	public int getChatroomId() {
+		return chatroomId;
+	}
+
+	public void setChatroomId(int chatroomId) {
+		this.chatroomId = chatroomId;
+	}
+
+	public int getProjectNo() {
+		return projectNo;
+	}
+
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
+
 //	private String chatroomName; // 프로젝트 제목
 
 //	public static ChatRoom create(String name) {

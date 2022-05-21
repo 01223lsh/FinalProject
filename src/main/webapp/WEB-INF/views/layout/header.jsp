@@ -58,9 +58,9 @@
       
       <style type="text/css">
       
-      a:link { color: black; text-decoration: none;} 
-      a:visited { color: black; text-decoration: none;} 
-      a:hover { color: black; text-decoration: none;}
+      a:link { color: white; text-decoration: none;} 
+      a:visited { color: white; text-decoration: none;} 
+      a:hover { color: white; text-decoration: none;}
       
       
       
@@ -77,14 +77,22 @@
 /*       		font-family: Georgia, "Malgun Gothic", serif; */
 		    padding: 0.32rem 0.6rem!important;
 		    font-size: 12px!important;
+		     border: 0;
+		     font-weight : bold;
       	}
       	
-      	.navbar-brand_h:hover {
+      	.nav-login_h button:hover {
+			background-color: #39AEA9 !important;
+			font-weight : bold;
+			color: #557B83 !important;
+		}
+      	
+      	/* .navbar-brand_h:hover {
 			color: #646b72 !important;
-      	}
+      	} */
       	
       .navbar-brand_h {
-      		 color: black;
+      		 color: white;
 			 font-size: 12pt;
 			 font-weight : bold;
       	
@@ -93,14 +101,16 @@
 		.nav-item_h a {
 			 font-size: 12pt;
 			 font-weight : bold;
+			 color: #ffffff;
+			 
 		}
 
-		.nav-item_h a:hover {
-			color: #646b72 !important;
-		} 
+		 .nav-item_h a:hover {
+			color: #557B83 !important;
+		}  
 		
 		.nav-link {
-			color: black;
+			color: white;
 			font-size: 15pt;
 		}
 		
@@ -110,6 +120,14 @@
 			margin:10px;
 			 padding: 0.32rem 0.6rem!important;
 			 font-size: 12px!important;
+			 border: 0;
+			 color: #ffffff;
+			 font-weight : bold;
+		}
+		
+		.d-flex button:hover {
+			background-color: #39AEA9 !important;
+			color: #557B83 !important;
 		}
 		
 		.d-flex input {
@@ -121,11 +139,29 @@
 		
 		.container {
 	 		flex-direction: row-reverse; 
+	 		 font-family: 'IBM Plex Sans KR', sans-serif; 
 		}
 		
 	 	.menubar_h {
-			border-bottom: 1px solid #ccc;
+			border-bottom: 50px solid #ffffff;
 		} 
+		
+		#navbar_h {
+		background-color: #39AEA9 !important;
+		}
+		
+		#menu_h {
+		background-color: #39AEA9 !important;
+		
+		}
+		
+		.container-fluid a {
+		margin: 12px;
+		}
+		
+		.container-fluid a:hover {
+		color: #557B83 !important;
+		}
 		
 		</style>
 
@@ -183,47 +219,46 @@
     </div>
 </nav> -->
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar_h">
    <div class="nav-login_h collapse navbar-collapse">
 <!-- 	<ul style="list-style-type: none;"> -->
 			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1">회원가입</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">로그인</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">LOGIN</a></button>
 			</c:when>
 			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '2'}">
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">관리자페이지</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">ADMINPAGE</a></button>
 			</c:when>
 			<c:otherwise>
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">로그아웃</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">마이페이지</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
 			</c:otherwise>
 		 	</c:choose>
 	</div>
 </nav>
 <div class="menubar_h">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_h">
   <div class="container-fluid">
-    <a class="navbar-brand_h" href="/member/main">홈</a>
+    <a class="navbar-brand_h" href="/member/main">MAIN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item_h">
-          <a class="nav-link active" aria-current="page" href="/project/list">프로젝트</a>
+          <a class="nav-link active" aria-current="page" href="/project/list"  style="color: #ffffff;">PROJECT</a>
         </li>
         <li class="nav-item_h">
-          <a class="nav-link active" aria-current="page" href="/qna/list">고객센터</a>
+          <a class="nav-link active" aria-current="page" href="/qna/list" style="color: #ffffff;">QnA</a>
        
         </li>
         <li class="nav-item_h">
-          <a class="nav-link active" aria-current="page" href="/notice/list">공지사항</a>
+          <a class="nav-link active" aria-current="page" href="/notice/list" style="color: #ffffff;">NOTICE</a>
        
         </li>
         <li class="nav-item_h">
-          <a class="nav-link active" aria-current="page" href="/main/guide">이용가이드</a>
+          <a class="nav-link active" aria-current="page" href="/main/guide" style="color: #ffffff;">GUIDE</a>
        
         </li>
         <li class="nav-item">
@@ -236,8 +271,8 @@
       
       <div class="form-inline text-center">
       <form class="d-flex" action="/member/main" method="POST" >
-        <input class="form-control me-2" placeholder="검색어를 입력하세요." type="text" id="search" name="keyword" />
-        <button id="btnSearch" class="btn btn-outline-primary" type="submit">검색</button>
+        <input class="form-control me-2" placeholder="Please enter a search keyword" type="text" id="search" name="keyword" />
+        <button id="btnSearch" class="btn btn-outline-primary" type="submit">SEARCH</button>
       </form>
       </div>
     </div>

@@ -67,7 +67,30 @@ textarea::placeholder {
 
 .submit_button {
 	font-weight: 500;
-    background: rgb(248, 100, 83);
+    background: #A2D5AB;
+    align-items: center;
+    display: inline-flex;
+    width: 112px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin-right: 12px !important;
+    border: 0px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+
+.apply_button {
+	font-weight: 500;
+    background: #39AEA9;
     align-items: center;
     display: inline-flex;
     width: 112px;
@@ -87,7 +110,6 @@ textarea::placeholder {
     border: 0px;
     outline: none;
 }
-
 
 .editor_topContent{
 	margin: 64px auto 0px;
@@ -445,7 +467,7 @@ textarea::placeholder {
     font-weight: normal;
     box-sizing: border-box;
     padding: 0px 24px;
-    background-color: rgb(248, 100, 83);
+    background-color: #39AEA9;
     color: rgb(255, 255, 255);
     flex: 1 1 0%;
 /*     margin: 0px 0px 0px 10px; */
@@ -487,9 +509,72 @@ textarea::placeholder {
     opacity: 0.6;
 }
 
+.rewardDeleteButton {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 32px;
+    border-radius: 4px;
+    font-weight: 400;
+    color: rgb(61, 61, 61);
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(240, 240, 240);
+    font-size: 11px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+    line-height: 32px !important;
+}
+
+.rewardDeleteDiv {
+	display: inline-flex;
+    align-self: center;
+    cursor: pointer;
+	font-size: 8px;
+}
+
+.rewardDeleteButton:hover, .rewardDeleteButton:active {
+	background: rgb(247,247,247);
+}
+.rewardDeleteDiv svg {
+/* 	width: 1em; */
+/*     height: 1em; */
+}
+
+
 </style>
 
 <script type="text/javascript">
+
+//펀딩 신청하기
+function applyDo() {
+	debugger;
+	if(!'${projectInfo.projectTitle}') {
+		alert("잘못되었다.")
+		return;
+	}
+	
+	$.ajax({
+		type:"get"
+		,url:"/apply/final?projectNo=${projectInfo.projectNo}"
+		,success: function(data){
+// 			var resultNo = ${result }
+// 			if(resultNo == 1) {
+// 				alert("리워드를 추가해주세요.")
+// 			};
+			
+			let url = '/member/main';
+			location.assign(url);
+		}
+		,error: function(e) {
+			alert("모든 정보를 입력해주세요.");
+		}
+	})
+}
+	
+
 
 //저장하기
 function applySubmit(){
@@ -510,7 +595,7 @@ function applySubmit(){
 			"rewardName" : $('#rewardName').val().trim(),
 			"rewardIntro" : $('#rewardIntro').val(),
 			"rewardAmount" : $('#rewardAmount').val(),
-			"rewardPrice" : uncommaRewardPrice,
+			"rewardPrice" : uncommaRewardPrice
 	}
 	
 	$.ajax({
@@ -519,12 +604,12 @@ function applySubmit(){
 		,data: JSON.stringify(form)
 		,contentType: "application/json"
 		,success: function(data){
-			alert("제품정보 저장완료")
+			alert("리워드 저장완료")
 			let url = '/apply/reward?projectNo=${projectInfo.projectNo}';
 			location.assign(url);
 		}
 		,error: function(e) {
-			alert("error!");
+			alert("모든 정보를 입력해주세요.");
 		}
 	})
 }
@@ -708,7 +793,34 @@ function rewardIntroAdd() {
 // 	alert(document.getElementById("rewardIntro").value);
 }
 
-
+//리워드 삭제
+function rewardDelete(number) {
+    debugger;
+	//넘길 데이터를 담아주는 객체
+	var formData = new FormData();
+	
+	//입력 데이터들 json 직렬화
+	var form = 
+	{
+			"projectNo" : ${projectInfo.projectNo},
+			"rewardNo" : number,
+	}
+	
+	$.ajax({
+		type:"POST"
+		,url:"/apply/rewardDelete"
+		,data: JSON.stringify(form)
+		,contentType: "application/json"
+		,success: function(data){
+			alert("리워드 삭제완료")
+			let url = '/apply/reward?projectNo=${projectInfo.projectNo}';
+			location.assign(url);
+		}
+		,error: function(e) {
+			alert("error!");
+		}
+	})
+}
 
 </script>
 
@@ -721,7 +833,8 @@ function rewardIntroAdd() {
 			<div class="top_nav_in">
 				<a href="/member/main">대충 뒤로가기</a>
 				<div class="top_nav_button">
-					<button class="submit_button" onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="submit_button" type="button"  onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="apply_button" type="button"  onclick="applyDo()"><span style=" color: rgb(255, 255, 255);">프로젝트 신청</span></button>
 				</div>
 			</div>
 		</div>
@@ -757,11 +870,18 @@ function rewardIntroAdd() {
 						</li>
 						<c:forEach items="${rewardList }" var="reward">
 						<li class="rewardList">
-							<div class="defaultReward">
-								<strong>${reward.rewardPrice }원+</strong>
-								<span>${reward.rewardName }</span>
-								<span>${reward.rewardIntro }</span>
-							</div>
+<!-- 						<button> -->
+								<div class="defaultReward">
+									<strong>${reward.rewardPrice }원+</strong>
+									<span>${reward.rewardName }</span>
+									<span>${reward.rewardIntro }</span>
+								</div>
+<!-- 						</button> -->
+							<button type="button" class="rewardDeleteButton" onclick="rewardDelete(${reward.rewardNo});">
+								<div class="rewardDeleteDiv">
+									<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M9 3h6v-1.75c0-.066-.026-.13-.073-.177-.047-.047-.111-.073-.177-.073h-5.5c-.066 0-.13.026-.177.073-.047.047-.073.111-.073.177v1.75zm11 1h-16v18c0 .552.448 1 1 1h14c.552 0 1-.448 1-1v-18zm-10 3.5c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm5 0c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm8-4.5v1h-2v18c0 1.105-.895 2-2 2h-14c-1.105 0-2-.895-2-2v-18h-2v-1h7v-2c0-.552.448-1 1-1h6c.552 0 1 .448 1 1v2h7z"/></svg>
+								</div>
+							</button>
 						</li>
 						</c:forEach>
 					</ul>
@@ -850,7 +970,7 @@ function rewardIntroAdd() {
 							</div>
 						</section>		
 						<div class="createItem_lastButton">
-							<button class="lastSubmitButton">
+							<button class="lastSubmitButton" onclick="applySubmit()">
 								<span>저장</span>
 							</button>
 						</div>				
