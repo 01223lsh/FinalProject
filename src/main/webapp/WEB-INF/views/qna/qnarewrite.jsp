@@ -32,6 +32,10 @@ textarea {
 	height: 400px;
 }
 */
+
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 </style>
 
 

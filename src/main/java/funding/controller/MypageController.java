@@ -224,17 +224,13 @@ public class MypageController {
 
 		logger.info("pwchk의 결과는? : {}", pwchk);
 
-//		if(pwchk>0 && grade == 0) {
-//			return "redirect:/mypage/infoview";
-//		} else if (pwchk >0 && grade ==2){
-//			return "redirect:/mypage/infoview";
-//		} else if (pwchk >0 && grade ==1) {
-//			return "redirect:/mypage/sellerinfo";
-//		} else {
-//			return "redirect:/mypage/mypagepwchk";
-//		}
+		if(pwchk>0 && grade >= 0) {
+			return "redirect:/mypage/infoview";
+		} else {
+			return "redirect:/mypage/mypagepwchk";
+		}
 
-		return "redirect:/mypage/infoview";
+//		return "redirect:/mypage/infoview";
 
 	}
 

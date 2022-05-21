@@ -4,6 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
+
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <c:import url="/WEB-INF/views/layout/mypageheader.jsp" />
 
@@ -19,14 +24,16 @@
 
 <style>
 
-
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 
 .box {
 	border: 1px solid #DDD;
 	border-radius: 10px;
 	margin-left : 10%;
- 	height: 80%; 
+ 	height: 100% !improtant; 
 	width: 80%;
 	margin-bottom: 20px;
 	background-color: #f9f9f9;
@@ -37,12 +44,31 @@
 
 	margin-left: 30px;
 	margin-right: 30px;
+	font-family: 'IBM Plex Sans KR', sans-serif;
 
 }
 
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: none;}
+
+#BTN {
+
+	border-radius: 7px;
+	background-color: #39AEA9 !important;
+	color: white; 
+	width: 220px;
+	height: 50px;
+	border: 0px solid #81BEF7; 
+	font-size: 17px;
+	font-weight: bold;
+
+}
+
+ #BTN:hover { 
+ 	background-color: #557B83; 
+  transition: background-color 0.3s; 
+ }
 
 </style>
 
@@ -133,7 +159,7 @@
 				
 <!-- 				<div class="clearfix"></div> -->
 			</div>
-			<hr>
+			<hr style="width: 100%;">
 	</div><!--.cont -->
 	</div><!-- .item  -->
 	
@@ -152,8 +178,13 @@
 	</div><!-- .item  -->
 	
 </div><!--.box  -->
+<br><br>
+<button onclick="history.back(-1);" class="BTN" id="BTN">목록</button>
+
 </div><!-- main -->
+
+<br><br><br><br>
 </div><!-- right -->
 </div> <!-- container  -->
 
-<c:import url="/WEB-INF/views/layout/footer.jsp" />
+<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>

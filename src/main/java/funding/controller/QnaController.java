@@ -99,15 +99,27 @@ public class QnaController {
 
 		logger.info("/qna/qnarewrite [GET]");
 
-		logger.info("현재 로그인한 상태 : {}", session.getAttribute("loginResult"));
+//		logger.info("현재 로그인한 상태 : {}", session.getAttribute("loginResult"));
 
-		if (session.getAttribute("loginResult") != null && ((String) session.getAttribute("loginResult")).equals("true")
-				&& Integer.valueOf((String) session.getAttribute("grade")) == 2) {
+//		if (((String) session.getAttribute("login")) != null && ((String) session.getAttribute("login")).equals("true")
+//				&& Integer.valueOf((String) session.getAttribute("grade")) == 2) {
+//			return "/qna/qnarewrite";
+//		} else {
+//			return "redirect:/member/login";
+//		}
+
+		int grade = (Integer) session.getAttribute("grade");
+		logger.info("하하하핳하 : {}", grade);
+		
+		String login = String.valueOf( session.getAttribute("login"));
+		logger.info("하하하핳하 : {}", login);
+		
+		if (login != null && login.equals("true")
+				&& grade == 2) {
 			return "/qna/qnarewrite";
 		} else {
 			return "redirect:/member/login";
 		}
-
 	}
 
 	@PostMapping("/qna/qnarewrite")

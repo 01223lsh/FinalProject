@@ -27,24 +27,57 @@ $(document).ready(function() {
 </script>
 
 <style>
-/*
-textarea {
-	height: 400px;
+
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
-*/
+
+.title {
+
+	width : 60%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.cont {
+
+	width : 60%;
+	margin: 0 auto;
+}
+
+input {
+	width: 100%;
+	border-radius: 5px;
+	height: 37px;
+	border: 2px solid #DDD;
+}
+
+button {
+    border-radius: 5px;
+    border: 0px solid black;
+/*     background-color: #183F7B; */
+    background-color: #396EB0;
+    color: white;
+    width: 53px;
+    height: 30px;
+    font-weight: bold;
+    margin-right: 15px;
+/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
+}
+
 </style>
 
 
 
-<div class="container">
+<!-- <div class="container"> -->
 
-<h1>글 수정 페이지</h1>
-<hr>
+<h1 style="margin: 0 auto; text-align: center;">문의글 수정 페이지</h1>
+<br>
 
 
-<div id="update"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px;" >
+<div id="update"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px;" >
 
-<form action="/qna/qnaupdate" method="post" class="form-horizontal">
+<form action="/qna/qnaupdate" method="post" >
 	
 	<input type="hidden" id="id" name="id" value="${id }"> 
 	<input type="hidden" id="nick" name="nick" value="${nick }"/> 
@@ -54,7 +87,7 @@ textarea {
 	<!-- param. 사용하면 쿼리스트링으로 들어온 파라미터 값을 받는다  -->
 
 	
-	<div class="form-group">
+	<div class="">
 <!-- 		<div> -->
 <!-- 			<label for="writer_nick" class="col-sm-1 col-sm-offset-1">작성자</label> -->
 <!-- 		</div> -->
@@ -65,20 +98,20 @@ textarea {
 <!-- 		</div> -->
 <!-- 	</div> -->
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
-			<input type="text" id="qnaTitle" name="qnaTitle" class="form-control"  value="${qna.qnaTitle }">
+	<div class="title">
+		<div class="">
+			<input type="text" id="qnaTitle" name="qnaTitle" value="${qna.qnaTitle }">
 		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
-			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">${qna.qnaContent }</textarea>
+	<div class="cont">
+		<div class="">
+			<textarea id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">${qna.qnaContent }</textarea>
 		</div>
 	</div>
 
 
-	
+	<br><br>
 	<div style="text-align: center;"> 
 		<button id="btnWrite" name="btnWrite" >수정</button>
 		<a href="/qna/list" ><button type="button" id="cancle">취소</button></a><br><br>
