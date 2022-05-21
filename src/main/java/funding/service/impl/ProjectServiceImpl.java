@@ -15,29 +15,30 @@ import funding.service.face.ProjectService;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(ProjectService.class);
-	
+
 	@Autowired
 	private ProjectDao projectDao;
 
 	@Override
 	public List<Project> getPageList(Pagination pagination) {
-		
+
 		log.info("pagination: {}", pagination);
-		
+
 		int total = projectDao.getTotalCnt(pagination);
-		
-		pagination.build(10, total);
-		
+
+		// 한 페이지에 보여주는 프로젝트 수 5개 - 상수값으로 처리함
+		pagination.build(12, total);
+
 		List<Project> list = projectDao.findAllByFilterAndOrder(pagination);
-		
+
 		return list;
 	}
 
 	@Override
 	public List<Category> getCategoryList() {
-		
+
 		return projectDao.findCategoryList();
 	}
 

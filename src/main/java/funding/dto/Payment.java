@@ -1,5 +1,6 @@
 package funding.dto;
 
+import java.util.Date;
 
 public class Payment {
 	
@@ -9,19 +10,18 @@ public class Payment {
 	private String paymentCode;
 	private String paymentTotal;
 	private String paymentMethod;
-	private Member member;
-	
-	public Member getMember() {
-		return member;
-	}
-	public void setMember(Member member) {
-		this.member = member;
-	}
+
+	private Date paymentDate;
+
+
 	@Override
 	public String toString() {
 		return "Payment [paymentNo=" + paymentNo + ", orderNo=" + orderNo + ", projectNo=" + projectNo
 				+ ", paymentCode=" + paymentCode + ", paymentTotal=" + paymentTotal + ", paymentMethod=" + paymentMethod
-				+ ", member=" + member + "]";
+
+				+ ", paymentDate=" + paymentDate + "]";
+
+
 	}
 	public int getPaymentNo() {
 		return paymentNo;
@@ -59,5 +59,11 @@ public class Payment {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
+
+	public Date getPaymentDate() {
+		return paymentDate;
+	}
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
 }

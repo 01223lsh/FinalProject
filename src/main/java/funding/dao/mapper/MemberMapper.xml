@@ -6,6 +6,25 @@
     
 <mapper namespace="funding.dao.face.MemberDao">
 
+	<resultMap type="funding.dto.Member" id="Member">
+		<id column="member_no" property="memberNo"/>
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+	
+   <resultMap type="funding.dto.MemberSeller" id="MemberSeller">
+      <id column="member_no" property="memberNo"/>
+      <result column="bank_name" property="bankName" />
+      <result column="account_number" property="accountNumber" />
+      <result column="accunt_name" property="accountname" />
+      <result column="seller_info" property="sellerInfo" />
+      <result column="project_title" property="projectTitle" />
+      <result column="project_no" property="projectNo" />
+      <result column="order_no" property="orderNo" />
+      <result column="naver_login" property="naverlogin" />
+      <result column="kakao_login" property="kakaologin" />
+   </resultMap>
+			
+	
 	<select id="selectCntMember" resultType="int" parameterType="funding.dto.Member">
 		SELECT count(*) FROM member
 		WHERE id = #{id} AND pw = #{pw}
@@ -25,5 +44,172 @@
 		SELECT member_no FROM member
 		WHERE id = #{id}
 	</select>
+	
+	<select id="selectCntById" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="funding.dto.Member">
+		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
+		VALUES ( member_no.nextval, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, 0 )
+	</insert>
+	
+	<select id="idCheck" resultType="integer">
+		SELECT count(*) FROM member
+		WHERE id = #{userid}
+	</select>
+	
+	<select id="nickCheck" resultType="integer">
+		SELECT count(*) FROM member
+		WHERE nick = #{usernick}
+	</select>
+	
+	<select id="selectCntById2" resultType="int" parameterType="funding.dto.MemberSeller">
+		SELECT count(*) FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="insert2" parameterType="funding.dto.MemberSeller">
+		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
+ 			 SELECT member_no.nextval FROM DUAL
+  		</selectKey>
+		
+		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
+		VALUES ( #{memberNo}, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, '1' )
+	</insert>
+	
+	<insert id="insert3" parameterType="funding.dto.MemberSeller">
+		INSERT INTO member_seller ( member_no, bank_name, account_number, account_name)
+		VALUES ( #{memberNo}, #{bankName}, #{accountNumber}, #{accountName} )
+	</insert>
+	
+	<select id="selectCntKakao" resultType="integer">
+		SELECT count(*) FROM member
+		WHERE email = #{kakaoEmail }
+			AND grade = '0' 	
+	</select>
+		
+	<select id="selectByKakaoEmail" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) FROM member
+		WHERE email = #{email}
+	</select>
+	
+	<insert id="KakaoUserinsert" parameterType="funding.dto.Member">
+		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, kakao_login )
+		VALUES ( member_no.nextval, 'kakaoUser', 'kakaoUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+	</insert>
+	
+	<select id="selectKakaoInfo" resultMap="Member" parameterType="funding.dto.Member">
+		SELECT * fROM member
+		WHERE email = #{email}
+			AND grade = '0' 
+	</select>
+	
+	<!-- 카카오 탈퇴 - 회원 정보(grade) 비활성화(3)로 변경 -->
+	<update id="updateKakaoUser">
+		UPDATE member
+		SET grade = '3'
+		WHERE member_no = #{memberNo}
+	</update>
+	
+	<select id="selectByEmail"  resultType="integer" >
+		SELECT count(*) FROM member
+		WHERE email = #{email }
+	</select>
+	
+	<update id="KakaoUserUpdate" parameterType="funding.dto.Member">
+		UPDATE member
+		SET nick = #{nick}
+			, phone = #{phone}
+			, name = #{name}
+			, grade = '0'
+		WHERE grade='3'
+			AND email = #{email}
+	</update>
+	
+	<select id="findIdByMember" resultType="string" parameterType="funding.dto.Member" >
+		SELECT id FROM member
+		WHERE email = #{email}
+			AND name = #{name}
+	</select>
+	
+	 
+	<update id="updatePw" parameterType="funding.dto.Member">
+		UPDATE member
+		SET pw=#{pw} 
+		WHERE id = #{id}
+	</update>
+	
+	
+	<select id="readMember" parameterType="funding.dto.Member" resultType="funding.dto.Member">
+		SELECT * FROM member
+		WHERE id = #{id}
+			AND email = #{email}
+	</select>
+	
+	<select id="comparePw" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) FROM member
+		WHERE pw = #{pw}
+			AND id = #{id}
+	</select>
+	
+	<!-- 테이블명은 order_tb, dto는 oredr로 설정해두었음 -->
+	<select id="selectCntByProject" resultType="int" parameterType="funding.dto.Order"> 
+		SELECT count(*) FROM order_tb
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="selectCntNaver" resultType="integer">
+		SELECT count(*) FROM member
+		WHERE email = #{naverEmail }
+			AND grade = '0' 	
+	</select>
+	
+	<select id="selectByNaverEmail" resultType="int" parameterType="funding.dto.Member">
+		SELECT count(*) FROM member
+		WHERE email = #{email}
+	</select>
+	
+	<insert id="naverUserinsert" parameterType="funding.dto.Member">
+		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, naver_login )
+		VALUES ( member_no.nextval, 'naverUser', 'naverUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+	</insert>
+	
+	<select id="selectNaverInfo" resultMap="Member" parameterType="funding.dto.Member">
+		SELECT * fROM member
+		WHERE email = #{email}
+			AND grade = '0' 
+	</select>
+	
+	
+	
+
+	
+
+	
+	<!-- made in 정영재 -->
+	<select id="selectByMemberNo" parameterType="int" resultType="funding.dto.Member">
+		SELECT member_no
+		, name, email
+		, nick, phone
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+<!-- 	<select id="naverConnectionCheck" parameterMap="apiJson" > -->
+<!-- 		SELECT email, nick, naverLogin FROM member -->
+<!-- 		WHERE email = #{email} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="userNaverLoginPro" parameterMap="apiJson"> -->
+<!-- 		SELECT email, nick FROM member  -->
+<!-- 		WHERE email = #{email} and naverLogin = #{id} -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="updateNaverLogin" parameterMap="apiJson"> -->
+<!-- 	UPDATE member SET naverLogin = #{id} -->
+<!-- 	WHERE email = #{email} -->
+<!-- 	</update> -->
 
 </mapper>

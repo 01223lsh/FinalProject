@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import funding.dto.Member;
 import funding.dto.Order;
 import funding.dto.Project;
 import funding.dto.Reward;
+import funding.service.face.ApplyService;
+import funding.service.face.MemberService;
 import funding.service.face.PaymentService;
 
 @Controller
@@ -30,6 +33,12 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	ApplyService applyService;
+	
 	@GetMapping(value = "/payment/chooseReward")
 	public void chooseReward(HttpSession session, Model model, Reward reward, int projectNo) {
 		
@@ -37,7 +46,7 @@ public class PaymentController {
 		
 		logger.info("projectNo : {}", projectNo);
 		
-		//리워드 선택지 불러오기 
+		//리워드 선택지 불러오기
 		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo);
 //		for (Reward r : rewardList) {
 //			logger.info("RewardList : {}", r);
@@ -97,9 +106,7 @@ public class PaymentController {
 	public void paymentOrder(HttpSession session, Model model, Order order, Project project) {
 		
 		logger.info("/payment/order [GET]");
-		
 		logger.info("project 정보 : {}", project);
-		
 		logger.info("order 정보 : {}", order);
 		
 		//주문 리워드에 대한 개수
@@ -117,10 +124,15 @@ public class PaymentController {
 		project = paymentService.checkProjectTitle(project);
 		logger.info("checkProjectTitle 메소드 이후 project : {}", project);
 		
+		//세션에서의 멤버번호를 통해 멤버 정보를 조회
+		int memberNo = (int) session.getAttribute("memberNo");
+		Member member = memberService.getUserInfoByMemberNo(memberNo);
+		
 		//추가금, 총금액 모델값 전송
 		model.addAttribute("order", order);
 		model.addAttribute("rewardOrderList", rewardOrderList);
 		model.addAttribute("project", project);
+		model.addAttribute("member", member);
 	}
 	
 	
@@ -140,7 +152,7 @@ public class PaymentController {
 		paymentService.changeStatus(Integer.parseInt(map.get("orderNo")));
 		
 		//결제 완료 후 어떤 URL (주문번호와 프로젝트 번호 전달)이동할 지 importPayment.jsp에서 볼 수 있다.
-		//location.href="/payment/result?orderNo=" + orderNo + "&projectNo=" + projectNo;
+		//location.href="/payment/result?orderNo=" + orderNo + "&projectNo=" + projectNo + "&memberNo=" + memberNo";
 	}
 	
 	@RequestMapping(value = "/payment/result")

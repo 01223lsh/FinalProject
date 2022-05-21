@@ -72,11 +72,14 @@
 					
 <form id="commentForm">
 <input type="hidden" name="projectNo" value="${project.projectNo }">
+
 <input type="hidden" name="commentWriter" value="${nick }">
 <input type="hidden" name="memberNo" value="${memberNo }">
 
 		<textarea id="commentContent" name="commentContent" style="width: 600px; height: 80px;"></textarea>
 		
+
+
 		<c:choose>
 					<c:when test="${project.projectStep eq 3 and login eq true}">
 					<button id="commentBtn" type="button" class="btn btn-primary" style="float: right; width: 106px; height: 41px; background-color: #39AEA9; border: none; ">작성</button>
