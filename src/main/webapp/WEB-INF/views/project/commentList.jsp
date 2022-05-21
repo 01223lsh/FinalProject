@@ -96,7 +96,7 @@ function loginModal(){
 					
 <form id="commentForm">
 <input type="hidden" name="projectNo" value="${project.projectNo }">
-<input type="hidden" name="commentWriter" value="${nick }">
+<input type="hidden" name="commentWriter" value="${sessoinScope.nick }">
 <table>
 	<tr>
 		<td><textarea id="commentContent" name="commentContent" style="width: 500px; height: 80px;"></textarea></td>

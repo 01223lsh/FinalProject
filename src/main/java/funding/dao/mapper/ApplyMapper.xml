@@ -65,7 +65,7 @@
            SET category_no = #{categoryNo}
               , project_title = #{projectTitle}
               , project_intro = #{projectIntro}
-
+			  , talk_time = #{talkTime}	
        	      <if test='projectImage!=null and projectImage neq""' >
        	      , project_image = #{projectImage}
        	      </if> 

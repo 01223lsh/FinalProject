@@ -260,11 +260,33 @@ public class ApplyController {
 	}
 	
 	//선택한 리워드 삭제
-	@RequestMapping(value = "/rewardDelete")
-	public String rewardDelete(Reward reward) {
+	@RequestMapping(value = "/rewardDelete", method = RequestMethod.POST)
+	public String rewardDelete(Reward reward, Model model) {
 		logger.info("/apply/rewardDelete");
+	
+		System.out.println(reward);
 		
+		int rewardNo = reward.getRewardNo();
 		// rewardNo를 가져와서 일치하는 데이터 삭제 
+		applyService.rewardDelete(rewardNo);
+		
+//		Project projectInfo = applyService.projectSelect(project.getProjectNo());
+//		
+//		//모델값 전달
+//		model.addAttribute("projectInfo", projectInfo);
+		
+		int projectNo = reward.getProjectNo();
+		
+		
+		//리워드 정보 불러옴
+		List<Reward> rewardList = applyService.rewardSelect(projectNo);
+		
+		System.out.println(rewardList);
+		
+		//모델값 저장
+		model.addAttribute("rewardList", rewardList);
+		
+	
 		
 		
 		return "redirect:/apply/reward";
@@ -272,10 +294,12 @@ public class ApplyController {
 	
 	//프로젝트 최종 신청
 	@RequestMapping(value = "/applyFinal")
-	public String apply(Project project) {
+	public String apply(int projectNo) {
 		logger.info("/applyFinal");
 		
 		// projectStep 값 1로 update
+		
+		
 		
 		//메인 페이지로 redirect
 		return "redirect:/";
