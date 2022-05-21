@@ -223,6 +223,7 @@ div {
 }
 
 #content1_1 {
+	margin-top: 50px;
 	margin-left: 30px; float : left;
 	width: 480px;
 	height: 330px;
@@ -554,7 +555,7 @@ a.disabled {
 			<br>
 
 			<div id="content1_1">
-				<img src="${project.projectImage }">
+				<img src="${project.projectImage }" style="">
 
 			</div>
 
