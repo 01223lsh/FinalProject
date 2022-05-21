@@ -36,7 +36,7 @@ public interface ProjectViewDao {
 
 	public Member selectSeller(Project project);
 
-	public Project selectStep(Project project);
+	public Project selectStep(int projectNo);
 
 	public void updateTalktime(Project project);
 

@@ -522,8 +522,8 @@ a.disabled {
 </head>
 <body>
 
-	
-		<div class="title" style="height: 185px; overflow: hidden; margin-top: 25px;">
+		<div><%@include file="/WEB-INF/views/layout/header.jsp" %></div>
+		<div class="title" style="height: 185px; overflow: hidden;">
 		<div class="bgimg" style="background-color: #39AEA9; position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url("${project.projectImage }");"></div>
 		<div style="position: relative;top: -195px; z-index: 1; text-align: center;">
 		<div id="category">
@@ -707,7 +707,7 @@ a.disabled {
 				<div>
 					<c:choose>
 					<c:when test="${project.projectStep eq 3 and login eq true }">
-					<a type="button" id="chatbtn" href="">대화하기</a>
+					<a type="button" id="chatbtn" href="/chat/room/enter/${project.projectNo }">대화하기</a>
 					</c:when>
 					<c:when test="${project.projectStep eq 3 and empty login }">
 					<a type="button" id="chatbtn" href="#" onclick="loginModal()">대화하기</a>
@@ -805,10 +805,12 @@ a.disabled {
 		<p>로그인페이지로 이동하시겠습니까?</p>
 		<div style="border-top: 1px solid #d6d6d6; padding-top: 20px; text-align: center; ">
 		<a id="modalcancel" type="button" onclick="loginModalClose()">취소</a>
-		<a id="toLogin" type="button" href="/login" style="">로그인</a>
+		<a id="toLogin" type="button" href="/member/login" style="">로그인</a>
 		</div>
 	</div>
 </div>
+
+<div><%@include file="/WEB-INF/views/layout/footer.jsp" %></div>
 
 </body>
 </html>

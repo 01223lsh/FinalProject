@@ -106,9 +106,9 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 	}
 	
 	@Override
-	public Project getStep(Project project) {
+	public Project getStep(int projectNo) {
 		
-		return projectViewDao.selectStep(project);
+		return projectViewDao.selectStep(projectNo);
 	}
 	
 	@Override

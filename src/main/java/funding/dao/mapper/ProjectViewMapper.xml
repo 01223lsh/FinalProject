@@ -103,7 +103,7 @@
 	WHERE a.member_no = #{memberNo}
 
 </select>
-<select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+<select id="selectStep" parameterType="int" resultType="funding.dto.Project">
 
 	SELECT project_step, project_no,member_no
 	 FROM project
