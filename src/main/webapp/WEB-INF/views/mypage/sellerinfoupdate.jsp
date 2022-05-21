@@ -79,7 +79,7 @@ textarea {
 
 }
 
-button {
+.BTN {
 
 	border-radius: 7px;
 	background-color: #39AEA9;
@@ -149,6 +149,9 @@ button {
 	transition: background-color 0.3s;
 }
 
+a:visited {
+	color: #000;
+}
 </style>
 
 

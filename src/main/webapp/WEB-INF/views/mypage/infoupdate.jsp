@@ -166,7 +166,7 @@ $(document).ready(function() {
 
 }
 
-button {
+.BTN {
 
 	border-radius: 7px;
 	background-color: #39AEA9;
@@ -234,6 +234,10 @@ input {
 .BTN:hover {
 	background-color: #557B83;
 	transition: background-color 0.3s;
+}
+
+a:visited {
+	color: #000;
 }
 
 </style>

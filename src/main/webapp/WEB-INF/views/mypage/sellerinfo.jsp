@@ -17,7 +17,7 @@ input {
 	text-align: center;
 }
 
-button {
+.BTN {
 
 	border-radius: 5px;
 	background-color: #39AEA9;
@@ -86,7 +86,9 @@ button {
 	margin-right: 8%;
 }
 
-
+a:visited {
+	color: #000;
+}
 
 </style>
 
@@ -169,7 +171,7 @@ button {
 
 <br><br>
 <div style="text-align: center; ">
-<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px;" id="updateBtn">수정</button>
+<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px;" id="updateBtn" class="BTN">수정</button>
 <button onclick="history.back(-1);" class="BTN">취소</button>
 <!-- <button onclick="location.href='./memberdelete'">탈퇴</button> -->
 </div>

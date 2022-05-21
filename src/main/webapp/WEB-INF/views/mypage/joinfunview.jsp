@@ -75,6 +75,9 @@ $(".cont").hide();
   transition: background-color 0.3s; 
  }
 
+a:visited {
+	color: #000;
+}
 </style>
 
 

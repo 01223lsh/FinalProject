@@ -23,7 +23,7 @@ input {
 	width: 220px;
 }
 
-button {
+#OkBtn {
 
 	border-radius: 5px;
 	background-color : #39AEA9;

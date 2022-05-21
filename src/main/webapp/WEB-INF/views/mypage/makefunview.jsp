@@ -15,6 +15,11 @@ $(document).ready(function() {
 	if("${view.projectStep == 0}"){
 		$("#update").show();
 	};
+	
+// 	if("${view.projectStep == 0}"){
+// 		$("#update").show();
+// 	};
+	
 
 	
 })
@@ -120,7 +125,7 @@ button {
 	<c:if test="${view.projectStep == 4}"><p style="font-weight: bold; font-size: 17px; color: tomato;">펀딩 종료</p></c:if>
 	<c:if test="${view.projectStep == 5}"><p style="font-weight: bold; font-size: 17px; color: green;">펀딩 진행대기중</p></c:if>
 	
-	<span>펀딩No ${view.projectNo }</span><br>
+	<span>펀딩no ${view.projectNo }</span><br>
 	<a href="/project/view?projectNo=${view.projectNo }"><p style="font-weight: bolder; font-size: 30px;">${view.projectTitle }</p></a> 
 	<p style="font-weight: bolder; font-size: 15px;">${view.projectIntro }</p>
 

@@ -65,7 +65,7 @@ input {
 	text-align: center;
 }
 
-button {
+#updateBtn,#deleteBtn  {
 
 	border-radius: 5px;
 	background-color: #39AEA9;
@@ -94,6 +94,10 @@ button {
 #updateBtn:hover {
 	background-color: #557B83;
 	transition: background-color 0.3s;
+}
+
+a:visited {
+	color: #000;
 }
 </style>
 
