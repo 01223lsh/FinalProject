@@ -50,15 +50,15 @@ p {
 	margin-right: 30px;
 }
 
-#ptitle {
+a {
 	text-decoration: none;
 }
 
 
-#ptitle:active { color:black; }
-#ptitle:link { color: black; text-decoration: none;}
-#ptitle:visited { color: black; text-decoration: none;}
-#ptitle:hover { color: black; text-decoration: none;}
+a:active { color:black; }
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
 
 button {
 
@@ -103,7 +103,7 @@ button {
 	<c:if test="${fund.projectStep == 5}"><p style="font-weight: bold; color: green;">펀딩 진행대기중</p></c:if>
 	
 	
-	<a href="/mypage/makefunview?projectNo=${fund.projectNo }" id="ptitle"><p style="font-weight: bolder; font-size: 25px;">${fund.projectTitle }</p></a>
+	<a href="/mypage/makefunview?projectNo=${fund.projectNo }"><p style="font-weight: bolder; font-size: 25px;">${fund.projectTitle }</p></a>
 	<p><fmt:formatDate value="${fund.openDate }" pattern="yyyy/MM/dd"/> - <fmt:formatDate value="${fund.closeDate }" pattern="yyyy/MM/dd"/></p>
 	
 <%-- 	<p >${fund.projectIntro }</p> --%>
