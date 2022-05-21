@@ -86,6 +86,8 @@
   .section-body .body-etc div:first-child > span:first-child{
     color: red;
   }
+  
+
 </style>
 
 <script>
@@ -170,24 +172,24 @@ function setCondition() {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/resources/jpg/vegan.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;">
+      <img src="/resources/jpg/KakaoTalk_20220521_195002834.jpg" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;">
       <div class="carousel-caption d-none d-md-block">
-        <h5>달콤하게 떠먹는 비건식</h5>
-        <p>우유 없는 초코 & 카라멜 비건 아이스크림</p>
+        <h5>[압생트] 왜곡을 비워내는 잔</h5>
+        <p>마지막 잔에는 사물의 원래 모습을 그대로 보게 된다. 그것은 세상에서 가장 끔찍한 일이다. - Oscar Wilde -</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/resources/jpg/perfume.JPG" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <img src="/resources/jpg/KakaoTalk_20220521_195639447.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
       <div class="carousel-caption d-none d-md-block">
-        <h5>포근하고 달콤한 향기</h5>
-        <p>부드러운 느낌의 프루티-플로럴 계열의 향수</p>
+        <h5>일상 속 작은 쉼, 필름 힐링엽서</h5>
+        <p>C'est toujours par hasard qu'on accomplit son destin - Le Festin -</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/resources/jpg/은지님하늘사진.jpg"" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <img src="/resources/jpg/KakaoTalk_20220521_200629599.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
       <div class="carousel-caption d-none d-md-block">
-        <h5>#푸른하늘 #맑은날씨</h5>
-        <p>by. 멋진 하늘</p>
+        <h5>「 Rêve bleu : ’푸른 꿈’이라는 뜻 」</h5>
+        <p>푸른 꿈을 꾸었다. 푸른 바다와 강을 헤엄치고 푸른 숲을 걷는.</p>
       </div>
     </div>
   </div>

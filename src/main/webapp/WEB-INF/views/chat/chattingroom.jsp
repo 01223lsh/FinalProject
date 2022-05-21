@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Cloud Funding</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -92,13 +92,13 @@ const myName = '${sessionId}'
 	    messageDiv.text(recv.message);
 	    messageHeaderDiv.append(myidDiv);
 	    messageHeaderDiv.addClass("d-flex justify-content-between")
-	    messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "margin" : "10px", "background": "#d9dbed"});
+	    messageDiv.css({"padding": "10px", "border-radius": "0 10px 10px 10px", "margin" : "10px", "background": "#A2D5AB"});
 	    messageContainer.append(messageHeaderDiv);
 	    messageContainer.append(messageDiv);
 	    messageContainer.css({"width": "200px", "align-self": "flex-start"})
 	    li.addClass(" d-flex flex-column");
 	    if (recv.sender == '${sessionScope.nick}') {
-	        messageDiv.css("background", "#dceaf9" )
+	        messageDiv.css("background", "#E5EFC1" )
 	        messageContainer.css("align-self", "flex-end")
 	    }
 	    li.append(messageContainer)
@@ -330,7 +330,7 @@ const myName = '${sessionId}'
 
 
 	 
-	.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #9e9e9e; color: white; text-align: center;  }
+	.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #557B83; color: white; text-align: center;  }
 	 
 	.chat_wrap .chat { padding-bottom: 80px; }
 	.chat_wrap .chat ul { width: 100%; list-style: none; padding: 10px;}
@@ -357,7 +357,7 @@ const myName = '${sessionId}'
 	<body>
 	<div class="chat_wrap">
 	    <div class="header">
-	        CHAT
+	        1:1문의
 	    </div>
 	<!--     <div class="test"> -->
 	    	
