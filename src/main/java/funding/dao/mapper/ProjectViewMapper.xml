@@ -7,10 +7,15 @@
 <mapper namespace="funding.dao.face.ProjectViewDao">
 
 <select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
-	SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
-			open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
-	FROM project
-	WHERE project_no = #{projectNo}
+	select pj.*, nvl(sum, 0) sum
+	from project pj
+	left join (
+    select project_no, sum(payment_total) sum
+    from payment
+    group by project_no    
+	) py
+    on pj.project_no = py.project_no 
+    WHERE pj.project_no = #{projectNo}
 
 </select>
 
@@ -30,7 +35,7 @@
  </select>
  
  <select id="selectCommentList" parameterType="int" resultType="funding.dto.ProjectComment">
- 	SELECT comment_no, comment_content, comment_writer, comment_date,project_no
+ 	SELECT comment_no, comment_content, comment_writer, comment_date,project_no,member_no
  	FROM project_comment
  	WHERE project_no = #{projectNo}
  	ORDER BY comment_no DESC
@@ -62,8 +67,8 @@
 </delete>
 
 <insert id="insertComment" parameterType="funding.dto.ProjectComment">
-	INSERT INTO project_comment(comment_no,project_no,comment_content,comment_date)
-	VALUES (comment_seq.nextval, #{projectNo}, #{commentContent},current_date)
+	INSERT INTO project_comment(comment_no,project_no,comment_content,comment_date,comment_writer,member_no)
+	VALUES (comment_seq.nextval, #{projectNo},#{commentContent},current_date, #{commentWriter},#{memberNo})
 
 </insert>
 
@@ -100,7 +105,7 @@
 </select>
 <select id="selectStep" parameterType="funding.dto.Project" resultType="funding.dto.Project">
 
-	SELECT project_step, project_no
+	SELECT project_step, project_no,member_no
 	 FROM project
 	WHERE project_no = #{projectNo}
 </select>
@@ -111,6 +116,37 @@
 	WHERE project_no = #{projectNo}
 
 </update>
+
+<select id="selectContributors" parameterType="int" resultType="int">
+	select NVL(contributors, 0) contributors from project p left join
+ 	( select py.project_no, count(distinct o.member_no) contributors from payment py 
+	join order_tb o on py.order_no = o.order_no 
+	group by py.project_no) po on p.project_no = po.project_no 
+	where p.project_no = #{projectNo}
+</select>
+
+<resultMap type="funding.dto.Payment" id="PaymentAndMemeber">
+	<id property="projectNo" column="project_no"/>
+	<id property="paymentTotal" column="payment_total"/>
+	
+	<association property="member" javaType="funding.dto.Member">
+	<id property="memberNo" column="member_no"/>
+	<id property="nick" column="nick"/>
+	</association>
+</resultMap>
+
+<select id="selectContributorsList" parameterType="funding.dto.Payment" resultMap="PaymentAndMemeber">
+	select c.project_no,a.payment_total,b.member_no, b.nick from
+	(select member_no ,total_price payment_total,order_no,order_date 
+	from order_tb 
+	where order_status=1)
+	A left outer join
+	(select member_no,id,nick from member) B
+	 on A.member_no = B.member_no left outer join 
+	(select project_no,order_no from payment)C on A.order_no = C.order_no
+	WHERE project_no = #{projectNo}
+</select>
+
 
 
 </mapper>

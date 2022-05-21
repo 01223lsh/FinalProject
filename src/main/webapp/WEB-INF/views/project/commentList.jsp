@@ -50,13 +50,7 @@
 		
 	}
 
-function loginModal(){
-	$(".modal").fadeIn();
-}
 
-	$("#modalcancel").click(function(){
-		$(".modal").fadeOut();
-	})
 
 	
 
@@ -68,67 +62,36 @@ function loginModal(){
 	cursor: pointer;
 	}
 	
-.modal{
-	position: absolute;
-	width: 100%; height: 130%;
-	background: rgba(0,0,0,0.8);
-	top:0; left: 0;
-	display: none;
-}
-
-.modal_content{
-  width:400px; height:200px;
-  background:#fff; border-radius:10px;
-  position:relative; top:50%; left:50%;
-  margin-top:-100px; margin-left:-200px;
-  text-align:center;
-  box-sizing:border-box; padding:74px 0;
-  line-height:23px; 
-}
 
 
 </style>
-<div>
+<div style="height: 180px;">
 
-<b>- 댓글</b>
-<br>
-<br>
+<b>- 댓글</b><br><br>
+
 					
 <form id="commentForm">
 <input type="hidden" name="projectNo" value="${project.projectNo }">
 <input type="hidden" name="commentWriter" value="${nick }">
-<table>
-	<tr>
-		<td><textarea id="commentContent" name="commentContent" style="width: 500px; height: 80px;"></textarea></td>
-		<td>
+<input type="hidden" name="memberNo" value="${memberNo }">
+
+		<textarea id="commentContent" name="commentContent" style="width: 600px; height: 80px;"></textarea>
+		
 		<c:choose>
 					<c:when test="${project.projectStep eq 3 and login eq true}">
-					<button id="commentBtn" type="button" class="btn btn-primary" style="vertical-align: middle;">작성</button>
+					<button id="commentBtn" type="button" class="btn btn-primary" style="float: right; width: 106px; height: 41px; background-color: #39AEA9; border: none; ">작성</button>
 					</c:when>
-					<c:when test="${empty login }">
-						<button id="modalbtn" type="button" class="btn btn-primary" style="vertical-align: middle;" onclick="loginModal()">작성</button>
+					<c:when test="${empty login and project.projectStep eq 3}">
+						<button id="modalbtn" type="button" class="btn btn-primary" style="float: right; width: 106px; height: 41px; background-color: #39AEA9; border: none;" onclick="loginModal()">작성</button>
 					</c:when>
-					<c:when test="${project.projectStep eq 4 }">
-					</c:when>
+					<c:otherwise>
+					<button type="button" class="btn btn-primary" style="float: right;  width: 106px; height: 41px; background-color: #39AEA9; border: none;" disabled="disabled">작성</button>
+					</c:otherwise>
 					</c:choose>
-		</td>
-	</tr>
-</table>
-
-
-
+	
 </form>
 </div>
-<div class="modal">
 
-	<div class="modal_content">
-		<p>로그인이 필요합니다</p>
-		<p>로그인페이지로 이동하시겠습니까?</p>
-		<hr>
-		<a id="modalcancel" type="button">취소</a>
-		<a type="button" type="button" href="/login">로그인</a>
-	</div>
-</div>
 
 <hr>
 <c:forEach var="comment" items="${commentList }">

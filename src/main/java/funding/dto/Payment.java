@@ -9,11 +9,19 @@ public class Payment {
 	private String paymentCode;
 	private String paymentTotal;
 	private String paymentMethod;
+	private Member member;
+	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	@Override
 	public String toString() {
 		return "Payment [paymentNo=" + paymentNo + ", orderNo=" + orderNo + ", projectNo=" + projectNo
 				+ ", paymentCode=" + paymentCode + ", paymentTotal=" + paymentTotal + ", paymentMethod=" + paymentMethod
-				+ "]";
+				+ ", member=" + member + "]";
 	}
 	public int getPaymentNo() {
 		return paymentNo;

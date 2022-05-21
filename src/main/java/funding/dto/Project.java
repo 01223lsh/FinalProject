@@ -20,7 +20,16 @@ public class Project {
 	private int projectStep;
 	private int sum;
 	private String talkTime;
+	private int contributors;
 	
+	public int getContributors() {
+		return contributors;
+	}
+
+	public void setContributors(int contributors) {
+		this.contributors = contributors;
+	}
+
 	public String getTalkTime() {
 		return talkTime;
 	}
@@ -36,7 +45,7 @@ public class Project {
 				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
-				+ ", sum=" + sum + ", talkTime=" + talkTime + "]";
+				+ ", sum=" + sum + ", talkTime=" + talkTime + ", contributors=" + contributors + "]";
 	}
 
 	public int getProjectNo() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -38,5 +39,9 @@ public interface ProjectViewDao {
 	public Project selectStep(Project project);
 
 	public void updateTalktime(Project project);
+
+	public int selectContributors(int projectNo);
+
+	public List<Payment> selectContributorsList(Payment payment);
 
 }
