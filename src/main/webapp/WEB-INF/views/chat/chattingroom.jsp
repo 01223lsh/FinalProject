@@ -357,7 +357,7 @@ const myName = '${sessionId}'
 	<body>
 	<div class="chat_wrap">
 	    <div class="header">
-	        1:1문의
+	        ${project.projectTitle }
 	    </div>
 	<!--     <div class="test"> -->
 	    	

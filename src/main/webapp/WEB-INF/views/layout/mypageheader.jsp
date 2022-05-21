@@ -208,7 +208,7 @@ ul {
   text-decoration: none;
 
   display: block;
-  color: #000;
+  color: black;
   font-weight: bold;
 }
 

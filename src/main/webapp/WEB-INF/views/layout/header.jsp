@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Crowd Funding</title>
+<title>Cloud Funding</title>
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -58,10 +58,12 @@
       
       <style type="text/css">
       
-      a:link { color: white; text-decoration: none;} 
-      a:visited { color: white; text-decoration: none;} 
-      a:hover { color: white; text-decoration: none;}
-      
+      #login:link { color: white; text-decoration: none;} 
+      #login:visited { color: white; text-decoration: none;}  
+      #login:hover { color: white; text-decoration: none;}
+      #main_h:link { color: white; text-decoration: none;} 
+      #main_h:visited { color: white; text-decoration: none;}  
+      #main_h:hover { color: white; text-decoration: none;}
       
       
       	.nav-login_h {
@@ -84,7 +86,7 @@
       	.nav-login_h button:hover {
 			background-color: #39AEA9 !important;
 			font-weight : bold;
-			color: #557B83 !important;
+			color: #557B83 ;
 		}
       	
       	/* .navbar-brand_h:hover {
@@ -163,6 +165,8 @@
 		color: #557B83 !important;
 		}
 		
+		
+		
 		</style>
 
 
@@ -225,14 +229,14 @@
 			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">LOGIN</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1" id="login">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login" id="login">LOGIN</a></button>
 			</c:when>
 			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '2'}">
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">ADMINPAGE</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main" id="login">ADMINPAGE</a></button>
 			</c:when>
 			<c:otherwise>
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button>
 			</c:otherwise>
 		 	</c:choose>
 	</div>
@@ -240,7 +244,7 @@
 <div class="menubar_h">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_h">
   <div class="container-fluid">
-    <a class="navbar-brand_h" href="/member/main">MAIN</a>
+    <a class="navbar-brand_h" href="/member/main" id="main_h">MAIN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
