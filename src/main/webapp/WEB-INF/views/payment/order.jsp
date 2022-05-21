@@ -100,7 +100,7 @@
 
 <div class="container">
 
-<h1>주문 정보 입력 페이지 </h1>
+<h1>프로젝트 후원하기</h1>
 <hr>
 
 	<div class="orderStep">
