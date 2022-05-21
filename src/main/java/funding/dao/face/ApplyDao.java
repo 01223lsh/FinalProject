@@ -81,5 +81,10 @@ public interface ApplyDao {
      */
     public void rewardDelete(int rewardNo);
 
-	
+    /**
+     * 프로젝트 업데이트
+     * 
+     * @param projectNo 신청할 프로젝트 번호
+     */
+	public void projectApply(int projectNo);
 }

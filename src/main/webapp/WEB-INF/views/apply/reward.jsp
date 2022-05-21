@@ -67,6 +67,29 @@ textarea::placeholder {
 
 .submit_button {
 	font-weight: 500;
+    background: #A2D5AB;
+    align-items: center;
+    display: inline-flex;
+    width: 112px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin-right: 12px !important;
+    border: 0px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+
+.apply_button {
+	font-weight: 500;
     background: #39AEA9;
     align-items: center;
     display: inline-flex;
@@ -87,7 +110,6 @@ textarea::placeholder {
     border: 0px;
     outline: none;
 }
-
 
 .editor_topContent{
 	margin: 64px auto 0px;
@@ -445,7 +467,7 @@ textarea::placeholder {
     font-weight: normal;
     box-sizing: border-box;
     padding: 0px 24px;
-    background-color: rgb(248, 100, 83);
+    background-color: #39AEA9;
     color: rgb(255, 255, 255);
     flex: 1 1 0%;
 /*     margin: 0px 0px 0px 10px; */
@@ -513,6 +535,9 @@ textarea::placeholder {
 	font-size: 8px;
 }
 
+.rewardDeleteButton:hover, .rewardDeleteButton:active {
+	background: rgb(247,247,247);
+}
 .rewardDeleteDiv svg {
 /* 	width: 1em; */
 /*     height: 1em; */
@@ -525,12 +550,26 @@ textarea::placeholder {
 
 //펀딩 신청하기
 function applyDo() {
+	debugger;
+	if(!'${projectInfo.projectTitle}') {
+		alert("잘못되었다.")
+		return;
+	}
+	
 	$.ajax({
 		type:"get"
 		,url:"/apply/final?projectNo=${projectInfo.projectNo}"
 		,success: function(data){
+// 			var resultNo = ${result }
+// 			if(resultNo == 1) {
+// 				alert("리워드를 추가해주세요.")
+// 			};
+			
 			let url = '/member/main';
 			location.assign(url);
+		}
+		,error: function(e) {
+			alert("모든 정보를 입력해주세요.");
 		}
 	})
 }
@@ -556,7 +595,7 @@ function applySubmit(){
 			"rewardName" : $('#rewardName').val().trim(),
 			"rewardIntro" : $('#rewardIntro').val(),
 			"rewardAmount" : $('#rewardAmount').val(),
-			"rewardPrice" : uncommaRewardPrice,
+			"rewardPrice" : uncommaRewardPrice
 	}
 	
 	$.ajax({
@@ -570,7 +609,7 @@ function applySubmit(){
 			location.assign(url);
 		}
 		,error: function(e) {
-			alert("error!");
+			alert("모든 정보를 입력해주세요.");
 		}
 	})
 }
@@ -756,7 +795,7 @@ function rewardIntroAdd() {
 
 //리워드 삭제
 function rewardDelete(number) {
-    
+    debugger;
 	//넘길 데이터를 담아주는 객체
 	var formData = new FormData();
 	
@@ -795,6 +834,7 @@ function rewardDelete(number) {
 				<a href="/member/main">대충 뒤로가기</a>
 				<div class="top_nav_button">
 					<button class="submit_button" type="button"  onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="apply_button" type="button"  onclick="applyDo()"><span style=" color: rgb(255, 255, 255);">프로젝트 신청</span></button>
 				</div>
 			</div>
 		</div>
