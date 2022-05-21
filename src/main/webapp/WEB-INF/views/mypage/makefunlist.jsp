@@ -24,12 +24,15 @@ $(document).ready(function() {
 
 
 <style>
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 .box {
 	border: 1px solid #DDD;
 	border-radius: 5px;
 	margin-left : 10%;
-	height: 200px;
+	height: 230px;
 	width: 80%;
 	margin-bottom: 20px;
 	background-color: #f9f9f9;
@@ -62,7 +65,7 @@ button {
 	border-radius: 5px;
 	background-color: #183F7B;
 	color: #fff; 
-	width: 51px;
+	width: 85px;
 	height: 25px;
 	border: 0px solid #538fd9;
 	font-size: 15px;
@@ -70,7 +73,11 @@ button {
 	margin-left: 10px;
 }
 
+.container {
 
+/* 	margin-bottom: 700px; */
+
+}
 
 </style>
 
@@ -112,7 +119,7 @@ button {
 <!-- 	<button>검색</button> -->
 <!-- 	</form> -->
 <!-- </div> -->
-
+<br><br><br>
 <form action="/mypage/makefunlist" method="get">
 <div class="FORM">
 	<select name="select" id="select" style="border-radius: 1px; width: 80px; margin-right: 10px;">
@@ -144,4 +151,4 @@ button {
 </div><!-- right -->
 </div> <!-- container  -->
 
-<c:import url="/WEB-INF/views/layout/footer.jsp" />
+

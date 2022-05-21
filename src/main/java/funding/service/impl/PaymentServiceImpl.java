@@ -3,8 +3,11 @@ package funding.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import funding.dao.face.PaymentDao;
 import funding.dto.Delivery;
@@ -20,22 +23,20 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	PaymentDao paymentDao;
 	
+	private static final Logger logger = LoggerFactory.getLogger(PaymentService.class);
+	
 	@Override
 	public List<Reward> rewardListByProjectNo(int projectNo) {
 		return paymentDao.selectRewardByProjectNo(projectNo);
 	}
 	
 	@Override
-	public List<Reward> rewardList() {
-		return paymentDao.selectReward();
-	}
-
-	@Override
 	public Reward detailReward(Reward rewardNo) {
 		return paymentDao.selectByRewardNo(rewardNo);
 	}
 	
 	@Override
+	@Transactional
 	public void addOrder(Order order, int[] rewardNoArr, int[] rewardCountArr) {
 		//주문테이블에 주문정보 삽입 
 		paymentDao.insertOrder(order);
@@ -59,9 +60,12 @@ public class PaymentServiceImpl implements PaymentService {
 		//json 데이터 받아서 넣기
 		Payment payment = new Payment();
 		payment.setOrderNo(Integer.parseInt(map.get("orderNo")));
+		payment.setProjectNo(Integer.parseInt(map.get("projectNo")));
 		payment.setPaymentCode(map.get("paymentCode"));
 		payment.setPaymentMethod(map.get("paymentMethod"));
 		payment.setPaymentTotal(map.get("paymentTotal"));
+		
+		logger.info("결제 DTO 확인~~~~~~~~~~~~~ : {}", payment);
 		
 		paymentDao.insertPayment(payment);
 		
@@ -86,6 +90,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
+	@Transactional
 	public void decreaseAmount(int orderNo) {
 		Order order = new Order();
 		order.setOrderNo(orderNo);

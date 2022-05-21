@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.ChatRoom;
 import funding.repository.ChatRoomRepository;
-import lombok.extern.slf4j.Slf4j;
 
 //@Slf4j
 @Controller
@@ -23,38 +22,41 @@ import lombok.extern.slf4j.Slf4j;
 public class RoomController {
 
 	private static Logger log = LoggerFactory.getLogger(RoomController.class);
-	
+
 	@Autowired
 	private ChatRoomRepository repository;
 
 	// 채팅방 생성
 	@PostMapping("/room")
 	@ResponseBody
-	public ChatRoom createRoom(int memberno) {
+	public ChatRoom createRoom(int projectNo) {
 		log.info("[/chat/room][POST]");
-		log.info("요청파라미터: {}", memberno);
-		return repository.createChatRoom(memberno);
+		log.info("요청파라미터: {}", projectNo);
+		return repository.createChatRoom(projectNo);
 	}
 
 	// 채팅방 입장 화면
-	@GetMapping("/room/enter/{memberNo}")
-	public String roomDetail(Model model, @PathVariable String memberNo, HttpSession session) {
+	@GetMapping("/room/enter/{projectNo}")
+	public String roomDetail(Model model, @PathVariable int projectNo, HttpSession session) {
 		// log.info("[/chat/room/enter/{}][GET]", memberNo);
-		ChatRoom room = repository.findRoomById(Integer.parseInt(memberNo));
+//		ChatRoom room = repository.findRoomById(Integer.parseInt(projectNo));
+		ChatRoom room = repository.findRoomById(projectNo);
 		System.out.println("결과값 테스트: " + room);
 		String sessionId = session.getId();
-		model.addAttribute("memberNo", memberNo);
+//		String sessionNick = session.getNick();
+		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("room", room);
 		model.addAttribute("sessionId", sessionId);
+//		model.addAttribute("sessionNick", sessionNick);
 		return "chat/chattingroom";
 	}
 
 	// 특정 채팅방 조회
-	@GetMapping("/room/{memberNo}")
+	@GetMapping("/room/{projectNo}")
 	@ResponseBody
-	public ChatRoom roomInfo(@PathVariable int memberNo) {
-		log.info("[/chat/room/{}][GET]", memberNo);
-		return repository.findRoomById(memberNo);
+	public ChatRoom roomInfo(@PathVariable int projectNo) {
+		log.info("[/chat/room/{}][GET]", projectNo);
+		return repository.findRoomById(projectNo);
 	}
 }
 //// 채팅 리스트 화면

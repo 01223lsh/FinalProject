@@ -49,6 +49,7 @@ $(document).ready(function() {
 		$("#delete").show();
 	</c:if>
 	
+	
 });
 
 
@@ -56,16 +57,26 @@ $(document).ready(function() {
 
 <style>
 
-button {
-    border-radius: 5px;
-    border: 0px solid black;
-/*     background-color: #183F7B; */
-    background-color: #396EB0;
-    color: white;
-    width: 46px;
-    height: 25px;
-/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
+
+button {
+ 	border-radius: 5px;
+    border: 0px solid black;
+    background-color: #39AEA9;
+    color: white;
+    width: 70px;
+    height: 35px;
+    font-weight: bold;
+/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71);  */
+}
+
+button:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
+}
+
 
 </style>
 
@@ -75,11 +86,11 @@ button {
 <br>
 
 <!-- <p style="font-size: 20px; font-weight: bold; margin-bottom: 20px; margin-left: 10px;" ma>문의 내역</p> -->
-<div id="view"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px; width: 80%; margin-left: 10%; margin-right: 10%;">
+<div id="view"  style="border: 2px solid #A2D5AB; border-radius: 10px; margin-bottom: 30px; width: 60%; margin-left: 20%; margin-right: 20%;">
 
 
 
-<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold;">${qna.qnaTitle }</h2></div>
+<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold; margin-top: 15px;">${qna.qnaTitle }</h2></div>
 <div style="float: left; margin-left: 15px; margin-bottom: 10px;">작성자 : ${qna.nick }</div>
 <%-- <div style="float: right;  margin-bottom: 20px; margin-left: 20px; margin-right: 20px;" >조회수 : ${qna.hit }</div> --%>
 <div style="float: right;  margin-bottom: 10px; margin-right: 10px;" >작성날짜 : <fmt:formatDate value="${qna.qnaCreateDate }" pattern="yy-MM-dd HH:mm:ss"/></div>
@@ -92,10 +103,10 @@ button {
 
 
 
-<div id="review"  style="border: 1px solid #DDD; border-radius: 10px; margin-bottom: 30px; display: none; width: 80%; margin-left: 10%; margin-right: 10%;">
+<div id="review"  style="border: 2px solid #A2D5AB; border-radius: 10px; margin-bottom: 30px; display: none; width: 60%; margin-left: 20%; margin-right: 20%;">
 
 
-<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold;">${qnare.qnaTitle }</h2></div>
+<div style="margin-left: 20px; margin-bottom: 20px;"><h2 style="font-weight: bold;  margin-top: 15px;">${qnare.qnaTitle }</h2></div>
 <div style="float: left; margin-left: 15px; margin-bottom: 10px;">작성자 : ${qnare.nick }</div>
 <%-- <div style="float: right;  margin-bottom: 20px; margin-left: 20px; margin-right: 20px;" >조회수 : ${qna.hit }</div> --%>
 <div style="float: right;  margin-bottom: 10px; margin-right: 10px;" >작성날짜 : <fmt:formatDate value="${qnare.qnaCreateDate }" pattern="yy-MM-dd HH:mm:ss"/></div>
@@ -106,21 +117,21 @@ button {
 
 </div><!-- view -->
 
-<div class="button" style="width: 80%; margin-left: 10%; margin-left: 10%;">
+<div class="button" style="width: 60%; margin-left: 20%; margin-left: 20%;">
 
-<br><br>
+<!-- <br><br> -->
 <!-- <a href="/qna/list"><button class="pull-left;">목록</button></a> -->
-<a href="/qna/list"><button>목록</button></a>
+<a href="/qna/list"><button class="btn1">목록</button></a>
 
 <%-- <c:if test="${memberNo == qna.memberNo}"> --%>
-<a href="/qna/qnaupdate?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px; display: none;" id="update">수정</button></a>
-<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px; display: none;" id="delete">삭제</button></a>
+<a href="/qna/qnaupdate?qnaNo=${qna.qnaNo }"><button  style="margin-right: 10px; display: none; float: right;" id="update">수정</button></a>
+<a href="/qna/qnadelete?qnaNo=${qna.qnaNo }"><button  style="margin-right: 10px; display: none;  float: right;" id="delete">삭제</button></a>
 
 <%-- </c:if> --%>
 
 <%-- <c:if test="${grade == 2 && reCnt ==1}"> --%>
-<a href="/qna/qnarewrite?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px; display: none;" id="reply" >답변작성</button></a>
-<a href="/qna/qnadeleteAd?qnaNo=${qna.qnaNo }"><button class="pull-right" style="margin-right: 10px; display: none;" id="deletead" >삭제ad</button></a>
+<a href="/qna/qnarewrite?qnaNo=${qna.qnaNo }"><button style="margin-right: 10px; display: none; width: 80px;  float: right;" id="reply" >답변작성</button></a>
+<a href="/qna/qnadeleteAd?qnaNo=${qna.qnaNo }"><button style="margin-right: 10px; display: none;  float: right;" id="deletead" >삭제ad</button></a>
 <%-- </c:if> --%>
 
 </div><!--.button  -->
