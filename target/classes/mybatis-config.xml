@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<!-- 컬럼의 Snake Case를 DTO의 Camel Case로 자동 변환하는 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		
+		<!-- JDBC타입이 명시되지않았을 때 null값을 처리하는 방법을 설정한다 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+</configuration>
