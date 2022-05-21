@@ -20,11 +20,15 @@ $(document).ready(function() {
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+ 
 .box {
 	border: 1px solid #DDD;
 	border-radius: 5px;
 	margin-left : 10%;
-	height: 200px;
+	height: 230px;
 	width: 80%;
 	margin-bottom: 20px;
 	background-color: #f9f9f9;
@@ -66,6 +70,12 @@ button {
 	margin-left: 10px;
 }
 
+.my-4 {
+    margin-top: 18.5rem!important;
+    margin-bottom: 1.5rem!important;
+}
+
+
 
 </style>
 
@@ -103,7 +113,7 @@ button {
 <!-- 	<button>검색</button> -->
 <!-- 	</form> -->
 <!-- </div> -->
-<br>
+<br><br><br>
 <form action="joinfunlist" method="get">
 <div class="FORM">
 	<select name="select" id="select" style="border-radius: 1px; width: 80px; margin-right: 10px;">
@@ -127,9 +137,9 @@ button {
 </div><!-- .allbox -->
 
 </div><!-- main --><br><br>
-
+<br>
 <c:if test="${paging.totalCount ne 0}">
-<c:import url="/WEB-INF/views/mypage/joinlistpaging.jsp" />
+<c:import url="/WEB-INF/views/mypage/joinlistpaging.jsp" /><br><br><br><br><br>
 </c:if>
 
 </div><!-- right -->

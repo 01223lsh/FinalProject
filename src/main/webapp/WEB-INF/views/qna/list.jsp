@@ -9,6 +9,10 @@
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 th{
 	text-align: center;
 }
@@ -36,10 +40,10 @@ button {
     border-radius: 5px;
     border: 0px solid black;
 /*     background-color: #183F7B; */
-    background-color: #396EB0;
+    background-color: #39AEA9;
     color: white;
-    width: 85px;
-    height: 25px;
+    width: 70px;
+    height: 50px;
 /*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
 }
 
@@ -54,6 +58,13 @@ select {
  a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: none;}
+
+
+button:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
+}
+
 
 </style>
 
@@ -88,8 +99,8 @@ select {
 	</c:forEach>
 
 </table><br>
-<a href="/qna/qnawrite" ><button class="pull-left">글쓰기</button></a>
-<div class="pull-right">
+<a href="/qna/qnawrite" ><button style="float: left; width: 80px; height:32px; font-weight: bold;">글쓰기</button></a>
+<div style="float: right;">
 <span >총 게시글 수 : ${paging.totalCount }</span>
 </div>
 <br><br><br>
@@ -108,7 +119,7 @@ select {
 <!-- 		<option value="qnaContent" id="qnaContent">내용</option> -->
 <!-- 	</select> -->
 	<input type="text" name="search" id="search" placeholder="검색어를 입력하세요"  value="${param.search}" />
-	<button>검색</button>
+	<button style="height: 32px; font-weight: bold;">검색</button>
 
 </div>
 
@@ -117,7 +128,7 @@ select {
 <br>
 
 </div><!-- main --><br><br>
-<c:import url="/WEB-INF/views/qna/listpaging2.jsp" />
+<c:import url="/WEB-INF/views/qna/listpaging.jsp" />
 </div><!-- container -->
-
+<br>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

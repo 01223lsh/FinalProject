@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 public class AlertController {
 	
-	
+	  
 	public void alertList(HttpSession session
 						, Model model
 //						,HttpServletRequest req

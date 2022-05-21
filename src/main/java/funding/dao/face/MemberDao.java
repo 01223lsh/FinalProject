@@ -8,6 +8,14 @@ import org.json.simple.JSONObject;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
 
+/**
+ * @author youngjae
+ *
+ */
+/**
+ * @author youngjae
+ *
+ */
 public interface MemberDao {
 
 	/**
@@ -217,5 +225,14 @@ public interface MemberDao {
 	 * @return DB에 등록된 해당 유저의 정보
 	 */
 	public List<Member> selectNaverInfo(JSONObject naverInfo);
+	
+	/**
+	 * 멤버번호를 통하여 멤버정보를 조회하는 쿼리문 실행 
+	 * made by 정영재
+	 * 
+	 * @param memberNo
+	 * @return
+	 */
+	public Member selectByMemberNo(int memberNo);
 
 }

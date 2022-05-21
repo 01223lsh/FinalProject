@@ -8,19 +8,24 @@
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 input {
 	border: 2px solid #DDD;
 	text-align: center;
 	border-radius: 5px;
+	width: 220px;
 }
 
 button {
 
 	border-radius: 5px;
-	background-color : #183F7B;
+	background-color : #39AEA9;
 	color: #fff; 
-	width: 85px;
-	height: 28px;
+	width: 150px;
+	height: 40px;
 	border: 0px solid #538fd9;
 	font-size: 15px;
 	font-weight: bold;
@@ -40,7 +45,7 @@ p {
 
 .all {
 
-    border: 3px solid #183F7B;
+    border: 4px solid #39AEA9;
     width: 549px;
     height: 308px;
     border-radius: 15px;
@@ -50,7 +55,10 @@ p {
 
 }
 
-
+#OkBtn:hover {
+	background-color: #557B83;
+	transition: background-color 0.2s;
+}
 </style>
 
 
@@ -72,9 +80,9 @@ p {
 		</div>
 	</div>
 	
-<br><br><br>
+<br><br>
 <div style="text-align: center; ">
-<button>확인</button>
+<button id="OkBtn">확인</button>
 </div>
 </form>
 </div> <!-- .pwform -->

@@ -50,6 +50,9 @@ $(document).ready(function() {
 		$("#makefunding").show();
 	};
 	
+	
+
+	
 // 	var id = ${id};
 // 	var kakao = "kakaoUser";
 // 	var naver = "naverUser";
@@ -148,21 +151,23 @@ $(document).ready(function() {
 
 .left {
 /* 	border : 1px solid black; */
-/* 	background-color: #538fd9; */
-	background-color: #f3f3f6;
-/*  background-color: #E0ECF8; */
- 	height: 100%;
+/* 	background-color: #f3f3f6; */
+ 	height: 1500px;
  	width: 15%;
  	float: left;
-
+ 	font-family: 'IBM Plex Sans KR', sans-serif;
+	margin-left: 15%;
 }
 
 .right {
 
 	background-color: #fff;
-	height: 1000px;
-	width: 85%;
-	margin-left: 15%;
+/* 	height: 1000px; */
+	height: 100%;
+	width: 60%;
+	margin-left: 30%;
+	margin-right: 10%;
+
 }
 
 h1 {
@@ -193,8 +198,8 @@ ul {
 .menu {
 	text-align: center;
 	margin-top: 40%;
-	line-height: 70px;
-	font-size: 16px;
+	line-height: 80px;
+	font-size: 17px;
   text-decoration: none;
 }
 
@@ -207,20 +212,38 @@ ul {
   font-weight: bold;
 }
 
+
+
+
+
 li a:hover {
 /* 	background-color : #538fd9; */
-    color: #183F7B;
-  text-decoration: none;
+     color: #39AEA9;
+     font-weight : bolder;
+/*   text-decoration: none; */
+
+	transition: 0.35s;
+/* 	text-shadow: 0 -1px 0 white, 0 1px 0 #E5EFC1, 0 2px 0 #E5EFC1, 0 3px 0 #E5EFC1, 0 5px 0 #E5EFC1, 0 5px 0 #E5EFC1; */
+	
+
+
+
+
 }
 
 a:vistied { 
-	color: #fff;
+	color: #39AEA9;
 	text-decoration: none;
 }
 
 
+html, body {
+	height: 100%;
+
+}
 
 
+a.active-color { color: red; }
 </style>
 
 

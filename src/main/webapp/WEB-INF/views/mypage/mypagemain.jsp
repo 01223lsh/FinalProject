@@ -4,6 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
+
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 <c:import url="/WEB-INF/views/layout/mypageheader.jsp" />
 
@@ -72,8 +77,12 @@ $(document).ready(function() {
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 .border {
-	border: 2px solid #DDD;
+	border: 2px solid #39AEA9;
 	border-radius: 8px;
 	margin-left : 15%;
 	height: 150px;
@@ -81,7 +90,7 @@ $(document).ready(function() {
 }
 
 .borderUser {
-	border: 2px solid #DDD;
+	border: 4px solid #A2D5AB;
 	border-radius: 8px;
 	margin-left : 15%;
 	height: 150px;
@@ -89,7 +98,7 @@ $(document).ready(function() {
 }
 
 .borderSeller {
-	border: 2px solid #DDD;
+	border: 4px solid #A2D5AB;
 	border-radius: 8px;
 	margin-left : 15%;
 	height: 300px;
@@ -97,7 +106,7 @@ $(document).ready(function() {
 }
 
 .border2 {
-	border: 2px solid #DDD;
+	border: 4px solid #A2D5AB;
 	border-radius: 8px;
 	margin-left : 15%;
 	height: 210px;
@@ -164,9 +173,10 @@ button {
 	margin-left : 10%;
 	height: 100%;
 	width: 80%;
-
+	font-family: 'IBM Plex Sans KR', sans-serif;
 
 }
+
 
 </style>
 
@@ -177,7 +187,7 @@ button {
 
 
 
-<div>
+<div style="margin-top: 30px;">
 <p style="font-size: 20px; font-weight: bolder; margin-top: 40px; display: inline-block;">${nick }님, 안녕하세요! </p>
 <img src="/resources/img/mypage/smile.png" alt="안나오네" height="25px" width="25px;" style="margin-top: -10px;">
 </div><br><br>
@@ -201,7 +211,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">참여중인 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">참여중인 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px; "></div>
@@ -218,7 +228,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">참여했던 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">참여했던 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
@@ -237,7 +247,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">나의 문의사항</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">나의 문의사항</span>
 		</div>
 	</div>
 
@@ -251,7 +261,7 @@ button {
 <div class="borderSeller">
 <div class="FinalSeller">
 <div class="seller1" style="display: none;">
-	<div id="first" style="height: 150px; width: 33%; float: left; border-bottom: 1px solid #DDD;">
+	<div id="first" style="height: 150px; width: 33%; float: left; border-bottom: 3px solid #A2D5AB;">
 		<div style="height: 80px; line-height: 100px; ">
 		
 		
@@ -264,7 +274,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">작성중인 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">작성중인 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px; "></div>
@@ -273,7 +283,7 @@ button {
 
 <!-- 판매자 - 승인대기 프로젝트 -->
 <div class="seller2" style="display: none;">
-	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 1px solid #DDD;">
+	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 3px solid #A2D5AB;">
 		<div style="height: 80px; line-height: 100px; ">
 		
 			<c:choose>
@@ -284,7 +294,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">승인 대기중 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">승인 대기중 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
@@ -292,7 +302,7 @@ button {
 
 <!-- 판매자 - 승인거절된 프로젝트 -->
 <div class="seller3" style="display: none;">
-	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 1px solid #DDD;">
+	<div id="first"  style="height: 150px; width: 33%; float: left; border-bottom: 3px solid #A2D5AB;">
 		<div style="height: 80px; line-height: 100px; ">
 		
 			<c:choose>
@@ -303,7 +313,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">승인 거절된 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">승인 거절된 프로젝트</span>
 		</div>
 	</div>
 <!-- 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div> -->
@@ -323,7 +333,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">진행 대기중 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">진행 대기중 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
@@ -343,7 +353,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">진행중인 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">진행중인 프로젝트</span>
 		</div>
 	</div>
 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div>
@@ -363,7 +373,7 @@ button {
 		</div>
 			<hr>
 		<div>	
-			<span style="font-size: 18px; line-height: 0px;">종료된 프로젝트</span>
+			<span style="font-size: 18px; line-height: 0px; font-weight: bold; line-height: 20px;">종료된 프로젝트</span>
 		</div>
 	</div>
 <!-- 	<div style="border: 1px solid #DDD; float: left; width: 0.1px; height: 150px;"></div> -->
@@ -396,7 +406,7 @@ button {
 		<div style="height: 10%; line-height: 40px;">
 			<span style="font-size: 18px; font-weight: bold;">나의 최근 문의내역</span>
 		</div>
-			<hr style="margin-bottom: 5px;">
+			<hr style="margin-bottom: 5px; height: 3px; color: #A2D5AB">
 		<div>	
 		
 			<c:forEach var="q" items="${qnalist }" begin="0" end="${fn:length(qnalist)}" >
@@ -427,15 +437,15 @@ button {
 
 <div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/notice2.png" alt="안나오네" height="40px" width="40px;" style="margin-top: -10px;">
-	<a href="/notice/list"><button>공지사항</button></a>
+	<a href="/notice/list"><button style="font-weight: bold;">공지사항</button></a>
 </div>
 <div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/guide.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -10px;">
-	<a href="/main/guide"><button>이용가이드</button></a>
+	<a href="/main/guide"><button  style="font-weight: bold;">이용가이드</button></a>
 </div>
 <div style="margin-top: 50px; text-align: center;" class="etcBtn">
 	<img src="/resources/img/mypage/cs.png" alt="안나오네" height="35px" width="35px;" style="margin-top: -15px;">
-	<a href="/qna/list"><button>고객센터</button></a>
+	<a href="/qna/list"><button  style="font-weight: bold;">고객센터</button></a>
 </div>
 
 
