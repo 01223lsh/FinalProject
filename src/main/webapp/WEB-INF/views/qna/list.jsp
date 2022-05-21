@@ -38,7 +38,7 @@ button {
 /*     background-color: #183F7B; */
     background-color: #396EB0;
     color: white;
-    width: 55px;
+    width: 85px;
     height: 25px;
 /*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
 }

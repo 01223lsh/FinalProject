@@ -62,7 +62,7 @@ button {
 	border-radius: 5px;
 	background-color: #183F7B;
 	color: #fff; 
-	width: 51px;
+	width: 85px;
 	height: 25px;
 	border: 0px solid #538fd9;
 	font-size: 15px;

@@ -8,11 +8,11 @@
  
     <select id="selectChatRoomByroomId" parameterType="int" resultType="funding.dto.ChatRoom">
         SELECT * FROM chat_room 
-        WHERE member_no = #{memberNo} 
+        WHERE project_no = #{projectNo} 
     </select>
     
     <insert id="insertChatRoom" parameterType="int">
-        INSERT INTO chat_room VALUES(SEQ_CHATROOM_ID.NEXTVAL, #{memberNo} )
+        INSERT INTO chat_room VALUES(CHATROOM_ID_SEQ.NEXTVAL, #{projectNo} )
     </insert>
     
 </mapper>

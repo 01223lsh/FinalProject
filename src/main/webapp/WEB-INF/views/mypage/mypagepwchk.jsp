@@ -19,7 +19,7 @@ button {
 	border-radius: 5px;
 	background-color : #183F7B;
 	color: #fff; 
-	width: 63px;
+	width: 85px;
 	height: 28px;
 	border: 0px solid #538fd9;
 	font-size: 15px;

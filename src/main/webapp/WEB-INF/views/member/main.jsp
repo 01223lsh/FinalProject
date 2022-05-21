@@ -184,10 +184,10 @@ function setCondition() {
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/resources/jpg/perfume.JPG"" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <img src="/resources/jpg/은지님하늘사진.jpg"" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h5>#푸른하늘 #맑은날씨</h5>
+        <p>by. 멋진 하늘</p>
       </div>
     </div>
   </div>
