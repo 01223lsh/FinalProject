@@ -14,9 +14,14 @@
 
 <script type="text/javascript">
 
+<c:if test = "${deliveryResult eq 1}">
+$("#delivery").show();
+</c:if>	
 
-
-
+<c:if test = "${deliveryResult eq 0}">
+$("#delivery").hide();
+$(".cont").hide();
+</c:if>	
 </script>
 
 
@@ -55,7 +60,7 @@
 #BTN {
 
 	border-radius: 7px;
-	background-color: #39AEA9 !important;
+	background-color: #39AEA9 ;
 	color: white; 
 	width: 220px;
 	height: 50px;
@@ -164,7 +169,7 @@
 	</div><!-- .item  -->
 	
 <!--네번째  -->
-<div class="item">	
+<div class="item" id="delivery">	
 	<div class="cont" style="text-align: left; margin-top: 20px;">
 <p> </p>
 		<p style="font-weight: bolder; font-size: 15px;">배송지 정보</p>

@@ -30,6 +30,7 @@ public class Project {
 	private String talkTime;		// 판매자 채팅 가능 시간
 	
 	private int rnum;
+
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
@@ -38,6 +39,7 @@ public class Project {
 				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
 				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
 				+ ", sum=" + sum + ", talkTime=" + talkTime + ", rnum=" + rnum + "]";
+
 	}
 
 

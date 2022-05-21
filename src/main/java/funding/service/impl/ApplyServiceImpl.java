@@ -209,5 +209,13 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.rewardDelete(rewardNo);
 	}
 	
+	@Override
+	public void projectApply(int projectNo) {
+		
+		//프로젝트 신청하기
+		applyDao.projectApply(projectNo);
+	}
+	
+	
 	
 }

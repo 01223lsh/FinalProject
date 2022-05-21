@@ -206,7 +206,6 @@ ul {
 
 .m {
   text-decoration: none;
-
   display: block;
   color: black;
   font-weight: bold;
@@ -224,17 +223,14 @@ li a:hover {
 
 	transition: 0.35s;
 /* 	text-shadow: 0 -1px 0 white, 0 1px 0 #E5EFC1, 0 2px 0 #E5EFC1, 0 3px 0 #E5EFC1, 0 5px 0 #E5EFC1, 0 5px 0 #E5EFC1; */
-	
-
-
 
 
 }
 
-a:vistied { 
-	color: #39AEA9;
-	text-decoration: none;
-}
+ a:vistied {  
+ 	color: #000; 
+ 	text-decoration: none; 
+ } 
 
 
 html, body {
@@ -243,7 +239,7 @@ html, body {
 }
 
 
-a.active-color { color: red; }
+/* a.active-color { color: red; } */
 </style>
 
 
@@ -251,13 +247,13 @@ a.active-color { color: red; }
 
 <div class="menu">
 <ul>
-	<li><a class="m" href="/mypage/mypagemain" id="mypagemain">MY PAGE</a></li>
-	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo">회원 정보 확인/수정</a></li>
-	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none;">판매 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagemain" id="mypagemain" >MY PAGE</a></li>
+	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo" >회원 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none; ">판매 정보 확인/수정</a></li>
 <!-- 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li> -->
 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
-	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none;">내가 제작한 펀딩</a></li>
-	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
+	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none; ">내가 제작한 펀딩</a></li>
+	<li><a class="m" href="#" style="color: #000;"">소셜체크확인용${socialchk }</a></li>
 	
 	<c:if test="${id.equals('kakaoUser')}">
 	<li><a class="m"  class="delete" id="deleteK" href="/member/kakaounlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
@@ -265,10 +261,7 @@ a.active-color { color: red; }
 	<c:if test="${id.equals('naverUser')}">
 	<li><a class="m"  class="delete" id="deleteN" href="/member/naverunlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
 	</c:if>
-	
-		<li><a class="m"  id="delete" style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
-		
-	
+		<li><a class="m"  id="delete" style="display: none; margin-top: 50px;">회원탈퇴</a></li>
 </ul>
 </div> <!-- menu -->
 </div><!-- left -->

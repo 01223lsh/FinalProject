@@ -104,9 +104,15 @@
 		VALUES( #{rewardNo}, #{projectNo}, #{rewardPrice}, #{rewardAmount}, #{rewardName}, #{rewardIntro} )
 	</insert>
 	
-<!-- 	<select id=""> -->
-		
-<!-- 	</select> -->
+	<delete id="rewardDelete" parameterType="int">
+		DELETE FROM reward  
+		WHERE reward_no = ${rewardNo}	
+	</delete>
 	
+	<update id="projectApply" parameterType="int">
+		UPDATE project
+           SET project_step = 1
+        WHERE project_no = #{projectNo}
+	</update>
 	
 </mapper>	

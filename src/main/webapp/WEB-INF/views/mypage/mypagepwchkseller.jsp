@@ -64,6 +64,10 @@ p {
 	transition: background-color 0.2s;
 }
 
+a:visited {
+	color: #000;
+}
+
 </style>
 
 
