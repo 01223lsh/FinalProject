@@ -534,5 +534,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> getinfo(JSONObject naverInfo) {
 		return memberDao.selectNaverInfo(naverInfo);
 	}
+	
+	//멤버번호를 통해서 멤버정보 조회 From 정영재 
+	@Override
+	public Member getUserInfoByMemberNo(int memberNo) {
+		return memberDao.selectByMemberNo(memberNo);
+	}
 
 } // service end

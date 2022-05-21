@@ -56,7 +56,7 @@
   }
   .section-body .body-intro {
     font-size: 12px;
-    height: 40px;
+    height: 55px;
     overflow: hidden;
   }
   .section-body .body-progress {
@@ -86,9 +86,10 @@
 <script>
 
 $(document).ready(function() {
-
+	// 필터, 정렬 조건 불러오기
+	setCondition()
 	// 검색어 입력
-	$("input[name=keyword]").on("keyup", function(key) {
+	$("input[name=keyword-list]").on("keyup", function(key) {
 		if (key.keyCode == 13) {
 			getList('${pagination.category}');
 		}
@@ -101,33 +102,36 @@ $(document).ready(function() {
 	$("select[name=order]").change(function() {
 		getList('${pagination.category}');
 	})
-	// 필터, 정렬 조건 유지
-	setCondition()	
-	
-	
 })
-
-
-
 // 프로젝트 리스트 조회
-function getList(category) {
-	var curPage = '${pagination.curPage}';
-	var keyword = $("input[name=keyword]").val();
-	if (category === undefined) var category = '';
-	var category = category; 
-	var filter = $("select[name=filter]").val();
-	var order = $("select[name=order]").val();
+function getList(cate, page) {
+	let curPage;
+    let category;
+    // 현재 페이지 매개변수가 전달되지 않아 undefine 일 떄 기본값 설정
+    if (page == undefined) {
+      curPage = 1;
+    } else {
+      curPage = page
+    }
+    // 카테고리 매개변수가 전달되지 않아 undefine 일 떄 기본값 설정
+	if (cate === undefined) {
+      category = '';
+    } else {
+      category = cate;
+    }
+
+	let keyword = $("input[name=keyword-list]").val();
+	let filter = $("select[name=filter]").val();
+	let order = $("select[name=order]").val();
 	
 	console.log(
-		'cuarPage: ' + curPage
+		'curPage: ' + curPage
 		+ ' / keyward: ' + keyword
 		+ ' / category: ' + category
 		+ ' / filter: ' + filter
 		+ ' / order: ' + order
 	)
-	
 	location.href="/project/list?curPage=" + curPage + "&keyword=" + keyword + "&category=" + category + "&filter=" + filter + "&order=" + order;
-	
 }
 // 정렬 조건 유지
 function setCondition() {
@@ -155,49 +159,6 @@ function setCondition() {
 
 <!-- header -->
 <%@include file="/WEB-INF/views/layout/header.jsp" %>
-<!--
-<header>
-
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <div class="container py-2">
-      <a class="navbar-brand" href="#">크라우드 펀딩</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <div class="col-md-3 text-end">
-<button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/login'">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-</header>
--->
-<!-- /header -->
 
 <main>
 
@@ -206,13 +167,13 @@ function setCondition() {
   <div class="container py-5">
     <div class="row">
       <div class="col text-center" onclick="getList()">
-<div><img src="/resources/img/project/category/all.svg" style="height: 60px"></div>
+      <div><img src="/resources/img/project/category/all.svg" style="height: 60px"></div>
         <span>전체</span>
       </div>
       
       <c:forEach var="c" items="${cList}">
       <div class="col text-center me-4" onclick="getList('${c.categoryNo}')">
-<div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="height: 60px"></div>
+      <div><img src="/resources/img/project/category/${c.categoryNo}.svg"  style="height: 60px"></div>
         <span>${c.categoryName}</span>
       </div>
       </c:forEach>
@@ -220,9 +181,6 @@ function setCondition() {
     </div>
   </div>
 </section>
-
-<!-- /카테고리 -->
-
 
 <!-- 프로젝트 목록 -->
 <section>
@@ -233,10 +191,8 @@ function setCondition() {
   <div class="container">
     <div class="row">
       <div class="col-auto me-auto">
-        <input class="form-control" list="datalistOptions" placeholder="Type to search..." name="keyword" value="${paramData.keyword }">
+        <input class="form-control" list="datalistOptions" placeholder="Type to search..." name="keyword-list" value="${paramData.keyword }">
         <datalist id="datalistOptions">
-          <!-- <option value="추천 검색어1">
-          <option value="추천 검색어2"> -->
         </datalist>
       </div>
       <div class="col-auto">
@@ -261,37 +217,6 @@ function setCondition() {
 
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto;">
-
-      <%--<c:forEach var="p" items="${list}">
-      <div class="col" style="max-width: 250px;">
-        <div class="card shadow-sm">
-          <img src="${p.projectImage }" style="min-height: 250px;">
-          <div class="card-body">
-            <strong>${p.projectTitle}</strong>
-            <c:if test="${p.projectStep eq 4}">
-              <span id="project-status">마감</span>
-            </c:if>
-            <p class="card-text">${p.projectIntro}</p>
-            <progress value="${p.sum}" max="${p.projectPrice}"></progress>
-            <div class="row fs-6">
-              <div class="col d-flex">
-              <span style="margin-right: 10px;">
-                <fmt:formatNumber value="${p.sum / p.projectPrice}" type="percent"/>
-              </span>
-                <span>
-                  <fmt:formatNumber value="${p.projectPrice}" pattern="#,###"/>
-              </span>
-              </div>
-              <div class="col text-end">
-              <span>
-              <fmt:formatDate value="${p.closeDate}" pattern="yy/MM/dd"/>
-              </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </c:forEach>--%>
 
       <c:forEach var="p" items="${list}">
       <%-- 테스트 영역 --%>
@@ -334,12 +259,59 @@ function setCondition() {
       </div>
       </c:forEach>
 
-
-
-
-
     </div>
   </div>
+
+  <%-- 페이지네이션 --%>
+  <div class="container">
+    <!-- 페이지네이션 -->
+    <div class="row justify-content-center" style="margin-top: 20px;">
+      <div class="col-auto">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <!-- 이전 -->
+            <c:if test="${pagination.curPage gt 1}">
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${pagination.curPage - 10})">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${pagination.prevPage})">Prev</a></li>
+            </c:if>
+
+            <!-- 페이지들 -->
+            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="i">
+              <c:choose>
+                <c:when test="${pagination.curPage eq i }">
+                  <li class="page-item active">
+                    <a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${i})">${i}</a>
+                  </li>
+                </c:when>
+                <c:otherwise>
+                  <li class="page-item">
+                      <%-- <a class="page-link" href="/board/list?curPage=${i}">${i}</a> --%>
+                    <a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${i})">${i}</a>
+                  </li>
+                </c:otherwise>
+              </c:choose>
+            </c:forEach>
+
+            <!-- 다음 -->
+            <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.curPage lt pagination.pageCnt}">
+              <li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${pagination.nextPage})">Next</a></li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0);" onclick="getList('${pagination.category}', ${pagination.curPage + 10})">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </c:if>
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <%-- 페이지네이션 --%>
 
 </div>
 
@@ -362,8 +334,6 @@ function setCondition() {
   </footer>
 </div>
 <!-- /footer-->
-
-
 
 </body>
 </html>

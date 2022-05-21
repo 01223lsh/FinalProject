@@ -22,9 +22,9 @@ function requestPay() {
 		name: $("#projectTitle").val(),
 // 		amount: 0,
 		amount: ${order.totalPrice},
-		buyer_email: "dudwo2144@gmail.com",
-		buyer_name: "세션 멤버 이름",
-		buyer_tel: "세션 멤버 연락처"
+		buyer_email: $("#memberEmail").val(),
+		buyer_name: $("#memberName").val(),
+		buyer_tel: $("#memberPhone").val()
 		
 	}, function (rsp) { // callback
 		if ( rsp.success ) { // 결제 성공 로직
@@ -56,7 +56,7 @@ function requestPay() {
 				})
 			}).done(function (data) {
 				// 가맹점 서버 결제 API 성공시 로직
-				location.href="/payment/result?orderNo=" + $("#orderNo").val() + "&projectNo=" + $("#projectNo").val();
+				location.href="/payment/result?orderNo=" + $("#orderNo").val() + "&projectNo=" + $("#projectNo").val() + "&memberNo=" + ${member.memberNo};
 			})
 		}
 	    else {
