@@ -55,7 +55,7 @@ public class ProjectViewController {
 		
 		seller = projectViewService.getSeller(project);
 		
-		logger.info("{}",seller);
+		logger.info("seller 정보 {}",seller);
 		
 		model.addAttribute("project", project);
 		model.addAttribute("seller", seller);
@@ -102,7 +102,7 @@ public class ProjectViewController {
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(project.getProjectNo());
 		
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(project.getProjectNo());
 		
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("project", project);
@@ -115,10 +115,11 @@ public class ProjectViewController {
 	public String projectCommentList(Project project, Model model) {
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(project.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(project.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("project", project);
+		logger.info("comment List {}", project);
 		
 		return "project/commentList";
 	}
@@ -136,10 +137,12 @@ public class ProjectViewController {
 	public String projectNewsView(ProjectNews news, Model model,Project project) {
 		
 		news = projectViewService.getNewsView(news);
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		model.addAttribute("news", news);
 		model.addAttribute("project", project);
+		
+		logger.info("news view {}", project);
 		return "project/newsView";
 	}
 	
@@ -158,7 +161,7 @@ public class ProjectViewController {
 		
 		
 		projectViewService.writeNews(news);
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
 		
@@ -175,7 +178,7 @@ public class ProjectViewController {
 		projectViewService.deleteNews(news);
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("projectNo", news.getProjectNo());
@@ -193,7 +196,7 @@ public class ProjectViewController {
 		projectViewService.writeComment(comment);
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(comment.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("projectNo", comment.getProjectNo());
@@ -209,7 +212,7 @@ public class ProjectViewController {
 		projectViewService.deleteComment(comment);
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(comment.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("projectNo", comment.getProjectNo());

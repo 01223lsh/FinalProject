@@ -39,7 +39,7 @@ public interface ProjectViewService {
 
 	public Member getSeller(Project project);
 
-	public Project getStep(Project project);
+	public Project getStep(int projectNo);
 
 	public String fileUpload(MultipartFile file);
 
