@@ -12,13 +12,13 @@ public class Payment {
 	private String paymentMethod;
 	private Date paymentDate;
 
+	private Member member;
+
 	@Override
 	public String toString() {
 		return "Payment [paymentNo=" + paymentNo + ", orderNo=" + orderNo + ", projectNo=" + projectNo
 				+ ", paymentCode=" + paymentCode + ", paymentTotal=" + paymentTotal + ", paymentMethod=" + paymentMethod
-
-				+ ", paymentDate=" + paymentDate + "]";
-
+				+ ", paymentDate=" + paymentDate + ", member=" + member + "]";
 	}
 	public int getPaymentNo() {
 		return paymentNo;
@@ -63,4 +63,12 @@ public class Payment {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
+	
 }

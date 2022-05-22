@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -38,10 +39,14 @@ public interface ProjectViewService {
 
 	public Member getSeller(Project project);
 
-	public Project getStep(Project project);
+	public Project getStep(int projectNo);
 
 	public String fileUpload(MultipartFile file);
 
 	public void updateTalktime(Project project);
+
+	public int getContributors(int projectNo);
+
+	public List<Payment> getContributorsList(Payment payment);
 
 }

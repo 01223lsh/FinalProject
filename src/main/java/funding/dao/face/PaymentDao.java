@@ -88,4 +88,11 @@ public interface PaymentDao {
 	 * @return
 	 */
 	public Order selectByOrderNo(Order order);
+
+	/**
+	 * 해당 프로젝트 번호를 통해 결제 행의 수를 조회하는 쿼리문
+	 * @param projectNo
+	 * @return
+	 */
+	public int selectCntPaymentByProjectNo(int projectNo);
 }

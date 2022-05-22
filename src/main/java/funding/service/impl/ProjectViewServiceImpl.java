@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import funding.dao.face.ProjectViewDao;
 import funding.dto.Member;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -105,9 +106,9 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 	}
 	
 	@Override
-	public Project getStep(Project project) {
+	public Project getStep(int projectNo) {
 		
-		return projectViewDao.selectStep(project);
+		return projectViewDao.selectStep(projectNo);
 	}
 	
 	@Override
@@ -135,5 +136,17 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 	public void updateTalktime(Project project) {
 		
 		projectViewDao.updateTalktime(project);
+	}
+	
+	@Override
+	public int getContributors(int projectNo) {
+		
+		return projectViewDao.selectContributors(projectNo);
+	}
+	
+	@Override
+	public List<Payment> getContributorsList(Payment payment) {
+		
+		return projectViewDao.selectContributorsList(payment);
 	}
 }

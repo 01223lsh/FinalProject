@@ -23,6 +23,7 @@ function grade(grade){
 		,success : function(res){
 			console.log("등급별로");
 			$("#resultLayout").html(res)
+			$(".grade"+grade).css("color","#527578")
 		}
 		,error : function(res){
 			console.log("오류")
@@ -285,27 +286,27 @@ td {
 	<div class="col text-center" id="General">
 	
 	
-		<a onclick="grade(0)"><i class="fa-solid fa-user fa-5x"></i></a>
+		<a onclick="grade(0)"><i class="fa-solid fa-user fa-5x grade0"></i></a>
 		<br>
 		<span>일반유저</span>
 	</div>
 	<div class="col text-center" id="Entrepreneur">
-		<a onclick="grade(1)"><i class="fa-solid fa-suitcase fa-5x"></i></a>
+		<a onclick="grade(1)"><i class="fa-solid fa-suitcase fa-5x grade1"></i></a>
 		<br>
 		<span>사업자</span>
 	</div>
 	<div class="col text-center" id="Manager">
-		<a onclick="grade(2)"><i class="fa-solid fa-clipboard-user fa-5x"></i></a>
+		<a onclick="grade(2)"><i class="fa-solid fa-clipboard-user fa-5x grade2"></i></a>
 		<br>
 		<span>관리자</span>
 	</div>
 	<div class="col text-center" id="All">
-		<a onclick="grade(4)"><i class="fa-solid fa-users fa-5x"></i></a>
+		<a onclick="grade(4)"><i class="fa-solid fa-users fa-5x grade4"></i></a>
 		<br>
 		<span>전체</span>
 	</div>
 	<div class="col text-center" id="Disabled">
-		<a onclick="grade(3)"><i class="fa-solid fa-user-ninja fa-5x"></i></a>
+		<a onclick="grade(3)"><i class="fa-solid fa-user-ninja fa-5x grade3"></i></a>
 		<br>
 		<span>비활성화</span>
 	</div>

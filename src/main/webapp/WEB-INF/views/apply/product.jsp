@@ -269,7 +269,7 @@ textarea::placeholder {
 	box-sizing: border-box;
 	border-radius: 4px;
 	outline: none;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.7em;
 }
 
@@ -295,7 +295,8 @@ function applySubmit(){
 			"projectNo" : ${projectInfo.projectNo},
 			"categoryNo" : $('#categoryNo').val(),
 			"projectTitle" : $('#projectTitle').val().trim(),
-			"projectIntro" : $('#projectIntro').val().trim()
+			"projectIntro" : $('#projectIntro').val().trim(),
+			"talkTime" : $('#talkTime').val().trim()
 	}
 	
 	//formData에 'projectPhoto'라는 키값으로 append 
@@ -383,32 +384,70 @@ $(function() {
 	$('#projectIntro').keyup(function (e) { 
 		let content = $(this).val(); 
 		
-		// 글자수 세기
+		// 글자수 세기 - projectIntro
 		if (content.length == 0 || content == '') { 
-			$('#textCount').text('0자'); 
+			$('#textCount_projectIntro').text('0자'); 
 			$('.submit_button').attr('disabled', 'disabled');
 		} else if(content.length < 10 && content.length > 0) { 
-			$('.projectItem_textarea').css('color', 'rgb(218, 74, 73)');
-			$('.projectItem_textarea textarea').css('border', '1px solid rgb(218, 74, 73)');
-			$('#textCount').text(content.length + '자'); 
+			$('.projectItem_textarea_projectIntro').css('color', 'rgb(218, 74, 73)');
+			$('.projectItem_textarea_projectIntro textarea').css('border', '1px solid rgb(218, 74, 73)');
+			$('#textCount_projectIntro').text(content.length + '자');
+			$('.submit_button').css('background', 'rgb(229, 229, 229)');
 			$('.submit_button').attr('disabled', 'disabled');
-		} else {
-			$('.projectItem_textarea').css('color', 'initial');
-			$('.projectItem_textarea textarea').css('border', '1px solid rgb(230, 230, 230)');
-			$('.item-intro-limit').css('display', 'none');
-			$('#textCount').text(content.length + '자'); 
+			$('.submit_button').css('cursor', 'default');
+		} else { 
+			$('.projectItem_textarea_projectIntro').css('color', 'initial');
+			$('.projectItem_textarea_projectIntro textarea').css('border', '1px solid rgb(230, 230, 230)');
+			$('.item-intro-limit_projectIntro').css('display', 'none');
+			$('#textCount_projectIntro').text(content.length + '자');
+			$('.submit_button').css('background', 'rgb(248, 100, 83)');
 			$('.submit_button').removeAttr('disabled');
+			$('.submit_button').css('cursor', 'pointer');
 		}
-		
 		
 		// 글자수 제한 
 		if (content.length > 50) { 
-			// 200자 부터는 타이핑 되지 않도록 
+			// 50자 부터는 타이핑 되지 않도록 
 			$(this).val($(this).val().substring(0, 50)); 
-			// 200자 넘으면 알림창 뜨도록 
+			// 50자 넘으면 알림창 뜨도록 
 // 			alert('글자수는 50자까지 입력 가능합니다.'); 
 		}; 
 	});
+	
+	// 채팅 시간 활성화
+	$('#talkTime').keyup(function (e) { 
+		let content = $(this).val(); 
+		// 글자수 세기 - talkTime
+		if (content.length == 0 || content == '') { 
+			$('#textCount_talkTime').text('0자'); 
+			$('.submit_button').attr('disabled', 'disabled');
+		} else if(content.length < 10 && content.length > 0) { 
+			$('.projectItem_textarea_talkTime').css('color', 'rgb(218, 74, 73)');
+			$('.projectItem_textarea_talkTime textarea').css('border', '1px solid rgb(218, 74, 73)');
+			$('#textCount_talkTime').text(content.length + '자');
+			$('.submit_button').css('background', 'rgb(229, 229, 229)');
+			$('.submit_button').attr('disabled', 'disabled');
+			$('.submit_button').css('cursor', 'default');
+		} else { 
+			$('.projectItem_textarea_talkTime').css('color', 'initial');
+			$('.projectItem_textarea_talkTime textarea').css('border', '1px solid rgb(230, 230, 230)');
+			$('.item-intro-limit_talkTime').css('display', 'none');
+			$('#textCount_talkTime').text(content.length + '자');
+			$('.submit_button').css('background', 'rgb(248, 100, 83)');
+			$('.submit_button').removeAttr('disabled');
+			$('.submit_button').css('cursor', 'pointer');
+		}
+		
+		// 글자수 제한 
+		if (content.length > 50) { 
+			// 50자 부터는 타이핑 되지 않도록 
+			$(this).val($(this).val().substring(0, 50)); 
+			// 50자 넘으면 알림창 뜨도록 
+// 			alert('글자수는 50자까지 입력 가능합니다.'); 
+		}; 
+	});
+	
+	
 	$("#file").change(function(){
 		if(this.files && this.files[0]) {
 			var reader = new FileReader;
@@ -513,12 +552,12 @@ $(function() {
 				</div>
 				<div class="projectItem_projectform">
 					<p>소개글</p>
-					<div class="projectItem_textarea">
+					<div class="projectItem_textarea projectItem_textarea_projectIntro">
 						<span>
 							<textarea placeholder="프로젝트 요약을 입력해주세요." id="projectIntro" name="projectIntro" maxlength="200">${projectInfo.projectIntro}</textarea>		
-							<span id=item-intro-limit>최소 10자이상 입력해주세요.</span>
-							<span id="textTotal">/ 50자</span>		
-							<span id="textCount">0자</span>
+							<span id=item-intro-limit_projectIntro>최소 10자이상 입력해주세요.</span>
+							<span id="textTotal_projectIntro">/ 50자</span>		
+							<span id="textCount_projectIntro">0자</span>
 						</span>
 					</div>				
 				</div>
@@ -539,9 +578,26 @@ $(function() {
 <%-- 							<img src="<%=request.getRealPath("/")%> +"${projectInfo.projectImage}"/> --%>
 							<img src="${projectInfo.projectImage}">
 						</div>
-<%-- 							<%=request.getRealPath("/")%>${projectInfo.projectImage} --%>
-<%-- 						<%=request.getRealPath("/") %> --%>
 					</div>				
+				</div>
+			</div>
+			<div class="projectItem_project">
+				<div class="projectItem_projectInfo">
+					<dl>
+						<dt>창작자 채팅 가능시간</dt>
+						<dd>창작자와 펀딩 참여자간 실시간 채팅이 가능합니다. 실시간 채팅이 가능한 시간을 적어주세요. 신청 이후에도 언제든지 수정 가능합니다.</dd>
+					</dl>
+				</div>
+				<div class="projectItem_projectform">
+					<p>채팅 가능시간</p>
+					<div class="projectItem_textarea projectItem_textarea_talkTime">
+						<span>
+							<textarea placeholder="예시) 월, 수, 금 19:00 ~ 21:00" id="talkTime" name="talkTime" maxlength="50">${projectInfo.talkTime}</textarea>		
+							<span id=item-intro-limit_talkTime>최소 10자이상 입력해주세요.</span>
+							<span id="textTotal_talkTime">/ 50자</span>		
+							<span id="textCount_talkTime">0자</span>
+						</span>
+					</div>					
 				</div>
 			</div>
 <!-- 			</form> -->

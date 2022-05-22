@@ -1,40 +1,55 @@
 package funding.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import funding.dto.Reward;
+import funding.service.face.AlertService;
+
+@Controller
+@RequestMapping(value = "/alert")
 public class AlertController {
 	
+	@Autowired
+	private AlertService alertService;
 	
-	public void alertList(HttpSession session
-						, Model model
-//						,HttpServletRequest req
-						,HttpServletResponse resp) {
-		// 전달된 파라미터를 UTF-8로 인코딩
-//		req.setCharacterEncoding("UTF-8");
+	private static final Logger logger = LoggerFactory.getLogger(AlertController.class);
+	
+	//안읽은 알림 보여주기
+	@RequestMapping(value="/list")
+	public void alertList(HttpSession session, Model model) {
 
-		// HTML이 UTF-8형식이라는 것을 브라우저에 알림
-//		resp.setContentType("text/html;charset=UTF-8");
-
-		// 전달된 파라미터를 새로운 변수에 저장
-//		String fromID = req.getParameter("fromID");
-		int memberNo = (Integer)session.getAttribute("memberNo");
+		logger.info("/ [GET]");
 		
-//		String listType = req.getParameter("listType");
+		int memberNo = (Integer)session.getAttribute("memberNo");
 
-		// 각 변수에 값이 null이거나 공백일때 공백 출력
-		if (memberNo == 0) {
-			resp.getWriter().write("");
-		} else {
-			try {
-				System.out.println("채팅 내용 불러오기[POST]");
-				resp.getWriter().write(alertService.getAlert(memberNo));
-			} catch (Exception e) {
-				resp.getWriter().write("");
-			}
-		}
+		// 알림 정보 불러옴
+		List<Reward> alertList = alertService.alertSelect(memberNo);
+		
+		System.out.println(alertList);
+		
+		//모델값 저장
+		
+		model.addAttribute("alertList", alertList);
+		
 	}
+	
+	//알림 읽음표시(삭제)
+	
+	
+	
+	//안읽은 메시지 수
+	
+	
+	
+	
+	
 }

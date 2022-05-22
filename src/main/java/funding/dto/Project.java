@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class Project {
+<<<<<<< HEAD
    
    private int projectNo;         // 프로젝트 번호
    private int memberNo;         // 회원번호
@@ -39,6 +40,42 @@ public class Project {
             + ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
             + ", sum=" + sum + ", talkTime=" + talkTime + ", rnum=" + rnum + "]";
    }
+=======
+	
+	private int projectNo;			// 프로젝트 번호
+	private int memberNo;			// 회원번호
+	private int categoryNo;			// 카테고리 번호
+	private String projectTitle;	// 프로젝트 제목
+	private String projectIntro;	// 소개글(요약)
+	private String budgetPlan;		// 프로젝트 예산 계획
+	private String schedulePlan;	// 프로젝트 일정
+	private String projectImage;	// 대표사진경로
+	private int projectPrice;		// 목표금액
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date openDate;			// 프로젝트 오픈일
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date closeDate;			// 프로젝트 종료일
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date deliveryDate;		// 예상 배송시작일
+	private String projectContent;	// 소개글 내용
+	private int fundPrice; 			// 펀딩금액(현재)
+	private int projectStep;		// 프로젝트 진행 단계
+	private int sum;				// 현재 모집된 총 금액
+	private String talkTime;		// 판매자 채팅 가능 시간
+	
+	private int rnum;
+
+	@Override
+	public String toString() {
+		return "Project [projectNo=" + projectNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
+				+ ", projectTitle=" + projectTitle + ", projectIntro=" + projectIntro + ", budgetPlan=" + budgetPlan
+				+ ", schedulePlan=" + schedulePlan + ", projectImage=" + projectImage + ", projectPrice=" + projectPrice
+				+ ", openDate=" + openDate + ", closeDate=" + closeDate + ", deliveryDate=" + deliveryDate
+				+ ", projectContent=" + projectContent + ", fundPrice=" + fundPrice + ", projectStep=" + projectStep
+				+ ", sum=" + sum + ", talkTime=" + talkTime + ", rnum=" + rnum + "]";
+
+	}
+>>>>>>> refs/heads/master
 
 
    public int getRnum() {

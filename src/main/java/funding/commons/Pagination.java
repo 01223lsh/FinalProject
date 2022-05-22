@@ -172,9 +172,10 @@ public class Pagination {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
-	
 
-	
-	
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+
 }

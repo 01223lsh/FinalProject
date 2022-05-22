@@ -9,7 +9,7 @@
 		left outer join
 		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as rdate
 		, count(*) as cnt from member
-		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+		where TO_CHAR(reg_date, 'YYYY-MM-DD') BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
 		and grade between 0 and 1
 		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
 		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
@@ -18,7 +18,7 @@
 		left outer join
 		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as buisness
 		, count(*) as buisnesscnt from member
-		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+		where TO_CHAR(reg_date, 'YYYY-MM-DD') BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
         and grade =1
 		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
 		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
@@ -27,7 +27,7 @@
 		left outer join
 		(select TO_CHAR(reg_date, 'YYYY-MM-DD') as normal
 		, count(*) as normalcnt from member
-		where REG_DATE BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
+		where TO_CHAR(reg_date, 'YYYY-MM-DD') BETWEEN TO_CHAR(CURRENT_DATE-${selectDate},'YYYY-MM-DD') and TO_CHAR(CURRENT_DATE,'YYYY-MM-DD')
         and grade =0
 		GROUP BY rollup(to_char(reg_date, 'YYYY-MM-DD'))
 		HAVING TO_CHAR(reg_date, 'YYYY-MM-DD') is not null
@@ -369,7 +369,9 @@
 	<select id="categoryCntList" resultType="funding.dto.AdminMain">
 		select * from (
 		select category_no,count(*) as categoryCnt from project
+		where project_step in (3,4)
 		group by category_no
+		
 		)A
 		left outer join
 		(select category_name as categoryName,category_no from category)B
@@ -421,6 +423,19 @@
 		where to_char(reg_date,'yy/mm/dd') = to_char(CURRENT_DATE-1,'yy/mm/dd')
 	
 	</select>
+	<select id="getBuisnessInfo" resultType="funding.dto.MemberSeller">
+		select * from(
+    	select * from member
+    	where member_no=#{memberNo})A
+		left join
+		(select * from member_seller)B
+		on A.member_no = B.member_no
+	</select>
+	
+	
+	
+	
+	
 	
 	<!-- 최원석님 코드 -->
 	<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">

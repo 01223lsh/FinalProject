@@ -214,6 +214,20 @@ public interface MypageDao {
 	 */
 	public Payment selectProjectByorderNo(int orderNo);
 
+	/**
+	 * 해당 주문 번호에 맞는 배송지 테이블 내용이 일치하는게 있는지 확인하기
+	 * @param joinFunding
+	 * @return
+	 */
+	public int selectCntDeliveryByOrderNo(JoinFunding joinFunding);
+
+	/**
+	 * 배송테이블 제외한 정보 가져오기
+	 * @param joinFunding
+	 * @return
+	 */
+	public List<HashMap<String, Object>> selectjoinfundBymemberNoBefore(JoinFunding joinFunding);
+
 	
 //	/**
 //	 * 네이버 소셜 확인

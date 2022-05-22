@@ -17,6 +17,7 @@ function complete(No){
 		,dataType :"html"
 		,success : function(res){
 			$("#resultLayout").html(res)
+			$(".complete"+No).css("color","#527578");
 		}
 		,error : function(){
 			console.log("qna view error")
@@ -214,23 +215,23 @@ td {
 <hr>
 <div class="row container py-3 text-center0" id="center">
 	<div class="col text-center" id="unchecked">
-		<a onclick="complete(1)"><i class="fa-regular fa-circle-check fa-5x"></i></a>
+		<a onclick="complete(1)"><i class="fa-regular fa-circle-check fa-5x complete1"></i></a>
 		<br>
 		<span>미답변</span>
 	</div>
 	<div class="col text-center" id="checked">
-		<a onclick="complete(2)"><i class="fa-solid fa-circle-check fa-5x"></i></a>
+		<a onclick="complete(2)"><i class="fa-solid fa-circle-check fa-5x complete2" ></i></a>
 		<br>
 		<span>답변 완료</span>
 	</div>
 	<div class="col text-center" id="checkedAll">
-		<a onclick="complete(3)"><i class="fa-solid fa-list fa-5x"></i></a>
+		<a onclick="complete(3)"><i class="fa-solid fa-list fa-5x complete3"></i></a>
 		<br>
 		<span>전체</span>
 	</div>
 </div>
 <br>
-<table style="margin: auto; width: 100%;  border-radius: 10px;" >
+<table style="margin: auto; width: 100%;  border-radius: 10px; background-color: white;" >
 
 	<tr style="border-bottom: 2px #DDD solid;">
 		<th style="width: 5%;">글번호</th>

@@ -8,6 +8,10 @@
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 input {
 	border: none;
 	text-align: center;
@@ -16,10 +20,10 @@ input {
 button {
 
 	border-radius: 5px;
-	background-color: #2E4C6D;
+	background-color: #39AEA9;
 	color: #fff; 
-	width: 54px;
-	height: 29px;
+	width: 170px;
+	height: 50px;
  	border: 0px solid #538fd9;
 	font-size: 15px;
 	font-weight: bold;
@@ -28,67 +32,129 @@ button {
 
 .data{
 /* 	font-size: 18px; */
-	margin-right: 25%;
-	margin-left: 15%;
+/* 	margin-right: 25%; */
+/* 	margin-left: 12%; */
 }
 
 .front {
-	display: inline;
+/* 	display: inline-block; */
 	margin-right: 17px;
 	text-align: center;
-	margin-left: 27%;
+/*  	margin-left: 34%;  */
 	
 	background-color: #fff; 
 	border-radius: 10px;
 	padding: 8px 5px 8px 5px;
 }
 
+
+#updateBtn:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
+}
+
+.alldata {
+    border: 5px solid #39AEA9;
+    border-radius: 33px;
+    width: 65%;
+    margin: 0 auto;
+    padding-bottom: 33px;
+    padding-top: 16px;
+    margin-top: 68px;
+}
+
+.hr-sect {
+	display: flex;
+	flex-basis: 50%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	font-size: 12px;
+	margin: 0 auto;
+	width: 70%
+	
+}
+.hr-sect::before,
+.hr-sect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 16px;
+	margin-left: 8%;
+	margin-right: 8%;
+}
+
+
+
 </style>
 
 
 <!-- <div class="container"> -->
 <div class="right">
+
+<div class="alldata" >
 <br>
 <h1 style="text-align: center;">판매 정보</h1>
 <br><br><br>
 
-<div style="margin: 0 auto;">
-	<div class="sellerinfo" >
+<div >
+	<div class="sellerinfo" style="text-align: center;" >
 <!-- 	<div class="sellerinfo" style="margin: 0 auto; width: 50%;"> -->
 		<div>
-			<div class="front">
-				<label for="bankName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color: #2E4C6D">은행명</label>
+			<div >
+			<div class="front" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color: #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="bankName" >은행명</label>
 			</div>
-			<div style="display: inline;" class="data">
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
 				${sellerinfo.bankName }
 			</div>
-			<br><br><br>
-		
-			<div class="front">
-				<label for="accountNumber" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #2E4C6D" >계좌번호</label>
 			</div>
-			<div style="display: inline;" class="data">
-				${ sellerinfo.accountNumber}
-			</div>
-			<br><br><br>
-			
-			<div class="front">
-				<label for="accountName" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color : #2E4C6D ">예금주</label>
-			</div>
-			<div style="display: inline;" class="data">
-				${ sellerinfo.accountName}
-			</div>
-			<br><br><br>
+			<br>
 			
 			<div>
-				<div class="front" style="display: inline-block; float: left; background : none; padding: 8px 0px 8px 0px;;">
-					<label for="sellerInfo" style="margin-bottom: 20px; font-weight: bold; width: 115px; background-color: #fff; padding: 4px 2px; border-radius: 10px; color : #2E4C6D">판매자 소개</label>
+			<div class="front" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="accountNumber" >계좌번호</label>
+			</div>
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
+				${ sellerinfo.accountNumber}
+			</div>
+			</div>
+			<br>
+			
+			<div>
+			<div class="front" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="accountName" >예금주</label>
+			</div>
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
+				${ sellerinfo.accountName}
+			</div>
+			</div>
+			<br>
+			
+			
+			
+			<div class="hr-sect">창작자 소개글</div>
+			
+				<br><br>
+				<div>
+<!-- 				<hr style="width: 20%; margin: 0 auto; margin-bottom: 20px; color: #A2D5AB; height: 3px; display: inline-block; "> -->
+				<div class="front11" style="margin-bottom: 20px;  font-weight: bold; width: 150px; color : #000; display: inline-block; text-align: center;">
+					<label for="sellerInfo" style="font-size: 17px;" >현재 창작자 소개글</label>
 				</div>
-				<div style="display:inline-block; width: 300px; float: left; margin-left: 15%;" class="data2" >
+				
+				
+				
+				
+<!-- 				<hr style="width: 20%; margin: 0 auto; margin-bottom: 20px; color: #A2D5AB; height: 3px; display: inline-block; line-height: 70px; " > -->
+<!-- 				<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data"></div> -->
+				<br>
+				<div style="display:inline-block; width: 300px; padding-left: 20px; text-align:center;  " class="data2" >
 					${ sellerinfo.sellerInfo}
 				</div>
-				<br><br><br>
-			</div>
+				</div>
+				
 		</div>
 
 	</div>
@@ -101,12 +167,13 @@ button {
 
 
 
-<br><br><br><br><br>
+<br><br>
 <div style="text-align: center; ">
-<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px;">수정</button>
+<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px;" id="updateBtn">수정</button>
+<button onclick="history.back(-1);" class="BTN">취소</button>
 <!-- <button onclick="location.href='./memberdelete'">탈퇴</button> -->
 </div>
-
+</div><!-- .alldata -->
 </div><!-- right -->
 </div><!-- .container end -->
 

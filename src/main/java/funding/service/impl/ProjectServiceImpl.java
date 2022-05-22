@@ -28,7 +28,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 		int total = projectDao.getTotalCnt(pagination);
 
-		pagination.build(10, total);
+		// 한 페이지에 보여주는 프로젝트 수 5개 - 상수값으로 처리함
+		pagination.build(12, total);
 
 		List<Project> list = projectDao.findAllByFilterAndOrder(pagination);
 
@@ -40,24 +41,5 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return projectDao.findCategoryList();
 	}
-
-	/*
-	 * @Override public List<Project> list(Paging paging) {
-	 * 
-	 * return projectDao.selectList(paging); }
-	 * 
-	 * @Override public Paging getPaging(Paging paramData) {
-	 * 
-	 * // 총 게시글 수 조회 int totalCount = projectDao.selectCntAll(paramData);
-	 * 
-	 * // 페이징 계산 Paging paging = new Paging(totalCount, paramData.getCurPage());
-	 * paging.setSearch(paramData.getSearch());
-	 * 
-	 * return paging; }
-	 * 
-	 * @Override public Project view(Project viewProject) {
-	 * 
-	 * // 상세보기 조회 결과 리턴 return projectDao.select(viewProject); }
-	 */
 
 }

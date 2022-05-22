@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,7 +170,7 @@ button{
 <h3 style="text-align: center;" >공지사항</h3>
 <hr>
 <div style="width: 1070px; margin:0 auto;">
-<table style="margin: auto; width: 100%;  border-radius: 10px;  margin-bottom: 20px;">
+<table style="margin: auto; width: 100%;  border-radius: 10px;  margin-bottom: 20px; background-color: white;">
 <tr style="border-bottom: 2px #DDD solid;">
 	<th style="width: 5%;">글번호</th>
 	<th style="width: 45%">제목</th>
@@ -184,7 +185,7 @@ button{
 	<input type="hidden" class="noticeNo" value="${i.noticeNo }"> 
 	</td>
 	<td>관리자</td>
-	<td>${i.regDate}</td>
+	<td><fmt:formatDate value="${i.regDate}" pattern="yy-MM-dd" /></td>
 	
 </tr>
 

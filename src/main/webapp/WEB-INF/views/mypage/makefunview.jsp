@@ -23,16 +23,21 @@ $(document).ready(function() {
 
 
 <style>
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 button {
 
-	border-radius: 15px;
-	background-color: white;
-	color: #2E9AFE; 
+	border-radius: 10px;
+/* 	background-color: #2D55AB; */
+	background-color: orange;
+	color: white; 
 	width: 70px;
-	height: 30px;
-	border: 2px solid #81BEF7;
-	font-size: 15px;
+	height: 40px;
+	border: 0px solid #2D55AB;
+	font-size: 20px;
+	font-weight: bold;
 
 }
 
@@ -59,11 +64,31 @@ button {
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: none;}
 
+#BTN {
+
+	border-radius: 7px;
+	background-color: #39AEA9;
+	color: white; 
+	width: 220px;
+	height: 50px;
+	border: 0px solid #81BEF7; 
+	font-size: 17px;
+	font-weight: bold;
+
+}
+
+ #BTN:hover { 
+ 	background-color: #557B83; 
+  transition: background-color 0.3s; 
+ }
+
 </style>
 
 
 <div class="right">
-<div id="main" style="text-align: center;" >
+
+	
+<div id="main" style="text-align: center; " >
 
 <!-- <h3 style="margin-top: 50px;"> 제작한 프로젝트 상세정보 </h3> -->
 
@@ -74,12 +99,19 @@ button {
 
 
 <br><br>
-<div class="box" style="margin-top: 50px;">
+<div class="box" style="margin-top: 0px;">
 
 <!--첫번째  -->
 <div class="item">	
-<div class="cont" style="text-align: left; margin-top: 20px;">
-	<p style="font-weight: bold; font-size: 17px;" >${category }</p>
+<div class="cont" style="text-align: left; margin-top: 15px;">
+
+	<p style="font-weight: bold; font-size: 17px; display: inline-block;" >${category }</p>
+<!-- 	<div style="margin-left: 10%; margin-top: 40px;"> -->
+	<div style="text-align: right; display: inline-block; margin-left: 88%;">
+		<c:if test="${view.projectStep == 0}">
+		<a href="/apply/product?projectNo=${view.projectNo }"><button type="button" id="update" style="display: none;">수정</button></a>
+		</c:if>
+	</div>
 	
 	<c:if test="${view.projectStep == 0}"><p style="font-weight: bold; font-size: 17px; color: orange;">펀딩 작성중</p></c:if>
 	<c:if test="${view.projectStep == 1}"><p style="font-weight: bold; font-size: 17px; color: green;">펀딩 승인대기중</p></c:if>
@@ -200,15 +232,12 @@ button {
 
 	
 </div><!--.box  -->
+<br><br>
+<button onclick="history.back(-1);" id="BTN">목록</button>
 </div><!-- main -->
 <br><br>
-<div style="text-align: center;">
-	<c:if test="${view.projectStep == 0}">
-	<a href="/apply/product?projectNo=${view.projectNo }"><button type="button" id="update" style="display: none;">수정</button></a>
-	</c:if>
-</div>
-
+<br><br><br><br><br>
 </div><!-- right -->
 </div> <!-- container  -->
 
-<c:import url="/WEB-INF/views/layout/footer.jsp" />
+<%-- <c:import url="/WEB-INF/views/layout/footer.jsp" /> --%>

@@ -260,25 +260,58 @@ public class ApplyController {
 	}
 	
 	//선택한 리워드 삭제
-	@RequestMapping(value = "/rewardDelete")
-	public String rewardDelete(Reward reward) {
+	@RequestMapping(value = "/rewardDelete", method = RequestMethod.POST)
+	public String rewardDelete(@RequestBody Reward reward, Model model) {
 		logger.info("/apply/rewardDelete");
+	
+		System.out.println(reward);
+
+		int projectNo = reward.getProjectNo();
 		
+		int rewardNo = reward.getRewardNo();
 		// rewardNo를 가져와서 일치하는 데이터 삭제 
+		applyService.rewardDelete(rewardNo);
+		
+//		Project projectInfo = applyService.projectSelect(project.getProjectNo());
+//		
+//		//모델값 전달
+//		model.addAttribute("projectInfo", projectInfo);
 		
 		
-		return "redirect:/apply/reward";
+		//리워드 정보 불러옴
+		List<Reward> rewardList = applyService.rewardSelect(projectNo);
+		Project projectInfo = applyService.projectSelect(projectNo);
+		
+		System.out.println(rewardList);
+		
+		//모델값 저장
+		model.addAttribute("rewardList", rewardList);
+		model.addAttribute("projectInfo", projectInfo);
+		
+		
+		
+		return "/apply/reward";
 	}
 	
 	//프로젝트 최종 신청
-	@RequestMapping(value = "/applyFinal")
-	public String apply(Project project) {
-		logger.info("/applyFinal");
+	@RequestMapping(value = "/final")
+	public String apply(int projectNo, Model model) {
+		logger.info("/apply/final");
+		
+		System.out.println(projectNo);
+
+		//리스트 개수 검사
+		List<Reward> rewardList = applyService.rewardSelect(projectNo);
+		if(rewardList.size() == 0) {
+			
+			//리스트는 최소 1개이상 추가
+			model.addAttribute("result", 1);
+		}
 		
 		// projectStep 값 1로 update
+		applyService.projectApply(projectNo);
 		
-		//메인 페이지로 redirect
-		return "redirect:/";
+		return "/member/main";
 	}
 	
 }
