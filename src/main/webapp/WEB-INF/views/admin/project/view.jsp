@@ -168,8 +168,6 @@ div {
 	margin-top: 12px;
 }
 
-
-/*content1_2*/
 #content1_2 {
 	float: left;
 	margin-left: 20px;
@@ -339,9 +337,9 @@ position: relative;
 	<div id="outer"  style="margin-top: 20px; background-color: white;">
 		<div class="reward-header" style="height: 170px; overflow: hidden;">
         <!-- 병합 전 -->
-        <div class="bg" style="position: relative;background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(/resources/img/test.png);"></div>
+<!--         <div class="bg" style="position: relative;background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(/resources/img/test.png);"></div> -->
         <!-- 병합 후 -->
-<!--         <div class="bg" style="position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),);"></div> -->
+        <div class="bg" style="position: relative; background-image:linear-gradient(  rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url(${project.projectImage});"></div>
         
         <div class="categoryTitle" style="position: relative;top: -110px; z-index: 1; ">
 
@@ -362,16 +360,7 @@ position: relative;
 		</div>
         </div>
         
-		<div  class="projectTop">
-		<div  class="projectTopImg">
-		</div>
-		<div class="category" style="color : #B6D9DC; font-size: 26px;" >
-			<p>
-			
-			</p>
-		</div>
-			<input type="hidden" value="3">
-		</div>
+	
 		<br>
 		<br>
 		<div id="content1" style="margin-top: -10px;">
@@ -379,9 +368,9 @@ position: relative;
 			<div id="content1_1">
 	
 				<!-- 병합 전 변경 -->
-				<img src="/resources/img/test.png" style="margin-top: 20px;">
+<!-- 				<img src="/resources/img/test.png" style="margin-top: 20px;"> -->
 				<!-- 병합 후 변경 -->
-<%-- 				<img src="${project.projectImage}"> --%>
+				<img src="${project.projectImage}">
 			</div>
 
 			<div id="content1_2" style="min-width: 400px; margin-top: 20px;">

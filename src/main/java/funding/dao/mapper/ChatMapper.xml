@@ -15,6 +15,19 @@
         INSERT INTO chat_room VALUES(CHATROOM_ID_SEQ.NEXTVAL, #{projectNo} )
     </insert>
     
+    <select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
+	select pj.*, nvl(sum, 0) sum
+	from project pj
+	left join (
+    select project_no, sum(payment_total) sum
+    from payment
+    group by project_no    
+	) py
+    on pj.project_no = py.project_no 
+    WHERE pj.project_no = #{projectNo}
+
+	</select>
+    
 </mapper>
   <!--   
     <select id="selectChatRoom" parameterType="int" resultType="funding.dto.ChatRoom">

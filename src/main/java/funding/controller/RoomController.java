@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.ChatRoom;
+import funding.dto.Project;
 import funding.repository.ChatRoomRepository;
 
 //@Slf4j
@@ -37,16 +38,18 @@ public class RoomController {
 
 	// 채팅방 입장 화면
 	@GetMapping("/room/enter/{projectNo}")
-	public String roomDetail(Model model, @PathVariable int projectNo, HttpSession session) {
+	public String roomDetail(Model model, Project project, @PathVariable int projectNo, HttpSession session) {
 		// log.info("[/chat/room/enter/{}][GET]", memberNo);
 //		ChatRoom room = repository.findRoomById(Integer.parseInt(projectNo));
 		ChatRoom room = repository.findRoomById(projectNo);
+		project = repository.getProject(project);
 		System.out.println("결과값 테스트: " + room);
 		String sessionId = session.getId();
 //		String sessionNick = session.getNick();
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("room", room);
 		model.addAttribute("sessionId", sessionId);
+		model.addAttribute("project", project);
 //		model.addAttribute("sessionNick", sessionNick);
 		return "chat/chattingroom";
 	}

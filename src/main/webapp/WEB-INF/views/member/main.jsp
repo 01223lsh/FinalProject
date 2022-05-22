@@ -35,7 +35,9 @@
   
   .main_pr {
   	position: absolute;
-  	left : 8%;
+  	left : 18%;
+  	 font-size: 15px;
+  	 border-radius: 15px;
   }
 </style>
 
@@ -85,6 +87,9 @@
   }
   .section-body .body-etc div:first-child > span:first-child{
     color: red;
+  }
+  .container {
+  border-top: 50px solid #ffffff;
   }
   
 
