@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 <style>
 
-.right {
+#wrtie {
 	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
@@ -52,17 +52,22 @@ input {
 	border: 2px solid #DDD;
 }
 
-button {
-    border-radius: 5px;
+
+
+.BTN  {
+ 	border-radius: 5px;
     border: 0px solid black;
-/*     background-color: #183F7B; */
-    background-color: #396EB0;
+    background-color: #39AEA9;
     color: white;
-    width: 53px;
-    height: 30px;
+    width: 80px;
+    height: 35px;
     font-weight: bold;
-    margin-right: 15px;
-/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
+    margin-left: 20px;
+}
+
+.BTN:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
 }
 </style>
 
@@ -70,11 +75,11 @@ button {
 
 
 
-<h1 style="text-align: center; margin-top: 30px;">문의글 작성</h1>
+<h1 style="text-align: center; margin-top: 30px; font-family: 'IBM Plex Sans KR', sans-serif;">문의글 작성</h1>
 <br>
 
 
-<div id="wrtie"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px;" >
+<div id="wrtie"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px; font-family: 'IBM Plex Sans KR', sans-serif;" >
 
 <form action="/qna/qnawrite" method="post" class="form-horizontal">
 	
@@ -108,8 +113,8 @@ button {
 
 
 	<div style="text-align: center; margin-top: 50px; margin-bottom: 100px;" > 
-		<button id="btnWrite" name="btnWrite" >작성</button>
-		<a href="/qna/list" ><button type="button" id="cancle">취소</button></a>
+		<button id="btnWrite" name="btnWrite" class="BTN" >작성</button>
+		<a href="/qna/list" ><button type="button" id="cancle" class="BTN">취소</button></a>
 	</div>
 </form>
 

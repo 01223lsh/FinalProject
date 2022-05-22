@@ -33,20 +33,58 @@ textarea {
 }
 */
 
-.right {
+#wrtie {
 	font-family: 'IBM Plex Sans KR', sans-serif;
 }
+
+
+.title {
+
+	width : 60%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.cont {
+
+	width : 60%;
+	margin: 0 auto;
+}
+
+input {
+	width: 100%;
+	border-radius: 5px;
+	height: 37px;
+	border: 2px solid #DDD;
+}
+
+.BTN  {
+ 	border-radius: 5px;
+    border: 0px solid black;
+    background-color: #39AEA9;
+    color: white;
+    width: 80px;
+    height: 35px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.BTN:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
+}
+
 </style>
 
 
 
 
 
-<h1 style="text-align: center; margin-top: 30px;">문의 답변글 작성</h1>
+<h1 style="text-align: center; margin-top: 30px; font-family: 'IBM Plex Sans KR', sans-serif;">문의 답변글 작성</h1>
 <br>
 
 
-<div id="wrtie"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px;" >
+<div id="wrtie"  style="border: 0px solid #DDD; border-radius: 10px; margin-bottom: 30px; padding-top: 20px; font-family: 'IBM Plex Sans KR', sans-serif;" >
 
 <form action="/qna/qnarewrite" method="post" class="form-horizontal">
 	
@@ -66,23 +104,23 @@ textarea {
 <!-- 		</div> -->
 <!-- 	</div> -->
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
+	<div class="title">
+		<div >
 			<input type="text" id="qnaTitle" name="qnaTitle" class="form-control"  placeholder="제목을 입력하세요" value="ㄴ">
 		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
-			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
+	<div class="cont">
+		<div>
+			<textarea  id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
 		</div>
 	</div>
 
 
 
 	<div style="text-align: center; margin-top: 50px; margin-bottom: 100px;" > 
-		<button id="btnWrite" name="btnWrite" >작성</button>
-		<a href="/qna/list" ><button type="button" id="cancle">취소</button></a>
+		<button id="btnWrite" name="btnWrite" class="BTN">작성</button>
+		<a href="/qna/list" ><button type="button" id="cancle" class="BTN">취소</button></a>
 	</div>
 </form>
 
