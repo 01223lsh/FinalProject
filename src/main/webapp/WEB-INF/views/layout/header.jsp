@@ -237,9 +237,14 @@
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">ADMINPAGE</a></button>
 			</c:when>
-			<c:otherwise>
-				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '1'}">
+				<button type="button" class="btn btn-outline-secondary"><a href="/apply/category">CREATE PROJECT</a></button>
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 			</c:otherwise>
 		 	</c:choose>
 	</div>
