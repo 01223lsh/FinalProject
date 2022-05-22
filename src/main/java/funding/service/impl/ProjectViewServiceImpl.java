@@ -149,4 +149,11 @@ public class ProjectViewServiceImpl implements ProjectViewService {
 		
 		return projectViewDao.selectContributorsList(payment);
 	}
+	
+	@Override
+	public void updateNews(ProjectNews news) {
+		
+		projectViewDao.updateNews(news);
+		
+	}
 }

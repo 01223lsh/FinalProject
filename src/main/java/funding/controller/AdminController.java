@@ -262,6 +262,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/notice/noticeWrite", method = RequestMethod.POST)
 	public void noticeWriteResult(Notice notice, MultipartHttpServletRequest mtfRequest) {
 		List<MultipartFile> filelist;
+		
 		if (mtfRequest.getFile("file").getSize() > 0) {
 			filelist = mtfRequest.getFiles("file");
 		} else {
@@ -278,7 +279,7 @@ public class AdminController {
 			, Model model
 			, @ModelAttribute(value = "NoticeFile") NoticeFile noticefile) {
 		logger.info("{}", noticefile);
-
+		
 		//공지사항 내용
 		notice = adminService.selectByNotice(notice);
 		//공지사항 정보로 파일 정보
@@ -291,6 +292,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/notice/noticeUpdate", method = RequestMethod.POST)
 	public void noticeUpdateresult(Notice notice, MultipartHttpServletRequest mtfRequest
 			, @RequestParam("fileNolist") List<Integer> fileNolist) {
+		if(notice.getTitle().equals("") &&notice.getTitle()==null) {
+			notice.setTitle("제목 없음");
+		}
 		logger.info("{}", fileNolist);
 		List<MultipartFile> filelist;
 		if (mtfRequest.getFile("file").getSize() > 0) {
@@ -370,11 +374,13 @@ public class AdminController {
 		List<Category> category = adminService.categoryList();
 		// 개별 프로젝트 상세내용 조회
 		Project result = adminService.getProject(project);
+		MemberSeller userInfo = adminService.getBuisnessInfo(result);
 		logger.info("조회된 프로젝트: {}", result);
+		logger.info("조회된 프로젝트: {}", userInfo);
 
-		// View 전달 데이터
 		model.addAttribute("category", category);
 		model.addAttribute("project", result);
+		model.addAttribute("member", userInfo);
 		
 		
 	}

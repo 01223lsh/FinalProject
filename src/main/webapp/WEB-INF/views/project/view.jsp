@@ -36,7 +36,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		
+		$(".bgimg").css("background-image",'url("${project.projectImage}")');
 
 		
 		$("#plan").on("click",function(){
@@ -493,6 +493,10 @@ a.disabled {
     -webkit-filter: blur(10px);
     background-position: 50% 30%;
      height: 180px;
+     background-color: #39AEA9; 
+     background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) );
+     
+
 }
 
 .title:before,
@@ -524,7 +528,7 @@ a.disabled {
 
 		<div><%@include file="/WEB-INF/views/layout/header.jsp" %></div>
 		<div class="title" style="height: 185px; overflow: hidden;">
-		<div class="bgimg" style="background-color: #39AEA9; position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url("${project.projectImage }");"></div>
+		<div class="bgimg"></div>
 		<div style="position: relative;top: -195px; z-index: 1; text-align: center;">
 		<div id="category">
 			<p>
@@ -555,7 +559,7 @@ a.disabled {
 			<br>
 
 			<div id="content1_1">
-				<img src="${project.projectImage }" style="">
+				<img src="${project.projectImage }" style="width: 480px; height: 330px;">
 
 			</div>
 
@@ -745,40 +749,99 @@ a.disabled {
 			
 					<div id="reward">
 						<br> <b>- 리워드 선택</b> <br>
+						<c:choose>
+							<c:when test="${login eq true and grade eq 0}">
+						
 						<c:forEach var="reward" items="${rewardList }">
 							
-							<c:choose>
-							<c:when test="${login eq true and grade eq 0}">
-							<a
-								href="/payment/chooseReward?projectNo=${project.projectNo }&rewardNo=${reward.rewardNo }">
+				
+									<c:choose>
+									<c:when test="${reward.rewardAmount eq 0}">
+									<a>
+								
+								<div id="reward_1" class="reward_1" style="opacity: 0.5;">
+									
+									</c:when>
+									<c:otherwise>
+									<a href="/payment/chooseReward?projectNo=${project.projectNo }&rewardNo=${reward.rewardNo }">
 								
 								<div id="reward_1" class="reward_1">
-
+									</c:otherwise>
+									</c:choose>
+									
 									<div style="font-size: 24px; line-height: 36px; margin: 0px 0px 6px;">
 									${reward.rewardPrice }원 +</div>
 									 <div style="font-size: 13px; line-height: 20px; margin-bottom: 6px;">
 									 ${reward.rewardName }</div>
 									<div style="font-size: 12px;line-height:19px; margin: 0px 0px 4px;">
 									${reward.rewardIntro }</div>
-
+									
+									<c:choose>
+									<c:when test="${reward.rewardPrice eq 1000}">
+									
+									</c:when>
+									<c:otherwise>
+									<em style=" font-weight: 500; background:#E7F9F9; color: #39AEA9; font-style: normal; font-size: 12px;">
+									현재 ${reward.rewardAmount }개 남음</em>
+									
+									</c:otherwise>
+									</c:choose>
+										
 								</div>
 							</a>
+							<br>
+							</c:forEach>
+							
+							
 							</c:when>
+							
 							<c:when test="${empty login }">
-							<a
-								href="#" onclick="loginModal()">
+							<c:forEach var="reward" items="${rewardList }">
+							
+							<c:choose>
+									<c:when test="${reward.rewardAmount eq 0}">
+									<a>
+								
+								<div id="reward_1" class="reward_1" style="opacity: 0.5;">
+									
+									</c:when>
+									<c:otherwise>
+									<a href="#" onclick="loginModal()">
 								
 								<div id="reward_1" class="reward_1">
-
+									</c:otherwise>
+									</c:choose>
+									
+									
+									
+									
+									
+									
 									<div style="font-size: 24px; line-height: 36px; margin: 0px 0px 6px;">
 									${reward.rewardPrice }원 +</div>
 									 <div style="font-size: 13px; line-height: 20px; margin-bottom: 6px;">
 									 ${reward.rewardName }</div>
 									<div style="font-size: 12px;line-height:19px; margin: 0px 0px 4px;">
 									${reward.rewardIntro }</div>
+									
+									<c:choose>
+									<c:when test="${reward.rewardPrice eq 1000}">
+									
+									</c:when>
+									<c:otherwise>
+									<em style=" font-weight: 500; background:#E7F9F9; color: #39AEA9; font-style: normal; font-size: 12px;">
+									현재 ${reward.rewardAmount }개 남음</em>
+									
+									</c:otherwise>
+									</c:choose>
+									
 
 								</div>
 							</a>
+							<br>
+							</c:forEach>
+							
+							
 							</c:when>
 							<c:otherwise>
 								
@@ -787,7 +850,7 @@ a.disabled {
 							
 							</c:choose>
 							<br>
-						</c:forEach>
+						
 
 					</div>
 				
