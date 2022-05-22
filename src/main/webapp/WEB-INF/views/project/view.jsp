@@ -36,7 +36,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		
+		$(".bgimg").css("background-image",'url("${project.projectImage}")');
 
 		
 		$("#plan").on("click",function(){
@@ -493,6 +493,10 @@ a.disabled {
     -webkit-filter: blur(10px);
     background-position: 50% 30%;
      height: 180px;
+     background-color: #39AEA9; 
+     background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) );
+     
+
 }
 
 .title:before,
@@ -524,7 +528,7 @@ a.disabled {
 
 		<div><%@include file="/WEB-INF/views/layout/header.jsp" %></div>
 		<div class="title" style="height: 185px; overflow: hidden;">
-		<div class="bgimg" style="background-color: #39AEA9; position: relative; background-image:linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3) ),url("${project.projectImage }");"></div>
+		<div class="bgimg"></div>
 		<div style="position: relative;top: -195px; z-index: 1; text-align: center;">
 		<div id="category">
 			<p>
