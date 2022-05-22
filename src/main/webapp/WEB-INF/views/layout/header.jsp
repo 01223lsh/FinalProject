@@ -243,13 +243,13 @@
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main" id="login">ADMINPAGE</a></button>
 			</c:when>
 			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '1'}">
-				<button type="button" class="btn btn-outline-secondary"><a href="/apply/category">CREATE PROJECT</a></button>
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/apply/category" id="login">CREATE PROJECT</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button>
 				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 			</c:when>
 			<c:otherwise>
 
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button>
 				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 			</c:otherwise>
 		 	</c:choose>
