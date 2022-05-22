@@ -32,6 +32,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
 
+<!-- 알림 아이콘 -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
 <!-- <script type="text/javascript">
 
 
@@ -226,7 +232,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar_h">
    <div class="nav-login_h collapse navbar-collapse">
 <!-- 	<ul style="list-style-type: none;"> -->
-			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/logo.png" width = "100" height="80"></img></a>
+
+			<a href="/member/main" class="me-auto mb-2 mb-lg-0" style="margin-left: 15px;"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1" id="login">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login" id="login">LOGIN</a></button>
@@ -235,8 +242,15 @@
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main" id="login">ADMINPAGE</a></button>
 			</c:when>
+			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '1'}">
+				<button type="button" class="btn btn-outline-secondary"><a href="/apply/category">CREATE PROJECT</a></button>
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+			</c:when>
 			<c:otherwise>
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout" id="login">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain" id="login">MYPAGE</a></button>
+
+				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
+				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 			</c:otherwise>
 		 	</c:choose>
 	</div>

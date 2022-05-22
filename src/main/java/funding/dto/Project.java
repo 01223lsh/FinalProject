@@ -13,7 +13,7 @@ public class Project {
 	private int categoryNo;			// 카테고리 번호
 	private String projectTitle;	// 프로젝트 제목
 	private String projectIntro;	// 소개글(요약)
-	private String budgetPlan;		// 프로젝트 예약 계획
+	private String budgetPlan;		// 프로젝트 예산 계획
 	private String schedulePlan;	// 프로젝트 일정
 	private String projectImage;	// 대표사진경로
 	private int projectPrice;		// 목표금액

@@ -115,4 +115,10 @@
         WHERE project_no = #{projectNo}
 	</update>
 	
+	<insert id="chatRoomInsert" parameterType="int">
+             INSERT INTO chat_room (chatroom_id, project_no) VALUES(chat_room_seq.NEXTVAL, #{projectNo} )
+	</insert>
+	
+	
+	
 </mapper>	
