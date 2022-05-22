@@ -53,7 +53,7 @@
 	
 	<insert id="insert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
-		VALUES ( member_no.nextval, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, 0 )
+		VALUES ( member_seq.nextval, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, 0 )
 	</insert>
 	
 	<select id="idCheck" resultType="integer">
@@ -75,7 +75,7 @@
 	
 	<insert id="insert2" parameterType="funding.dto.MemberSeller">
 		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
- 			 SELECT member_no.nextval FROM DUAL
+ 			 SELECT member_seq.nextval FROM DUAL
   		</selectKey>
 		
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
@@ -101,7 +101,7 @@
 	
 	<insert id="KakaoUserinsert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, kakao_login )
-		VALUES ( member_no.nextval, 'kakaoUser', 'kakaoUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+		VALUES ( member_seq.nextval, 'kakaoUser', 'kakaoUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
 	</insert>
 	
 	<select id="selectKakaoInfo" resultMap="Member" parameterType="funding.dto.Member">
@@ -184,7 +184,7 @@
 	
 	<insert id="naverUserinsert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, naver_login )
-		VALUES ( member_no.nextval, 'naverUser', 'naverUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+		VALUES ( member_seq.nextval, 'naverUser', 'naverUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
 	</insert>
 	
 	<select id="selectNaverInfo" resultMap="Member" parameterType="funding.dto.Member">

@@ -35,11 +35,6 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/main")
-	public void main() {
-		logger.info("main 접속 완료");
-	}
-	
 	
 	//--------------------------- 회원가입 -----------------------------------
 	
@@ -120,7 +115,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		
 		String from = "abcd@company.com";//보내는 이 메일주소
 		String to = email;
-		String title = "KH final 회원가입 인증 메일입니다."; 
+		String title = "클라우드 펀딩 회원가입 인증 메일입니다."; 
 		String content = "홈페이지를 방문해주셔서 감사합니다 <br/> [인증번호] "+ checkNum +"<br/> 해당 인증번호를 인증번호 확인란에 기입해주십시오."; 
 		String num = ""; 
 		
@@ -201,7 +196,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			session.setAttribute("nick", memberService.getNick(member));
 			session.setAttribute("memberNo", memberService.getMemberNo(member));
 			
-			return "redirect:/main";
+			return "redirect:/member/main";
 			
 		} else {
 			logger.info("로그인 실패");
@@ -219,7 +214,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 
     	session.invalidate();
     	
-    return "/main";
+    return "/member/main";
     }
     
 
@@ -304,7 +299,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			
 		}    	
      	
-		model.addAttribute("redirectUrl", "/main");
+		model.addAttribute("redirectUrl", "/member/main");
 		
 		return "member/alertJsp";
      	

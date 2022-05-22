@@ -81,12 +81,12 @@
 	<!-- 네이버로그인 api 사용 bean 설정 추가-->
 	<beans:bean id="naverLoginBO" class="funding.controller.NaverLoginBO" />
 	
-	<!-- navermail설정 -->
+	<!-- SMTP mail설정 -->
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
 		<beans:property name="port" value="587"/> <!-- 메이서버 포트번호 -->
-		<beans:property name="username" value="id"/> <!-- 자신의 이메일 아이디 -->
-		<beans:property name="password" value="pw"/> <!-- 자신의 비밀번호 -->
+		<beans:property name="username" value="finaltest2221@gmail.com"/> <!-- 자신의 이메일 아이디 -->
+		<beans:property name="password" value="final2221@@"/> <!-- 자신의 비밀번호 -->
 	
 		<!-- 보안연결 SSL과 관련된 설정 --> 
 		<beans:property name="javaMailProperties"> 

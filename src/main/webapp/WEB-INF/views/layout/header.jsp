@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +19,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
 <script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script> -->
 
-<!-- JQuery 2.2.4 -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- 부트스트랩 5.1.3 CSS, JS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!-- Fontawesome 라이브러리 -->
 <script src="https://kit.fontawesome.com/c3d0d95309.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<!-- login, join font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+
+
 
 <!-- mypage font -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -236,7 +243,10 @@
 			<a href="/member/main" class="me-auto mb-2 mb-lg-0" style="margin-left: 15px;"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
-				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1" id="login">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login" id="login">LOGIN</a></button>
+<!-- 				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1" id="login">JOIN</a></button> -->
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='/member/join_step1'" id="join" style="color : white">JOIN</button>
+<!-- 				<button type="button" class="btn btn-outline-secondary"><a href="/member/login" id="login">LOGIN</a></button> -->
+				<button type="button" class="btn btn-outline-secondary" onclick="location.href='/member/login'" id="login" style="color : white">LOGIN</button>
 			</c:when>
 			<c:when test="${sessionScope.login eq true && sessionScope.grade eq '2'}">
 <!-- 				<a href="#" >로그아웃</a> | <a href="#">관리자 페이지</a> | <a href="/chat/room/enter/1">채팅</a> -->
