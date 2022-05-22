@@ -76,7 +76,7 @@
 <input type="hidden" name="commentWriter" value="${nick }">
 <input type="hidden" name="memberNo" value="${memberNo }">
 
-		<textarea id="commentContent" name="commentContent" style="width: 600px; height: 80px;"></textarea>
+		<textarea id="commentContent" name="commentContent" style="width: 600px; height: 80px; resize: none;"></textarea>
 		
 
 

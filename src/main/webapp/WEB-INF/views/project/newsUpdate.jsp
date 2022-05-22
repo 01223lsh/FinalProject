@@ -11,10 +11,11 @@
 		
 		var from1 = $("#newsForm").serialize();
 		from1 += "&newsContent="+CKEDITOR.instances['newsContent'].getData();
+		from1 += "&projectNo="+${project.projectNo}
 		console.log(from1);
 		
 		$.ajax({
-			url:"/project/news/write",
+			url:"/project/news/update",
 			type:"post",
 			data:from1,
 			datatype:"html",
@@ -34,7 +35,7 @@
 			$.ajax({
 				url:"/project/news/list",
 				type:"post",
-				data:{projectNo:${projectNo}},
+				data:{projectNo:${project.projectNo}},
 				dataType: "html",
 				success:function(res){
 					console.log("성공")
@@ -55,18 +56,18 @@
 
 <div>
 <form id="newsForm" enctype="multipart/form-data" method="post">
-<input type="hidden" name="projectNo" value="${projectNo }">
+<input type="hidden" name="newsNo" value="${news.newsNo }">
 	<table style="height: 600px;">
 	<tr>
 	<td width="10%;">제목</td>
-	<td><input type="text" id="newsTitle" name="newsTitle" style="width:500px "></td>
+	<td><input type="text" id="newsTitle" name="newsTitle" style="width:500px " value="${news.newsTitle }"></td>
 	</tr>
 	
 	
 	
 	<tr>
 		<td>내용</td>
-		<td><textarea style="width: 500px; height: 400px" id="newsContent"></textarea></td>
+		<td><textarea style="width: 500px; height: 400px" id="newsContent">${news.newsContent }</textarea></td>
 	</tr>
 	
 	
@@ -75,7 +76,7 @@
 
 </form>
 <div style="text-align: center; margin: 8px 0px 8px;">
-<button id="newsSubmit" type="button" class="btn btn-primary" style="background-color: #39AEA9; border: none;">작성</button>
+<button id="newsSubmit" type="button" class="btn btn-primary" style="background-color: #39AEA9; border: none;">수정</button>
 <button id="newsCancel" type="button" class="btn btn-default" onclick="cancel()" style="background-color: rgb(240, 240, 240);">취소</button>
 </div>
 
