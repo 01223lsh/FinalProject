@@ -356,7 +356,7 @@ $(function() {
 								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/happyLogo.png" width = "100" height="50"></img></a>
 							</div>
 							<div class="header_side">
-								<button class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+								<button class="project_button"  onclick=""><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 								<button class="project_button"  onclick="location.href='/mypage/mypagemain' "><span>${sessionScope.nick}</span></button>
 							</div>
 						</div>
