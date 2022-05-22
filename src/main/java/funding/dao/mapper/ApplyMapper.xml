@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="funding.dao.face.ApplyDao">
+
+	<resultMap type="funding.dto.Project" id="Project">
+		<id column="project_no" property="projectNo"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_intro" property="projectIntro"/>
+		<result column="budget_plan" property="budgetPlan"/>
+		<result column="schedule_plan" property="schedulePlan"/>
+		<result column="project_image" property="projectImage"/>
+		<result column="project_price" property="projectPrice"/>
+		<result column="open_date" property="openDate"/>
+		<result column="close_date" property="closeDate"/>
+		<result column="delivery_date" property="deliveryDate"/>
+		<result column="project_content" property="projectContent"/>
+		<result column="fund_price" property="fundPrice"/>
+		<result column="project_step" property="projectStep"/>
+	</resultMap>
+	
+	<resultMap type="funding.dto.Reward" id="Reward">
+		<id column="reward_no" property="rewardNo"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="reward_amount" property="rewardAmount"/>
+		<result column="reward_name" property="rewardName"/>
+		<result column="reward_intro" property="rewardIntro"/>
+		<result column="reward_state" property="rewardState"/>
+	</resultMap>
+	
+	<resultMap type="funding.dto.ProjectPhoto" id="ProjectPhoto">
+		<id column="photo_no" property="photoNo"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="photo_name" property="photoName"/>
+		<result column="reward_update" property="photoUpdate"/>
+		<result column="photo_path" property="photoPath"/>
+	</resultMap>
+	
+	
+	<insert id="projectInsert" parameterType="funding.dto.Project">
+		<selectKey order="BEFORE" resultType="int" keyProperty="projectNo">
+			SELECT project_seq.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO project(project_no, member_no, category_no, project_intro) 
+		VALUES( #{projectNo}, #{memberNo}, #{categoryNo}, #{projectIntro} )
+	</insert>
+	
+	<insert id="insertDefaultReward" parameterType="int">
+		INSERT INTO reward(reward_no, project_no, reward_price, reward_amount, reward_name, reward_state)
+		VALUES(reward_seq.NEXTVAL, #{projectNo}, 1000, -1, '리워드 없이 후원하기', 1)
+	</insert>
+	
+	<select id="projectSelect" resultMap="Project" parameterType="int">
+		SELECT * FROM project
+        WHERE project_no = #{projectNo}
+	</select>
+
+	<update id="productUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET category_no = #{categoryNo}
+              , project_title = #{projectTitle}
+              , project_intro = #{projectIntro}
+			  , talk_time = #{talkTime}	
+       	      <if test='projectImage!=null and projectImage neq""' >
+       	      , project_image = #{projectImage}
+       	      </if> 
+
+        WHERE project_no = #{projectNo} 
+	</update>
+	
+	<update id="planUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET project_price = #{projectPrice}
+              , open_date = #{openDate}
+              , close_date = #{closeDate}
+              , delivery_date = #{deliveryDate}
+        WHERE project_no = #{projectNo}
+	</update>
+	
+	<update id="contentUpdate" parameterType="funding.dto.Project">
+		UPDATE project
+           SET project_content = #{projectContent}
+              , budget_plan = #{budgetPlan}
+              , schedule_plan = #{schedulePlan}
+        WHERE project_no = #{projectNo}
+	</update>
+	
+	<select id="rewardSelect" resultMap="Reward" parameterType="int">
+		SELECT * from reward
+         WHERE project_no = #{projectNo}
+           AND reward_state = 0
+	</select>
+	
+	<insert id="rewardInsert" parameterType="funding.dto.Reward">
+		<selectKey order="BEFORE" resultType="int" keyProperty="rewardNo">
+			SELECT reward_seq.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO reward(reward_no, project_no, reward_price, reward_amount, reward_name, reward_intro) 
+		VALUES( #{rewardNo}, #{projectNo}, #{rewardPrice}, #{rewardAmount}, #{rewardName}, #{rewardIntro} )
+	</insert>
+	
+	<delete id="rewardDelete" parameterType="int">
+		DELETE FROM reward  
+		WHERE reward_no = ${rewardNo}	
+	</delete>
+	
+	<update id="projectApply" parameterType="int">
+		UPDATE project
+           SET project_step = 1
+        WHERE project_no = #{projectNo}
+	</update>
+	
+	<insert id="chatRoomInsert" parameterType="int">
+             INSERT INTO chat_room (chatroom_id, project_no) VALUES(chat_room_seq.NEXTVAL, #{projectNo} )
+	</insert>
+	
+	
+	
+</mapper>	

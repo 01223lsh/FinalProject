@@ -223,14 +223,16 @@ public interface MemberDao {
 	 * @return 행 수로 반환
 	 */
 	public int chkNaverEmail(String naverEmail);
-
-
-
-
-
-
 	
-	
+	/**
+	 * 멤버번호를 통하여 멤버정보를 조회하는 쿼리문 실행 
+	 * made by 정영재
+	 * 
+	 * @param memberNo
+	 * @return
+	 */
+	public Member selectByMemberNo(int memberNo);
+
 
 
 

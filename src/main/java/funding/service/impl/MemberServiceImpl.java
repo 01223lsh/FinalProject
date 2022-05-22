@@ -1,3 +1,4 @@
+
 package funding.service.impl;
 
 import java.io.BufferedReader;
@@ -28,7 +29,6 @@ import funding.dao.face.MemberDao;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
 import funding.service.face.MemberService;
-
 @Service
 public class MemberServiceImpl implements MemberService {
 	
@@ -564,22 +564,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//멤버번호를 통해서 멤버정보 조회 From 정영재 
+	@Override
+	public Member getUserInfoByMemberNo(int memberNo) {
+		return memberDao.selectByMemberNo(memberNo);
+	}
 
-} //service end
-
-
-	
-	
-
-	
-
-
+} // service end

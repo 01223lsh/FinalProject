@@ -200,5 +200,28 @@
 			AND id = 'naverUser'
 	</select>
 	
+	<!-- made in 정영재 -->
+	<select id="selectByMemberNo" parameterType="int" resultType="funding.dto.Member">
+		SELECT member_no
+		, name, email
+		, nick, phone
+		FROM member 
+		WHERE member_no = #{memberNo}
+	</select>
+	
+<!-- 	<select id="naverConnectionCheck" parameterMap="apiJson" > -->
+<!-- 		SELECT email, nick, naverLogin FROM member -->
+<!-- 		WHERE email = #{email} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="userNaverLoginPro" parameterMap="apiJson"> -->
+<!-- 		SELECT email, nick FROM member  -->
+<!-- 		WHERE email = #{email} and naverLogin = #{id} -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="updateNaverLogin" parameterMap="apiJson"> -->
+<!-- 	UPDATE member SET naverLogin = #{id} -->
+<!-- 	WHERE email = #{email} -->
+<!-- 	</update> -->
 
 </mapper>
