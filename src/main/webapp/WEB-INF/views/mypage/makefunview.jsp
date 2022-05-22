@@ -67,7 +67,7 @@ button {
 #BTN {
 
 	border-radius: 7px;
-	background-color: #39AEA9 !important;
+	background-color: #39AEA9;
 	color: white; 
 	width: 220px;
 	height: 50px;
