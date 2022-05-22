@@ -50,7 +50,8 @@ function categorya(categoryNo){
 		,success : function(res){
 			console.log(this);
 			$("#resultLayout").html(res)
-			$(".category"+categoryNo).css("background-color","#b3b1b2");
+			$(".category"+categoryNo).css("background-color","#47423f");
+			$(".step"+projectStep).css("color","#527578");
 		},error : function(){
 			console.log("프로젝트 카테고리 error");
 		}
@@ -65,7 +66,8 @@ function step(stepe){
 		,success : function(res){
 			console.log("등급별로");
 			$("#resultLayout").html(res)
-			$(".category"+categoryNo).css("background-color","#b3b1b2");
+			$(".step"+stepe).css("color","#527578");
+			$(".category"+categoryNo).css("background-color","#47423f");
 		}
 		,error : function(res){
 			console.log("오류")
@@ -285,7 +287,7 @@ $(document).ready(function(){
 	float: left;
 }
 .btncate {
-        background-color : #47423f;
+        background-color : #b3b1b2;
         color : white;
         width: 100px;
         height: 50px;
@@ -295,7 +297,7 @@ $(document).ready(function(){
 }
 .btncate:hover {
         color : white;
-        background-color: #b3b1b2;
+        background-color: #47423f;
 }
 
 table.test{width: 100%; width: 1000px; margin:auto;}
@@ -314,17 +316,17 @@ table.test td{height: 30px; padding : 10px;}
 <br>
 <div class="row container py-3 text-center0" id="center">
 	<div class="col text-center" id="ing">
-		<a onclick="step(3)"><i class="fa-regular fa-circle-check fa-5x step(3)"></i></a>
+		<a onclick="step(3)"><i class="fa-regular fa-circle-check fa-5x step3"></i></a>
 		<br>
 		<span>진행중인 펀딩</span>
 	</div>
 	<div class="col text-center" id="end">
-		<a onclick="step(4)"><i class="fa-solid fa-sack-xmark fa-5x step(4)"></i></a>
+		<a onclick="step(4)"><i class="fa-solid fa-sack-xmark fa-5x step4"></i></a>
 		<br>
 		<span>종료된 펀딩</span>
 	</div>
 	<div class="col text-center" id="All">
-		<a onclick="step(5)"><i class="fa-solid fa-scale-balanced fa-5x step(5)"></i></a>
+		<a onclick="step(5)"><i class="fa-solid fa-scale-balanced fa-5x step5"></i></a>
 		<br>
 		<span>전체</span>
 	</div>
@@ -358,12 +360,14 @@ table.test td{height: 30px; padding : 10px;}
       
         <div class="card shadow-sm" style=" border: 1px solid; max-width: 250px; max-height:332px; padding: 5px;">
           <img src="${i.projectImage}" style="min-height: 250px; width: 100%; ">
-          <div class="card-body">
+          <div class="card-body" >
+          <div style="height: 55px; overflow: hidden;">
             <strong>${i.projectTitle}</strong>
             <c:if test="${i.projectStep eq 4}">
               <span id="project-status">마감</span>
             </c:if>
             <p class="card-text">${i.projectIntro}</p>
+            </div>
             <div >
               <div class="col d-flex">
               <span style="margin-right: 10px;">

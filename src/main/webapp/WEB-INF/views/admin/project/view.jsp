@@ -168,8 +168,6 @@ div {
 	margin-top: 12px;
 }
 
-
-/*content1_2*/
 #content1_2 {
 	float: left;
 	margin-left: 20px;
@@ -362,16 +360,7 @@ position: relative;
 		</div>
         </div>
         
-		<div  class="projectTop">
-		<div  class="projectTopImg">
-		</div>
-		<div class="category" style="color : #B6D9DC; font-size: 26px;" >
-			<p>
-			
-			</p>
-		</div>
-			<input type="hidden" value="3">
-		</div>
+	
 		<br>
 		<br>
 		<div id="content1" style="margin-top: -10px;">

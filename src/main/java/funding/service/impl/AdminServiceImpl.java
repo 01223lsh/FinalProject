@@ -365,6 +365,17 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.selectCntAll();
 	}
 	
+	@Override
+	public MemberSeller getBuisnessInfo(Project result) {
+		return adminDao.getBuisnessInfo(result);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	//최원석님 코드
 	@Override

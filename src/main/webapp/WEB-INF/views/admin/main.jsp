@@ -28,7 +28,6 @@
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script type="text/javascript">
 function projectView(projectNo){
-	console.log(projectNo + "test");
 	$.ajax({
 		type: "get"
 		,url : "/admin/project/view"
@@ -285,7 +284,7 @@ h1{ font-size:18px;  padding:20px; }
 	min-height: 800px;	
 	list-style: none;	
 }
-    .menu li {}
+  
 
     
 .menu li a {
@@ -379,6 +378,10 @@ h1{ font-size:18px;  padding:20px; }
 	width : 100%;
 
 }
+
+.maintable{
+	text-align: center;
+}
 .Mqna{
 	min-width: 480px;
 	min-height: 150px;
@@ -437,6 +440,20 @@ a {
 a:hover {
 	  text-decoration-line: none;
 }
+@supports (position: sticky) or (position: -webkit-sticky) {
+ .menu{
+      position: sticky;
+      top: 4px;
+  }
+}
+@media screen and (max-width: 1536px) { 
+#menu{ display: none; } }
+
+.noticeTabletr>td{
+	overflow: hidden;
+	height: 27px;
+}
+
 </style>
 
 
@@ -446,8 +463,8 @@ a:hover {
 <div id="managerLayout" style="height:100%;margin-top: 0px;">
 <div  id="menu" >
 
-<nav >
-   <a href="" style="color:#fff; font-size: 18px;">관리자 페이지</a>
+<nav class="menubar">
+   <a href="" style="color:#fff; font-size: 18px;" >관리자 페이지</a>
     <ul class="menu">
         <li><a onclick="memberManagement()"><i class="fa-solid fa-user" ></i>&nbsp;&nbsp;회원관리</a></li>
         <li><a onclick="projectManagement()"><i class="fa-solid fa-briefcase"></i>&nbsp;&nbsp;프로젝트 목록</a></li>
@@ -684,7 +701,7 @@ a:hover {
 				</div>
 				<div class="Mnotice" style="overflow:scroll; width:33%; height:150px; overflow-x: hidden; ">
 				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC;width: 25.9%;  text-align: center; min-width: 486px; min-height: 20px; "  class="MnoticeManagement">공지사항 리스트</div>
-					<table class="MnoticeList">
+					<table class="MnoticeList maintable">
 						<tr style="border-bottom: 2px solid #ddd;">
 						
 							<td style="width: 10%;">.</td><td style="width: 76%;"></td><td></td>
@@ -701,7 +718,7 @@ a:hover {
 				<div class="Mqna" style="overflow:scroll; overflow-x: hidden;">
 				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC; width:  25.1%;  text-align: center;min-width: 470px; min-height: 20px;" class="MqnaManagement">문의게시판 답변 안한 리스트</div>
 
-						<table class="MqnaList">
+						<table class="MqnaList maintable">
 							<tr style="border-bottom: 2px solid #ddd;">
 								<td style="width: 10%;">.</td><td style="width: 76%;"></td><td style="width: 17%;" ></td>
 							</tr>
@@ -723,7 +740,7 @@ a:hover {
 				</div>
 				<div class="projectOrder" style="overflow:scroll; height: 449px; overflow-x: hidden;">
 				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC; width: 30.65%;  text-align: center; min-width:580px;min-height: 20px; " class="Mprojectmanagement" >프로젝트 펀딩률</div>
-					<table style="    width: 100%;">
+					<table style="    width: 100%;" class="maintable">
 					<tr style="border-bottom: 1px solid #ddd;">
 						<th style="width: 8%;">.</th>
 						<th style="width: 50%;"></th>
@@ -734,8 +751,8 @@ a:hover {
 					<c:forEach items="${projectList }" var="i">
 						<tr style="border-bottom: 1px solid #ddd;" class="noticeTabletr">
 							<td>${i.projectNo }</td>
-							<td  onclick="projectView(${i.projectNo})">${i.projectTitle } </td>
-							<td>${i.paymentTotal}</td>
+							<td  onclick="projectView(${i.projectNo})"  ><div style="overflow: hidden; height: 21px">${i.projectTitle }</div> </td>
+							<td>${i.paymentTotal}원</td>
 							<td><fmt:formatNumber value="${i.paymentTotal / i.projectPrice}" type="percent"/></td>
 							<td>
 							<c:if test="${i.paymentTotal ne 0}">

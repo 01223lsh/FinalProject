@@ -374,11 +374,13 @@ public class AdminController {
 		List<Category> category = adminService.categoryList();
 		// 개별 프로젝트 상세내용 조회
 		Project result = adminService.getProject(project);
+		MemberSeller userInfo = adminService.getBuisnessInfo(result);
 		logger.info("조회된 프로젝트: {}", result);
+		logger.info("조회된 프로젝트: {}", userInfo);
 
-		// View 전달 데이터
 		model.addAttribute("category", category);
 		model.addAttribute("project", result);
+		model.addAttribute("member", userInfo);
 		
 		
 	}
