@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import funding.dto.ChatRoom;
 import funding.dto.Project;
 import funding.repository.ChatRoomRepository;
-import funding.service.face.ProjectViewService;
 
 //@Slf4j
 @Controller
@@ -27,9 +26,6 @@ public class RoomController {
 
 	@Autowired
 	private ChatRoomRepository repository;
-
-	@Autowired
-	private ProjectViewService projectViewService;
 
 	// 채팅방 생성
 	@PostMapping("/room")
@@ -46,6 +42,7 @@ public class RoomController {
 		// log.info("[/chat/room/enter/{}][GET]", memberNo);
 //		ChatRoom room = repository.findRoomById(Integer.parseInt(projectNo));
 		ChatRoom room = repository.findRoomById(projectNo);
+		project = repository.getProject(project);
 		System.out.println("결과값 테스트: " + room);
 		String sessionId = session.getId();
 //		String sessionNick = session.getNick();

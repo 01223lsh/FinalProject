@@ -144,9 +144,9 @@
 	 		 font-family: 'IBM Plex Sans KR', sans-serif; 
 		}
 		
-	 	.menubar_h {
+	 	/* .menubar_h {
 			border-bottom: 50px solid #ffffff;
-		} 
+		}  */
 		
 		#navbar_h {
 		background-color: #39AEA9 !important;
@@ -226,7 +226,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar_h">
    <div class="nav-login_h collapse navbar-collapse">
 <!-- 	<ul style="list-style-type: none;"> -->
-			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
+			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/logo.png" width = "100" height="80"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1" id="login">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login" id="login">LOGIN</a></button>
