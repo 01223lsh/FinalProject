@@ -49,4 +49,6 @@ public interface ProjectViewService {
 
 	public List<Payment> getContributorsList(Payment payment);
 
+	public void updateNews(ProjectNews news);
+
 }
