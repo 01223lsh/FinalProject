@@ -4,7 +4,7 @@ package funding.dto;
 import java.util.Date;
 
 public class Alert {
-	
+	  
 	private int alertNo;
 	private int memberNo;
 	private String alertContent;

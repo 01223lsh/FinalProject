@@ -23,6 +23,7 @@
 $(document).ready(function(){
 	
 	$("#btnWrite").click(function(){
+		
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 
 		var form = $("#writeform")[0];

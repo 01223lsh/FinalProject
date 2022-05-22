@@ -187,8 +187,8 @@ table.test td{height: 30px; padding : 10px;}
     justify-content: space-between;">
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
       
-        <div class="card shadow-sm" style=" border: 1px solid;">
-         <img src="${i.projectImage}" style="min-height: 250px;">
+        <div class="card shadow-sm" style=" border: 1px solid; max-width: 250px; padding: 5px;">
+          <img src="${i.projectImage}" style="min-height: 250px; width: 100%; ">
           <div class="card-body">
             <strong>${i.projectTitle}</strong>
             <c:if test="${p.projectStep eq 4}">

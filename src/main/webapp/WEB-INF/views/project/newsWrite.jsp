@@ -56,24 +56,27 @@
 <div>
 <form id="newsForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="projectNo" value="${projectNo }">
-<table style="width: 500px; height: 350px;">
-<tr>
-	<td style="width: 15%">제목</td>
-	<td><input type="text" id="newsTitle" name="newsTitle" style="width:400px "></td>
-</tr>
-
-<tr>
-	<td>내용</td>
-	<td><textarea style="width: 400px; height: 300px" id="newsContent"></textarea></td>
+	<table style="height: 350px;">
+	<tr>
+	<td width="10%;">제목</td>
+	<td><input type="text" id="newsTitle" name="newsTitle" style="width:500px "></td>
+	</tr>
 	
-</tr>
+	
+	
+	<tr>
+		<td>내용</td>
+		<td><textarea style="width: 500px; height: 400px" id="newsContent"></textarea></td>
+	</tr>
+	
+	
+	
+	</table>
 
-
-</table>
 </form>
-<div class="text-center">
+<div style="text-align: center; margin: 8px 0px 8px;">
 <button id="newsSubmit" type="button" class="btn btn-primary">작성</button>
-<button id="newsCancel" type="button" class="btn btn-default" onclick="cancel()">취소</button>
+<button id="newsCancel" type="button" class="btn btn-default" onclick="cancel()" style="background-color: rgb(240, 240, 240);">취소</button>
 </div>
 
 <br><br><br><br><br>
@@ -82,8 +85,7 @@
 <script>
 $(function () {
 	CKEDITOR.replace('newsContent', { // ck에디터를 지정하고자 하는 textarea 태그의 id
-	filebrowserUploadUrl: '/project/ck/upload',// 이미지 업로드를 진행할 url
-	language: 'ko'
+	filebrowserUploadUrl: '/project/ck/upload'// 이미지 업로드를 진행할 url
 	})
 	})
 </script>

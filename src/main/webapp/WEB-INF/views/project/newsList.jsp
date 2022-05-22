@@ -63,17 +63,17 @@ $.ajax({
 </style>
 
 <div id="news1">
+<div style="margin-bottom: 5px; padding-top: 10px; height: 50px;">
 <b>- 최근소식</b>
 <c:choose>
-		<c:when test="${project.projectStep eq 3}">
-		<button id="newsWrite" class="btn btn-primary">작성하기</button>
+		<c:when test="${project.projectStep eq 3 and project.memberNo eq memberNo}">
+		<button id="newsWrite" class="btn btn-primary" style="width: 106px; height: 41px; background-color: #39AEA9; border: none;">작성하기</button>
 		</c:when>
-		<c:when test="${project.projectStep eq 4 }">
+		<c:otherwise>
 		
-		</c:when>
+		</c:otherwise>
 	</c:choose>
-
-<br>
+</div>
 <hr>
 
 <c:forEach var="news" items="${newsList }">

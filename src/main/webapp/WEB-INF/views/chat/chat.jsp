@@ -29,17 +29,17 @@
             , dataType: "JSON"
             , data: {name: name}
             , success: function(res) {
-                console.log(res)
-                const li = $("<li></li>");
-                const a = $("<a></a>")
-                a.attr("href", "/chat/room/enter/" + res.roomName)
-                a.text(res.roomName);
-                li.addClass("list-group-item");
-                li.addClass("list-group-item-action");
-                li.addClass("room-name");
-                li.append(a);
-                // $("#chat-list").append("<li class=list-group-item list-group-item-action>" + res.roomName + "</li>")
-                $("#chat-list").append(li);
+//                 console.log(res)
+//                 const li = $("<li></li>");
+//                 const a = $("<a></a>")
+//                 a.attr("href", "/chat/room/enter/" + res.roomName)
+//                 a.text(res.roomName);
+//                 li.addClass("list-group-item");
+//                 li.addClass("list-group-item-action");
+//                 li.addClass("room-name");
+//                 li.append(a);
+//                 // $("#chat-list").append("<li class=list-group-item list-group-item-action>" + res.roomName + "</li>")
+//                 $("#chat-list").append(li);
             }
             , error: function () {
                 console.log("ajax 실패")

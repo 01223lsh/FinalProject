@@ -340,7 +340,12 @@ public interface AdminDao {
 	 * @return 전일 데이터
 	 */
 	public AdminMain selectCntAll();
-	
+	/**
+	 * 프로젝트 유저 번호로 유저 판매정보 및 유저 정보 가져오기
+	 * @param result 프로젝트 정보
+	 * @return 유저정보(사업자 포함)
+	 */
+	public MemberSeller getBuisnessInfo(Project result);
 	
 	
 	
@@ -371,6 +376,7 @@ public interface AdminDao {
 
 	//최원석님 코드
 	public List<ProjectComment> selectCommentList(int projectNo);
+
 
 
 

@@ -75,10 +75,23 @@ public interface ApplyDao {
 	
     /**
      * 선택한 리워드 삭제
-     * @param rewardNo 삭제할 리워드 식별값
+     * 
+     * @param rewardNo 삭제할 리워드 번호
      * @return 삭제 결과
      */
     public void rewardDelete(int rewardNo);
 
-	
+    /**
+     * 프로젝트 업데이트
+     * 
+     * @param projectNo 신청할 프로젝트 번호
+     */
+	public void projectApply(int projectNo);
+
+	/**
+	 * 채팅방 생성
+	 * 
+	 * @param projectNo
+	 */
+	public void chatRoomInsert(int projectNo);
 }
