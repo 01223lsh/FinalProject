@@ -25,13 +25,6 @@ public interface PaymentService {
 	public List<Reward> rewardListByProjectNo(int projectNo);
 	
 	/**
-	 * reward 목록을 조회한다.
-	 * 
-	 * @return - rewardList
-	 */
-	public List<Reward> rewardList();
-	
-	/**
 	 * rewardNo를 통해서 해당 reward의 정보를 조회 
 	 * @param rewardNo - rewardNo가 있는 DTO
 	 * @return - reward 정보
