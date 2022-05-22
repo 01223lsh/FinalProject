@@ -58,9 +58,10 @@ body{
     z-index: 9999;
 }
 .header3 {
-	height: 65px;
+	height: 100px;
 	width: 100%;
-    background-color: rgb(255, 255, 255);
+/*     background-color: rgb(255, 255, 255); */
+    background-color: #39AEA9;
     display: flex;
 /*     -webkit-box-align: center; */
     align-items: center;
@@ -118,7 +119,7 @@ body{
 	border: none;
     background: transparent;
     outline: none;
-    color: black;
+    color: rgb(255,255, 255);
 /*     font-weight: bold; */
     font-size: 1rem;
     cursor: pointer;
@@ -133,7 +134,7 @@ body{
 .apply{
 	display: flex;
 	flex-grow: 1;
-	padding-top: 65px;
+	padding-top: 100px;
     overflow: hidden;
 	width: 100%;
 }
@@ -353,7 +354,7 @@ $(function() {
 								<button class="project_button"  onclick="location.href='/project/list'"><span style="">프로젝트 둘러보기</span></button>
 							</div>
 							<div class="header_logo">
-								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/happyLogo.png" width = "100" height="50"></img></a>
+								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
 							</div>
 							<div class="header_side">
 								<button class="project_button"  onclick=""><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>

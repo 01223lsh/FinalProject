@@ -228,7 +228,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar_h">
    <div class="nav-login_h collapse navbar-collapse">
 <!-- 	<ul style="list-style-type: none;"> -->
-			<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
+			<a href="/member/main" class="me-auto mb-2 mb-lg-0" style="margin-left: 15px;"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
 		    <c:choose>
 			<c:when test="${empty login }">
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/join_step1">JOIN</a></button><button type="button" class="btn btn-outline-secondary"><a href="/member/login">LOGIN</a></button>
@@ -238,7 +238,7 @@
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button><button type="button" class="btn btn-outline-secondary"><a href="/admin/main">ADMINPAGE</a></button>
 			</c:when>
 			<c:otherwise>
-				<button style="background-color: #39AEA9;" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+				<button style="background-color: #39AEA9; color: rgb(255,255,255);" class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
 				<button type="button" class="btn btn-outline-secondary"><a href="/member/logout">LOGOUT</a></button><button type="button" class="btn btn-outline-secondary"><a href="/mypage/mypagemain">MYPAGE</a></button>
 			</c:otherwise>
 		 	</c:choose>
