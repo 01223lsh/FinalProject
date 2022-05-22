@@ -88,7 +88,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	}
 	
 	@PostMapping("/member/join_step3_consumer")
-	public String cousumer_joinProcess(Member member, Model model, Errors errors) {
+	public String cousumer_joinProcess(Member member) {
 		logger.info("cunsumer의 회원 정보 입력 값 : {}", member);
 		
 		boolean joinResult = memberService.consumerJoin(member);
