@@ -214,6 +214,9 @@ public class ApplyServiceImpl implements ApplyService{
 		
 		//프로젝트 신청하기
 		applyDao.projectApply(projectNo);
+		
+		//채팅방 생성하기
+		applyDao.chatRoomInsert(projectNo);
 	}
 	
 	
