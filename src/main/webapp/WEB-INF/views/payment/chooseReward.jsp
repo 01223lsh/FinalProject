@@ -160,7 +160,7 @@ function sumPrice() {
 					<em>리워드 선택</em>
 				</li>
 				<li style="padding: 0 80px; box-sizing: content-box;">
-					<em>결제 예약</em>
+					<em>결제 정보</em>
 				</li>
 				<li>
 					<em>결제 완료</em>
