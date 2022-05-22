@@ -46,7 +46,7 @@
 		<interceptor>
 		
 			<!-- 인터셉터 적용될 URL -->
-			<mapping path="/member/login"/>
+			<mapping path="/member/loginform"/>
 						
 			<!-- 인터셉터 클래스 지정 -->
 			<beans:bean class="funding.interceptor.MainInterceptor"/>

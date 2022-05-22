@@ -151,6 +151,12 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void noticeUpdate(Notice notice, List<MultipartFile> filelist, List<Integer> fileNolist) {
 		int noticeNo = notice.getNoticeNo();
+		if(notice.getTitle().equals("") &&notice.getTitle()==null) {
+			notice.setTitle("제목 없음");
+		}
+		if(notice.getContent().equals("") || notice.getContent()==null) {
+			notice.setContent(" ");
+		}
 		adminDao.noticeUpdate(notice);
 		adminDao.fileNoByDelete(notice, fileNolist);
 		if (filelist.size() <= 0) {
@@ -192,10 +198,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public void noticeWrite(Notice notice, List<MultipartFile> filelist) {
+		if(notice.getTitle().equals("") || notice.getTitle()==null) {
+			notice.setTitle("제목 없음");
+		}
+		if(notice.getContent().equals("") || notice.getContent()==null) {
+			notice.setContent(" ");
+		}
 		int noticeNo = adminDao.selectBynoticeno();
 		notice.setNoticeNo(noticeNo);
 		adminDao.noticeWrite(notice);
-
+		
 		if (filelist.size() <= 0) {
 			return;
 		}
@@ -352,6 +364,17 @@ public class AdminServiceImpl implements AdminService {
 	public AdminMain selectCntAll() {
 		return adminDao.selectCntAll();
 	}
+	
+	@Override
+	public MemberSeller getBuisnessInfo(Project result) {
+		return adminDao.getBuisnessInfo(result);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	//최원석님 코드
