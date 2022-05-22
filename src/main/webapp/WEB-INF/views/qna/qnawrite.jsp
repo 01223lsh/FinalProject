@@ -27,11 +27,43 @@ $(document).ready(function() {
 </script>
 
 <style>
-/*
-textarea {
-	height: 400px;
+
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
-*/
+
+.title {
+
+	width : 60%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.cont {
+
+	width : 60%;
+	margin: 0 auto;
+}
+
+input {
+	width: 100%;
+	border-radius: 5px;
+	height: 37px;
+	border: 2px solid #DDD;
+}
+
+button {
+    border-radius: 5px;
+    border: 0px solid black;
+/*     background-color: #183F7B; */
+    background-color: #396EB0;
+    color: white;
+    width: 53px;
+    height: 30px;
+    font-weight: bold;
+    margin-right: 15px;
+/*     box-shadow: inset 1px 1px 2px 1px rgb(77, 71, 71); */
+}
 </style>
 
 
@@ -61,15 +93,15 @@ textarea {
 <!-- 		</div> -->
 <!-- 	</div> -->
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
-			<input type="text" id="qnaTitle" name="qnaTitle" class="form-control"  placeholder="제목을 입력하세요">
+	<div class="title">
+		<div class="">
+			<input type="text" id="qnaTitle" name="qnaTitle" class=""  placeholder="제목을 입력하세요" >
 		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-sm-10 col-sm-offset-1">
-			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
+	<div class="cont">
+		<div class="">
+			<textarea class="" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
 		</div>
 	</div>
 

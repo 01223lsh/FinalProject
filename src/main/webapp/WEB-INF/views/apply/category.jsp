@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,6 +8,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
 <style type="text/css">
 input[type=radio]{display:none; margin:10px; }
@@ -28,18 +30,123 @@ background-color:#f86453;
 color:#fff;
 }
 
+html {
+	height: 100%;
+}
+
+body{
+	height: 100%;
+	margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    min-width: 320px;
+}
+
+.all {
+	display: flex;
+	flex-direction: column;
+    min-height: 100%;
+    height: 100%;
+}
+
+.header1 {
+	position: fixed;
+    width: 100%;
+}
+.header2 {
+	position: relative;
+    z-index: 9999;
+}
+.header3 {
+	height: 100px;
+	width: 100%;
+/*     background-color: rgb(255, 255, 255); */
+    background-color: #39AEA9;
+    display: flex;
+/*     -webkit-box-align: center; */
+    align-items: center;
+    position: relative;
+    box-shadow: rgb(10 10 10 / 10%) 0px 1px 2px 0px;
+    z-index: 999;
+}
+.header4 {
+	position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0px auto;
+    padding: 0px;
+    width: 1160px;
+}
+.header5 {
+	display: flex;
+/*     -webkit-box-align: center; */
+    align-items: center;
+/*     -webkit-box-pack: justify; */
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    max-height: 70px;
+}
+
+.header_project {
+	flex: 1 0 25%;
+    text-align: center;
+    display: flex;
+}
+.header_logo {
+	width: 10rem;
+    position: absolute;
+    inset: 0px;
+    margin: 0px auto;
+    padding: 0px 1rem;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.header_side {
+	text-align: right;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.project_button {
+	border: none;
+    background: transparent;
+    outline: none;
+    color: rgb(255,255, 255);
+/*     font-weight: bold; */
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 58px;
+    padding: 0px 1rem;
+}
+
+.project_button span:hover, .project_button span:active {
+	color: rgb(150, 150, 150);
+}
+
 .apply{
 	display: flex;
 	flex-grow: 1;
+	padding-top: 100px;
+    overflow: hidden;
+	width: 100%;
 }
 
 
 .apply-back{
     display: block;
-    width: 600px;
+    width: 400x;
     height: 100%;
-    display:flex; 
-    position: fixed;
+	flex-grow: 1;
+/*     display:flex;  */
+    position: relative;
 /*     background-image: url(https://tumblbug-assets.s3-ap-northeast-1.amazonaws.com/static_assets/editor-start-image-03.jpg); */
 /* 	background-image: user */
 /*     background: url(https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/30034/images/YIHaFaIQeWQ5u7uk4u2g_Montessori-Rhyming-Objects-Set.png) 0% 0% / cover no-repeat rgb(237, 229, 227);  */
@@ -56,12 +163,12 @@ color:#fff;
 .item {
 /*     display:flex;  */
     position: relative; 
-    left: 5%;
+/*     left: 5%; */
     top:100px;  
-/*     overflow:auto; */
-	width:550\x;
-/* 	margin: 0 auto; */
-/* 	text-align: justify; */
+/*     overflow:auto;  */
+	width:550px;
+ 	margin: 0 auto; 
+/*  	text-align: justify;  */
 }
 
 .item-category{
@@ -73,11 +180,22 @@ color:#fff;
 /* 	flex:1; */
 }
 
+.right-content-all {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
 .right-content{
 /* 	flex:1; */
-    position: relative; 
-    left: 610px;
-	width:auto;
+/*     position: relative;  */
+/*     left: 610px; */
+/* 	width:auto; */
+	
+	width: 450px;
+    padding: 40px 0px 63px;
+    margin:50px auto;
+    flex-grow: 1;
 }
 
 .item-intro{
@@ -226,39 +344,63 @@ $(function() {
 
 </head>
 <body>
-	<div class="apply">
-		<div class="apply-back"></div>
-		<div class="right-content">
-			<div class="item">
-				<h3 style= "font-size: 24px !important;">카테고리를 선택해주세요.</h3>
-	 			<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
-			</div>
-			
-			<div class="item item-category">
-				<input type="radio" class="rounded-pill" id="radio1" name="categoryNo" value= 1><label class="rounded-pill"  for="radio1">뷰티</label>
-				<input type="radio" class="rounded-pill" id="radio2" name="categoryNo" value= 2><label class="rounded-pill"  for="radio2">디자인 문구</label>
-				<input type="radio" class="rounded-pill" id="radio3" name="categoryNo" value= 3><label class="rounded-pill"  for="radio3">푸드</label>
-				<input type="radio" class="rounded-pill" id="radio4" name="categoryNo" value= 4><label class="rounded-pill"  for="radio4">잡화</label>
-				<input type="radio" class="rounded-pill" id="radio5" name="categoryNo" value= 5 ><label class="rounded-pill"  for="radio5">굿즈</label>
-			</div>
-			
-			<div class="item-intro">
-				<div class="item">
-					<h3 style= "font-size: 24px !important;">프로젝트를 간단하게 소개해주세요!</h3>
-	 				<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
-					
-					<div class="item-intro-text">
-						<textarea placeholder="프로젝트 요약을 입력해주세요." id="projectIntro" name="projectIntro" maxlength="200"></textarea>		
-						<span id="item-intro-limit">최소 10자이상 입력해주세요.</span>
-						<span id="textTotal">/ 50자</span>		
-						<span id="textCount">0자</span>
+	<div class="all">
+		<div class="header1">
+			<div class="header2">
+				<div class="header3">
+					<div class="header4">
+						<div class="header5">
+							<div class="header_project">
+								<button class="project_button"  onclick="location.href='/project/list'"><span style="">프로젝트 둘러보기</span></button>
+							</div>
+							<div class="header_logo">
+								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/LogoWhale2.png" width = "100" height="80"></img></a>
+							</div>
+							<div class="header_side">
+								<button class="project_button"  onclick=""><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
+								<button class="project_button"  onclick="location.href='/mypage/mypagemain' "><span>${sessionScope.nick}</span></button>
+							</div>
+						</div>
 					</div>
-					<button class="button-next" onclick="applyCategory()">다음단계</button>
+				</div>
+			</div>
+		</div>
+		<div class="apply">
+			<div class="apply-back"></div>
+			<div class="right-content-all">
+				<div class="right-content">
+					<div class="item">
+						<h3 style= "font-size: 24px !important;">카테고리를 선택해주세요.</h3>
+			 			<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
+					</div>
+					<div class="item item-category">
+						<input type="radio" class="rounded-pill" id="radio1" name="categoryNo" value= 1><label class="rounded-pill"  for="radio1">홈·리빙</label>
+						<input type="radio" class="rounded-pill" id="radio2" name="categoryNo" value= 2><label class="rounded-pill"  for="radio2">테크·가전</label>
+						<input type="radio" class="rounded-pill" id="radio3" name="categoryNo" value= 3><label class="rounded-pill"  for="radio3">향수·뷰티</label>
+						<input type="radio" class="rounded-pill" id="radio4" name="categoryNo" value= 4><label class="rounded-pill"  for="radio4">잡화</label>
+						<input type="radio" class="rounded-pill" id="radio5" name="categoryNo" value= 5 ><label class="rounded-pill"  for="radio5">의류</label>
+						<input type="radio" class="rounded-pill" id="radio6" name="categoryNo" value= 6 ><label class="rounded-pill"  for="radio6">디자인·예술</label>
+						<input type="radio" class="rounded-pill" id="radio7" name="categoryNo" value= 7 ><label class="rounded-pill"  for="radio7">푸드</label>
+						<input type="radio" class="rounded-pill" id="radio8" name="categoryNo" value= 8 ><label class="rounded-pill"  for="radio8">반려동물</label>
+					</div>
+					<div class="item-intro">
+						<div class="item">
+							<h3 style= "font-size: 24px !important;">프로젝트를 간단하게 소개해주세요!</h3>
+			 				<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>
+							
+							<div class="item-intro-text" style="width: 100%;">
+								<textarea placeholder="프로젝트 요약을 입력해주세요." id="projectIntro" name="projectIntro" maxlength="200"></textarea>		
+								<span id="item-intro-limit">최소 10자이상 입력해주세요.</span>
+								<span id="textTotal">/ 50자</span>		
+								<span id="textCount">0자</span>
+							</div>
+							<button class="button-next" onclick="applyCategory()">다음단계</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 		
 		
 </body>

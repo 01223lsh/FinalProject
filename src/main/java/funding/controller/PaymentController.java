@@ -21,6 +21,7 @@ import funding.dto.Member;
 import funding.dto.Order;
 import funding.dto.Project;
 import funding.dto.Reward;
+import funding.service.face.ApplyService;
 import funding.service.face.MemberService;
 import funding.service.face.PaymentService;
 
@@ -35,6 +36,9 @@ public class PaymentController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	ApplyService applyService;
+	
 	@GetMapping(value = "/payment/chooseReward")
 	public void chooseReward(HttpSession session, Model model, Reward reward, int projectNo) {
 		
@@ -42,7 +46,7 @@ public class PaymentController {
 		
 		logger.info("projectNo : {}", projectNo);
 		
-		//리워드 선택지 불러오기 
+		//리워드 선택지 불러오기
 		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo);
 //		for (Reward r : rewardList) {
 //			logger.info("RewardList : {}", r);

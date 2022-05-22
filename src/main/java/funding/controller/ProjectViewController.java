@@ -1,8 +1,7 @@
 package funding.controller;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import funding.dto.Member;
-import funding.dto.MemberSeller;
+import funding.dto.Payment;
 import funding.dto.Project;
 import funding.dto.ProjectComment;
 import funding.dto.ProjectNews;
@@ -47,17 +46,26 @@ public class ProjectViewController {
 			return "redirect:/main";
 		}
 		
+		
+		
 		project = projectViewService.getProject(project);
+		
+		
+		int contributors = projectViewService.getContributors(project.getProjectNo());
+		
 		seller = projectViewService.getSeller(project);
-		logger.info("{}",seller);
+		
+		logger.info("seller 정보 {}",seller);
 		
 		model.addAttribute("project", project);
 		model.addAttribute("seller", seller);
+		model.addAttribute("contributors", contributors);
 		
+		if(project.getProjectStep() == 3) {
 		List<Reward> rewardList = projectViewService.getReward(project);
 		
 		model.addAttribute("rewardList", rewardList);
-		
+		}
 		
 		//남은 일 계산
 		Calendar today = Calendar.getInstance();
@@ -94,7 +102,7 @@ public class ProjectViewController {
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(project.getProjectNo());
 		
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(project.getProjectNo());
 		
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("project", project);
@@ -107,10 +115,11 @@ public class ProjectViewController {
 	public String projectCommentList(Project project, Model model) {
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(project.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(project.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("project", project);
+		logger.info("comment List {}", project);
 		
 		return "project/commentList";
 	}
@@ -125,12 +134,15 @@ public class ProjectViewController {
 	}
 	
 	@RequestMapping(value = "/project/news/view")
-	public String projectNewsView(ProjectNews news, Model model) {
+	public String projectNewsView(ProjectNews news, Model model,Project project) {
 		
 		news = projectViewService.getNewsView(news);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		model.addAttribute("news", news);
+		model.addAttribute("project", project);
 		
+		logger.info("news view {}", project);
 		return "project/newsView";
 	}
 	
@@ -149,7 +161,7 @@ public class ProjectViewController {
 		
 		
 		projectViewService.writeNews(news);
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
 		
@@ -166,7 +178,7 @@ public class ProjectViewController {
 		projectViewService.deleteNews(news);
 		
 		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(news.getProjectNo());
 		
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("projectNo", news.getProjectNo());
@@ -179,12 +191,12 @@ public class ProjectViewController {
 	public String projectCommentWrite(Model model, ProjectComment comment, Project project) {
 		
 		logger.info("/project/comment/write");
-		logger.info("{}",comment);
+		logger.info("전달받은 댓글 입력 값 : {}",comment);
 		
 		projectViewService.writeComment(comment);
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
-		project = projectViewService.getStep(project);
+		project = projectViewService.getStep(comment.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("projectNo", comment.getProjectNo());
@@ -195,15 +207,16 @@ public class ProjectViewController {
 	
 	
 	@RequestMapping(value = "/project/comment/delete")
-	public String projectCommentDelete(Model model, ProjectComment comment) {
+	public String projectCommentDelete(Model model, ProjectComment comment, Project project) {
 		
 		projectViewService.deleteComment(comment);
 		
 		List<ProjectComment> commentList = projectViewService.getCommentList(comment.getProjectNo());
+		project = projectViewService.getStep(comment.getProjectNo());
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("projectNo", comment.getProjectNo());
-		
+		model.addAttribute("project", project);
 		return "project/commentList";
 	}
 	
@@ -236,8 +249,21 @@ public class ProjectViewController {
 	public String projectTalktimeUpdate(Project project) {
 		
 		projectViewService.updateTalktime(project);
+		logger.info("{}",project.getProjectNo());
+		return "redirect:/project/view?projectNo="+project.getProjectNo();
+	}
+	
+	@RequestMapping(value = "/project/contributors")
+	public String projectContributorsList(Payment payment,Model model ) {
 		
-		return "redirect:/project/view?projectNo"+project.getProjectNo();
+		List<Payment> coList = projectViewService.getContributorsList(payment);
+		int contributors = projectViewService.getContributors(payment.getProjectNo());
+		
+		
+		model.addAttribute("coList", coList);
+		model.addAttribute("contributors", contributors);
+		
+		return "project/contributorsList";
 	}
 	
 	

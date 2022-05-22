@@ -50,6 +50,9 @@ $(document).ready(function() {
 		$("#makefunding").show();
 	};
 	
+	
+
+	
 // 	var id = ${id};
 // 	var kakao = "kakaoUser";
 // 	var naver = "naverUser";
@@ -148,21 +151,23 @@ $(document).ready(function() {
 
 .left {
 /* 	border : 1px solid black; */
-/* 	background-color: #538fd9; */
-	background-color: #f3f3f6;
-/*  background-color: #E0ECF8; */
- 	height: 100%;
+/* 	background-color: #f3f3f6; */
+ 	height: 1500px;
  	width: 15%;
  	float: left;
-
+ 	font-family: 'IBM Plex Sans KR', sans-serif;
+	margin-left: 15%;
 }
 
 .right {
 
 	background-color: #fff;
-	height: 1000px;
-	width: 85%;
-	margin-left: 15%;
+/* 	height: 1000px; */
+	height: 100%;
+	width: 60%;
+	margin-left: 30%;
+	margin-right: 10%;
+
 }
 
 h1 {
@@ -193,34 +198,48 @@ ul {
 .menu {
 	text-align: center;
 	margin-top: 40%;
-	line-height: 70px;
-	font-size: 16px;
+	line-height: 80px;
+	font-size: 17px;
   text-decoration: none;
 }
 
 
 .m {
   text-decoration: none;
-
   display: block;
-  color: #000;
+  color: black;
   font-weight: bold;
 }
 
+
+
+
+
 li a:hover {
 /* 	background-color : #538fd9; */
-    color: #183F7B;
-  text-decoration: none;
+     color: #39AEA9;
+     font-weight : bolder;
+/*   text-decoration: none; */
+
+	transition: 0.35s;
+/* 	text-shadow: 0 -1px 0 white, 0 1px 0 #E5EFC1, 0 2px 0 #E5EFC1, 0 3px 0 #E5EFC1, 0 5px 0 #E5EFC1, 0 5px 0 #E5EFC1; */
+
+
 }
 
-a:vistied { 
-	color: #fff;
-	text-decoration: none;
+ a:vistied {  
+ 	color: #000; 
+ 	text-decoration: none; 
+ } 
+
+
+html, body {
+	height: 100%;
+
 }
 
 
-
-
+/* a.active-color { color: red; } */
 </style>
 
 
@@ -228,13 +247,13 @@ a:vistied {
 
 <div class="menu">
 <ul>
-	<li><a class="m" href="/mypage/mypagemain" id="mypagemain">MY PAGE</a></li>
-	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo">회원 정보 확인/수정</a></li>
-	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none;">판매 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagemain" id="mypagemain" >MY PAGE</a></li>
+	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo" >회원 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none; ">판매 정보 확인/수정</a></li>
 <!-- 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li> -->
 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
-	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none;">내가 제작한 펀딩</a></li>
-	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
+	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none; ">내가 제작한 펀딩</a></li>
+	<li><a class="m" href="#" style="color: #000;"">소셜체크확인용${socialchk }</a></li>
 	
 	<c:if test="${id.equals('kakaoUser')}">
 	<li><a class="m"  class="delete" id="deleteK" href="/member/kakaounlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
@@ -242,10 +261,7 @@ a:vistied {
 	<c:if test="${id.equals('naverUser')}">
 	<li><a class="m"  class="delete" id="deleteN" href="/member/naverunlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
 	</c:if>
-	
-		<li><a class="m"  id="delete" style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
-		
-	
+		<li><a class="m"  id="delete" style="display: none; margin-top: 50px;">회원탈퇴</a></li>
 </ul>
 </div> <!-- menu -->
 </div><!-- left -->

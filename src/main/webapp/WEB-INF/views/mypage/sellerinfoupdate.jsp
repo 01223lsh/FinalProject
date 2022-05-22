@@ -62,6 +62,9 @@ $(document).ready(function() {
 
 <style>
 
+.right {
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 input {
 	border-radius : 5px;
@@ -78,33 +81,72 @@ textarea {
 
 button {
 
-	border-radius: 5px;
-	background-color: #2E4C6D;
-	color: #fff; 
-	width: 54px;
-	height: 29px;
-	border: 0px solid #538fd9;
+	border-radius: 7px;
+	background-color: #39AEA9;
+	color: white; 
+	width: 170px;
+	height: 50px;
+	border: 0px solid #81BEF7; 
 	font-size: 15px;
 	font-weight: bold;
 
 }
 
 .data{
-	font-size: 15px;
-	margin-right: 25%;
-	margin-left: 15%;
+/* 	font-size: 15px; */
+/* 	margin-right: 25%; */
+/* 	margin-left: 15%; */
 }
 
 .front {
-	display: inline;
+/* 	display: inline; */
 	margin-right: 17px;
 	text-align: center;
-	margin-left: 20%;
+/* 	margin-left: 30%; */
 	
 	background-color: #fff; 
 	border-radius: 10px;
 	padding: 8px 5px 8px 5px;
-	color: #2E4C6D;
+/* 	color: #2E4C6D; */
+}
+
+
+.alldata {
+    border: 5px solid #39AEA9;
+    border-radius: 33px;
+    width: 65%;
+    margin: 0 auto;
+    padding-bottom: 33px;
+    padding-top: 16px;
+    margin-top: 68px;
+}
+
+.hr-sect {
+	display: flex;
+	flex-basis: 50%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	font-size: 12px;
+	margin: 0 auto;
+	width: 70%
+	
+}
+.hr-sect::before,
+.hr-sect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 16px;
+	margin-left: 8%;
+	margin-right: 8%;
+}
+
+.BTN:hover {
+	background-color: #557B83;
+	transition: background-color 0.3s;
 }
 
 </style>
@@ -112,72 +154,76 @@ button {
 
 <!-- <div class="container"> -->
 <div class="right">
+<div class="alldata" >
 <br>
-<h1 style="text-align: center;">판매 정보</h1>
+<h1 style="text-align: center;">판매 정보 수정</h1>
 <br><br><br>
 
-<div style="margin: 0 auto; margin-bottom: 300px;">
+<!-- <div style="margin: 0 auto; margin-bottom: 250px;"> -->
 <form action="/mypage/sellerinfoupdate" method="post">
 
 <input type="hidden" id="memberNo" name="memberNo" value="${memberNo }">
 
-	<div class="sellerinfo" >
+	<div class="sellerinfo" style="text-align: center;">
 <!-- 	<div class="sellerinfo" style="margin: 0 auto; width: 50%;"> -->
 		<div>
-			<div class="front">
-				<label for="bankName" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; width: 100px;">은행명</label>
+			<div class="front" style="margin-bottom: 20px;  font-weight: bold; width: 100px; color: #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="bankName">은행명</label>
 			</div>
-			<div style="display: inline;" class="data">
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
 				<input type="text" id="bankName" name="bankName" value="${sellerinfo.bankName }">
 			</div>
 			<br><br><br>
 		
-			<div class="front">
-				<label for="accountNumber" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; width: 100px;" >계좌번호</label>
+			<div class="front" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="accountNumber" >계좌번호</label>
 			</div>
-			<div style="display: inline;" class="data">
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
 				<input type="text" id="accountNumber" name="accountNumber" value="${ sellerinfo.accountNumber}"}>
 			</div>
 			<br><br><br>
 			
-			<div class="front">
-				<label for="accountName" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; width: 100px; ">예금주</label>
+			<div class="front" style="margin-bottom: 20px; font-weight: bold; width: 100px; color : #000; display: inline-block; text-align: center; margin-left: 5%;">
+				<label for="accountName" >예금주</label>
 			</div>
-			<div style="display: inline;" class="data">
+			<div style="display: inline-block; margin-left: 7%; width: 250px;" class="data">
 				<input type="text" id="accountName" name="accountName" value="${ sellerinfo.accountName}">
 			</div>
-			<br><br><br>
 			
-			<div>
-				<div class="front" style="display: inline-block; float: left; background : none; padding: 8px 0px 8px 0px;">
-					<label for="sellerInfo" style="margin-bottom: 20px; font-size: 15px; font-weight: bold; width: 115px; background-color: #fff; padding: 4px 2px; border-radius: 10px; color: #2E4C6D; ">판매자 소개</label>
-				</div>
-				<div style="display:inline-block; width: 300px; float: left; font-size: 15px; margin-left: 15%;" class="data2" >
+			<br><br>
+			<div class="hr-sect">창작자 소개글</div>
+			
+			
+			<br>
+			
+			<div style="margin: 0 auto; text-align: center;">
+				<div class="front111" style="margin-bottom: 20px;  font-weight: bold; width: 150px; color : #000; display: inline-block; margin: 0 auto;">
+					<label for="sellerInfo" style="font-size: 17px;" >현재 창작자 소개글</label>
+				</div><br><br>
+				<div style="display:block;  padding-left: 20px; text-align:center;  " class="data2" >
 <%-- 					<input type="text" id="sellerInfo" name="sellerInfo" value="${ sellerinfo.sellerInfo}"> --%>
-					<textarea rows="10" cols="20" id="sellerInfo" name="sellerInfo"  style="width:300px; height: 300px;">${ sellerinfo.sellerInfo}</textarea>
-				</div>
-				<br><br><br>
+					<textarea rows="5" cols="20" id="sellerInfo" name="sellerInfo"  style="width:300px; height: 150px;">${ sellerinfo.sellerInfo}</textarea>
+			</div>	<br>
 			</div>
 		</div>
 
 	</div>
 
 </form>
-</div>
+<!-- </div> -->
 
 
 
 
 
 
-<br><br><br>
 <div style="text-align: center; ">
-<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px;" id="update">수정</button>
-<!-- <button onclick="location.href='./memberdelete'">탈퇴</button> -->
+<button onclick="location.href='./sellerinfoupdate'" style="margin-right: 15px; margin-top: 30px;" id="update" class="BTN">수정</button>
+<button onclick="history.back(-1);" class="BTN">취소</button>
 </div>
-
+</div><!-- alldata -->
 </div><!-- right -->
 </div><!-- .container end -->
 
-<br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

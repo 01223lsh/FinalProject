@@ -7,29 +7,35 @@ import org.springframework.stereotype.Repository;
 
 import funding.dao.face.ChatDao;
 import funding.dto.ChatRoom;
-import lombok.extern.slf4j.Slf4j;
+import funding.dto.Project;
 
 @Repository
 //@Slf4j
 public class ChatRoomRepository { // 채팅방을 생성하고 정보를 조회함
-	
+
 	private static Logger log = LoggerFactory.getLogger(ChatRoomRepository.class);
 
 	@Autowired
 	private ChatDao chatDao;
 
 	// 채팅방 생성
-	public ChatRoom createChatRoom(int memberno) {
+	public ChatRoom createChatRoom(int projectNo) {
 		// ChatRoom chatRoom = ChatRoom.create(name); //네임이 필요가 없으니깐
 		// chatDao.put(chatRoom.getchatroomId(), chatRoom);
 		// log.info("생성된 채팅방: {}", chatRoom);
-		return chatDao.insertChatRoom(memberno);
+		return chatDao.insertChatRoom(projectNo);
 	}
 
 	// 채팅방 하나 불러오기
-	public ChatRoom findRoomById(int memberno) {
-		log.info("조회된 채팅방: {}", chatDao.selectChatRoomByroomId(memberno));
-		return chatDao.selectChatRoomByroomId(memberno);
+	public ChatRoom findRoomById(int projectNo) {
+		log.info("조회된 채팅방: {}", chatDao.selectChatRoomByroomId(projectNo));
+		return chatDao.selectChatRoomByroomId(projectNo);
+	}
+
+	// 특정 프로젝트 불러오기
+	public Project getProject(Project project) {
+
+		return chatDao.selectProject(project);
 	}
 
 //	public ChatRoom createChatRoom(ChatRoom chatRoom) {

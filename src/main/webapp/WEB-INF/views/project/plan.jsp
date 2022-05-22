@@ -6,15 +6,15 @@
 <div>
 <div>
 	<b>- 프로젝트 예산</b>
-	<br><br>
+	<div>
 	${plan.budgetPlan }
-	
+	</div>
 </div>
 <hr>
 <div>
 	<b>- 프로젝트 일정</b>
-	<br><br>
-	${plan.schedulePlan }
+	
+	<div>${plan.schedulePlan }</div>
 </div>
 </div>
 <br><br><br><br><br><br><br><br>

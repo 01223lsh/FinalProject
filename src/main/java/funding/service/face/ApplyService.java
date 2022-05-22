@@ -68,6 +68,20 @@ public interface ApplyService {
 	 */
 	public void rewardInsert(Reward reward);
 	
+	/**
+	 * 리워드 삭제
+	 * 
+	 * @param rewardNo - 삭제할 리워드 번호
+	 */
+	public void rewardDelete(int rewardNo);
+
+	/**
+	 * 프로젝트 신청
+	 * 
+	 * @param projectNo - 신청할 프로젝트 번호
+	 */
+	public void projectApply(int projectNo);
+	
 	
 
 }
