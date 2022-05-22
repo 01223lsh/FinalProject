@@ -552,7 +552,59 @@ textarea::placeholder {
 function applyDo() {
 	debugger;
 	if(!'${projectInfo.projectTitle}') {
-		alert("잘못되었다.")
+		alert("프로젝트 제목을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectIntro}') {
+		alert("프로젝트 소개글 요약을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectImage}') {
+		alert("프로젝트 대표사진을 올려주세요.")
+		return;
+	}
+	if(!'${projectInfo.talkTime}') {
+		alert("창작자 채팅 가능 시간을 입력해주세요.")
+		return;
+	}
+	if('${projectInfo.projectPrice}' == 0) {
+		alert("프로젝트 목표금액을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.budgetPlan}') {
+		alert("프로젝트 예산 계획을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.openDate}') {
+		alert("프로젝트 오픈일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.closeDate}') {
+		alert("프로젝트 종료일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.deliveryDate}') {
+		alert("프로젝트 예상 배송 시작일을 입력해주세요.")
+		return;
+	}
+	
+	var sysDate = new Date();
+	var openDate = new Date('${projectInfo.openDate}');
+	var closeDate = new Date('${projectInfo.closeDate}');
+	var deliveryDate = new Date('${projectInfo.deliveryDate}');
+	
+	if(sysDate > openDate) {
+		alert("프로젝트 오픈일을 수정해주세요.")
+		return;
+	}
+	
+	if(sysDate > closeDate) {
+		alert("프로젝트 종료일을 수정해주세요.")
+		return;
+	}
+	
+	if(closeDate > deliveryDate) {
+		alert("프로젝트 배송 시작일을 수정해주세요.")
 		return;
 	}
 	
@@ -569,7 +621,7 @@ function applyDo() {
 			location.assign(url);
 		}
 		,error: function(e) {
-			alert("모든 정보를 입력해주세요.");
+			alert("리워드 정보를 입력해주세요.");
 		}
 	})
 }
@@ -767,8 +819,9 @@ function deleteLastIntro() {
 		return;
 	}
 	rIntroNo = rIntroNo - 1;
-	document.getElementById("show_rewardIntro").remove;
-	alert(document.getElementById("show_rewardIntro").val)
+	$(".removeIntro li:last-child").remove()
+// 	document.getElementById("show_rewardIntro").remove;
+// 	alert(document.getElementById("show_rewardIntro").val);
 }
 
 

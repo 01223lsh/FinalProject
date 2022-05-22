@@ -87,4 +87,11 @@ public interface ApplyDao {
      * @param projectNo 신청할 프로젝트 번호
      */
 	public void projectApply(int projectNo);
+
+	/**
+	 * 채팅방 생성
+	 * 
+	 * @param projectNo
+	 */
+	public void chatRoomInsert(int projectNo);
 }

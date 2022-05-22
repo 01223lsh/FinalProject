@@ -353,7 +353,7 @@ $(function() {
 								<button class="project_button"  onclick="location.href='/project/list'"><span style="">프로젝트 둘러보기</span></button>
 							</div>
 							<div class="header_logo">
-								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
+								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/happyLogo.png" width = "100" height="50"></img></a>
 							</div>
 							<div class="header_side">
 								<button class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
