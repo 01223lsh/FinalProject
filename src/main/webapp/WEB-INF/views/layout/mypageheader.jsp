@@ -36,8 +36,8 @@ $(document).ready(function() {
 		 if("${id}"==naver){
 			 $(location).attr("href", "https://www.google.com/");
 // 			 $(location).attr("href", "/member/naverunlink");
-
 		 };
+		 
 	 	 }); 
 		
 	};
@@ -50,6 +50,43 @@ $(document).ready(function() {
 		$("#makefunding").show();
 	};
 	
+	
+	
+	//==================== 탈퇴 ====================
+	$("#deletebtn").click(function() {
+		console.log("delete 클릭")
+		
+		var pw = prompt('비밀번호를 입력해주세요', '비밀번호 입력');
+		
+		$.ajax({
+			 url: '${pageContext.request.contextPath}/member/withdrawPw?pw='+ pw, 
+			 type: "POST",
+			 dataType: "JSON",
+			 success: function(data){
+				 console.log("data1 : ", data)
+				 
+				 if(data == true ){
+			 		console.log("비밀번호 맞음")
+	
+					var deleteYN = confirm("탈퇴하시겠습니까?");
+					if(deleteYN == true){
+						location.href = '${pageContext.request.contextPath}/member/quit';
+						
+					} else
+						alert("취소하였습니다.");
+					
+			 	} else {
+			 		console.log("비밀번호 틀림")
+			 		alert("패스워드가 틀렸습니다.")
+			 		return;
+		 		}
+		 	 } //success end
+			 , error: function(){
+				 console.log("AJAX실패")
+			 } //error end
+		}) //ajax end
+		
+	}); //#delete end 
 	
 
 	
@@ -97,50 +134,6 @@ $(document).ready(function() {
 	
 // })
 	
-	
-	
-	
-	
-
-
-// $(document).ready(function(){
-   
-   
-//    //==================== 탈퇴 ====================
-//    $("#delete").click(function() {
-      
-//       var pw = prompt('비밀번호를 입력해주세요', '비밀번호 입력');
-      
-//       $.ajax({
-//           url: '${pageContext.request.contextPath}/member/withdrawPw?pw='+ pw, 
-//           type: "POST",
-//           dataType: "JSON",
-//           success: function(data){
-//              console.log("data1 : ", data)
-             
-//              if(data == true ){
-//                 console.log("비밀번호 맞음")
-   
-//                var deleteYN = confirm("탈퇴하시겠습니까? 개인정보는 3개월간 보관됩니다.");
-//                if(deleteYN == true){
-//                   location.href = '${pageContext.request.contextPath}/member/quit';
-                  
-//                } else
-//                   alert("취소하였습니다.");
-               
-//              } else {
-//                 console.log("비밀번호 틀림")
-//                 alert("패스워드가 틀렸습니다.")
-//                 return;
-//              }
-//            } //success end
-//           , error: function(){
-//              console.log("AJAX실패")
-//           } //error end
-//       }) //ajax end
-      
-//    }); //#delete end 
-// });
 
 
 
@@ -206,9 +199,8 @@ ul {
 
 .m {
   text-decoration: none;
-
   display: block;
-  color: #000;
+  color: black;
   font-weight: bold;
 }
 
@@ -224,17 +216,14 @@ li a:hover {
 
 	transition: 0.35s;
 /* 	text-shadow: 0 -1px 0 white, 0 1px 0 #E5EFC1, 0 2px 0 #E5EFC1, 0 3px 0 #E5EFC1, 0 5px 0 #E5EFC1, 0 5px 0 #E5EFC1; */
-	
-
-
 
 
 }
 
-a:vistied { 
-	color: #39AEA9;
-	text-decoration: none;
-}
+ a:vistied {  
+ 	color: #000; 
+ 	text-decoration: none; 
+ } 
 
 
 html, body {
@@ -243,7 +232,7 @@ html, body {
 }
 
 
-a.active-color { color: red; }
+/* a.active-color { color: red; } */
 </style>
 
 
@@ -251,13 +240,13 @@ a.active-color { color: red; }
 
 <div class="menu">
 <ul>
-	<li><a class="m" href="/mypage/mypagemain" id="mypagemain">MY PAGE</a></li>
-	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo">회원 정보 확인/수정</a></li>
-	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none;">판매 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagemain" id="mypagemain" >MY PAGE</a></li>
+	<li><a class="m" href="/mypage/mypagepwchk" id="memberinfo" >회원 정보 확인/수정</a></li>
+	<li><a class="m" href="/mypage/mypagepwchkseller" id="sellerinfo" style="display: none; ">판매 정보 확인/수정</a></li>
 <!-- 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li> -->
 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
-	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none;">내가 제작한 펀딩</a></li>
-	<li><a class="m" href="#">소셜체크확인용${socialchk }</a></li>
+	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none; ">내가 제작한 펀딩</a></li>
+	<li><a class="m" href="#" style="color: #000;"">소셜체크확인용${socialchk }</a></li>
 	
 	<c:if test="${id.equals('kakaoUser')}">
 	<li><a class="m"  class="delete" id="deleteK" href="/member/kakaounlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
@@ -265,10 +254,7 @@ a.active-color { color: red; }
 	<c:if test="${id.equals('naverUser')}">
 	<li><a class="m"  class="delete" id="deleteN" href="/member/naverunlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
 	</c:if>
-	
-		<li><a class="m"  id="delete" style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
-		
-	
+		<li><a class="m"  id="delete" style="display: none; margin-top: 50px;">회원탈퇴</a></li>
 </ul>
 </div> <!-- menu -->
 </div><!-- left -->

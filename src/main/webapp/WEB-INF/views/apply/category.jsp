@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -26,7 +28,7 @@ text-align: center;
 }
 input[type=radio]:checked+label{
 background-image:none;
-background-color:#f86453;
+background-color:#39AEA9;
 color:#fff;
 }
 
@@ -58,9 +60,10 @@ body{
     z-index: 9999;
 }
 .header3 {
-	height: 65px;
+	height: 100px;
 	width: 100%;
-    background-color: rgb(255, 255, 255);
+/*     background-color: rgb(255, 255, 255); */
+    background-color: #39AEA9;
     display: flex;
 /*     -webkit-box-align: center; */
     align-items: center;
@@ -118,7 +121,7 @@ body{
 	border: none;
     background: transparent;
     outline: none;
-    color: black;
+    color: rgb(255,255, 255);
 /*     font-weight: bold; */
     font-size: 1rem;
     cursor: pointer;
@@ -133,7 +136,7 @@ body{
 .apply{
 	display: flex;
 	flex-grow: 1;
-	padding-top: 65px;
+	padding-top: 100px;
     overflow: hidden;
 	width: 100%;
 }
@@ -161,7 +164,7 @@ body{
 
 .item {
 /*     display:flex;  */
-    position: relative; 
+/*     position: relative;  */
 /*     left: 5%; */
     top:100px;  
 /*     overflow:auto;  */
@@ -242,10 +245,235 @@ body{
 /*  	disabled: disabled;  */
 } 
 
+.header_alert{
+    display: none; 
+    position: absolute;
+    min-width: 240px;
+    width:345px;
+    height: auto;
+    font-size: 12px;
+/*     border: 2px solid #39AEA9; */
+    border: 2px solid  #E5EFC1;
+    z-index: 1000;
+    text-align: left;
+    background-color: rgb(255,255,255);
+/*     #E5EFC1; */
+	top: 60px;
+	right: 40px;
+	z-index: 1000;
+}
 
-/* textarea{ */
-/* 	border: 1px solid rgb(218, 74, 73); */
-/* } */
+.header_alert_title {
+	flex: 1;
+	font-size: 16px !important;
+	font-weight: 700;
+/* 	display: block; */
+}
+
+.header_alert_btn {
+	position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -18px;
+}
+
+.header_alert_deleteAll {
+/* 	min-width: 30px; */
+/*     min-height: 30px; */
+/*     margin: 2px; */
+/*     display: inline-block; */
+     border: none; 
+/*     text-align: center; */
+/*     color: white; */
+     background-color: E5EFC1; 
+/*     vertical-align: middle; */
+/*     border-radius: 3px; */
+/*     box-sizing: border-box !important; */
+}
+
+.header_alert_box {
+	position: relative;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: rgb(255,255,255); 
+    margin-bottom: 10px;
+}
+
+.header_alert_box li{
+	position: relative;
+    padding: 10px;
+    margin: 3px;
+}
+
+.header_alert h1{
+    display: flex;
+    position: relative;
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    flex-direction: row;
+    background-color: #E5EFC1; 
+}
+
+
+.header_alert ul {
+	padding: 0;
+    margin: 0;
+    list-style: none;
+}
+	
+.header_alert_content a {
+	display:block;
+	margin-bottom: 10px;
+}
+
+.header_alert_info {
+	position: relative;
+    width: 100%;
+    display: flex;
+    padding-right: 72px;
+    flex-direction: row;
+    box-sizing: border-box
+}
+
+.info_box{
+	flex: 1;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.header_alert_delete_div {
+	position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.header_alert_delete {
+	min-width: 40px;
+    min-height: 30px;
+    padding: 0;
+    margin: 0;
+/*     font-size: 12px !important; */
+/*     line-height: 22px; */
+/*     text-transform: capitalize; */
+/*     display: inline-block; */
+    border: none; 
+/*     text-align: center; */
+/*     color: white; */
+     background-color: transparent; 
+/*     vertical-align: middle; */
+/*     border-radius: 3px; */
+/*     box-sizing: border-box !important; */
+}
+
+#unread {
+	display:none;
+	position: absolute;
+    top: 14px;
+    right: 90px;
+/*     width: 16px; */
+/*     height: 16px; */
+    line-height: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 50%;
+    border: 3px solid red; 
+    background-color: #ff3c64;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.header_alert_deleteAll:hover, .header_alert_deleteAll:active {
+    opacity: 0.4; 
+/* 	background-color: rgb(250, 250, 250); */
+}
+
+.header_alert_delete:hover, .header_alert_delete:active {
+    opacity: 0.4; 
+/* 	background-color: rgb(250, 250, 250); */
+}
+
+
+::-webkit-scrollbar { width: 11px; } 
+::-webkit-scrollbar-track { background-color: rgb(245, 245, 245); border-radius: 9px; } 
+::-webkit-scrollbar-thumb { background-color: rgb(210, 210, 210); border-radius: 9px; }
+
+/* 작성했던 프로젝트 */
+	
+/* 	padding: 17px 24px; */
+.projectList1 {
+    width: 100%;
+    border: 0.8px solid rgb(240, 240, 240);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 4%) 0px 4px 12px, rgb(0 0 0 / 3%) 0px 0.8px 0px;    
+    min-height: 90px;
+}
+
+.projectList2 {
+	padding: 17px 24px;
+}
+
+.projectList3 {
+	justify-content: space-between;
+    display: flex;
+    font-weight: 400;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+.projectList4 {
+	display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.projectList5 {
+	flex-shrink: 0;
+    flex-basis: 56px;
+    display: flex;
+    width: 56px;
+    height: 40px;
+    margin-right: 16px;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(0 0 0 / 15%) 0px 0.8px 0px;
+    font-size: 30px;
+    line-height: 45px;
+    letter-spacing: -0.03em;
+}
+
+.projectListButton {
+    height: 32px;
+/*     width: 98px; */
+	background: rgb(240, 240, 240);
+    font-weight: 400;
+    color: rgb(61, 61, 61);
+/*     width: 100%; */
+    font-size: 11px !important;
+    line-height: 20px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+	cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+    box-sizing: border-box;
+    padding: 0px 12px;
+    overflow: visible;
+}
+
+.projectListButton:hover, .projectListButton:active {
+    opacity: 0.6;
+}
+
+
 
 </style>	
 <script type="text/javascript">
@@ -318,7 +546,7 @@ $(function() {
 			$('.item-intro-text textarea').css('border', '1px solid rgb(0, 0, 0)');
 			$('.item-intro-limit').css('display', 'none');
 			$('#textCount').text(content.length + '자'); 
-			$('.button-next').css('background', 'rgb(255, 87, 87)');
+			$('.button-next').css('background', '#A2D5AB');
 			$('.button-next').removeAttr('disabled');
 			$('.button-next').css('cursor', 'pointer');
 // 			$('.button-next: hover').css('color', 'rgb(255,192,192)');
@@ -334,10 +562,130 @@ $(function() {
 		}; 
 	});
 
-	
+// 	alertList();
 });
 
 
+
+
+// function alertList(){
+// 	$.ajax({
+// 		type:"get"
+// 		,url:"/alert/list"
+// 		,dataType : "html"
+// 		,success : function(res){
+// 		$("#resultLayout").html(res)
+// 		}
+// 	})
+// }
+
+//알림 리스트
+function alertList() {
+	debugger;
+	$.ajax({
+		url : "/alert/list",
+		type : "post",
+		contentType: false,
+	    processData: false,
+		cache : false
+	}).done(function(result) {
+			console.log("결과확인");
+	 		var html = jQuery('<div>').html(result);
+			var contents = html.find("div#alertLoad").html();
+			$("#alertView").html(contents);
+			$('.header_alert').css('display', 'block');
+	})			
+}
+
+//알림 가리기
+function alertNone() {
+	$('.header_alert').css('display', 'none');
+}
+
+//알림 삭제
+function alertDelete(number) {
+	//넘길 데이터를 담아주는 객체
+	var formData = new FormData();
+	
+	//입력 데이터들 json 직렬화
+	var form = 
+	{
+			"alertNo" : number,
+	}
+	
+	$.ajax({
+		type:"POST"
+		,url:"/alert/delete"
+		,data: JSON.stringify(form)
+		,contentType: "application/json"
+		,success: function(data){
+			alertList();
+		}
+		,error: function(e) {
+			alert("error!");
+		}
+	})
+	
+}
+
+//알림 전체 삭제
+function alertDeleteAll() {
+	
+	$.ajax({
+		type:"POST"
+		,url:"/alert/deleteAll"
+		,success: function(data){
+			alertList();
+		}
+		,error: function(e) {
+			alert("error!");
+		}
+	})
+	
+}
+
+//안 읽은 알림수
+function unreadNo() {
+	$.ajax({
+		url : "/alert/unread",
+		type : "post",
+		contentType: false,
+	    processData: false,
+		cache : false
+	}).done(function(result) {
+			console.log("결과확인");
+	 		var html = jQuery('<div>').html(result);
+			var contents = html.find("div#alertUnread").html().trim();
+				console.log(contents);
+// 				alert(contents);
+			if(contents == ""){
+				$('#unread').css('display', 'none');
+				return;
+			}
+			$('#unread').css('display', 'block');
+			$("#unread").html(contents);
+	})	
+	
+
+}
+
+//알림창 띄우기
+function showUnread(result) {
+	$('#unread').html(result);
+}
+
+//3초마다 반복
+function getInfiniteAlert() {
+	setInterval(function() {
+		unreadNo();
+	}, 3000);
+}
+
+//함수 실행
+$(function(){
+// 	unreadNo();
+	getInfiniteAlert();
+})
 
 </script>
 
@@ -350,14 +698,27 @@ $(function() {
 					<div class="header4">
 						<div class="header5">
 							<div class="header_project">
-								<button class="project_button"  onclick="location.href='/project/list'"><span style="">프로젝트 둘러보기</span></button>
+								<button class="project_button"
+									onclick="location.href='/project/list'">
+									<span style="">프로젝트 둘러보기</span>
+								</button>
 							</div>
 							<div class="header_logo">
-								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img src="/resources/jpg/KakaoTalk_20220107_230043280.jpg" width = "100" height="50"></img></a>
+								<a href="/member/main" class="me-auto mb-2 mb-lg-0"><img
+									src="/resources/jpg/LogoWhale2.png" width="100" height="80"></img></a>
 							</div>
 							<div class="header_side">
-								<button class="project_button"  onclick=" "><span><ion-icon size="large" name="notifications-outline"></ion-icon></span></button>
-								<button class="project_button"  onclick="location.href='/mypage/mypagemain' "><span>${sessionScope.nick}</span></button>
+								<button class="project_button" onclick="alertList()">
+									<ion-icon size="large" name="notifications-outline"></ion-icon>
+									<span id="unread"></span>
+								</button>
+								<button class="project_button"
+									onclick="location.href='/mypage/mypagemain' ">
+									<span>${sessionScope.nick}</span>
+								</button>
+							</div>
+							<div id="alertView" class="header_alert active">
+							<!-- 동적생성 -->
 							</div>
 						</div>
 					</div>
@@ -368,6 +729,33 @@ $(function() {
 			<div class="apply-back"></div>
 			<div class="right-content-all">
 				<div class="right-content">
+					<div style="height: 380px; overflow: scroll; margin-bottom: 50px; overflow-x: hidden;">
+						<div class="projectList1">
+							<c:forEach items="${projectList }" var="list">
+							<div class="projectList2">
+								<div class="projectList3">
+									<div class="projectList4">
+										<div class="projectList5">
+											<c:choose>
+												<c:when test="${list.projectImage == null}">
+												</c:when>
+												<c:otherwise>
+												<img style="width: 56px; height: 40px;" src="${list.projectImage}">
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<p>${list.projectTitle }</p>
+									</div>
+									<button class="projectListButton" onclick="location.href='/apply/product?projectNo=${list.projectNo}'">
+										<span>
+											이어서 작성<div style="display: inline-flex; align-self: center;"></div>
+										</span>
+									</button>
+								</div>
+							</div>
+							</c:forEach>
+						</div>
+					</div>
 					<div class="item">
 						<h3 style= "font-size: 24px !important;">카테고리를 선택해주세요.</h3>
 			 			<p style="color:rgb(109, 109, 109); font-size: 14px !important;">나중에 변경 가능하니 걱정마세요.</p>

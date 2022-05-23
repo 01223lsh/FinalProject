@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 
 <style type="text/css">
-
-#joinForm{width: 460px;margin: 0 auto;}
 
 
 div.top-text {
@@ -18,6 +15,7 @@ div.top-text {
     text-align: center;
     font-size: 30px;
 }
+
 
 .step-list {
 	list-style-type: none;
@@ -29,49 +27,46 @@ div.top-text {
 }
 
 .step-list li.on strong {
- 	background: #2775C4;
-    margin: 0px;
-    padding: 17px 118px;
+background: #2775C4;
+    margin: -25px;
+    padding: 21px 118px;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
 }
-
 .step-list li.off strong {
  	background: #bfc4ca;
-    margin: 0px;
-    padding: 17px 118px;
+    margin: -25px;
+    padding: 21px 118px;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
 }
-
 
 .step-list li {
 	float: left;
-	width: 33%;
-	text-align: center;
-	line-height: 50px;
+	WIDTH: 355px;
+    margin: 0 0 0 44px;
+	line-height: 58px;
 }
 
-/* 정보입력 div */
-.memberinfo {
-	margin: 24px;
-    padding: 54px;
-	text-align: center; 
-}
+
 
 /* 아이디 중복확인 css */ 
 #info_id {
 	position: relative;
 }
 #idChkbtn {
-  position: absolute;
-  width: 73px;
-  height: 29px;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto 0;
-  border-radius: 3px;
+    position: absolute;
+    width: 88px;
+    height: 42px;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    margin: auto 0;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 /* 닉네임 중복확인 css */ 
@@ -79,14 +74,16 @@ div.top-text {
 	position: relative;
 }
 #nickChkbtn {
-  position: absolute;
-  width: 73px;
-  height: 29px;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto 0;
-  border-radius: 3px;
+    position: absolute;
+    width: 88px;
+    height: 42px;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    margin: auto 0;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 /* 이메일 인증번호 전송 css */ 
@@ -94,38 +91,85 @@ div.top-text {
 	position: relative;
 }
 #emailChk {
-  position: absolute;
-  width: 88px;
-  height: 29px;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto 0;
-  border-radius: 3px;
+    position: absolute;
+    width: 92px;
+    height: 40px;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    margin: auto 0;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
-.form-group input2{
-	width: 100px;
-}
-
-.form-horizontal {
-text-align: center;
-    margin: 0px 0 0 72px;
-}
-
-.col-sm-6 {
-	text-align: -webkit-left;
-}
-
-.form-group input{
-	height: 42px;
+#emailChk2 {
+    width: 92px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 
- .join-wrap {
-	margin: 20px;
+h3 {
+margin: 35px 0 0px 0px;
 }
- 
+
+.btn-sm {
+	background: #E5EFC1;
+}
+
+form {
+    margin: 50px;
+    font-size: 16px;
+    text-align: -webkit-center;
+    font-weight: bold;
+    }
+
+.form-group {
+margin : 20px;
+}
+
+.form-control{height: 54px;}
+
+.control-label {
+	text-align: left;
+    margin: 0px 284px 0 0px;
+}
+
+#chkemailform {
+margin : 0 276px 0 0px;
+}
+
+#email2{height: 39px;} 
+
+#emailDoubleChk{background: red;
+}
+
+#infoform{
+	padding: 85px 0 0 0;
+    font-size: 30px;
+}
+
+#cancel{
+	outline: 0px;
+    border: 0px;
+    width: 15%;
+    height: 61px;
+    font-size: 34px;
+    color: white;
+    font-weight: bold;
+	
+}
+
+#join {
+    background: #39AEA9;
+    outline: 0px;
+    border: 0px;
+    width: 15%;
+    height: 61px;
+    font-size: 34px;
+    font-weight: bold;
+}
 
 </style>
 
@@ -289,7 +333,7 @@ function validate() {
   	var objPhone = document.getElementById("phone");//핸드폰번호
       
 	//id 유효성 검사 정규식(소문자,숫자 (첫문자는 소문자만 가능) 허용)
-	var id_RegExp = /^[a-z]{1}[a-z0-9_]{5,12}$/; 
+	var id_RegExp = /^[a-z]{1}[a-z0-9_]{4,12}$/; 
 	//pw 유효성 검사 정규식(영어,숫자,특수문자 모두 포함)
 	var pw_RegExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/; 
  	//이름과 닉네임 유효성 검사 정규식
@@ -402,12 +446,9 @@ function check(re, what, message) {
 </script>
 
 
-
 <div class="container">
 
-
 <div class="join-wrap">
-	
 	<ol class="step-list">
 		<li class="off">
 			<strong>STEP1<span>  회원구분</span></strong>
@@ -419,18 +460,16 @@ function check(re, what, message) {
 			<strong>STEP3<span>  정보입력</span></strong>
 		</li>
 	</ol>
-	
 </div>
+
 
 <div class="memberinfo">
 
-<h3><strong>정보입력</strong></h3>
-<hr>
+<form action="/member/join_step3_consumer" method="POST" onsubmit="return validate()">
 
-<form action="/member/join_step3_consumer" method="POST" class="form-horizontal" onsubmit="return validate()">
-
-
-
+	
+	<div id="infoform">정보입력</div>
+	<hr>
 
 <div class="form-group">
 	<label for="userid" class="col-sm-3 control-label">아이디</label>
@@ -497,20 +536,20 @@ function check(re, what, message) {
 			<input type="button" id="emailChk" class="btn doubleChk btn-default btn-sm" value="인증번호 전송">
 <!-- 		<button class="btn"><p id="emailChk" class="doubleChk">인증번호 보내기</p></button> -->
 		</div>
-		<small class="tip"> 아이디 비밀번호 분실시 필요한 정보이므로, 정확하게 기입해 주십시오. </small> 
+		<small class="tip" style="color : red"> 아이디/비밀번호 분실 시 필요한 정보이므로, 정확하게 기입해 주십시오. </small> 
 	</div>
 </div>
 
 
 <div class="form-group">
 	<label for="emailChk" class="col-sm-3 control-label">이메일 인증 번호</label>
-	<div class="col-sm-6">
+	<div class="col-sm-6" id="chkemailform">
 		<input type="text" id="email2" name="email2" title="인증번호 입력" disabled /> 
 		<input type="button" id="emailChk2" class="btn doubleChk btn-default btn-sm" value="이메일 인증">
-<!-- 		<button><span id="emailChk2" class="doubleChk">이메일인증</span> </button> -->
 	</div>
 		<span class="point successEmailChk"></span>
 		<input type="hidden" id="emailDoubleChk"/>
+	
 </div>
 
 

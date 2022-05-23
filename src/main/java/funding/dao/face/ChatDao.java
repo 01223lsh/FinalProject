@@ -3,6 +3,7 @@ package funding.dao.face;
 import org.springframework.stereotype.Repository;
 
 import funding.dto.ChatRoom;
+import funding.dto.Project;
 
 @Repository
 public interface ChatDao {
@@ -12,6 +13,9 @@ public interface ChatDao {
 
 	// roomId를 이용하여 채팅방 찾기
 	public ChatRoom selectChatRoomByroomId(int projectNo);
+
+	// 특정 프로젝트 찾기
+	public Project selectProject(Project project);
 
 }
 

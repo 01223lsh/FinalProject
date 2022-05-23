@@ -35,7 +35,18 @@
   
   .main_pr {
   	position: absolute;
-  	left : 8%;
+  	left : 21%;
+  	
+  	 
+  }
+  
+  .main_pr span {
+  	color: #39AEA9 !important;
+  	width: 250px;
+  	background-color: #ffffff !important;
+  	 font-size: 20px !important;
+  	 font-weight : bold !important;
+  
   }
 </style>
 
@@ -86,6 +97,9 @@
   .section-body .body-etc div:first-child > span:first-child{
     color: red;
   }
+  #carousel {
+  border-top: 50px solid #ffffff;
+  }
   
 
 </style>
@@ -108,8 +122,8 @@ $(document).ready(function() {
 	$("select[name=order]").change(function() {
 		getList('${pagination.category}');
 	})
-	// 필터, 정렬 조건 유지
-	setCondition()	
+// 	// 필터, 정렬 조건 유지
+// 	setCondition()	
 	
 	
 })
@@ -137,24 +151,24 @@ function getList(category) {
 	
 }
 // 정렬 조건 유지
-function setCondition() {
-    const selectOrder = document.querySelector("select[name=order]")
-    const selectFilter = document.querySelector("select[name=filter]")
+// function setCondition() {
+//     const selectOrder = document.querySelector("select[name=order]")
+//     const selectFilter = document.querySelector("select[name=filter]")
 
-    for (i = 0; i < selectOrder.length; i++) {
-        if (selectOrder.options[i].value == '${pagination.order}') {
-            selectOrder.options[i].selected = true
-            break
-        }
-    }
+//     for (i = 0; i < selectOrder.length; i++) {
+//         if (selectOrder.options[i].value == '${pagination.order}') {
+//             selectOrder.options[i].selected = true
+//             break
+//         }
+//     }
     
-    for (i = 0; i < selectFilter.length; i++) {
-        if (selectFilter.options[i].value == '${pagination.filter}') {
-        	selectFilter.options[i].selected = true
-            break
-        }
-    }
-}
+//     for (i = 0; i < selectFilter.length; i++) {
+//         if (selectFilter.options[i].value == '${pagination.filter}') {
+//         	selectFilter.options[i].selected = true
+//             break
+//         }
+//     }
+// }
 
 </script>
 </head>
@@ -163,7 +177,7 @@ function setCondition() {
 
 <main>
 
-<div class="container">
+<div class="container" id="carousel">
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -172,21 +186,21 @@ function setCondition() {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/resources/jpg/KakaoTalk_20220521_195002834.jpg" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;">
+      <a href="/project/view?projectNo=228"><img src="/resources/jpg/KakaoTalk_20220521_195002834.jpg" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:980px; height:300px;"></a>
       <div class="carousel-caption d-none d-md-block">
         <h5>[압생트] 왜곡을 비워내는 잔</h5>
         <p>마지막 잔에는 사물의 원래 모습을 그대로 보게 된다. 그것은 세상에서 가장 끔찍한 일이다. - Oscar Wilde -</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/resources/jpg/KakaoTalk_20220521_195639447.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <a href="/project/view?projectNo=231"><img src="/resources/jpg/KakaoTalk_20220521_195639447.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;"></a>
       <div class="carousel-caption d-none d-md-block">
         <h5>일상 속 작은 쉼, 필름 힐링엽서</h5>
         <p>C'est toujours par hasard qu'on accomplit son destin - Le Festin -</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/resources/jpg/KakaoTalk_20220521_200629599.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;">
+      <a href="/project/view?projectNo=232"><img src="/resources/jpg/KakaoTalk_20220521_200629599.png" class="d-block w-100" alt="이미지 로드에 실패하였습니다" style="width:400px; height:300px;"></a>
       <div class="carousel-caption d-none d-md-block">
         <h5>「 Rêve bleu : ’푸른 꿈’이라는 뜻 」</h5>
         <p>푸른 꿈을 꾸었다. 푸른 바다와 강을 헤엄치고 푸른 숲을 걷는.</p>
@@ -211,12 +225,12 @@ function setCondition() {
 <section>
 
  	  <div class="main_pr">
-      <h5>주목할 만한 프로젝트</h5>
+     <h4><span class="badge bg-secondary">주목할 만한 프로젝트</span></h4>
 	  </div>
+	  
+	   
 
-<div class="album py-5 bg-light">
-
-
+ <div class="album py-5">
 
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: 0 auto;">
@@ -261,7 +275,7 @@ function setCondition() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
       </c:forEach>
 
 

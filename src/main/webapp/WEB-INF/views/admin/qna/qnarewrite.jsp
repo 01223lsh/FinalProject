@@ -18,8 +18,6 @@ $(document).ready(function(){
 			,success : function(res){
 				console.log("성공??");
 				qnaManagement();
-
-				
 			},
 			error : function(){
 				
@@ -31,11 +29,14 @@ $(document).ready(function(){
 </script>
 
 <style>
-/*
-textarea {
-	height: 400px;
-}
-*/
+
+
+
+button{   
+    background: #527578;
+    border: 1px solid #527578;
+    color: white;
+    border-radius: 5px;}
 </style>
 </head>
 <body>
@@ -78,7 +79,7 @@ textarea {
 
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-1">
-			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;">내용을 입력하세요</textarea>
+			<textarea class="form-control" id="qnaContent" name="qnaContent" rows="30"  style="width: 100%;" >내용을 입력하세요</textarea>
 		</div>
 	</div>
 

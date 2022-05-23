@@ -84,4 +84,11 @@ public interface PaymentService {
 	 * @return
 	 */
 	public Order detailOrder(Order order);
+
+	/**
+	 * projectNo를 통하여 결제한 사람 수를 나타낸다.
+	 * @param projectNo
+	 * @return
+	 */
+	public int cntPayment(int projectNo);
 }

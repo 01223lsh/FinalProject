@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import funding.dto.JoinFunding;
 import funding.dto.Member;
 import funding.dto.MemberSeller;
+import funding.dto.Order;
 import funding.dto.Payment;
 import funding.dto.Project;
 import funding.service.face.MypageService;
@@ -394,13 +395,27 @@ public class MypageController {
 
 	// 참여중인 펀딩 view
 	@GetMapping("/mypage/joinfunview")
-	public void joinfundview(HttpSession session, Model model, JoinFunding joinFunding, Payment payment) {
+	public void joinfundview(HttpSession session, Model model, JoinFunding joinFunding, Payment payment, Order order) {
 
 		logger.info("/mypage/joinfunview [GET]");
 
 		int memberNo = (Integer) session.getAttribute("memberNo");
 		logger.info("mypage[joinfunview-memberNo] = {}", memberNo);
 
+		logger.info("오더테이블 : {} ", order);
+		logger.info("조인펀딩테이블 : {} ", joinFunding);
+		
+		
+		
+		
+		//결제전인지 찾아보자 (딜리버리 데이터 없으면 결제전이다)
+		
+		int deliveryResult = mypageService.getChkDelivery(joinFunding);
+		logger.info("딜리버리 데이터 확인 : {}", deliveryResult);
+		
+		if(deliveryResult == 1 ) {
+		
+		
 		joinFunding.setMemberNo(memberNo);
 		logger.info("참여정보 어디 보자 : {}", joinFunding);
 
@@ -410,19 +425,52 @@ public class MypageController {
 
 		// 해시맵의 정보를 뜯어오자
 		int projectNo = Integer.parseInt(view.get(0).get("PROJECT_NO").toString());
-		logger.info("나와라좀 : {} ", projectNo);
+		logger.info("나와라좀11 : {} ", projectNo);
 
 		String seller = mypageService.getseller(projectNo);
 
 		int orderNo = Integer.parseInt(view.get(0).get("ORDER_NO").toString());
-		logger.info("나와라좀 : {} ", orderNo);
+		logger.info("나와라좀11 : {} ", orderNo);
 
 		Payment paymentinfo = mypageService.getPaymentInfo(orderNo);
-		logger.info("나와라좀_paymentinfo : {} ", paymentinfo);
+		logger.info("나와라좀11_paymentinfo : {} ", paymentinfo);
 
+		model.addAttribute("deliveryResult", deliveryResult);
 		model.addAttribute("view", view);
 		model.addAttribute("seller", seller);
 		model.addAttribute("paymentinfo", paymentinfo);
+		
+		} else if(deliveryResult == 0 ){
+			
+			joinFunding.setMemberNo(memberNo);
+			logger.info("참여정보 어디 보자22 : {}", joinFunding);
+			
+			List<HashMap<String, Object>> view = mypageService.joinfundviewBefore(joinFunding);
+			
+			logger.info("해시맵의 정보다 : {}", view);
+			
+			// 해시맵의 정보를 뜯어오자
+			int projectNo = Integer.parseInt(view.get(0).get("PROJECT_NO").toString());
+			logger.info("나와라좀22 : {} ", projectNo);
+			
+			String seller = mypageService.getseller(projectNo);
+			
+			int orderNo = Integer.parseInt(view.get(0).get("ORDER_NO").toString());
+			logger.info("나와라좀22 : {} ", orderNo);
+			
+			Payment paymentinfo = mypageService.getPaymentInfo(orderNo);
+			logger.info("나와라좀22_paymentinfo : {} ", paymentinfo);
+			
+			model.addAttribute("deliveryResult", deliveryResult);
+			model.addAttribute("view", view);
+			model.addAttribute("seller", seller);
+			model.addAttribute("paymentinfo", paymentinfo);
+			
+			
+		}
+		
+
+		
 	}
 
 	// 제작한 펀딩 list

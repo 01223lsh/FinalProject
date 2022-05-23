@@ -11,19 +11,20 @@
 		<result column="reg_date" property="regDate" />
 	</resultMap>
 	
-   <resultMap type="funding.dto.MemberSeller" id="MemberSeller">
-      <id column="member_no" property="memberNo"/>
-      <result column="bank_name" property="bankName" />
-      <result column="account_number" property="accountNumber" />
-      <result column="accunt_name" property="accountname" />
-      <result column="seller_info" property="sellerInfo" />
-      <result column="project_title" property="projectTitle" />
-      <result column="project_no" property="projectNo" />
-      <result column="order_no" property="orderNo" />
-      <result column="naver_login" property="naverlogin" />
-      <result column="kakao_login" property="kakaologin" />
-   </resultMap>
-			
+	<resultMap type="funding.dto.MemberSeller" id="MemberSeller">
+		<id column="member_no" property="memberNo"/>
+		<result column="bank_name" property="bankName" />
+		<result column="account_number" property="accountNumber" />
+		<result column="accunt_name" property="accountname" />
+		<result column="seller_info" property="sellerInfo" />
+		<result column="project_title" property="projectTitle" />
+		<result column="project_no" property="projectNo" />
+		<result column="order_no" property="orderNo" />
+		<result column="naver_login" property="naverlogin" />
+		<result column="kakao_login" property="kakaologin" />
+	</resultMap>
+	
+
 	
 	<select id="selectCntMember" resultType="int" parameterType="funding.dto.Member">
 		SELECT count(*) FROM member
@@ -52,7 +53,7 @@
 	
 	<insert id="insert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
-		VALUES ( member_no.nextval, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, 0 )
+		VALUES ( member_seq.nextval, #{id}, #{pw}, #{name}, #{email}, #{nick}, #{phone}, 0 )
 	</insert>
 	
 	<select id="idCheck" resultType="integer">
@@ -65,6 +66,8 @@
 		WHERE nick = #{usernick}
 	</select>
 	
+	
+	
 	<select id="selectCntById2" resultType="int" parameterType="funding.dto.MemberSeller">
 		SELECT count(*) FROM member
 		WHERE id = #{id}
@@ -72,7 +75,7 @@
 	
 	<insert id="insert2" parameterType="funding.dto.MemberSeller">
 		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
- 			 SELECT member_no.nextval FROM DUAL
+ 			 SELECT member_seq.nextval FROM DUAL
   		</selectKey>
 		
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade )
@@ -89,6 +92,7 @@
 		WHERE email = #{kakaoEmail }
 			AND grade = '0' 	
 	</select>
+	
 		
 	<select id="selectByKakaoEmail" resultType="int" parameterType="funding.dto.Member">
 		SELECT count(*) FROM member
@@ -97,7 +101,7 @@
 	
 	<insert id="KakaoUserinsert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, kakao_login )
-		VALUES ( member_no.nextval, 'kakaoUser', 'kakaoUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+		VALUES ( member_seq.nextval, 'kakaoUser', 'kakaoUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
 	</insert>
 	
 	<select id="selectKakaoInfo" resultMap="Member" parameterType="funding.dto.Member">
@@ -155,38 +159,46 @@
 	</select>
 	
 	<!-- 테이블명은 order_tb, dto는 oredr로 설정해두었음 -->
-	<select id="selectCntByProject" resultType="int" parameterType="funding.dto.Order"> 
+	<select id="selectCntByOrder" resultType="int" parameterType="funding.dto.Order"> 
 		SELECT count(*) FROM order_tb
+		WHERE member_no = #{memberNo}
+	</select>
+	
+	<select id="selectCntByProject" resultType="int" parameterType="funding.dto.Project"> 
+		SELECT count(*) FROM project
 		WHERE member_no = #{memberNo}
 	</select>
 	
 	<select id="selectCntNaver" resultType="integer">
 		SELECT count(*) FROM member
 		WHERE email = #{naverEmail }
-			AND grade = '0' 	
+			AND grade = '0' 
+			AND id = 'naverUser'
 	</select>
 	
 	<select id="selectByNaverEmail" resultType="int" parameterType="funding.dto.Member">
 		SELECT count(*) FROM member
 		WHERE email = #{email}
+			AND id = 'naverUser'
 	</select>
 	
 	<insert id="naverUserinsert" parameterType="funding.dto.Member">
 		INSERT INTO member( member_no, id, pw, name, email, nick, phone, grade, naver_login )
-		VALUES ( member_no.nextval, 'naverUser', 'naverUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
+		VALUES ( member_seq.nextval, 'naverUser', 'naverUser', #{name}, #{email}, #{nick}, #{phone}, 0, 'Y' )
 	</insert>
 	
 	<select id="selectNaverInfo" resultMap="Member" parameterType="funding.dto.Member">
 		SELECT * fROM member
 		WHERE email = #{email}
 			AND grade = '0' 
+			AND id = 'naverUser'
 	</select>
 	
-	
-	
-
-	
-
+	<select id="chkNaverEmail"  resultType="integer" >
+		SELECT count(*) FROM member
+		WHERE email = #{email }
+			AND id = 'naverUser'
+	</select>
 	
 	<!-- made in 정영재 -->
 	<select id="selectByMemberNo" parameterType="int" resultType="funding.dto.Member">

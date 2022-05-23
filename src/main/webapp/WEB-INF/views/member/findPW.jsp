@@ -4,7 +4,6 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-
 <script>
 	$(function(){
 		$("#findBtn").click(function(){
@@ -27,12 +26,14 @@
 #container{
 	text-align: center;
 	margin: 30px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 input {
-    height: 53px;
-    width: 344px;
-    margin: 9px;
+    height: 68px;
+    width: 414px;
+    margin: 8px;
+    font-size: 18px;
 }
 
 #pwfont {
@@ -41,14 +42,30 @@ input {
     margin: 22px;
 }
 
-.btn-primary {
-    height: 43px;
-    width: 172px;
+#findBtn {
+	background: #39AEA9;
+    outline: 0px;
+    border: 0px;
+    width: 195px;
+    height: 65px;
+    color: white;
+    font-size: 20px;
+    border-radius: 7px;
+    margin: 10px;
 }
-.btn-warning {
-    height: 43px;
-    width: 172px;
+#location {
+	background : #A2D5AB;
+    outline: 0px;
+    border: 0px;
+    width: 195px;
+    height: 65px;
+    color: white;
+    font-size: 25px;
+    border-radius: 7px;
+    margin: 10px;
 }
+
+
 
 
 </style>
@@ -65,9 +82,10 @@ input {
 </form>
 
 	<p class="w3-center">
-		<button type="button" id="findBtn" class="btn btn-primary">임시 비밀번호 발급</button>
-		<button type="button" onclick="history.go(-1);" class="btn btn-warning">로그인</button>
+		<button type="button" id="location" onclick="history.go(-1);">로그인</button>
+		<button type="button" id="findBtn" >임시 비밀번호 발급</button>
 	</p>
 
 </div>
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

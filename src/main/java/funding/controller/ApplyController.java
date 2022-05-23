@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.Service;
+
 import funding.dto.Project;
 import funding.dto.Reward;
 import funding.service.face.ApplyService;
@@ -38,8 +40,19 @@ public class ApplyController {
 	
 	//프로젝트 생성
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public void category() {
+	public String category(HttpSession session, Model model) {
 		logger.info("/apply/category [GET]");
+		
+		int memberNo = (Integer)session.getAttribute("memberNo");
+		
+		List<Project> projectList = applyService.projectSelectAll(memberNo);
+		
+		System.out.println(projectList);
+		
+		model.addAttribute("projectList", projectList);
+		
+		return "/apply/category";
+		
 	}
 
 	

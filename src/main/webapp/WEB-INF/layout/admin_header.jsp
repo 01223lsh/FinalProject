@@ -39,7 +39,7 @@
 <div style="background-color:#527578;">
 <div >
 <a href="/member/main">
-<img src="/resources/img/logo.png" style="width: 100px;">
+<img src="/resources/img/dolphin2.png" style="width: 100px;">
 </a>
 
 </div>

@@ -129,4 +129,9 @@ public class PaymentServiceImpl implements PaymentService {
 	public Order detailOrder(Order order) {
 		return paymentDao.selectByOrderNo(order);
 	}
+
+	@Override
+	public int cntPayment(int projectNo) {
+		return paymentDao.selectCntPaymentByProjectNo(projectNo);
+	}
 }

@@ -23,7 +23,7 @@ public class MailUtil {
 		String hostSMTPid=""; //관리자 이메일 아이디
 		String hostSMTPpw=""; //관리자 이메일 비밀번호
 		
-		//보내는 사람 
+		//보내는 사람  
 		String fromEmail=""; //보내는 사람 이메일 
 		String fromName=""; //보내는 사람 이름
 		

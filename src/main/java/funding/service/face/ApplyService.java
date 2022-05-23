@@ -82,6 +82,14 @@ public interface ApplyService {
 	 */
 	public void projectApply(int projectNo);
 	
+	/**
+	 * 작성중인 프로젝트 불러오기
+	 * 
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Project> projectSelectAll(int memberNo);
+	
 	
 
 }

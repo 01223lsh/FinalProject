@@ -2,20 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <c:import url="/WEB-INF/views/layout/header.jsp" />
-
-<!-- 부트스트랩 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<!-- 폰트  -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
 
 <style type="text/css">
 
@@ -33,7 +20,8 @@ html, div, body,h3{
  
  #rememberid{
  	text-align: left;
-    margin: 0px 0px 0px 25px;
+    font-size: 18px;
+    margin: 3px 0 0 8px;
  }
  
  
@@ -67,10 +55,7 @@ html, div, body,h3{
 .container{
     text-align: -webkit-center;
     padding: 40px;
-}
-
-.col-sm-3 {
-	margin: 7px;
+   	font-family: 'Noto Sans KR', sans-serif;
 }
 
 #id_pw{
@@ -78,23 +63,48 @@ html, div, body,h3{
 }
 
 .form-control {
-    display: block;
-    width: 100%;
-    height: 48px;
-    padding: 6px 12px;
+	display: block;
+    width: 400px;
+    height: 68px;
+    padding: 8px 10px;
     font-size: 16px;
+    margin: 5px;
+}
+   }
+   
 
 
- 
+
+#login {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 22px;
+}
+
+#loginBtn {
+    background: #39AEA9;
+    outline: 0px;
+    border: 0px;
+    width: 429px;
+    height: 69px;
+    color: white;
+    font-size: 40px;
+    border-radius: 7px;
+}
+
+a {
+	text-decoration-line: none;
+    font-size: 18px;
+    color: gray;
+
+}
+
+.separator {
+	font-size: 20px;
+}
+
  
 </style>
-
-
-
-
-
-
-
 
 
 
@@ -111,10 +121,6 @@ html, div, body,h3{
 
   
   <body>
-  
-  
-  
-  
   
 
 
@@ -241,11 +247,6 @@ html, div, body,h3{
     
   </script>
   
-
-  
-
-  
-  
   
 <div class="container">
 
@@ -254,33 +255,33 @@ html, div, body,h3{
 
 <form action="/member/loginform" method="post" style="width:470px;" class="form-horizontal" onsubmit="return submit()">
 
+
 <div id="id_pw">
+<table>
+<tr>
+<!-- 	<th class="col-sm-6">아이디</th> -->
+	<td class="col-sm-7"><input type="text" class="form-control" id="id" name="id" maxlength="12" placeholder="아이디를 입력해주세요" autofocus></td>
+</tr>
 
-<div class="form-group">
-	<span class="col-sm-3"> 아이디 </span>
+<tr>
+<!-- 	<th class="col-sm-6">비밀번호</th> -->
+	<td class="col-sm-7"><input type="password" class="form-control" id="pw" name="pw" maxlength="20" placeholder="비밀번호를 입력해주세요"></td>
+</tr>
 
-	<div class="col-sm-8">
-		<input type="text" class="form-control" id="id" name="id" maxlength="12" placeholder="아이디를 입력해주세요" autofocus>
-	</div>
-</div>
-
-<div class="form-group">
-	<span class="col-sm-3"> 비밀번호 </span>
-
-	<div class="col-sm-8">
-		<input type="password" class="form-control" id="pw" name="pw" maxlength="20" placeholder="비밀번호를 입력해주세요">
-	</div>
-</div>
+</table>
 
 <div id="rememberid">
     <input type="checkbox" class="save_id" name="checkId" id="saveId" >
     <label for="saveId">아이디 저장</label>
 </div>
 
-</div> <!--"id_pw" end  -->
+
+</div><!--id_pw end -->
 
 
-<button id="loginBtn" type="submit" class="btn btn-primary btn-lg btn-block" >로그인</button> 
+
+<!-- <button id="loginBtn" type="submit" class="btn btn-primary btn-lg btn-block" >로그인</button>  -->
+<button id="loginBtn" type="submit"  >로그인</button> 
 
 <br><br>
 <div id="find_join"  style="color: black">
@@ -297,27 +298,15 @@ html, div, body,h3{
 </form>
 
 
-
-
-
-
-
-  
-
-
-
-
-  
-
  
 <!-- ============ 네이버 로그인 ============ -->  
 <!-- 네이버 로그인 화면으로 이동 시키는 URL -->
 <!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
 <div id="sns_login" style="text-align: center;">
 <span id="naverlogin"><a href="${url}"><img height="54px" width="217px"
-src="../resources/icon/naver_logo.png"/></a></span>
+src="../resources/snslogo/naver_logo.png"/></a></span>
 <span id="kakaologin" onclick="kakaoLogin();"><a href="javascript:void(0)"><img height="54px" width="217px"
-src="../resources/icon/kakao_logo.png"/></a></span>
+src="../resources/snslogo/kakao_logo.png"/></a></span>
 </div>
 
 <!--   <ul> -->
@@ -333,5 +322,5 @@ src="../resources/icon/kakao_logo.png"/></a></span>
 </div> <!-- container end -->
 
 
-</body>
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp" />
+ 

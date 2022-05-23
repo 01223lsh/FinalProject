@@ -218,6 +218,20 @@ public interface MypageService {
 	 */
 	public Payment getPaymentInfo(int orderNo);
 
+	/**
+	 * 배달 테이블 확인하기
+	 * @param joinFunding
+	 * @return
+	 */
+	public int getChkDelivery(JoinFunding joinFunding);
+
+	/**
+	 * 배달 테이블 뺀 정보 가져오기
+	 * @param joinFunding
+	 * @return
+	 */
+	public List<HashMap<String, Object>> joinfundviewBefore(JoinFunding joinFunding);
+
 //	/**
 //	 * 소셜 - 로그인 네이버 확인
 //	 * @param member

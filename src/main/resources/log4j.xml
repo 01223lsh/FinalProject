@@ -14,9 +14,9 @@
 
 
 	
-	<logger name="funding">
-		<level value="info"/>
-	</logger>
+<!-- 	<logger name="funding"> -->
+<!-- 		<level value="info"/> -->
+<!-- 	</logger> -->
 	
 		<!-- 마이바티스 Loggers -->
 
@@ -44,9 +44,9 @@
 <!-- 		<level value="INFO" /> -->
 <!-- 	</logger> -->
 	
-	<logger name="jdbc.mybatis">
-		<level value="INFO" />
-	</logger>
+<!-- 	<logger name="jdbc.mybatis"> -->
+<!-- 		<level value="INFO" /> -->
+<!-- 	</logger> -->
 	
 <!-- 	<logger name="funding"> -->
 <!-- 		<level value="INFO" /> -->
