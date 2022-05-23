@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <style type="text/css">
 
@@ -70,7 +72,30 @@ textarea::placeholder {
 
 .submit_button {
 	font-weight: 500;
-    background: rgb(248, 100, 83);
+    background: #A2D5AB;
+    align-items: center;
+    display: inline-flex;
+    width: 112px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin-right: 12px !important;
+    border: 0px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+
+.apply_button {
+	font-weight: 500;
+    background: #39AEA9;
     align-items: center;
     display: inline-flex;
     width: 112px;
@@ -91,6 +116,28 @@ textarea::placeholder {
     outline: none;
 }
 
+.submit_button:hover, .submit_button:active {
+    opacity: 0.6;
+}
+
+.apply_button:hover, .apply_button:active {
+    opacity: 0.6;
+}
+
+.project_button {
+	border: none;
+    background: transparent;
+    outline: none;
+    color: black;
+/*     font-weight: bold; */
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0px 1rem;
+}
+
+.project_button span:hover, .project_button span:active {
+	color: rgb(150, 150, 150);
+}
 
 
 .editor_topContent{
@@ -362,6 +409,94 @@ input[type="number"]::-webkit-inner-spin-button {
 </style>
 
 <script type="text/javascript">
+//펀딩 신청하기
+function applyDo() {
+	debugger;
+	if(!'${projectInfo.projectTitle}') {
+		alert("프로젝트 제목을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectIntro}') {
+		alert("프로젝트 소개글 요약을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectImage}') {
+		alert("프로젝트 대표사진을 올려주세요.")
+		return;
+	}
+	if(!'${projectInfo.talkTime}') {
+		alert("창작자 채팅 가능 시간을 입력해주세요.")
+		return;
+	}
+	if('${projectInfo.projectPrice}' == 0) {
+		alert("프로젝트 목표금액을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.budgetPlan}') {
+		alert("프로젝트 예산 계획을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.openDate}') {
+		alert("프로젝트 오픈일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.closeDate}') {
+		alert("프로젝트 종료일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.deliveryDate}') {
+		alert("프로젝트 예상 배송 시작일을 입력해주세요.")
+		return;
+	}
+	
+	var sysDate = new Date();
+	
+	<fmt:formatDate value = "${projectInfo.openDate }" var = "openDateApply"/>
+	var openDate = new Date('${openDateApply}');
+	
+	<fmt:formatDate value = "${projectInfo.closeDate }" var = "closeDateApply"/>
+	var closeDate = new Date('${closeDateApply}');
+
+	<fmt:formatDate value = "${projectInfo.deliveryDate }" var = "deliveryDateApply"/>
+	var deliveryDate = new Date('${deliveryDateApply}');
+	
+	if(sysDate > openDate) {
+		alert("프로젝트 오픈일을 수정해주세요.")
+		return;
+	}
+	
+	if(sysDate > closeDate) {
+		alert("프로젝트 종료일을 수정해주세요.")
+		return;
+	}
+	
+	if(openDate > closeDate) {
+		alert("프로젝트 종료일을 수정해주세요.")
+		return;
+	}
+	
+	if(closeDate > deliveryDate) {
+		alert("프로젝트 배송 시작일을 수정해주세요.")
+		return;
+	}
+	
+	$.ajax({
+		type:"get"
+		,url:"/apply/final?projectNo=${projectInfo.projectNo}"
+		,success: function(data){
+// 			var resultNo = ${result }
+// 			if(resultNo == 1) {
+// 				alert("리워드를 추가해주세요.")
+// 			};
+			
+			let url = '/member/main';
+			location.assign(url);
+		}
+		,error: function(e) {
+			alert("리워드 정보를 입력해주세요.");
+		}
+	})
+}
 
 
 //저장하기
@@ -387,7 +522,6 @@ function applySubmit(){
 	var stringDelivery = $.datepicker.formatDate("yy-mm-dd",$("#deliveryDate").datepicker("getDate")); 
   stringDelivery = $("#deliveryDate").val();
 	
- 	alert(stringOpen);
 	
 	
 	//입력 데이터들 json 파싱
@@ -506,7 +640,6 @@ function planDate (date) {
 function period() {
 	
 	var openPeriod = new Date($('#openDate').datepicker('getDate'));
-		alert(openPeriod.getTime());
 	var closePeriod = new Date($('#closeDate').datepicker('getDate'));
 	
 	var periodMs = closePeriod.getTime() - openPeriod.getTime();		
@@ -620,7 +753,6 @@ $(function() {
 
 // 		var openPeriod = new Date(${openDateView });
 		openPeriod = new Date($("#openDate").datepicker("getDate"));
-			alert(openPeriod.getTime());
 // 		var closePeriod = new Date(${closeDateView });
 		closePeriod = new Date($("#closeDate").datepicker("getDate"));
 		
@@ -653,9 +785,10 @@ $(function() {
 	<div class="editor_top">
 		<div class="top_nav"> 
 			<div class="top_nav_in">
-				<a href="/member/main">대충 뒤로가기</a>
+				<button class="project_button"  onclick="location.href='/mypage/mypagemain' "><span><ion-icon size="large" name="arrow-back-outline"></ion-icon></span></button>
 				<div class="top_nav_button">
-					<button class="submit_button" onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="submit_button" type="button"  onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="apply_button" type="button"  onclick="applyDo()"><span style=" color: rgb(255, 255, 255);">프로젝트 신청</span></button>
 				</div>
 			</div>
 		</div>

@@ -113,8 +113,8 @@ $(document).ready(function() {
 	$("select[name=order]").change(function() {
 		getList('${pagination.category}');
 	})
-	// 필터, 정렬 조건 유지
-	setCondition()	
+// 	// 필터, 정렬 조건 유지
+// 	setCondition()	
 	
 	
 })
@@ -142,24 +142,24 @@ function getList(category) {
 	
 }
 // 정렬 조건 유지
-function setCondition() {
-    const selectOrder = document.querySelector("select[name=order]")
-    const selectFilter = document.querySelector("select[name=filter]")
+// function setCondition() {
+//     const selectOrder = document.querySelector("select[name=order]")
+//     const selectFilter = document.querySelector("select[name=filter]")
 
-    for (i = 0; i < selectOrder.length; i++) {
-        if (selectOrder.options[i].value == '${pagination.order}') {
-            selectOrder.options[i].selected = true
-            break
-        }
-    }
+//     for (i = 0; i < selectOrder.length; i++) {
+//         if (selectOrder.options[i].value == '${pagination.order}') {
+//             selectOrder.options[i].selected = true
+//             break
+//         }
+//     }
     
-    for (i = 0; i < selectFilter.length; i++) {
-        if (selectFilter.options[i].value == '${pagination.filter}') {
-        	selectFilter.options[i].selected = true
-            break
-        }
-    }
-}
+//     for (i = 0; i < selectFilter.length; i++) {
+//         if (selectFilter.options[i].value == '${pagination.filter}') {
+//         	selectFilter.options[i].selected = true
+//             break
+//         }
+//     }
+// }
 
 </script>
 </head>
