@@ -109,7 +109,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
             	model.addAttribute("email", kakaoEmail);
             	model.addAttribute("nick", userInfo.get("nickname"));
             	model.addAttribute("kakaoInfo", kakaoInfo);
-            	model.addAttribute("access_token", access_Token);
+            	model.addAttribute("login", access_Token);
             	
             	//redirect를 사용하면 값이 전달되지 않음 -> forward 사용
             	return "forward:/member/kakaoJoin";
@@ -135,7 +135,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
 		
 		if(joinResult) {
 			logger.info("회원가입 성공");
-			return "redirect:/member/login";			
+			return "redirect:/member/main";			
 		} else {
 			logger.info("회원가입 실패");
 			return "redirect:/member/kakaoJoin"; 
