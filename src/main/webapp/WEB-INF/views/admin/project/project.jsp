@@ -358,10 +358,10 @@ table.test td{height: 30px; padding : 10px;}
     justify-content: space-between;">
       <div class="col" style="min-width: 250px;" style="margin:0px auto;">
       
-        <div class="card shadow-sm" style=" border: 1px solid; max-width: 250px; max-height:332px; padding: 5px;">
-          <img src="${i.projectImage}" style="min-height: 250px; width: 100%; ">
+        <div class="card shadow-sm" style=" border: 1px solid; max-width: 250px; max-height:375px; padding: 5px;">
+          <img src="${i.projectImage}" style="min-height: 250px; width: 100%; height: 250px;">
           <div class="card-body" >
-          <div style="height: 55px; overflow: hidden;">
+          <div style="height: 85px; overflow: hidden;">
             <strong>${i.projectTitle}</strong>
             <c:if test="${i.projectStep eq 4}">
               <span id="project-status">마감</span>

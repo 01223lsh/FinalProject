@@ -347,7 +347,11 @@ public interface AdminDao {
 	 */
 	public MemberSeller getBuisnessInfo(Project result);
 	
-	
+	/**
+	 * 멤버 사업자를 삭제합니다.
+	 * @param i
+	 */
+	public void DisabledAllDeleteSeller(int i);
 	
 	
 	
@@ -376,6 +380,8 @@ public interface AdminDao {
 
 	//최원석님 코드
 	public List<ProjectComment> selectCommentList(int projectNo);
+
+
 
 
 

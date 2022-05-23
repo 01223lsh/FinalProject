@@ -90,6 +90,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void DisabledAllDelete(int i) {
+		adminDao.DisabledAllDeleteSeller(i);
 		adminDao.DisabledAllDelete(i);
 	}
 

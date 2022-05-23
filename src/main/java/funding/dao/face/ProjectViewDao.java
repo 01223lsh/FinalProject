@@ -44,4 +44,6 @@ public interface ProjectViewDao {
 
 	public List<Payment> selectContributorsList(Payment payment);
 
+	public void updateNews(ProjectNews news);
+
 }

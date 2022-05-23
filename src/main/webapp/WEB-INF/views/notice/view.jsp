@@ -77,7 +77,8 @@ function noticeDownload(fileNo){
 	<div class="notice Content">${notice.content}</div>
 </div>
 <div class="text-center">
-<button onclick="noticeManagement()">목록</button>
+<!-- <button onclick="noticeManagement()">목록</button> -->
+<button onclick="location.href='/notice/list'">목록</button>
 </div>
 
 </body>

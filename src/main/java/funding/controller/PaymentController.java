@@ -40,20 +40,24 @@ public class PaymentController {
 	ApplyService applyService;
 	
 	@GetMapping(value = "/payment/chooseReward")
-	public void chooseReward(HttpSession session, Model model, Reward reward, int projectNo) {
+	public void chooseReward(HttpSession session, Model model, Reward reward, Project projectNo) {
 		
 		logger.info("/payment/chooseReward [GET]");
 		
 		logger.info("projectNo : {}", projectNo);
 		
+		//프로젝트 번호를 통해 프로젝트 정보를 불러오기 
+		projectNo = applyService.projectSelect(projectNo.getProjectNo());
+		logger.info("projectNo 정보 : {}", projectNo);
+		
 		//리워드 선택지 불러오기
-		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo);
+		List<Reward> rewardList = paymentService.rewardListByProjectNo(projectNo.getProjectNo());
 //		for (Reward r : rewardList) {
 //			logger.info("RewardList : {}", r);
 //		}
 		
 		//전달받은 rewardNo 확인
-		logger.info("전송된 RewardNo : {}", reward.getRewardNo());
+//		logger.info("전송된 RewardNo : {}", reward.getRewardNo());
 		
 		//로그인 되어 있는 세션 정보 불러오기
 		int memberNo = (int) session.getAttribute("memberNo");
@@ -64,7 +68,7 @@ public class PaymentController {
 		//모델값 전송
 		model.addAttribute("rewardNo", reward.getRewardNo());
 		model.addAttribute("rewardList", rewardList);
-		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("project", projectNo);
 		model.addAttribute("memberNo", memberNo);
 	}
 	
@@ -73,10 +77,10 @@ public class PaymentController {
 			, @RequestParam("rewardNo") int[] rewardNoArr
 			, @RequestParam("rewardCount") int[] rewardCountArr
 			, Order order
-			, int projectNo) {
+			, Project project) {
 		logger.info("/payment/chooseRewardProc [POST]");
 		
-		logger.info("전달 받은 projectNo : {}", projectNo);
+		logger.info("전달 받은 projectNo : {}", project);
 		logger.info("전달 받은 rewardNoArr : {}", rewardNoArr);
 		logger.info("전달 받은 rewardCountArr : {}", rewardCountArr);
 		logger.info("order 의 정보 : {}", order);
@@ -99,7 +103,7 @@ public class PaymentController {
 		//주문정보 추가 
 		paymentService.addOrder(order, rewardNoArr, rewardCountArr);
 		
-		return "redirect:/payment/order?orderNo=" + order.getOrderNo() + "&projectNo=" + projectNo;
+		return "redirect:/payment/order?orderNo=" + order.getOrderNo() + "&projectNo=" + project.getProjectNo();
 	}
 	
 	@GetMapping(value = "/payment/order")
@@ -159,8 +163,23 @@ public class PaymentController {
 	public void result(Order order, Model model, int projectNo) {
 		logger.info("/payment/result [Connection]");
 		
-		logger.info("projectNo 정보: {}", projectNo);
+		//결제한 사람의 수를 계산하는 메소드
+		int index = paymentService.cntPayment(projectNo);
+		logger.info("index의 정보 {}", index);
 		
-		logger.info("order 정보 : {} ", order);
+		Project project = new Project();
+		project = applyService.projectSelect(projectNo);
+		
+		logger.info("project 정보: {}", project);
+		
+		order = paymentService.detailOrder(order);
+		
+		logger.info("order 정보: {} ", order);
+		
+		//모델값 전송!!
+		model.addAttribute("index", index);
+		model.addAttribute("project", project);
+		model.addAttribute("order", order);
+		
 	}
 }

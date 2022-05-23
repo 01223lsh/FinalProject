@@ -184,31 +184,33 @@ button{
     border: 1px solid #527578;
     color: white;
     border-radius: 5px;}
-
+.pagination{
+	justify-content: center
+}
 </style>
 
 </head>
 <body>
-<div id="resultLayout">
-<h3>공지사항</h3>
+<div  id="resultLayout">
+<h3 style="text-align: center;">공지사항</h3>
 <hr>
 
 <div style="width: 1070px; margin:0 auto;">
 <table style="margin: auto; width: 100%;  border-radius: 10px;  margin-bottom: 20px;">
 <tr style="border-bottom: 2px #DDD solid;">
 	<th style="width: 5%;">글번호</th>
-	<th style="width: 45%">제목</th>
+	<th style="width: 30%">제목</th>
 	<th style="width: 10%">작성자</th>
 	<th style="width: 10%">작성일</th>
 	
 </tr>
 <c:forEach items="${list}" var="i">
 <tr>
-	<td>${i.noticeNo }</td>
-	<td><a onclick="noticeView(${i.noticeNo})">${i.title }</a></td>
-	<td>관리자</td>
+	<td style="text-align: center;">${i.noticeNo }</td>
+	<td style="width: 30%; text-align: center; "><a onclick="noticeView(${i.noticeNo})">${i.title }</a></td>
+	<td style="width: 10%; text-align: center;">관리자</td>
 	<fmt:formatDate value = "${i.regDate }" pattern = "yyyy-MM-dd HH:mm:ss" var = "noticeDateView"/>
-	<td>${noticeDateView}</td>
+	<td style="width: 10%; text-align: center;">${noticeDateView}</td>
 	
 </tr>
 </c:forEach>

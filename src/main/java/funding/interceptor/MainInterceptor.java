@@ -16,6 +16,10 @@ public class MainInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("grade")==null) {
+		}
+		if(((Integer) session.getAttribute("grade"))==3) {
+			session.invalidate();
+			modelAndView.setViewName("redirect:/member/login");
 		} 
 		else if (((Integer) session.getAttribute("grade"))==2) {
 			modelAndView.setViewName("redirect:/admin/main");

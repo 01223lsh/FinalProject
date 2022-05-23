@@ -146,7 +146,7 @@ button:hover {
 	</td>
 </tr>
 </table>
-<c:if test="${member.grade eq 1 }">
+<c:if test="${member.grade eq 1 || !empty memberSeller.bankName }">
 <h3>사업자 정보</h3>
 <hr>
 <table class="table table-striped table-hover table-condensed">

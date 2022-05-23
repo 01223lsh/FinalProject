@@ -13,7 +13,7 @@
 	<style type="text/css">
 	
 	/* #navbar-example { position: relative; padding: 1rem; margin: 0rem -0.75rem 0; border: solid #dee2e6; border-width: 1px 0 0; } */
- 	#navbar-example { position: absolute; top: 150px; left: 25px; } 
+ 	#navbar-example { position: absolute; top: 230px; left: 25px; } 
 	#scrollspy-example p { margin-bottom: 1.5em; }
 	</style> 
 

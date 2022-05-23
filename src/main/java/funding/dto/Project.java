@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class Project {
-	
+
 	private int projectNo;			// 프로젝트 번호
 	private int memberNo;			// 회원번호
 	private int categoryNo;			// 카테고리 번호
@@ -42,264 +42,262 @@ public class Project {
 
 	}
 
+   public int getRnum() {
+      return rnum;
+   }
 
-	public int getRnum() {
-		return rnum;
-	}
 
+   public void setRnum(int rnum) {
+      this.rnum = rnum;
+   }
 
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
 
+   public int getProjectNo() {
+      return projectNo;
+   }
 
-	public int getProjectNo() {
-		return projectNo;
-	}
 
 
 
 
+   public void setProjectNo(int projectNo) {
+      this.projectNo = projectNo;
+   }
 
-	public void setProjectNo(int projectNo) {
-		this.projectNo = projectNo;
-	}
 
 
 
 
+   public int getMemberNo() {
+      return memberNo;
+   }
 
-	public int getMemberNo() {
-		return memberNo;
-	}
 
 
 
 
+   public void setMemberNo(int memberNo) {
+      this.memberNo = memberNo;
+   }
 
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
-	}
 
 
 
 
+   public int getCategoryNo() {
+      return categoryNo;
+   }
 
-	public int getCategoryNo() {
-		return categoryNo;
-	}
 
 
 
 
+   public void setCategoryNo(int categoryNo) {
+      this.categoryNo = categoryNo;
+   }
 
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
-	}
 
 
 
 
+   public String getProjectTitle() {
+      return projectTitle;
+   }
 
-	public String getProjectTitle() {
-		return projectTitle;
-	}
 
 
 
 
+   public void setProjectTitle(String projectTitle) {
+      this.projectTitle = projectTitle;
+   }
 
-	public void setProjectTitle(String projectTitle) {
-		this.projectTitle = projectTitle;
-	}
 
 
 
 
+   public String getProjectIntro() {
+      return projectIntro;
+   }
 
-	public String getProjectIntro() {
-		return projectIntro;
-	}
 
 
 
 
+   public void setProjectIntro(String projectIntro) {
+      this.projectIntro = projectIntro;
+   }
 
-	public void setProjectIntro(String projectIntro) {
-		this.projectIntro = projectIntro;
-	}
 
 
 
 
+   public String getBudgetPlan() {
+      return budgetPlan;
+   }
 
-	public String getBudgetPlan() {
-		return budgetPlan;
-	}
 
 
 
 
+   public void setBudgetPlan(String budgetPlan) {
+      this.budgetPlan = budgetPlan;
+   }
 
-	public void setBudgetPlan(String budgetPlan) {
-		this.budgetPlan = budgetPlan;
-	}
 
 
 
 
+   public String getSchedulePlan() {
+      return schedulePlan;
+   }
 
-	public String getSchedulePlan() {
-		return schedulePlan;
-	}
 
 
 
 
+   public void setSchedulePlan(String schedulePlan) {
+      this.schedulePlan = schedulePlan;
+   }
 
-	public void setSchedulePlan(String schedulePlan) {
-		this.schedulePlan = schedulePlan;
-	}
 
 
 
 
+   public String getProjectImage() {
+      return projectImage;
+   }
 
-	public String getProjectImage() {
-		return projectImage;
-	}
 
 
 
 
+   public void setProjectImage(String projectImage) {
+      this.projectImage = projectImage;
+   }
 
-	public void setProjectImage(String projectImage) {
-		this.projectImage = projectImage;
-	}
 
 
 
 
+   public int getProjectPrice() {
+      return projectPrice;
+   }
 
-	public int getProjectPrice() {
-		return projectPrice;
-	}
 
 
 
 
+   public void setProjectPrice(int projectPrice) {
+      this.projectPrice = projectPrice;
+   }
 
-	public void setProjectPrice(int projectPrice) {
-		this.projectPrice = projectPrice;
-	}
 
 
 
 
+   public Date getOpenDate() {
+      return openDate;
+   }
 
-	public Date getOpenDate() {
-		return openDate;
-	}
 
 
 
 
+   public void setOpenDate(Date openDate) {
+      this.openDate = openDate;
+   }
 
-	public void setOpenDate(Date openDate) {
-		this.openDate = openDate;
-	}
 
 
 
 
+   public Date getCloseDate() {
+      return closeDate;
+   }
 
-	public Date getCloseDate() {
-		return closeDate;
-	}
 
 
 
 
+   public void setCloseDate(Date closeDate) {
+      this.closeDate = closeDate;
+   }
 
-	public void setCloseDate(Date closeDate) {
-		this.closeDate = closeDate;
-	}
 
 
 
 
+   public Date getDeliveryDate() {
+      return deliveryDate;
+   }
 
-	public Date getDeliveryDate() {
-		return deliveryDate;
-	}
 
 
 
 
+   public void setDeliveryDate(Date deliveryDate) {
+      this.deliveryDate = deliveryDate;
+   }
 
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
 
 
 
 
+   public String getProjectContent() {
+      return projectContent;
+   }
 
-	public String getProjectContent() {
-		return projectContent;
-	}
 
 
 
 
+   public void setProjectContent(String projectContent) {
+      this.projectContent = projectContent;
+   }
 
-	public void setProjectContent(String projectContent) {
-		this.projectContent = projectContent;
-	}
 
 
 
 
+   public int getFundPrice() {
+      return fundPrice;
+   }
 
-	public int getFundPrice() {
-		return fundPrice;
-	}
 
+   public void setFundPrice(int fundPrice) {
+      this.fundPrice = fundPrice;
+   }
 
-	public void setFundPrice(int fundPrice) {
-		this.fundPrice = fundPrice;
-	}
 
 
+   public int getProjectStep() {
+      return projectStep;
+   }
 
-	public int getProjectStep() {
-		return projectStep;
-	}
 
+   public void setProjectStep(int projectStep) {
+      this.projectStep = projectStep;
+   }
 
-	public void setProjectStep(int projectStep) {
-		this.projectStep = projectStep;
-	}
+   public int getSum() {
+      return sum;
+   }
 
-	public int getSum() {
-		return sum;
-	}
 
 
+   public void setSum(int sum) {
+      this.sum = sum;
+   }
 
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
 
+   public String getTalkTime() {
+      return talkTime;
+   }
 
-	public String getTalkTime() {
-		return talkTime;
-	}
 
-
-	public void setTalkTime(String talkTime) {
-		this.talkTime = talkTime;
-	}
-	
+   public void setTalkTime(String talkTime) {
+      this.talkTime = talkTime;
+   }
+   
 }
-

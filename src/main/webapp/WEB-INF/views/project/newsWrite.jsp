@@ -56,7 +56,7 @@
 <div>
 <form id="newsForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="projectNo" value="${projectNo }">
-	<table style="height: 350px;">
+	<table style="height: 600px;">
 	<tr>
 	<td width="10%;">제목</td>
 	<td><input type="text" id="newsTitle" name="newsTitle" style="width:500px "></td>
@@ -75,7 +75,7 @@
 
 </form>
 <div style="text-align: center; margin: 8px 0px 8px;">
-<button id="newsSubmit" type="button" class="btn btn-primary">작성</button>
+<button id="newsSubmit" type="button" class="btn btn-primary" style="background-color: #39AEA9; border: none;">작성</button>
 <button id="newsCancel" type="button" class="btn btn-default" onclick="cancel()" style="background-color: rgb(240, 240, 240);">취소</button>
 </div>
 

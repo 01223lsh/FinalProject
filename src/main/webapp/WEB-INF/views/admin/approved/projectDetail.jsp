@@ -97,7 +97,7 @@ img{
  	float: left; 
 }
 .projectApplicant{
-	height: 310px;
+	
     width: 300px;
     border : 1px solid #527578;
     border-radius:10px;
@@ -166,7 +166,8 @@ img{
 			
 			<div style="float: right; color:#47423f;" class="rightbar" >
 <!-- 			<div style=" color:#47423f;" class="rightbar" > -->
-				<div class="projectApplicant" style="margin-bottom: 35px; height: 235px;">
+
+				<div class="projectApplicant" style="margin-bottom: 35px; ">
 					<div class="projectApplicantInfoHead"> <img src="${project.projectImage}" style="width: 28px;height: 28px;border-radius: 13px;    margin-bottom: 6px;">	${member.accountName}</div>
 					<div class="projectApplicantInfo">
 					<div>아이디 &nbsp;&nbsp;&nbsp;${member.id }</div>
@@ -182,11 +183,12 @@ img{
 					</div>
 					<div class="projectApplicantInfo">
 						<div style="letter-spacing:10%;">목표금액&nbsp;&nbsp;&nbsp;${project.projectPrice}</div>
-						<div>예산계획&nbsp;&nbsp;&nbsp;${project.budgetPlan}</div>
-						<div>일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정&nbsp;&nbsp;&nbsp;${project.schedulePlan}</div>
 						<div style="letter-spacing: 7px;float: left;">오픈일&nbsp;</div><div><fmt:formatDate value="${project.openDate}" pattern="yyyy-MM-dd"/></div>
 						<div style="letter-spacing: 7px;float: left;">마감일&nbsp;</div><div><fmt:formatDate value="${project.closeDate}" pattern="yyyy-MM-dd"/></div>
 						<div style="float: left;">배송시작&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${project.deliveryDate}" pattern="yyyy-MM-dd"/></div>
+						<br><br>
+						<div>일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정&nbsp;&nbsp;&nbsp;<div>${project.schedulePlan}</div></div>
+						<div>예산계획&nbsp;&nbsp;&nbsp;<div>${project.budgetPlan}</div></div>
 <%-- 						<div style="letter-spacing: 7px;">오픈일&nbsp;</div><div><fmt:formatDate value="${project.openDate}" pattern="yyyy-MM-dd"/></div> --%>
 <%-- 						<div style="letter-spacing: 7px;">마감일&nbsp;</div><div><fmt:formatDate value="${project.closeDate}" pattern="yyyy-MM-dd"/></div> --%>
 <%-- 						<div style="">배송시작&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${project.deliveryDate}" pattern="yyyy-MM-dd"/></div> --%>

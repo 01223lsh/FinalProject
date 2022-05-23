@@ -117,9 +117,9 @@ public class NaverLoginController {
         	session.setAttribute("nick", naverlogin.get(0).getNick());
         	session.setAttribute("grade", naverlogin.get(0).getGrade());
         	session.setAttribute("memberNo", naverlogin.get(0).getMemberNo());
-        	session.setAttribute("access_token", access_token);
+        	session.setAttribute("login", access_token);
         	
-        	 return "redirect:/main";
+        	 return "redirect:/member/main";
         	
  
         } else {
@@ -158,7 +158,7 @@ public class NaverLoginController {
 		logger.info("/member/naverJoin 접속");
 	}
 	
-	//POST - 카카오 유저 회원가입
+	//POST - 네이버 유저 회원가입
 	@PostMapping(value = "/member/naverJoin")
 	public String naverJoinProcess(Member member) {
 		logger.info("회원 정보 입력 값 : {}", member);
@@ -168,7 +168,7 @@ public class NaverLoginController {
 		
 		if(joinResult) {
 			logger.info("회원가입 성공");
-			return "redirect:/member/login";			
+			return "redirect:/member/main";			
 		} else {
 			logger.info("회원가입 실패");
 			return "redirect:/member/naverJoin"; 
@@ -200,7 +200,7 @@ public class NaverLoginController {
 				e.printStackTrace();
 			}
 			
-		    return "/main";
+		    return "/member/main";
 	}
 	
 	private String requestToServer(String apiURL) throws IOException {

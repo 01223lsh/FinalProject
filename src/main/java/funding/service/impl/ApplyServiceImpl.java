@@ -170,7 +170,7 @@ public class ApplyServiceImpl implements ApplyService{
 		// 파일 저장 경로 생성
 		String storedPath = context.getRealPath("projectPhoto");
 		File storedFolder = new File(storedPath);
-		if (storedFolder.exists()) {
+		if (!storedFolder.exists()) {
 		storedFolder.mkdir();
 		}
 		// 저장 파일 이름 생성
@@ -219,6 +219,10 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.chatRoomInsert(projectNo);
 	}
 	
-	
+	@Override
+	public List<Project> projectSelectAll(int memberNo) {
+
+		return applyDao.projectSelectAll(memberNo);
+	}
 	
 }
