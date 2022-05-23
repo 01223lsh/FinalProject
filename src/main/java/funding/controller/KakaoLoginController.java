@@ -85,7 +85,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
         	session.setAttribute("grade", kakaoinfo.get(0).getGrade());
         	session.setAttribute("memberNo", kakaoinfo.get(0).getMemberNo());
         	
-          	return "redirect:/main";
+          	return "redirect:/member/main";
  
         } else { //행 수 0 반환 -> false -> 회원가입 or 탈퇴한 회원(등급 3)인지 여부 확인하여 재가입(grade 변경)
         	
@@ -194,14 +194,14 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
 		if(result == true) {
 			
 			session.invalidate(); 
-			return "redirect:/main";
+			return "redirect:/member/main";
 			
 		} else { //생성된 프로젝트 있음
 			
 			logger.info("생성된 프로젝트 있음, 탈퇴 안됨");
 			//탈퇴 안된다는 메세지 띄어주기
 
-			return "/main";
+			return "/member/main";
 
 			
 		}

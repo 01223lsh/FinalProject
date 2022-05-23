@@ -193,7 +193,7 @@ const myName = '${sessionId}'
 	            var recv = JSON.parse(message.body);
 	            recvMessage(recv);
 	        });
-	        ws.send("/app/chat/message", {}, JSON.stringify({type:'ENTER', chatroomId: '${room.chatroomId}', sender: '${sessoinScope.nick}'}));
+	        /* ws.send("/app/chat/message", {}, JSON.stringify({type:'ENTER', chatroomId: '${room.chatroomId}', sender: '${sessoinScope.nick}'})); */
 	    }, function(error) {
 	        if(reconnect++ <= 5) {
 	            setTimeout(function() {

@@ -119,7 +119,7 @@ public class NaverLoginController {
         	session.setAttribute("memberNo", naverlogin.get(0).getMemberNo());
         	session.setAttribute("access_token", access_token);
         	
-        	 return "redirect:/main";
+        	 return "redirect:/member/main";
         	
  
         } else {
@@ -200,7 +200,7 @@ public class NaverLoginController {
 				e.printStackTrace();
 			}
 			
-		    return "/main";
+		    return "/member/main";
 	}
 	
 	private String requestToServer(String apiURL) throws IOException {

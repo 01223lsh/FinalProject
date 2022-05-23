@@ -119,6 +119,10 @@
              INSERT INTO chat_room (chatroom_id, project_no) VALUES(chat_room_seq.NEXTVAL, #{projectNo} )
 	</insert>
 	
-	
+	<select id="projectSelectAll" resultMap="Project" parameterType="int">
+		SELECT * from project
+         WHERE member_no = #{memberNo}
+           AND project_step = 0
+	</select>
 	
 </mapper>	

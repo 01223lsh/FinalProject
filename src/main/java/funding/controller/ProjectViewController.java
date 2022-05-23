@@ -42,17 +42,19 @@ public class ProjectViewController {
 	public String projectView(Project project, Model model, Member seller) {
 		logger.info("/projectView/view");
 		
+		
 		if( project.getProjectNo() < 1 ) {
 			return "redirect:/main";
 		}
 		
 		
-		
+		//프로젝트 정보 불러오기
 		project = projectViewService.getProject(project);
 		
-		
+		//후원자 수 불러오기
 		int contributors = projectViewService.getContributors(project.getProjectNo());
 		
+		//창작자 정보
 		seller = projectViewService.getSeller(project);
 		
 		logger.info("seller 정보 {}",seller);
@@ -61,6 +63,7 @@ public class ProjectViewController {
 		model.addAttribute("seller", seller);
 		model.addAttribute("contributors", contributors);
 		
+		//프로젝트 진행중일 경우에만 리워드 불러오기
 		if(project.getProjectStep() == 3) {
 		List<Reward> rewardList = projectViewService.getReward(project);
 		
@@ -264,6 +267,33 @@ public class ProjectViewController {
 		model.addAttribute("contributors", contributors);
 		
 		return "project/contributorsList";
+	}
+	
+	
+	@GetMapping(value = "/project/news/update")
+	public String projectUpdate(ProjectNews news, Model model,Project project) {
+		
+		news = projectViewService.getNewsView(news);
+		project = projectViewService.getStep(news.getProjectNo());
+		
+		model.addAttribute("news", news);
+		model.addAttribute("project", project);
+		return "project/newsUpdate";
+	}
+	
+	@PostMapping(value = "/project/news/update")
+	public String projectUpdateProcess(ProjectNews news,Model model, Project project) {
+		
+		logger.info("news 내용{}",news);
+		projectViewService.updateNews(news);
+		
+		project = projectViewService.getStep(news.getProjectNo());
+		
+		List<ProjectNews> newsList = projectViewService.getNewsList(news.getProjectNo());
+		
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("project", project);
+		return "project/newsList";
 	}
 	
 	

@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
+
+
 <script type="text/javascript">
 $(document).on('click','#findId',function(){
 	var name = $('#name').val();
@@ -65,11 +67,14 @@ $(document).on('click','#findId',function(){
 #container{
 	text-align: center;
 	margin: 30px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 input.form-group-lg {
-    height: 53px;
-    width: 344px;
+    height: 68px;
+    width: 414px;
+    margin: 8px;
+    font-size: 18px;
 }
 
 #idfont {
@@ -78,19 +83,35 @@ input.form-group-lg {
     margin: 22px;
 }
 
-.btn-primary {
-    height: 43px;
-    width: 172px;
+#findId {
+	background: #39AEA9;
+    outline: 0px;
+    border: 0px;
+    width: 195px;
+    height: 65px;
+    color: white;
+    font-size: 25px;
+    border-radius: 7px;
+    margin: 10px;
 }
-.btn-warning {
-    height: 43px;
-    width: 172px;
+
+#location {
+	background : #A2D5AB;
+    outline: 0px;
+    border: 0px;
+    width: 195px;
+    height: 65px;
+    color: white;
+    font-size: 25px;
+    border-radius: 7px;
+    margin: 10px;
 }
 
 h4{
-	font-size: 18px;
-	margin: 35px;
+    font-size: 28px;
+    margin: 37px;
 }
+
 
 </style>
 
@@ -107,16 +128,16 @@ h4{
 	<input type="text" id="name"  class="form-group form-group-lg" placeholder="이름을 입력해주세요(2~10자)" maxlength="10" required autofocus><br>
 	<input type="text" id="email"  class="form-group form-group-lg" placeholder="이메일을 입력해주세요(ex. funding@naver.com)" maxlength="20" required>
 </form>
-<input type="button"  id="findId" class="btn btn-primary" value="아이디 찾기">
 
-
-<a href="/member/login"><button class="btn btn-warning">로그인 이동</button></a>
+<input type="button" id="location" onclick="location.href='/member/login'" value="로그인이동">
+<input type="button"  id="findId" value="아이디 찾기">
 
 <br>
 <div id="idList"></div>
 
 
 </div>
+
 
 
 <c:import url="/WEB-INF/views/layout/footer.jsp" />

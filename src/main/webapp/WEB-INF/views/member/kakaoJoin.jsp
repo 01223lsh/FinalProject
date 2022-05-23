@@ -4,49 +4,97 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-
 <style type="text/css">
+
+.container { font-family: 'Noto Sans KR', sans-serif;}
 
 /* 닉네임 중복확인 css */ 
 #info_nick {
 	position: relative;
 }
 #nickChkbtn {
-  position: absolute;
-  width: 73px;
-  height: 29px;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto 0;
-  border-radius: 3px;
+    position: absolute;
+    width: 88px;
+    height: 42px;
+    top: 0;
+    right: 5px;
+    bottom: 0;
+    margin: auto 0;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 body {
 	text-align: center;
 }
 
-#join {
-    font-size: 42px;
+h3 {
+margin: 35px 0 0px 0px;
+}
+
+.btn-sm {
+	background: #E5EFC1;
+}
+
+form {
+    margin: 30px;
+    font-size: 16px;
+    text-align: -webkit-center;
+    font-weight: bold;
+    }
+
+.form-group {
+margin : 20px;
+}
+
+.form-control{height: 54px;}
+
+.control-label {
+	text-align: left;
+    margin: 0px 109px 0 0px;
+    font-size: 16px;
+}
+
+#chkemailform {
+margin : 0 276px 0 0px;
+}
+
+#email2{height: 39px;} 
+
+#emailDoubleChk{background: red;
+}
+
+#infoform{
+	padding: 85px 0 0 0;
+    font-size: 30px;
+}
+
+#cancel{
+    outline: 0px;
+    border: 0px;
+    width: 13%;
+    height: 62px;
+    font-size: 21px;
+    color: white;
     font-weight: bold;
 }
 
-#comment {font-size: 15px;}
-
-#info {margin: 20px;}
-
-.form-group input {height: 42px;}
-
-#userinfo{
-	margin: 0 0 0 246px;
+#joinbtn {
+    background: #39AEA9;
+    outline: 0px;
+    border: 0px;
+    width: 13%;
+    height: 62px;
+    font-size: 21px;
+    color: white;
+    font-weight: bold;
 }
 
-#joinbtn{
-	font-size: 21px;
-}
-
-#cancle{
-	font-size: 21px;
+#joinfont {
+    font-size: 44px;
+    font-weight: bold;
+    margin: 20px;
 }
 
 </style>
@@ -162,7 +210,7 @@ function check(re, what, message) {
 <div id="container">
 
 <div id="info">
-	<div id="join">회원가입</div>
+	<div id="joinfont">회원가입</div>
 	<div id="comment">홈페이지를 이용하기 위해 필요한 최소한의 정보를 받고있습니다.</div>
 </div>
 
@@ -204,7 +252,7 @@ function check(re, what, message) {
 
 <div class="form-group2">
 	<div>
-		<input type="reset" id="cancle" class="btn btn-warning" value="로그인으로 이동" />
+		<input type="reset" id="cancel" class="btn btn-warning" value="로그인으로 이동" />
 		<input type="submit" id="joinbtn" class="btn btn-primary" value="회원가입" />
 	</div>
 </div>
@@ -215,4 +263,3 @@ function check(re, what, message) {
 </div> <!-- container end -->
 
 
-<c:import url="/WEB-INF/views/layout/footer.jsp" />

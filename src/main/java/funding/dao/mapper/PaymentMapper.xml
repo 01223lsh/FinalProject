@@ -110,4 +110,10 @@
 		WHERE order_no = #{orderNo} 
 	</select>
 	
+	<select id="selectCntPaymentByProjectNo" resultType="int" parameterType="int">
+		SELECT count(*) 
+		FROM payment 
+		WHERE project_no = #{projectNo}
+	</select>
+	
 </mapper>

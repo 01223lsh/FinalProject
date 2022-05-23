@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <style type="text/css">
 
 body {
@@ -58,7 +61,7 @@ textarea::placeholder {
 }
 
 .top_nav_button {
-	SSposition: relative;
+	position: relative;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -66,7 +69,30 @@ textarea::placeholder {
 
 .submit_button {
 	font-weight: 500;
-    background: rgb(248, 100, 83);
+    background: #A2D5AB;
+    align-items: center;
+    display: inline-flex;
+    width: 112px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    font-size: 12px !important;
+    line-height: 20px !important;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin-right: 12px !important;
+    border: 0px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+
+.apply_button {
+	font-weight: 500;
+    background: #39AEA9;
     align-items: center;
     display: inline-flex;
     width: 112px;
@@ -87,7 +113,28 @@ textarea::placeholder {
     outline: none;
 }
 
+.submit_button:hover, .submit_button:active {
+    opacity: 0.6;
+}
 
+.apply_button:hover, .apply_button:active {
+    opacity: 0.6;
+}
+
+.project_button {
+	border: none;
+    background: transparent;
+    outline: none;
+    color: black;
+/*     font-weight: bold; */
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0px 1rem;
+}
+
+.project_button span:hover, .project_button span:active {
+	color: rgb(150, 150, 150);
+}
 
 .editor_topContent{
 	margin: 64px auto 0px;
@@ -282,6 +329,93 @@ textarea::placeholder {
 
 <script type="text/javascript">
 
+//펀딩 신청하기
+function applyDo() {
+	debugger;
+	if(!'${projectInfo.projectTitle}') {
+		alert("프로젝트 제목을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectIntro}') {
+		alert("프로젝트 소개글 요약을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.projectImage}') {
+		alert("프로젝트 대표사진을 올려주세요.")
+		return;
+	}
+	if(!'${projectInfo.talkTime}') {
+		alert("창작자 채팅 가능 시간을 입력해주세요.")
+		return;
+	}
+	if('${projectInfo.projectPrice}' == 0) {
+		alert("프로젝트 목표금액을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.openDate}') {
+		alert("프로젝트 오픈일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.closeDate}') {
+		alert("프로젝트 종료일을 입력해주세요.")
+		return;
+	}
+	if(!'${projectInfo.deliveryDate}') {
+		alert("프로젝트 예상 배송 시작일을 입력해주세요.")
+		return;
+	}
+	
+	var sysDate = new Date();
+	
+	<fmt:formatDate value = "${projectInfo.openDate }" var = "openDateApply"/>
+	var openDate = new Date('${openDateApply}');
+	
+	<fmt:formatDate value = "${projectInfo.closeDate }" var = "closeDateApply"/>
+	var closeDate = new Date('${closeDateApply}');
+
+	<fmt:formatDate value = "${projectInfo.deliveryDate }" var = "deliveryDateApply"/>
+	var deliveryDate = new Date('${deliveryDateApply}');
+	
+	if(sysDate > openDate) {
+		alert("프로젝트 오픈일을 수정해주세요.")
+		return;
+	}
+	
+	if(sysDate > closeDate) {
+		alert("프로젝트 종료일을 수정해주세요.")
+		return;
+	}
+	
+	if(openDate > closeDate) {
+		alert("프로젝트 종료일을 수정해주세요.")
+		return;
+	}
+	
+	if(closeDate > deliveryDate) {
+		alert("프로젝트 배송 시작일을 수정해주세요.")
+		return;
+	}
+	
+	$.ajax({
+		type:"get"
+		,url:"/apply/final?projectNo=${projectInfo.projectNo}"
+		,success: function(data){
+// 			var resultNo = ${result }
+// 			if(resultNo == 1) {
+// 				alert("리워드를 추가해주세요.")
+// 			};
+			
+			let url = '/member/main';
+			location.assign(url);
+		}
+		,error: function(e) {
+			alert("리워드 정보를 입력해주세요.");
+		}
+	})
+}
+
+
+
 //저장하기
 function applySubmit(){
 // 	debugger;
@@ -471,9 +605,10 @@ $(function() {
 	<div class="editor_top">
 		<div class="top_nav"> 
 			<div class="top_nav_in">
-				<a href="/member/main">대충 뒤로가기</a>
+				<button class="project_button"  onclick="location.href='/mypage/mypagemain' "><span><ion-icon size="large" name="arrow-back-outline"></ion-icon></span></button>
 				<div class="top_nav_button">
-					<button class="submit_button" onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="submit_button" type="button"  onclick="applySubmit()"><span style=" color: rgb(255, 255, 255);">저장</span></button>
+					<button class="apply_button" type="button"  onclick="applyDo()"><span style=" color: rgb(255, 255, 255);">프로젝트 신청</span></button>
 				</div>
 			</div>
 		</div>

@@ -82,7 +82,7 @@ public interface ApplyDao {
     public void rewardDelete(int rewardNo);
 
     /**
-     * 프로젝트 업데이트
+     * 프로젝트 신청
      * 
      * @param projectNo 신청할 프로젝트 번호
      */
@@ -94,4 +94,12 @@ public interface ApplyDao {
 	 * @param projectNo
 	 */
 	public void chatRoomInsert(int projectNo);
+
+	/** 
+	 * 작성중인 프로젝트 불러오기
+	 * 
+	 * @param memberNo
+	 * @return 작성중인 프로젝트 목록
+	 */
+	public List<Project> projectSelectAll(int memberNo);
 }
