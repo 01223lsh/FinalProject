@@ -738,7 +738,7 @@ a:hover {
 				<div class="monthChart">
 					<canvas id="monthchart"></canvas>
 				</div>
-				<div class="projectOrder" style="overflow:scroll; height: 449px; overflow-x: hidden;">
+				<div class="projectOrder" style="overflow:scroll; height: 500px; overflow-x: hidden;">
 				<div style=" position: absolute; z-index: 999; background-color: #DCDCDC; width: 30.65%;  text-align: center; min-width:580px;min-height: 20px; " class="Mprojectmanagement" >프로젝트 펀딩률</div>
 					<table style="    width: 100%;" class="maintable">
 					<tr style="border-bottom: 1px solid #ddd;">
