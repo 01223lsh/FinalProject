@@ -12,6 +12,8 @@
 window.onload = function(){
 	toggleAmount()
 	sumPrice()
+	orderAmountCompared()
+	soldOut()
 }
 
 //가격표시에 콤마를 표시해주는 함수 
@@ -23,6 +25,36 @@ window.onload = function(){
 //toggleAmount()는 onclick이라는 이벤트에 의해서 실헹 되기 때문에 
 //window.onload 를 통하여 페이지의 요소가 모두 로드되고 함수가 호출 되도록한다.
 //결제 페이지로 넘어가기전 선택한 리워드의 수량을 선택할 수 있도록 해준다.
+
+// 남은재고가 0일 때 체크박스 비활성화
+function soldOut(){
+	var amount = document.getElementsByClassName("amount")
+	var checkBox = document.getElementsByName("rewardNo")
+	
+	for (var i = 0; i < amount.length; i++) {
+		if (Number(amount[i].innerHTML) <= 0) {
+			checkBox[i].disabled = true;
+		}
+	}	
+}
+
+// 남은재고보다 주문수량을 더많이 주문할 수 없도록 한다.
+function orderAmountCompared() {
+	var amount = document.getElementsByClassName("amount")
+	var rewardCount = document.getElementsByName("rewardCount")
+	
+	for (var i=0; i<amount.length; i++) {
+		console.log(amount[i].innerHTML + " 비교 " + rewardCount[i].value);
+		
+		if (Number(amount[i].innerHTML) < rewardCount[i].value) {
+			console.log("orderAmountCompared() 실행!")
+			alert("남은 재고보다 많은 수량을 주문할 수 없습니다!")
+			rewardCount[i].value = Number(amount[i].innerHTML);
+		}
+	}
+}
+
+// 체크박스를 체크를 했을 때 수량 조절 가능하게 하기
 function toggleAmount() {
 	var checkBox = document.getElementsByName("rewardNo")
 	var rewardCount = document.getElementsByName("rewardCount")
@@ -35,6 +67,7 @@ function toggleAmount() {
 	}
 }
 
+// 총금액을 바로 반영해주는 함수
 function sumPrice() {
 	var checkBox = document.getElementsByName("rewardNo")
 	var rewardCount = document.getElementsByName("rewardCount")
@@ -96,12 +129,14 @@ function sumPrice() {
 	box-sizing: content-box;
 	border: 1px dashed #979797;
 }
-
 .totalP {
 	text-align: center;
 	font-size: 30px;	
 }
-#totalPrice {border: none;}
+#totalPrice {
+	width: 170px; 
+	border: 0;
+}
 .all{
 	padding: 20px;
 	margin-left: 20%;
@@ -160,7 +195,7 @@ function sumPrice() {
 					<em>리워드 선택</em>
 				</li>
 				<li style="padding: 0 80px; box-sizing: content-box;">
-					<em>결제 예약</em>
+					<em>결제 정보</em>
 				</li>
 				<li>
 					<em>결제 완료</em>
@@ -222,10 +257,9 @@ function sumPrice() {
 				<!-- 넘겨줄 세션에 존재하는 멤버 번호 --> 
 				<input type="hidden" name="memberNo" value="${memberNo}">
 				
-				<c:forEach var="i" items="${rewardList }">
+				<c:forEach var="i" items="${rewardList}">
 				
 					<div class="rewardInfo">
-					
 						<div class="rewardLeft">
 							<c:choose>
 								<c:when test="${i.rewardNo eq rewardNo}">
@@ -250,9 +284,9 @@ function sumPrice() {
 							<table>
 								<tr><th>리워드 품명</th> <td>${i.rewardName}</td></tr>
 								<tr><th>리워드 구성내용</th> <td>${i.rewardIntro}</td></tr>
-								<tr><th>리워드 남은재고</th> <td>${i.rewardAmount}개 (남음)</td></tr>
+								<tr><th>리워드 남은재고</th> <td><em class="amount">${i.rewardAmount}</em>개 (남음)</td></tr>
 							</table>
-								수량 <input type="number" name="rewardCount" min="1" max="9" value="0" onclick="sumPrice()" disabled>
+								수량 <input type="number" name="rewardCount" min="1" max="9" value="0" onclick="sumPrice(), orderAmountCompared()" disabled>
 							
 						</div>
 					</div>
@@ -272,13 +306,12 @@ function sumPrice() {
 						원을 추가로 후원합니다. <em style="font-style: 12px;">(최대 9자리)</em>
 					<hr>
 					<p class="totalP">
-					총 <input id="totalPrice" name="totalPrice" min="0" value="" readonly>원 결제 합니다.
+						<input id="totalPrice" name="totalPrice" min="0" value="" style="text-align:right;" readonly>원 결제 합니다.
 					</p>
 					<hr>
 					
 					<div style="text-align: center;">
-<!-- 					<button id="paymentBtn" class="btn-lg">다음 단계로 >></button> -->
-					<button id="paymentBtn" class="btn btn-secondary">결제 정보 입력</button>
+						<button id="paymentBtn" class="btn btn-secondary">결제 정보 입력</button>
 					</div>
 					
 				</div>

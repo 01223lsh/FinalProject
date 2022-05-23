@@ -585,7 +585,7 @@ function applyDo() {
 		alert("프로젝트 제목을 입력해주세요.")
 		return;
 	}
-	if(!'${projectInfo.projectIntro}') {
+	if(!"${projectInfo.projectIntro}") {
 		alert("프로젝트 소개글 요약을 입력해주세요.")
 		return;
 	}
@@ -601,7 +601,7 @@ function applyDo() {
 		alert("프로젝트 목표금액을 입력해주세요.")
 		return;
 	}
-	if(!'${projectInfo.budgetPlan}') {
+	if(!"${projectInfo.budgetPlan}") {
 		alert("프로젝트 예산 계획을 입력해주세요.")
 		return;
 	}

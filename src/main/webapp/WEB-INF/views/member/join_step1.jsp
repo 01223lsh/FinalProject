@@ -5,15 +5,7 @@
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
 
-
 <style type="text/css">
-div.top-text {
-	margin: 0px 0px 50px;
-	color : #2775C4;
-	height: 74.4;
-/*     text-align: center; */
-    font-size: 30px;
-}
 
 .step-list {
 	list-style-type: none;
@@ -25,43 +17,45 @@ div.top-text {
 }
 
 .step-list li.on strong {
- 	background: #2775C4;
-    margin: 0px;
-    padding: 17px 118px;
+background: #2775C4;
+    margin: -25px;
+    padding: 21px 118px;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .step-list li.off strong {
  	background: #bfc4ca;
-    margin: 0px;
-    padding: 17px 118px;
+    margin: -25px;
+    padding: 21px 118px;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 
 .step-list li {
 	float: left;
-	width: 33%;
-	text-align: center;
-	line-height: 50px;
+	WIDTH: 355px;
+    margin: 0 0 0 44px;
+	line-height: 58px;
 }
 
-.step1 {
-	margin: 24px;
-    padding: 54px;
-	text-align: center; 
-}
+.step1{clear:both;
+	margin: 0 0 0 380px;}
 
 .join-wrap {
-	margin: 20px;
+	margin: 25px;
 }
 
-
- .box bg-1 { margin: 15px 0 112px 224px; }
  
- 
+ h3 {
+	padding: 41px;
+    margin: 0px 311px 0 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 27px;
+}
  
  
 /* ================= btn custom  =================  */ 
@@ -103,8 +97,8 @@ div.top-text {
   transition-timing-function: ease-out;
 }
 .button--saqui:hover {
-  background-color: #7986cb;
-  color: #7986cb;
+  background-color: #39AEA9;
+  color: #39AEA9;
 }
 .button--saqui.button--inverted:hover {
   background-color: #3f51b5;
@@ -149,7 +143,7 @@ div.top-text {
   display: none;
 }
 a {
-  color: #7986cb;
+  color: #39AEA9;
   text-decoration: none;
   outline: none;
 }
@@ -178,15 +172,15 @@ a:focus {
   font-size: 0.85em;
 }
 .box {
-  padding: 4.5em 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-justify-content: center;
-  justify-content: center;
+/*   padding: 4.5em 0; */
+/*   display: -webkit-flex; */
+/*   display: -ms-flexbox; */
+/*   display: flex; */
+/*   -webkit-flex-wrap: wrap; */
+/*   -ms-flex-wrap: wrap; */
+/*   flex-wrap: wrap; */
+/*   -webkit-justify-content: center; */
+/*   justify-content: center; */
 }
 
 
@@ -365,15 +359,16 @@ $(document).ready(function(){
 	</div>
 	
 	
+	
 	<div class="step1">
+	<h3>회원 유형을 선택해주세요.</h3>
 		 <section class="content">
+		        
 		        <div class="box bg-1">
 		          <button class="button button--saqui button--round-l button--text-thick" data-text="일반 회원가입" onClick="location.href='/member/join_step2_consumer'">일반 회원가입</button>
-		          <button class="button button--saqui button--round-l button--text-thick" data-text="판매자 회원가입">판매자 회원가입</button>
+		          <button class="button button--saqui button--round-l button--text-thick" data-text="판매자 회원가입" id="certify">판매자 회원가입</button>
 		        </div>
 		</section>
 	</div>
 </div>
 
-
-<c:import url="/WEB-INF/views/layout/footer.jsp" />
