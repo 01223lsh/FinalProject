@@ -377,6 +377,7 @@ public class AdminController {
 		MemberSeller userInfo = adminService.getBuisnessInfo(result);
 		logger.info("조회된 프로젝트: {}", result);
 		logger.info("조회된 프로젝트: {}", userInfo);
+		System.out.println("test + "+result);
 
 		model.addAttribute("category", category);
 		model.addAttribute("project", result);
