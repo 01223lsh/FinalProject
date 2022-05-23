@@ -235,6 +235,7 @@
 		     border: none; 
 		/*     text-align: center; */
 		/*     color: white; */
+			 color: rgb(0, 0, 0) !important;
 		     background-color: #E5EFC1 !important; 
 		/*     vertical-align: middle; */
 		/*     border-radius: 3px; */
@@ -308,6 +309,7 @@
 		/*     line-height: 22px; */
 		/*     text-transform: capitalize; */
 		/*     display: inline-block; */
+			color: rgb(0, 0, 0) !important;
 		    border: none; 
 		/*     text-align: center; */
 		/*     color: white; */
