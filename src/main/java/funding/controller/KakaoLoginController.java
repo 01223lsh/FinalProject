@@ -56,7 +56,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
         System.out.println("###access_Token#### : " + access_Token);
         System.out.println("###userInfo#### : " + userInfo.get("email"));
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
-        session.setAttribute("access_token", access_Token);
+        session.setAttribute("login", access_Token);
         
         String kakaoEmail = (String) userInfo.get("email");
         
@@ -85,7 +85,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
         	session.setAttribute("grade", kakaoinfo.get(0).getGrade());
         	session.setAttribute("memberNo", kakaoinfo.get(0).getMemberNo());
         	
-          	return "redirect:/main";
+          	return "redirect:/member/main";
  
         } else { //행 수 0 반환 -> false -> 회원가입 or 탈퇴한 회원(등급 3)인지 여부 확인하여 재가입(grade 변경)
         	
@@ -109,7 +109,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
             	model.addAttribute("email", kakaoEmail);
             	model.addAttribute("nick", userInfo.get("nickname"));
             	model.addAttribute("kakaoInfo", kakaoInfo);
-            	model.addAttribute("access_token", access_Token);
+            	model.addAttribute("login", access_Token);
             	
             	//redirect를 사용하면 값이 전달되지 않음 -> forward 사용
             	return "forward:/member/kakaoJoin";
@@ -135,7 +135,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
 		
 		if(joinResult) {
 			logger.info("회원가입 성공");
-			return "redirect:/member/login";			
+			return "redirect:/member/main";			
 		} else {
 			logger.info("회원가입 실패");
 			return "redirect:/member/kakaoJoin"; 
@@ -194,14 +194,14 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
 		if(result == true) {
 			
 			session.invalidate(); 
-			return "redirect:/main";
+			return "redirect:/member/main";
 			
 		} else { //생성된 프로젝트 있음
 			
 			logger.info("생성된 프로젝트 있음, 탈퇴 안됨");
 			//탈퇴 안된다는 메세지 띄어주기
 
-			return "/main";
+			return "/member/main";
 
 			
 		}

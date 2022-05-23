@@ -65,7 +65,7 @@ textarea::placeholder {
 }
 
 .top_nav_button {
-	SSposition: relative;
+	position: relative;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -697,7 +697,7 @@ function applySubmit(){
 		,data: JSON.stringify(form)
 		,contentType: "application/json"
 		,success: function(data){
-			alert("리워드 저장완료")
+			alert("리워드 추가완료")
 			let url = '/apply/reward?projectNo=${projectInfo.projectNo}';
 			location.assign(url);
 		}
@@ -896,13 +896,12 @@ function rewardDelete(number) {
 	//입력 데이터들 json 직렬화
 	var form = 
 	{
-			"projectNo" : ${projectInfo.projectNo},
-			"rewardNo" : number,
+			"alertNo" : number,
 	}
 	
 	$.ajax({
 		type:"POST"
-		,url:"/apply/rewardDelete"
+		,url:"/alert/rewardDelete"
 		,data: JSON.stringify(form)
 		,contentType: "application/json"
 		,success: function(data){

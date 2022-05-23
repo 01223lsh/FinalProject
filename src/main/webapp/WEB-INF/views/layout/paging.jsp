@@ -8,7 +8,7 @@
 
 <%-- 첫 페이지로 이동 --%> 
 <c:if test="${paging.curPage ne 1}">
-	<li class="page-item"><a class="pagingFirst" 
+	<li class="page-item"><a class="pagingFirst page-link" 
 	>처음</a></li>
 </c:if>
 	
@@ -16,12 +16,12 @@
 <%-- 이전 페이징 리스트로 이동 --%>
 <c:choose>
 	<c:when test="${paging.curPage < 11}">
-		<li class="disabled page-item"><a>&laquo;</a></li>
+		<li class="disabled page-item"><a class="page-link">&laquo;</a></li>
 	</c:when>
 
 	<c:otherwise>
 		<li  class="page-item">
-			<a class="pagingBackAll" 
+			<a class="pagingBackAll page-link" 
 			>
 				&laquo;
 			</a>
@@ -32,7 +32,7 @@
 	<%-- 이전 페이지로 이동 --%>
 <c:if test="${paging.curPage > 1 }">
 	<li class="page-item">
-		<a  class="pagingBack"  
+		<a  class="pagingBack page-link"  
 		>
 			&lt; 
 		</a>
@@ -45,7 +45,7 @@
 	<c:choose>
 		<c:when test="${paging.curPage eq i}">
 			<li class="active" page-item">
-				<a class="paging${i}"
+				<a class="paging${i} page-link"
 				 >
 					${i }
 				</a>
@@ -53,7 +53,7 @@
 		</c:when>
 		<c:otherwise>
 			<li>
-				<a class="paging${i}" 
+				<a class="paging${i} page-link" 
 				>
 					${i }
 				</a>
@@ -65,7 +65,7 @@
 <%-- 다음 페이지로 이동 --%>
 <c:if test="${paging.curPage < paging.totalPage }">
 	<li>
-		<a class="pagingGo" 
+		<a class="pagingGo page-link"  
 		>
 			&gt; 
 		</a>
@@ -75,12 +75,12 @@
 <%-- 다음 페이징 리스트로 이동 --%>
 <c:choose>
    <c:when test="${paging.endPage eq paging.totalPage }">
-      <li class="disabled"><a>&raquo;</a></li>
+      <li class="disabled"><a class="page-link">&raquo;</a></li>
    </c:when>
    
    <c:otherwise>
       <li>
-         <a class="pagingGoAll" 
+         <a class="pagingGoAll page-link" 
          >
             &raquo;
          </a>
@@ -90,7 +90,7 @@
 	
 <%-- 마지막 페이지로 이동 --%>
 <c:if test="${paging.curPage ne paging.totalPage }">
-	<li><a class="pagingLast" 
+	<li><a class="pagingLast page-link" 
 	>
 		끝
 	</a>

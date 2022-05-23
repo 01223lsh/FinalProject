@@ -219,6 +219,10 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.chatRoomInsert(projectNo);
 	}
 	
-	
+	@Override
+	public List<Project> projectSelectAll(int memberNo) {
+
+		return applyDao.projectSelectAll(memberNo);
+	}
 	
 }

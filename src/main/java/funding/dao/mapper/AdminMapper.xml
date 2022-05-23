@@ -439,8 +439,7 @@
 	
 	<!-- 최원석님 코드 -->
 	<select id="selectProject" parameterType="funding.dto.Project" resultType="funding.dto.Project">
-		SELECT project_no, member_no, category_no, project_title, project_intro,  project_price,
-				open_date, close_date, delivery_date, project_content, fund_price, project_step, project_image
+		SELECT *
 		FROM project
 		WHERE project_no = #{projectNo}
 	</select>
