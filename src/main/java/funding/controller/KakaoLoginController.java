@@ -56,7 +56,7 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
         System.out.println("###access_Token#### : " + access_Token);
         System.out.println("###userInfo#### : " + userInfo.get("email"));
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
-        session.setAttribute("access_token", access_Token);
+        session.setAttribute("login", access_Token);
         
         String kakaoEmail = (String) userInfo.get("email");
         

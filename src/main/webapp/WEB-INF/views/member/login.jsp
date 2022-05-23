@@ -172,7 +172,7 @@ a {
      }
  
     function fnInit(){
-        var cookieid = getCookie("saveid");
+        var cookieid = getCookie("checkId");
 //         console.log(cookieid);
         if(cookieid !=""){
             $("input:checkbox[id='saveId']").prop("checked", true);
@@ -237,7 +237,9 @@ a {
 	        if($("#saveId").is(":checked")){
 	            alert("이 PC에 로그인 정보를 저장하시겠습니까?\n공공장소에서는 개인정보가 유출될 수 있으니 주의 바랍니다.");
 	        }
+	    	saveid()
 	    });
+	    
 	});
     
 	    
