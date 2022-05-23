@@ -76,7 +76,7 @@ function newsList(no){
 		<c:when test="${project.projectStep eq 3 and project.memberNo eq memberNo}">
 		<div style="float: right;">
 		<button id="newsUpdate"  class="btn btn-primary" style="background-color: #A2D5AB; border: none; ">수정</button>
-		<button id="newsDelete"  class="btn btn-danger" >삭제</button>
+		<button id="newsDelete"  class="btn btn-danger" style="background-color: #557B83; border: none;">삭제</button>
 		</div>
 		</c:when>
 		<c:otherwise>

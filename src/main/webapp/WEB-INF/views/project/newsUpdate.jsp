@@ -57,7 +57,7 @@
 <div>
 <form id="newsForm" enctype="multipart/form-data" method="post">
 <input type="hidden" name="newsNo" value="${news.newsNo }">
-	<table style="height: 600px;">
+	<table style="height: 400px;">
 	<tr>
 	<td width="10%;">제목</td>
 	<td><input type="text" id="newsTitle" name="newsTitle" style="width:500px " value="${news.newsTitle }"></td>
