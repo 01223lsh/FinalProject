@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import funding.dto.Alert;
 import funding.service.face.AlertService;
@@ -82,6 +81,10 @@ public class AlertController {
 
 		logger.info("/alert/unread [GET]");
 		
+		
+		if(session.getAttribute("memberNo") == null) {
+			return "/alert/list";
+		}
 		int memberNo = (Integer)session.getAttribute("memberNo");
 
 		// 알림 정보 불러옴

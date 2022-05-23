@@ -37,7 +37,9 @@ $(document).ready(function() {
 // 			 $(location).attr("href", "https://www.google.com/");
 			 $(location).attr("href", "/member/naverunlink");
 
+
 		 };
+		 
 	 	 }); 
 		
 	};
@@ -50,6 +52,43 @@ $(document).ready(function() {
 		$("#makefunding").show();
 	};
 	
+	
+	
+	//==================== 탈퇴 ====================
+	$("#deletebtn").click(function() {
+		console.log("delete 클릭")
+		
+		var pw = prompt('비밀번호를 입력해주세요', '비밀번호 입력');
+		
+		$.ajax({
+			 url: '${pageContext.request.contextPath}/member/withdrawPw?pw='+ pw, 
+			 type: "POST",
+			 dataType: "JSON",
+			 success: function(data){
+				 console.log("data1 : ", data)
+				 
+				 if(data == true ){
+			 		console.log("비밀번호 맞음")
+	
+					var deleteYN = confirm("탈퇴하시겠습니까?");
+					if(deleteYN == true){
+						location.href = '${pageContext.request.contextPath}/member/quit';
+						
+					} else
+						alert("취소하였습니다.");
+					
+			 	} else {
+			 		console.log("비밀번호 틀림")
+			 		alert("패스워드가 틀렸습니다.")
+			 		return;
+		 		}
+		 	 } //success end
+			 , error: function(){
+				 console.log("AJAX실패")
+			 } //error end
+		}) //ajax end
+		
+	}); //#delete end 
 	
 
 	
@@ -97,50 +136,6 @@ $(document).ready(function() {
 	
 // })
 	
-	
-	
-	
-	
-
-
-// $(document).ready(function(){
-   
-   
-//    //==================== 탈퇴 ====================
-//    $("#delete").click(function() {
-      
-//       var pw = prompt('비밀번호를 입력해주세요', '비밀번호 입력');
-      
-//       $.ajax({
-//           url: '${pageContext.request.contextPath}/member/withdrawPw?pw='+ pw, 
-//           type: "POST",
-//           dataType: "JSON",
-//           success: function(data){
-//              console.log("data1 : ", data)
-             
-//              if(data == true ){
-//                 console.log("비밀번호 맞음")
-   
-//                var deleteYN = confirm("탈퇴하시겠습니까? 개인정보는 3개월간 보관됩니다.");
-//                if(deleteYN == true){
-//                   location.href = '${pageContext.request.contextPath}/member/quit';
-                  
-//                } else
-//                   alert("취소하였습니다.");
-               
-//              } else {
-//                 console.log("비밀번호 틀림")
-//                 alert("패스워드가 틀렸습니다.")
-//                 return;
-//              }
-//            } //success end
-//           , error: function(){
-//              console.log("AJAX실패")
-//           } //error end
-//       }) //ajax end
-      
-//    }); //#delete end 
-// });
 
 
 
