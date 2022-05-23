@@ -167,7 +167,7 @@ img{
 			<div style="float: right; color:#47423f;" class="rightbar" >
 <!-- 			<div style=" color:#47423f;" class="rightbar" > -->
 				<div class="projectApplicant" style="margin-bottom: 35px; height: 235px;">
-					<div class="projectApplicantInfoHead"> <img src="${project.projectImage}" style="width: 28px;height: 28px;border-radius: 13px;    margin-bottom: 6px;">	${member.sellerInfo}</div>
+					<div class="projectApplicantInfoHead"> <img src="${project.projectImage}" style="width: 28px;height: 28px;border-radius: 13px;    margin-bottom: 6px;">	${member.accountName}</div>
 					<div class="projectApplicantInfo">
 					<div>아이디 &nbsp;&nbsp;&nbsp;${member.id }</div>
 					<div>대&nbsp;&nbsp;&nbsp;표&nbsp;&nbsp;&nbsp; ${member.name }</div>
