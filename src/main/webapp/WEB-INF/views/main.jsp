@@ -92,12 +92,13 @@ $(document).ready(function(){
 
 </div>
 
-	<!-- 카카오 -->
-	반갑습니다. ${nick }님, <br> 
+  
+  
+  	<!-- 네이버 -->
+	반갑습니다. ${id }의 ${nick }님, <br> 
 	등급: ${grade } <br>
 	토큰: ${access_token } <br>
 	회원번호: ${memberNo } <br>
-  
   <a href="/member/kakaologout">카카오로그아웃</a>
   <a href="/member/kakaounlink">카카오연결끊기</a>
   

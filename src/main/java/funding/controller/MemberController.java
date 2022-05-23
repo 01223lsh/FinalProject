@@ -295,7 +295,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		} else { 
 			
 			logger.info("주문 이력 있음, 탈퇴 안됨");
-			model.addAttribute("msg", "프로젝트에 참여한 이력이 확인됩니다. 확인 후 다시 진행해주시길 바랍니다.");
+			model.addAttribute("msg", "주문 이력 혹은 프로젝트에 참여한 이력이 확인됩니다. 확인 후 다시 진행해주시길 바랍니다.");
 			
 		}    	
      	
