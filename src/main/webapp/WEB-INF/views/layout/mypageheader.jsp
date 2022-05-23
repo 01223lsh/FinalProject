@@ -253,7 +253,7 @@ html, body {
 <!-- 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li> -->
 	<li><a class="m" href="/mypage/joinfunlist" id="joinfunding" style="display: none;">참여중인 펀딩</a></li>
 	<li><a class="m" href="/mypage/makefunlist" id="makefunding" style="display: none; ">내가 제작한 펀딩</a></li>
-	<li><a class="m" href="#" style="color: #000;"">소셜체크확인용${socialchk }</a></li>
+<%-- 	<li><a class="m" href="#" style="color: #000;"">소셜체크확인용${socialchk }</a></li> --%>
 	
 	<c:if test="${id.equals('kakaoUser')}">
 	<li><a class="m"  class="delete" id="deleteK" href="/member/kakaounlink"; style="display: none; margin-top: 50px; ">회원탈퇴</a></li>
