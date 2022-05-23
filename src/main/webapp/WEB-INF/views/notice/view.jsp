@@ -52,32 +52,50 @@ function noticeDownload(fileNo){
 .noticeimg{
 	width : 500px;
 }
+
+.noticeView{
+	margin: 2px 0;
+	padding: 1px 3px;
+	border-width: 2px;
+	border-color: #aaa;
+	text-align: center;
+	border-style: solid;
+		
+}
+.notice {
+	margin : 60px 100px;
+}
+
+html { overflow-y:scroll; }
+
+
 </style>
 
 </head>
 
 <body>
-<div class="noticeView">
-<div style="height:20px;">
-	<div class="noticeTitle" >${notice.title}</div>
-	<fmt:formatDate value = "${notice.regDate }" pattern = "yyyy-MM-dd HH:mm:ss" var = "noticeDateView"/>
-	
-	<div class="noticeDate" style="color :#ccc;">작성일자 : ${noticeDateView} | 작성자  : 관리자</div>
+<br>
+<br>
+<div class="noticeView" style="width: 800px;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 1px solid #ddd; margin-bottom: 30px;">
+<div style="height:20px; ">
+	<div class="noticeTitle" style="text-align: left;" >${notice.title}</div>
+
+	<div class="noticeDate" style="color :#ccc;">작성일자 :<fmt:formatDate value="${notice.regDate}" pattern="yy-MM-dd" /> | 작성자  : 관리자</div>
 </div>
 
 
 <hr>
 	<c:forEach items="${listfile}" var="i">
 	<c:if test="${not empty i.fileOrigin}"> 
-	<img src="/upload/${i.fileStorage}" class="noticeimg"> 
-	
-	
+	<img src="/noticeimg/${i.fileStorage}" class="noticeimg"> <br>
 	</c:if>
 	</c:forEach> 
 	<div class="notice Content">${notice.content}</div>
 </div>
 <div class="text-center">
-<!-- <button onclick="noticeManagement()">목록</button> -->
 <button onclick="location.href='/notice/list'">목록</button>
 </div>
 
