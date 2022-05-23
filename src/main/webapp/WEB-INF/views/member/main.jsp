@@ -35,7 +35,7 @@
   
   .main_pr {
   	position: absolute;
-  	left : 21%;
+  	left : 10%;
   	
   	 
   }
