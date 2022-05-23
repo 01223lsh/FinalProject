@@ -109,7 +109,7 @@ $(document).ready(function() {
 	border: 4px solid #A2D5AB;
 	border-radius: 8px;
 	margin-left : 15%;
-	height: 210px;
+	height: 230px;
 	width: 70%;
 }
 /*
