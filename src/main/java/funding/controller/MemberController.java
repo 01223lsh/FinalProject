@@ -191,6 +191,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			
 			//로그인 성공하면 session 객체 사용해서 세션 저장
 			session.setAttribute("login", loginResult) ; 
+			session.setAttribute("loginResult", loginResult) ; 
 			session.setAttribute("id", member.getId());
 			session.setAttribute("grade", memberService.getGrade(member));
 			session.setAttribute("nick", memberService.getNick(member));
@@ -214,7 +215,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 
     	session.invalidate();
     	
-    return "/member/main";
+    return "redirect:/member/main";
     }
     
 

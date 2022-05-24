@@ -569,5 +569,14 @@ public class MemberServiceImpl implements MemberService {
 	public Member getUserInfoByMemberNo(int memberNo) {
 		return memberDao.selectByMemberNo(memberNo);
 	}
+	
+	//네이버 계정 유무 확인
+	@Override
+	public boolean login(int memberNo) {
+		int loginChk = memberDao.selectCntNaverUser(memberNo);
+		
+		if( loginChk > 0 )	return true;
+		return false;
+	}
 
 } // service end

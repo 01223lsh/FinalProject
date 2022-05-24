@@ -103,10 +103,16 @@ public class NaverLoginController {
         //네이버 계정 정보 담기
         JSONObject naverInfo =  new JSONObject(apiJson);
         model.addAttribute("naverInfo", naverInfo);
-        logger.info("naverInfo: {}", naverInfo);
+        logger.info("@@@naverInfo: {}", naverInfo);
+        
         //로그인 진행하기 위해 담은 계정 이용해서 DB에서 결과 조회
         List<Member> naverlogin  = memberService.getinfo(naverInfo);
         
+        logger.info("@@@naverlogin: {}", naverlogin);
+        
+        //마이페이지 연결하기 위해 세션값 boolean 처리
+//        int memberNo = naverlogin.get(0).getMemberNo(); 
+//        boolean loginResult = memberService.login(memberNo);
         
         if(naverResult) { 
         	//	-> 행 수 1 반환 - ture -> 탈퇴하지 않은 '기존 회원' -> 세션 처리
@@ -118,6 +124,8 @@ public class NaverLoginController {
         	session.setAttribute("grade", naverlogin.get(0).getGrade());
         	session.setAttribute("memberNo", naverlogin.get(0).getMemberNo());
         	session.setAttribute("login", access_token);
+        	session.setAttribute("access_token", access_token);
+//        	session.setAttribute("loginResult", loginResult);
         	
         	 return "redirect:/member/main";
         	
@@ -195,10 +203,12 @@ public class NaverLoginController {
 			try {
 				String res = requestToServer(apiUrl);
 				model.addAttribute("res", res); //결과값 찍어주는용
+				model.addAttribute("msg", "탈퇴되었습니다. 이용해주셔서 감사합니다.");
 			session.invalidate();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			model.addAttribute("redirectUrl", "/member/main");
 			
 		    return "/member/main";
 	}

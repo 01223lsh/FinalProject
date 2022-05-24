@@ -218,4 +218,12 @@ public interface MemberService {
 	 */
 	public Member getUserInfoByMemberNo(int memberNo);
 
+	/**
+	 * 네이버계정으로 로그인 여부 확인
+	 * 
+	 * @param memberNo - 해당 네이버 계정의 회원번호
+	 * @return 로그인 인증 결과
+	 */
+	public boolean login(int memberNo);
+
 }

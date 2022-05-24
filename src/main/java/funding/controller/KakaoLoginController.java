@@ -81,9 +81,12 @@ private static final Logger logger = LoggerFactory.getLogger(KakaoLoginControlle
         	logger.info("@@@@memberNo : {}", kakaoinfo.get(0).getMemberNo());
         	
             //세션
+        	session.setAttribute("login", access_Token);
+        	session.setAttribute("id", kakaoinfo.get(0).getId());
         	session.setAttribute("nick", kakaoinfo.get(0).getNick());
         	session.setAttribute("grade", kakaoinfo.get(0).getGrade());
         	session.setAttribute("memberNo", kakaoinfo.get(0).getMemberNo());
+        	session.setAttribute("loginResult", kakaoResult);
         	
           	return "redirect:/member/main";
  
