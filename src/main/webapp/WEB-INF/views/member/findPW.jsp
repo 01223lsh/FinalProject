@@ -82,7 +82,7 @@ input {
 </form>
 
 	<p class="w3-center">
-		<button type="button" id="location" onclick="history.go(-1);">로그인</button>
+		<button type="button" id="location" onclick="history.go(-1);">로그인이동</button>
 		<button type="button" id="findBtn" >임시 비밀번호 발급</button>
 	</p>
 
