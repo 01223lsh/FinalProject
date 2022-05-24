@@ -128,7 +128,7 @@ public class MypageController {
 		// 세션에 chk 저장하자(0: 소셜 / 1 : 일반회원)
 		session.setAttribute("socialchk", chk);
 
-		boolean result = (Boolean) session.getAttribute("login");
+		boolean result = (Boolean) session.getAttribute("loginResult");
 		logger.info("result : {}", result);
 
 		if (result) {

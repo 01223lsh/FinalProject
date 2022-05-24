@@ -230,8 +230,8 @@ a {
              
         }
     }
-    
-    //알림창 설정
+   
+   //알림창 설정
 	$(document).ready(function(){
 	    $("#saveId").change(function(){
 	        if($("#saveId").is(":checked")){
@@ -241,9 +241,6 @@ a {
 	    });
 	    
 	});
-    
-	    
-	//로그인 버튼 입력했을 때, 빈칸 있을 시 알림 요청
     
     
     

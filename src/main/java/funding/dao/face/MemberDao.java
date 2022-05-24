@@ -233,6 +233,15 @@ public interface MemberDao {
 	 */
 	public Member selectByMemberNo(int memberNo);
 
+	/**
+	 * 네이버 계정 정보에 일치하는 사용자 수를 반환한다
+	 * 	-> 로그인 인증에 활용한다
+	 * 
+	 * @param naverlogin - 조회할 계정 정보를 가진 객체
+	 * @return 조회된 행 수
+	 */
+	public int selectCntNaverUser(int memberNo);
+
 
 
 
