@@ -36,7 +36,7 @@ public class AlertController {
 		// 알림 정보 불러옴
 		List<Alert> alertList = alertService.alertSelect(memberNo);
 		
-		System.out.println(alertList);
+//		System.out.println(alertList);
 		
 		//모델값 저장
 		model.addAttribute("alertList", alertList);
@@ -50,7 +50,7 @@ public class AlertController {
 	public String alertDelete(HttpSession session, Model model, @RequestBody Alert alert) {
 		logger.info("/alert/delete [POST]");
 		
-		System.out.println(alert);
+//		System.out.println(alert);
 		
 		int alertNo = alert.getAlertNo(); 
 		
@@ -90,7 +90,7 @@ public class AlertController {
 		// 알림 정보 불러옴
 		int alertUnread = alertService.alertUnread(memberNo);
 		
-		System.out.println(alertUnread);
+//		System.out.println(alertUnread);
 		
 		//모델값 저장
 		model.addAttribute("alertUnread", alertUnread);
