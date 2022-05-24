@@ -214,7 +214,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 
     	session.invalidate();
     	
-    return "/member/main";
+    return "redirect:/member/main";
     }
     
 

@@ -87,7 +87,9 @@ public class AlertController {
 
 		// 알림 정보 불러옴
 		int alertUnread = alertService.alertUnread(memberNo);
-		
+
+//		System.out.println(alertUnread);
+
 		
 		//모델값 저장
 		model.addAttribute("alertUnread", alertUnread);
