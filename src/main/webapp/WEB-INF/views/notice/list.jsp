@@ -65,7 +65,8 @@ $(document).ready(function(){
 					,dataType : "html"
 					,success : function(res){
 						console.log("성공");
-						$("#resultLayout").html(res)
+						location.href="/notice/list?curPage="+i
+// 						$("#resultLayout").html(res)
 					},
 					error : function(){
 						console.log("실패");

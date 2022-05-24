@@ -371,7 +371,7 @@ function alertList() {
 	    processData: false,
 		cache : false
 	}).done(function(result) {
-			console.log("결과확인");
+// 			console.log("결과확인");
 	 		var html = jQuery('<div>').html(result);
 			var contents = html.find("div#alertLoad").html();
 			$("#alertView").html(contents);
@@ -439,7 +439,7 @@ function unreadNo() {
 			console.log("결과확인");
 	 		var html = jQuery('<div>').html(result);
 			var contents = html.find("div#alertUnread").html().trim();
-				console.log(contents);
+// 				console.log(contents);
 // 				alert(contents);
 			if(contents == ""){
 				$('#unread').css('display', 'none');
