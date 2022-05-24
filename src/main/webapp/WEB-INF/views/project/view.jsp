@@ -711,7 +711,8 @@ a.disabled {
 				<div>
 					<c:choose>
 					<c:when test="${project.projectStep eq 3 and login eq true }">
-					<a type="button" id="chatbtn" href="/chat/room/enter/${project.projectNo }">대화하기</a>
+<%-- 					<a type="button" id="chatbtn" href="/chat/room/enter/${project.projectNo }">대화하기</a> --%>
+					<a type="button" id="chatbtn" href="javascript:void(0)" onclick='window.open("/chat/room/enter/${project.projectNo }","_blank","width=500px, height=800px;");'>대화하기</a>
 					</c:when>
 					<c:when test="${project.projectStep eq 3 and empty login }">
 					<a type="button" id="chatbtn" href="#" onclick="loginModal()">대화하기</a>

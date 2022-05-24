@@ -371,7 +371,7 @@ body{
 	display:none;
 	position: absolute;
     top: 14px;
-    right: 90px;
+    right: 160px;
 /*     width: 16px; */
 /*     height: 16px; */
     line-height: 12px;
@@ -581,7 +581,7 @@ $(function() {
 
 //알림 리스트
 function alertList() {
-	debugger;
+// 	debugger;
 	$.ajax({
 		url : "/alert/list",
 		type : "post",
@@ -589,7 +589,7 @@ function alertList() {
 	    processData: false,
 		cache : false
 	}).done(function(result) {
-			console.log("결과확인");
+// 			console.log("결과확인");
 	 		var html = jQuery('<div>').html(result);
 			var contents = html.find("div#alertLoad").html();
 			$("#alertView").html(contents);
@@ -653,10 +653,10 @@ function unreadNo() {
 	    processData: false,
 		cache : false
 	}).done(function(result) {
-			console.log("결과확인");
+// 			console.log("결과확인");
 	 		var html = jQuery('<div>').html(result);
 			var contents = html.find("div#alertUnread").html().trim();
-				console.log(contents);
+// 				console.log(contents);
 // 				alert(contents);
 			if(contents == ""){
 				$('#unread').css('display', 'none');
@@ -713,7 +713,7 @@ $(function(){
 									<span id="unread"></span>
 								</button>
 								<button class="project_button"
-									onclick="location.href='/mypage/mypagemain' ">
+									onclick="location.href='/mypage/mypagemain'" style="width: 150px;">
 									<span>${sessionScope.nick}</span>
 								</button>
 							</div>

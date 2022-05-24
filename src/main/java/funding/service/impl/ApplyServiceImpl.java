@@ -170,8 +170,8 @@ public class ApplyServiceImpl implements ApplyService{
 		// 파일 저장 경로 생성
 		String storedPath = context.getRealPath("projectPhoto");
 		File storedFolder = new File(storedPath);
-		if (storedFolder.exists()) {
-		storedFolder.mkdir();
+		if ( !storedFolder.exists()) {
+			storedFolder.mkdir();
 		}
 		// 저장 파일 이름 생성
 		String fileName = UUID.randomUUID().toString().split("-")[4] + file.getOriginalFilename();
@@ -179,9 +179,9 @@ public class ApplyServiceImpl implements ApplyService{
 		File dest = new File(storedFolder, fileName);
 		// 파일 업로드
 		try {
-		file.transferTo(dest);
+			file.transferTo(dest);
 		} catch (IOException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 		return fileName;
 	
