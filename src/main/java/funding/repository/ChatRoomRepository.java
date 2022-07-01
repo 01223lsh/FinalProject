@@ -10,7 +10,6 @@ import funding.dto.ChatRoom;
 import funding.dto.Project;
 
 @Repository
-//@Slf4j
 public class ChatRoomRepository { // 채팅방을 생성하고 정보를 조회함
 
 	private static Logger log = LoggerFactory.getLogger(ChatRoomRepository.class);
@@ -20,9 +19,7 @@ public class ChatRoomRepository { // 채팅방을 생성하고 정보를 조회�
 
 	// 채팅방 생성
 	public ChatRoom createChatRoom(int projectNo) {
-		// ChatRoom chatRoom = ChatRoom.create(name); //네임이 필요가 없으니깐
-		// chatDao.put(chatRoom.getchatroomId(), chatRoom);
-		// log.info("생성된 채팅방: {}", chatRoom);
+
 		return chatDao.insertChatRoom(projectNo);
 	}
 
