@@ -9,7 +9,7 @@ import funding.dto.Project;
 public interface ChatDao {
 
 	// 새로운 채팅방 생성
-	public ChatRoom insertChatRoom(int projectNo); // 판매자 페이지에 코드 공유
+	public ChatRoom insertChatRoom(int projectNo);
 
 	// roomId를 이용하여 채팅방 찾기
 	public ChatRoom selectChatRoomByroomId(int projectNo);

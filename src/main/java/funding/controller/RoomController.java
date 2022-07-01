@@ -17,7 +17,6 @@ import funding.dto.ChatRoom;
 import funding.dto.Project;
 import funding.repository.ChatRoomRepository;
 
-//@Slf4j
 @Controller
 @RequestMapping("/chat")
 public class RoomController {
@@ -45,12 +44,10 @@ public class RoomController {
 		project = repository.getProject(project);
 		System.out.println("결과값 테스트: " + room);
 		String sessionId = session.getId();
-//		String sessionNick = session.getNick();
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("room", room);
 		model.addAttribute("sessionId", sessionId);
 		model.addAttribute("project", project);
-//		model.addAttribute("sessionNick", sessionNick);
 		return "chat/chattingroom";
 	}
 
@@ -62,17 +59,3 @@ public class RoomController {
 		return repository.findRoomById(projectNo);
 	}
 }
-//// 채팅 리스트 화면
-//@GetMapping("/room")
-//public String rooms() {
-//	log.info("[/chat/room][GET]");
-//	return "chat/room";
-//}
-//
-//// 모든 채팅방 목록 반환
-//@GetMapping("/rooms")
-//@ResponseBody
-//public List<ChatRoom> room() {
-//	log.info("[/chat/rooms][GET]");
-//	return repository.findAllRoom();
-//}
